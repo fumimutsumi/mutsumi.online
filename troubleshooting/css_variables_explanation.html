@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS变量（自定义属性）详解</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 15px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            border-left: 5px solid #3498db;
+            padding-left: 15px;
+        }
+        h3 {
+            color: #7f8c8d;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+        p {
+            margin-bottom: 15px;
+        }
+        pre {
+            background-color: #f0f0f0;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            border-left: 4px solid #e74c3c;
+            margin: 20px 0;
+        }
+        code {
+            color: #e74c3c;
+            background-color: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+        .highlight {
+            background-color: #fff3cd;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+        .note {
+            background-color: #e8f4fd;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+            border-radius: 0 4px 4px 0;
+        }
+        .example {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 4px;
+            margin: 20px 0;
+            border: 1px solid #ddd;
+        }
+        .important {
+            background-color: #ffeaa7;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+        ul, ol {
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        .demo-box {
+            width: 100px;
+            height: 100px;
+            margin: 20px auto;
+            background-color: var(--demo-color, #3498db);
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+        .demo-box:hover {
+            background-color: var(--demo-hover-color, #2980b9);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>CSS变量（自定义属性）详解</h1>
+        
+        <h2>1. 为什么CSS变量名前需要加<code>--</code>前缀？</h2>
+        
+        <p>在CSS中，变量名（也称为<strong>自定义属性</strong>）前需要加上<code>--</code>前缀，这是CSS规范中规定的<strong>语法要求</strong>。这种设计有几个重要原因：</p>
+        
+        <div class="important">
+            <ul>
+                <li><strong>避免与现有CSS属性冲突</strong>：使用<code>--</code>前缀可以确保自定义变量不会与现有的CSS属性（如color、font-size等）或未来可能添加的CSS属性发生重名冲突</li>
+                <li><strong>明确区分</strong>：使开发者能够一眼就区分出哪些是CSS变量，哪些是普通的CSS属性</li>
+                <li><strong>语法标准化</strong>：为CSS变量定义统一的语法规则，便于浏览器解析和实现</li>
+            </ul>
+        </div>
+        
+        <pre>/* 正确的CSS变量声明方式 */
+:root {
+    --primary-color: #3498db;
+    --font-size-large: 24px;
+}
+
+/* 错误的声明方式 - 没有--前缀 */
+:root {
+    primary-color: #3498db; /* 这不是CSS变量，而是一个无效的CSS属性 */
+}</pre>
+        
+        <h2>2. CSS变量的基本概念</h2>
+        
+        <p>CSS变量（CSS Custom Properties）是CSS中的一种机制，允许开发者定义可重用的值，并在整个样式表中引用这些值。</p>
+        
+        <div class="note">
+            <strong>注意：</strong>CSS变量和预处理器（如Sass、Less）中的变量不同。CSS变量是<strong>浏览器原生支持</strong>的，可以在运行时修改，而预处理器变量在编译后就会被替换为具体的值。
+        </div>
+        
+        <h3>2.1 变量的声明</h3>
+        <p>CSS变量通常在<code>:root</code>伪类中声明，以便在整个文档中使用：</p>
+        
+        <pre>:root {
+    --primary-color: #3498db;
+    --secondary-color: #2ecc71;
+    --text-color: #333;
+    --spacing: 16px;
+}</pre>
+        
+        <h3>2.2 变量的使用</h3>
+        <p>使用<code>var()</code>函数来引用CSS变量：</p>
+        
+        <pre>.button {
+    background-color: var(--primary-color);
+    color: white;
+    padding: var(--spacing);
+    font-size: 16px;
+}
+
+.header {
+    color: var(--text-color);
+    background-color: var(--secondary-color);
+    padding: calc(var(--spacing) * 2); /* 可以与calc()函数结合使用 */
+}</pre>
+        
+        <h2>3. 为什么在<code>:root</code>中声明CSS变量？</h2>
+        
+        <p>虽然CSS变量可以在任何CSS选择器中声明，但通常推荐在<code>:root</code>中声明全局CSS变量，原因如下：</p>
+        
+        <ul>
+            <li><strong>全局性</strong>：<code>:root</code>选择器指向文档的根元素（在HTML中是<code>&lt;html&gt;</code>元素），在<code>:root</code>中声明的变量可以在<strong>整个文档</strong>中访问</li>
+            <li><strong>高优先级</strong>：<code>:root</code>选择器的优先级高于普通的<code>html</code>元素选择器，有助于确保变量定义不会被意外覆盖</li>
+            <li><strong>集中管理</strong>：将所有全局变量集中在一个地方定义，便于维护和修改</li>
+        </ul>
+        
+        <div class="example">
+            <h3>实际应用示例</h3>
+            <p>下面是一个简单的互动演示，展示CSS变量的效果：</p>
+            <div class="demo-box"></div>
+            <p>将鼠标悬停在上面的方块上，可以看到背景颜色的变化，这就是通过CSS变量实现的。</p>
+        </div>
+        
+        <h2>4. CSS变量的高级特性</h2>
+        
+        <h3>4.1 默认值</h3>
+        <p><code>var()</code>函数可以接受第二个参数作为默认值，当指定的变量未定义时，将使用这个默认值：</p>
+        
+        <pre>.element {
+    color: var(--undefined-variable, #ff0000); /* 如果--undefined-variable未定义，将使用#ff0000 */
+}</pre>
+        
+        <h3>4.2 变量的继承和作用域</h3>
+        <p>CSS变量遵循CSS的继承规则：</p>
+        
+        <ul>
+            <li>子元素可以继承父元素中定义的变量</li>
+            <li>可以在特定选择器中重新定义变量，创建局部作用域</li>
+        </ul>
+        
+        <pre>:root {
+    --color: blue; /* 全局变量 */
+}
+
+.parent {
+    --color: green; /* 覆盖全局变量，只在.parent及其子元素中生效 */
+}
+
+.child {
+    color: var(--color); /* 将会使用green，而不是blue */
+}
+
+.other-element {
+    color: var(--color); /* 将会使用blue */
+}</pre>
+        
+        <h3>4.3 动态修改变量</h3>
+        <p>与预处理器变量不同，CSS变量可以在运行时通过JavaScript动态修改：</p>
+        
+        <pre>// JavaScript代码示例
+// 修改全局变量
+document.documentElement.style.setProperty('--primary-color', '#e74c3c');
+
+// 修改特定元素的变量
+document.querySelector('.specific-element').style.setProperty('--local-color', '#f39c12');</pre>
+        
+        <h2>5. CSS变量的优势</h2>
+        
+        <ul>
+            <li><strong>减少重复代码</strong>：通过变量复用相同的值，避免在多处重复编写相同的颜色、尺寸等值</li>
+            <li><strong>便于维护</strong>：当需要修改某个值时，只需要修改一处变量定义，而不是在多处查找和替换</li>
+            <li><strong>提高可读性</strong>：使用有意义的变量名（如--primary-color）比使用纯数值（如#3498db）更易理解</li>
+            <li><strong>主题切换</strong>：可以通过修改CSS变量轻松实现主题切换，而不需要重写大量CSS</li>
+            <li><strong>响应式设计</strong>：可以在媒体查询中修改变量值，实现更灵活的响应式设计</li>
+        </ul>
+        
+        <h2>6. 浏览器支持</h2>
+        
+        <p>CSS变量得到了现代浏览器的广泛支持，包括：</p>
+        
+        <ul>
+            <li>Chrome 49+</li>
+            <li>Firefox 44+</li>
+            <li>Safari 9.1+</li>
+            <li>Edge 15+</li>
+        </ul>
+        
+        <div class="note">
+            <strong>注意：</strong>如果需要支持较旧的浏览器，可能需要提供回退方案或使用CSS预处理器。
+        </div>
+        
+        <h2>7. 总结</h2>
+        
+        <p>CSS变量（自定义属性）是现代CSS中非常强大的功能，通过在变量名前添加<code>--</code>前缀，我们可以定义可重用、可维护的值，使CSS代码更加灵活和易于管理。</p>
+        
+        <p>记住这些关键点：</p>
+        
+        <div class="highlight">
+            <ul>
+                <li>CSS变量名必须以<code>--</code>开头</li>
+                <li>使用<code>:root</code>选择器声明全局变量</li>
+                <li>使用<code>var()</code>函数引用变量</li>
+                <li>CSS变量可以在运行时通过JavaScript修改</li>
+                <li>CSS变量支持作用域和继承</li>
+            </ul>
+        </div>
+    </div>
+    
+    <!-- 为演示添加一些简单的内联样式 -->
+    <style>
+        :root {
+            --demo-color: #3498db;
+            --demo-hover-color: #2980b9;
+        }
+    </style>
+</body>
+</html>

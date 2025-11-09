@@ -1,0 +1,941 @@
+<!DOCTYPE html><!-- 声明由HTML5规范定义的文档类型 -->
+<html lang="zh-CN"><!-- 声明网页全局默认语言为简体中文 -->
+<head><!-- 网页的元数据，不会显示在网页中 -->
+    <meta charset="UTF-8">
+    <!-- 声明网页的字符编码为UTF-8 -->
+
+    <title>HTML and CSS</title>
+    <!-- 网页的标题，会显示在浏览器的标签页上 -->
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- 声明网页的兼容模式为IE=edge，即使用最新的IE浏览器引擎渲染网页 -->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 声明网页的视口（viewport），即浏览器显示网页的区域，width=device-width表示视口宽度与设备宽度相同，initial-scale=1.0表示初始缩放比例为100% -->
+
+    <meta name="description" content="这是一个个人前端复习的网页">
+    <!-- 网页的描述，会显示在搜索引擎的搜索结果中 -->
+
+    <meta name="keywords" content="HTML,前端,CSS,鸠山文睦">
+    <!-- 网页的关键词，会显示在搜索引擎的搜索结果中 -->
+
+    <meta name="author" content="fumimutsumi">
+    <!-- 网页的作者 -->
+
+    <meta name="generator" content="Visual Studio Code">
+    <!-- 网页的生成器 -->
+
+    <meta name="copyright" content="2025-2100©版权所有">
+    <!-- 网页的版权信息 -->
+
+    <link rel="icon" type="image/x-icon" href="../assets/favico.ico">
+    <!-- <link>标签用于引入外部资源，这里引入了一个图标文件 -->
+
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- 引入外部CSS文件 -->
+
+    <style>
+        /* 三大特性 */
+        /* 层叠性：相同选择器给设置相同的样式，此时一个样式就会覆盖（层叠）另一个冲突的样式。层叠性主要解决冲突的问题 */
+        /* 继承性：子元素会继承父元素的某些样式，如颜色、字体、字号等。继承性主要解决后代元素的问题。谁近听谁的，权重低的听权重高的 */
+        /* 优先级：当一个元素有多个选择器同时作用于它时，会根据选择器的权重来确定最终的样式。权重高的样式会覆盖权重低的样式。优先级主要解决冲突的问题 */
+
+        /* 风格：展开风格即编写、维护代码时的样式；紧凑风格即项目上线时，为了压缩文件体积用工具进行压缩的样式 */
+        .internal-css-demo>h2.demo1:first-child {
+            background-color: pink;/* 背景颜色 */
+            color: aqua;/* 文字颜色 */
+        }
+        /* h2是选择器，{}是声明块，里面是声明。选择器和声明块之间用空格隔开；属性名和属性值之间也用空格隔开 */
+        /* 展开风格 */
+        .internal-css-demo>h2.demo1:nth-child(2){background-color:aqua;color:pink;}
+        /* 紧凑风格 */
+
+        /* 通配选择器*，应用于所有HTML元素，常用于重置浏览器默认样式 */
+        /* * {
+            color: red;
+        } */
+
+        /* ：root伪类选择器，应用于文档的根元素，即<html>元素,常用于定义全局CSS变量或设置根元素样式 */
+        /* :root（或者“html”） {
+            --color: red;
+        } */
+        /* CSS变量还没有学到 */
+
+        /* 元素选择器 */
+        h1.demo2 {
+            font-size: 40px;/* 字体大小 */
+            color: aqua;
+            background-color: pink;
+            width: 12.5%;/* 宽度,height是高度 */
+        }
+        h2.demo2 {
+            font-size: 30px;
+            color: pink;
+            background-color: aqua;
+            width: 160px;
+        }
+
+        /* 交集选择器 */
+        div.demo3#demo3>p.demo4 {
+            font-size: 30px;
+            color: aqua;
+            background-color: red;
+            width: 160px;
+        }
+
+        /* 并集选择器 */
+        h1.demo5,
+        p.demo5 {
+            font-size: 40px;
+            color: blue;
+            background-color: aqua;
+            width: 12.5%;
+        }
+
+        /* 类选择器 */
+        p.demo6 {
+            background-color: yellow;
+            font-size: 40px;
+            color: pink;
+            width: 10%;
+        }
+        p.demo6.demo6-1 {
+            color: red;
+        }
+        /* 类选择器，应用于所有指定类名的元素，类名不能出现中文，也不能是数字开头 */
+
+        /* id选择器 */
+        p.demo7#demo7-1 {
+            font-size: 40px;
+            color: aqua;
+            background-color: pink;
+            width: 10%;
+        }
+        /* id选择器，应用于所有指定id名的元素，一个元素只能写一个id名，id名不能出现中文，也不能是数字开头 */
+        /* 一般一个id名只应用于一个元素，多了JS或者超链接会出问题 */
+
+        /* 子代选择器 */
+        div.demo8 > p {
+            font-size: 60px;
+            color: red;
+        }
+        /* 空格有没有不影响 */
+        /* 子代选择器，应用于所有满足选择器的子代元素，只应用于直接子元素 */
+
+        /* 后代选择器 */
+        div.demo9 p {
+            font-size: 60px;
+            color: red;
+        }
+        /* 后代选择器，应用于所有满足选择器的后代元素，不只是直接子元素 */
+        /* 和数学一样，会出现复杂的交集和并集，自行理解即可 */
+
+        /* 兄弟选择器 */
+        div.demo10>p.demo10-1+p {
+            color: aqua;
+            font-size: 60px;
+        }
+        /* 往下找一个兄弟版，不往上找 */
+        div.demo11>p.demo11-1~p {
+            color: red;
+            font-size: 60px;
+        }
+        /* 往下找全部兄弟版，不往上找 */
+
+        /* 属性选择器 */
+        div.demo12 h2[title] {
+            font-size: 50px;
+            width: 10%;
+        }
+        /* 应用于所有title属性的元素，值不管 */
+        div.demo12>h2[title="demo12-2"] {
+            color: red;
+        }
+        /* 母庸置疑 */
+        div.demo12 h2[title^="demo"] {
+            background-color: pink;
+        }
+        /* 应用于以title值开头的元素 */
+        div.demo12>h2[title$="-1"] {
+            color: aqua;
+        }
+        /* 应用于以title值结尾的元素 */
+        div.demo12 h2[title*="12-1"] {
+            color: yellowgreen;
+        }
+        /* 应用于包含title值的元素 */
+
+        /* 伪类选择器 */
+        div.demo13>a.demo13-1:link {
+            color: orange;
+            /* 未访问过的链接 */
+        }
+        div.demo13>a.demo13-1:visited {
+            color: pink; 
+            /* 已访问过的链接 */
+        }
+        div.demo13>a.demo13-1:hover {
+            color: red; 
+            /* 鼠标悬停在链接上时的颜色 */
+        }
+        div.demo13>a.demo13-1:active {
+            color: blue; 
+            /* 点击链接时的颜色 */
+        }
+        /* 顺序乱了容易丢失效果，所以对于超链接a，建议按link、visited、hover、active的顺序写 */
+        div.demo13>form.demo13-2-form>label>input.demo13-2:focus {
+            color: orangered;
+            background-color: aquamarine;
+            /* 获得焦点时的样式 */
+        }
+        div.demo13>form.demo13-2-form>input.demo13-2-radio:checked {
+            width: 100px;
+            height: 100px;
+        }
+        /* checked是持久状态，而focus是临时状态 */
+        /* checked一般用在单选框和复选框和开关按钮上。focus通用，详见文件 */
+        div.demo13>form.demo13-2-form>input.demo13-2-text:disabled {
+            background-color: aquamarine;
+            /* 禁用状态下的元素这样写 */
+        }
+        div.demo13>form.demo13-2-form>input.demo13-2-text:enabled {
+            background-color: pink;
+            /* 启用状态下的元素这样写 */
+        }
+        div.anchor-points-demo>img.Gladiia:target {
+            background-color: aqua;
+            /* 目标伪类,选中锚点所指向的元素 */
+        }
+        div.demo13>p.demo13-3:lang(en) {
+            color: blue;
+            /* 语言伪类,选中指定语言的元素 */
+        }
+        div.demo13>p.demo13-4:lang(zh-CN) {
+            color: red;
+            /* 因为全局语言是中文，所以这里可以省略写成：":lang"(zh-CN) {}" */
+            /* 和上面一样，是局部的，只作用于指定元素；写在html标签里面的是全局的 */
+        }
+
+        /* 一些杂七杂八的类选择器 */
+        div.demo14>p:first-child {
+            /* first-of-type表示第一个满足选择器的元素 */
+            font-size: 60px;
+            /* 因为看所有儿子时，第一个儿子不是p，所以效果不生效 */
+        }
+        div.demo14>p:last-child {
+            /* last-of-type表示最后一个满足选择器的元素 */
+            font-size: 10px;
+            /* 因为看所有儿子时，最后一个儿子是p，所以效果生效 */
+        }
+        div.demo14 p:last-child {
+            color: red;
+            /* 因为看所有后代时，div.demo14和第七个儿子div的最后一个后代都是p，所以效果生效 */
+            /* 之后不再举后代选择器有关的例 */
+        }
+        div.demo14>p:nth-child(4) {
+            /* nth-last-child()表示从后往前数第n个 */
+            /* nth-of-type()表示第n个满足选择器的元素 */
+            /* nth-last-of-type()表示从后往前数第n个满足选择器的元素 */
+            color: blue;
+            /* 因为看所有儿子时，第五个儿子是p，所以效果生效 */
+        }
+        div.demo14 p:only-child {
+            color: yellow;
+            /* 独生子 */
+            /* 都不满足，不生效 */
+        }
+        div.demo14 p:only-of-type {
+            color: yellowgreen;
+            /* 同类独生子 */
+            /* 只有孙子二满足 */
+        }
+        div.demo14-1:empty {
+            background-color: aquamarine;
+            /* 应用于没有内容的div元素,可以强行赋予宽高 */
+            width: 200px;
+            height: 200px;
+        }
+
+        /* 否定伪类选择器 */
+        div.demo15 p:not([title^="demo"]) {
+            color: red;
+            /* 记得加引号，不过不加也没影响 */
+            /* not()里几乎可以包所有选择器。例如：div>p:first-child什么什么的，否定可以略去：not(:first-child) */
+        }
+
+        /* 伪元素选择器 */
+        div.demo16>p.demo16-1::first-letter {
+            font-size: 40px;
+            color: red;
+            /* 第一个字母 */
+        }
+        div.demo16>p.demo16-1::first-line {
+            background-color: yellow;
+            /* 第一行 */
+        }
+        div.demo16>input.demo16-2::placeholder {
+            background-color: pink;
+            color: rgb(70, 108, 231);
+            /* 文本提示的东西 */
+        }
+        div.demo16>input.demo16-2::selection {
+            background-color: red;
+            color: rgb(70, 108, 231);
+            /* 选中的文本 */
+        }
+        div.demo16>p:not(.demo16-1)::before {
+            /* 每个p元素的前面添加内容 */
+            content:"现价:";
+            /* 注意双引号 */
+        }
+        div.demo16>p:not(.demo16-1)::after {
+            /* 每个p元素的后面添加内容 */
+            content:"¥";
+            /* 复制文本的时候，自动添加的选不中 */
+        }
+
+        /* !important 权重最高，会覆盖所有其他样式 */
+        div.demo17>p.demo17-1 {
+            color: pink !important;
+            color: blue;
+            background-color: orange;
+            font-size: 40px;
+            width: 10%;
+            /* 按理来说后写的覆盖先写的，但是!important权重最高 */
+        }
+
+        /* CSS权重计算(a,b,c),a是id选择器的数量，b是类选择器、伪类选择器、属性选择器的数量，c是元素选择器、伪元素选择器的数量。比较时从a开始比 */
+        /* p a.hhh (0,1,2)
+        div p[title="hhh"] (0,1,2) 
+        div>p:first-child (0,1,2) 
+        并集选择器每一部分分开计算 */
+
+        /* 像素和颜色 */
+        div.demo18-1 {
+            width: 1cm;
+            height: 1cm;
+            /* 厘米可以 */
+            background-color: pink;
+            /* 颜色名命名 */
+        }
+        div.demo18-2 {
+            width: 1mm;
+            height: 1mm;
+            /* 毫米可以 */
+            background-color: rgba(255, 192, 203, 0.5);
+            /* rgba()表示红色、绿色、蓝色、透明度，每个值的范围是0-255，透明度的范围是0-1 */
+            /* 也可以用%表示，每个值的范围是0%到100% */
+            /* rgb略去 */
+        }
+        div.demo18-3 {
+            width: 1px;
+            height: 1px;
+            /* 像素可以 */
+            background-color: #1372c0aa;
+            /* 当两两重复时，比如#FFCCDDAA，可以简写为#FCDA，HEX同理 */
+            /* 十六进制颜色值+透明度,又名HEXA，#号后面跟着6位16进制数，每个数的范围是0-9、A-F */
+            /* HEX略去 */
+            background-color: hsla(200, 50%, 50%, 0.5);
+            /* hsla()表示色相、饱和度、亮度、透明度，每个值的范围是0-360、0%到100%、0-1 */
+            /* 也可以用%表示，每个值的范围是0%到100% */
+            /* hsl略去 */
+        }
+        /* cm之类的不准确，像素点对不齐 */
+
+        /* 字体 */
+        div.demo19>p.demo19-1 {
+            font-size: 80px;/* 字体大小 */
+            font-family: "Snell Roundhand";/* 字体族，字体样式。记得加引号 */
+        }
+        div.demo19>p.demo19-2 {
+            font-size: 80px;
+            font-family: "娃娃体-简";
+        }
+        div.demo19>p.demo19-3 {
+            font-size: 80px;
+            font-family: "クレー";
+        }
+        div.demo19>p.demo19-4 {
+            font-size: 80px;
+            font-family: "行楷-简", "娃娃体-简";
+            /* 前来者居上 */
+            /* 备胎尽量是同一类型的字体 */
+        }
+        /* 衬线字体，棱角分明；非衬线字体，棱角平滑 */
+        /* 会部署在服务器上，不用担心不同设备之间字体不同 */
+    </style><!-- 内部CSS -->
+    <!-- 不同属性换行处理。理论上style标签可以写在head或者body中，但是为了方便阅读，一般写在head中 -->
+    <!-- 一般权重规律:！important > 行内CSS > 内部CSS = 外部CSS ｜
+    ｜ id选择器 > 类选择器 = 伪类选择器 = 属性选择器 > 元素选择器 = 伪元素选择器 > 通配.demo1选择器:* > 从父元素继承的效果 -->
+</head>
+<body><!-- 网页的主体内容，会显示在网页中 -->
+    <!-- 块级元素:标签呈现的元素独占一行 -->
+    <!-- 行级元素:标签呈现的元素不独占一行 -->
+    <!-- 行内块元素:特性几乎和行级元素相同，也不独占一行 -->
+    <!-- 规则:块级元素内可以嵌套块级元素和行级元素（几乎，例如p和h不能嵌套块级元素，有限制）;
+    行级元素不可以嵌套块级元素，但行级元素可以嵌套;行内块元素也不可嵌套块级元素 -->
+
+    <div class="block-elements-demo">
+        <div>我是块级容器</div>
+        <!-- div是块级容器，可以嵌套所有元素 -->
+        
+        <h1>第一级标题</h1>
+        <h2>第二级标题</h2>
+        <!-- h1~h6表示标题，特殊块级元素，不可嵌套其他块级元素，数字越小，标题的重要性越高。
+        h1在同一界面只能出现一次，其余可以多次出现；标题的使用需注意先后顺序，不可先使用h2再使用h1之类的； -->
+
+        <p>这是一个段落</p>
+        <!-- p表示段落，和h1一样的特殊块级元素，不可嵌套块级元素 -->
+
+        <p>海猫小故事:</p>
+        <blockquote>海猫小时候上公交车，发现公交车里面还有公交车，公交车里面的公交车里面还有人，那个人直接隐蔽把海猫的糖偷走了</blockquote>
+        <!-- blockquote是块级元素，表示长引用，空两个汉字，不能嵌套在p标签里 -->
+
+        <p>网站制作人的地址是:</p>
+        <address>泰拉大陆罗德岛医药企业</address>
+        <!-- address是块级元素，表示地址信息，不能嵌套在p标签里 -->
+
+        <hr>
+        <!-- hr是块级元素，单标签，表示水平分割线 -->
+
+        <pre>
+            I      Love      You
+               I   Love   You
+                   Love
+        </pre>
+        <!-- pre是块级元素，表示预格式化文本，保留空格和换行 -->
+    </div>
+
+    <div class="inline-elements-demo">
+        <span>我是行级容器</span>
+        <!-- span是行级容器，不可嵌套块级元素 -->
+        
+        <p>我是一个<em>强调文本</em></p>
+        <!-- em是行级元素，强调文本 -->
+         
+        <p>我是一个<strong>重要文本</strong></p>
+        <!-- strong是行级元素，表示重要文本 -->
+        <!-- h1>strong>em，强调级别 -->
+
+        <p><cite>《call of silence》</cite></p>
+        <!-- cite是行级元素，表示作品名 -->
+
+        <p><dfn>HTML</dfn></p>
+        <!-- dfn是行级元素，表示特殊术语、专有名词 -->
+
+        <p>原价<del>239</del>，现价<ins>199</ins>。</p>
+        <!-- del是行级元素，表示删除的文本;ins是行级元素，表示插入的文本 -->
+
+        <p>H<sub>2</sub>O,8<sup>3</sup>。</p>
+        <!-- sub是行级元素，表示下标文字;sup是行级元素，表示上标文字 -->
+
+        <p><code>fmt.Println("hello world")</code></p>
+        <!-- code是行级元素，表示代码 -->
+
+        <p>标识设备输出，<samp>支付宝到账100万元</samp></p>
+        <!-- samp是行级元素，表示在正常的上下文中，讲文本提取出来 -->
+
+        <p><kbd>Ctrl</kbd>+<kbd>C</kbd>复制，<kbd>Ctrl</kbd>+<kbd>V</kbd>粘贴</p>
+        <!-- kbd是行级元素，表示键盘按键，常用于计算机教学手册 -->
+
+        <p><abbr title="明日方舟">昨月圆车</abbr>这个游戏很好玩</p>
+        <!-- abbr是行级元素，表示缩写，title属性在鼠标停留在缩写处而显示的文本 -->
+
+        <p>你是年少的欢喜，<bdo dir="rtl">你是年少的欢喜</bdo></p>
+        <!-- bdo是行级元素，表示更改文本方向，dir属性默认是ltr，从左到右;rtl，从右到左 -->
+
+        <p>JS变量这样表示:<code>let <var>a</var> = 1</code></p>
+        <!-- var是行级元素，表示变量，常用在code标签内 -->
+
+        <p><small>本网站仅为学习交流使用，如有侵权请联系删除。</small></p>
+        <!-- small是行级元素，表示附属细则 -->
+
+        <p><b>罗技鼠标</b></p>
+        <!-- b是行级元素，表示摘要中的关键字或者评论中的产品名称 -->
+
+        <p>乌尔比安:<i>“它们必须吐出些有价值的情报”</i></p>
+        <!-- i是行级元素，表示人物的心理活动或者语言，呈现字体图标（重要） -->
+
+        <p>“<u>五二饼干</u>”，乌尔比安</p>
+        <!-- u是行级元素，表示反差文本，错误的单词之类的 -->
+
+        <p>柯洁曾经说过:<q>给你糖完了兄弟</q></p>
+        <!-- q是行级元素，表示短引用 -->
+
+        <a href="https://ak.hypergryph.com/#index" target="_self">了解我们</a>
+        <a href="https://monster-siren.hypergryph.com/about" target="_blank">塞壬唱片</a>
+        <a href="README.md" target="_blank">自述文件</a>
+        <a href="css/style.css" target="_blank">外部CSS文件</a>
+        <a href="assets/若叶睦简笔画.jpg" target="_blank">作者画像</a>
+        <a href="assets/阿戈尔.ico" download="阿戈尔">下载阿戈尔图标</a>
+        <!-- download属性表示下载文件，里面的值为预览名 -->
+        <!-- a是行级元素，表示超链接，href属性表示超链接地址。target属性中_blank属性表示在新页签打开超链接;
+        _self属性表示在本页签打开超链接(不写就默认此标签)。两个a标签之间不空格就连在一起，空格不管多少浏览器都解析为空一格 -->
+
+        <a href="#">回到顶部</a>
+        <a href="">刷新页面</a>
+        <a href="javascript:alert('hello world');">JS脚本</a>
+        <a href="tel:+86 10086">联系客服（10086）</a>
+        <a href="mailto:hatoyamafumimutsumi@icloud.com">邮件联系</a>
+        <a href="sms:+86 10086">短信联系（10086）</a>
+        <!-- 超链接href属性:#为回到顶部;空着为刷新页面;javascript:;为JS脚本，:和;之间写入脚本;
+        tel:为拨打电话号码，可以写上+86 具体电话号码（空格）;
+        mailto:具体邮箱地址，为向该地址发送邮件;sms:+86 10086同理，为向其发送短信 -->
+
+        <br>
+        <!-- br是行级元素，单标签，表示换行，可叠加使用 -->
+        <br><br>
+    </div>
+
+    <div class="inline-block-elements-demo">
+        <img src="assets/深海猎人油画.png" alt="深海猎人" height="280px">
+        <img src="assets/浊心斯卡蒂皮肤立绘.png" alt="浊心斯卡蒂" height="280px">
+        <img src="assets/歌蕾蒂娅皮肤立绘.png" alt="歌蕾蒂娅" height="280px">
+        <img src="assets/乌尔比安新皮立绘.jpg" alt="乌尔比安" height="280px">
+        <img src="assets/归溟幽灵鲨皮肤立绘.png" alt="归溟幽灵鲨" height="280px"><br>
+        <!-- 相对路径:./表示在和本文件同级的找图片文件;../表示在上一级的找;../../表示在上两级找，以此类推 -->
+        <!-- img是行内块元素，表示导入图片，src属性表示导入地址，地址错误图片不显示;alt属性表示图片文本介绍，在图片不显示时显示文本介绍，在搜索图片会显示图片，打开图片进入原网址;
+        width属性表示图片宽度，height属性表示图片高度，仅设置其一图片会遵照原比例缩放，都设置就根据设置px值缩放 -->
+
+        <img src="file:/Users/fumimutsumi/Desktop/写真/珂莱塔.jpg" alt="珂莱塔" height="280px">
+        <img src="https://web.hycdn.cn/arknights/official/pic/20250422/cea7367d1c3293399e51d4d3aeaa29a6.jpg" alt="逻各斯" height="280px">
+        <!-- 绝对路径:一:本地绝对路径:因为Live Server插件（弊端:上传到服务器找不到、安全问题），不能打开本地绝对路径的图片，需要用Finder打开，选中需打开文件鼠标左击，或者command+option+R。
+        二:网络绝对路径:仍然因为该插件而无法打开，打开方法同上。如果未经授权可能因为防盗链而无法拉图。 -->
+        <!-- mac本地路径从file:/开始找 -->
+    </div>
+
+    <div class="anchor-points-demo">
+        <a href="#Ulpianus">看乌尔比安</a>
+        <a href="#Gladiia">看歌蕾蒂娅</a><br>
+        <a name="Ulpianus"></a>
+        <img src="assets/乌尔比安精二立绘.png" alt="乌尔比安" height="400px"><br>
+        <img src="assets/歌蕾蒂娅皮肤立绘.png" alt="歌蕾蒂娅" height="400px" id="Gladiia" class="Gladiia">
+        <!-- 超链接跳转锚点:在文件上加特殊的a标签，用name属性为锚点命名，再在锚点跳转按钮处加超链接，用#+锚点名即可跳转 -->
+        <!-- p的id属性也可作为锚点，推荐优先使用id属性;id属性是通用属性，任何标签都可加最好不要重复和开头数字 -->
+        <!-- name跳转因为有个空标签而不是那么精准;id没有问题，更推荐使用 -->
+    </div>
+
+    <div class="list-elements-demo">
+        <ul><li>第一项</li><li>第二项</li><li>第三项</li></ul>
+        <!-- ul是块级元素(只能嵌套<li></li>)，表示无序列表;li是块级元素，表示列表项 -->
+
+        <ol><li>第一项</li><li>第二项</li><li>第三项</li></ol>
+        <!-- ol是块级元素(只能嵌套<li></li>)，表示有序列表 -->
+
+        <dl><dt>术语1</dt><dd>定义1</dd><dt>术语2</dt><dd>定义2</dd><dd>定义2还能有多个</dd></dl>
+        <!-- dl是块级元素(只能嵌套<dt></dt><dd></dd>)，表示定义列表;dt是块级元素(特殊，不可嵌套块级)，表示定义术语;dd是块级元素，表示定义内容 -->
+
+        <ul>
+            <li>第一项</li>
+            <li>第二项</li>
+            <li>
+                第三项
+                <dl>
+                    <dt><em>术语1</em></dt>
+                    <dd>定义1</dd>
+                    <dd>
+                        定义2
+                        <ol><li>第一项</li><li>第二项</li></ol>
+                    </dd>
+                </dl>
+            </li>
+        </ul>
+        <!-- 列表标签都可相互嵌套，不过要在li标签和dd标签内，dt只允许嵌套行内元素 -->
+    </div>
+
+    <div class="table-elements-demo">
+        <!-- CSS可以代替写额外的属性，此处不是重点 -->
+         <table border="10" width="500" height="200" cellspcing="2">
+            <caption>表格标题</caption>
+            <!-- caption是块级元素，表示表格标题 -->
+            <thead height="50" align="center" valign="middle"><tr><th>表头1</th><th>表头2</th><th>表头3</th></tr></thead>
+            <!-- tr是单元行，th是表头单元格，td是主体和脚注单元格;都没有块级行级属性区分 -->
+            <!-- thead是块级元素，表示表头;thead可+height属性，此时整个表格的高度会超出设定值，表头给撑大了;
+            align属性表示水平对齐方式，left是左对齐，center（默认）是中间对齐，right是右对齐;
+            valign属性表示垂直对齐方式，top是上对齐，middle是中间对齐，bottom是下对齐 -->
+            <tbody height="100" align="center" valign="middle">
+                <tr><td>第一行第一列</td><td>第一行第二列</td><td>第一行第三列</td></tr>
+                <tr><td>第二行第一列</td><td>第二行第二列</td><td>第二行第三列</td></tr>
+            </tbody>
+            <!-- tbody是块级元素，表示表格主体 -->
+            <tfoot height="50" align="center" valign="middle"><tr><td></td><td></td><td>表格脚注</td></tr></tfoot>
+            <!-- tfoot是块级元素，表示表格底部 -->
+            <!-- tr能写和thead一样的属性，得重新计算防止出错;td和th还能写width宽度属性等，此时整列宽度都会变，高度属性同理，总和超出没事，少于就出问题;
+            整体调应用于所有，还可以单独调应用于个别 -->
+        </table>
+        <!-- table是块级元素，表示表格;border属性表示表格边框，1px的实线边框;px值>1时只改变表格外边框，里面仍是1px;
+        width属性表示表格的宽，字多的一列更宽;height属性表示表格的高(至少，得计算里面各部分的总和，超过没事，少于就失效)，只会改变主体部分，表头表底不会改变;
+        cellspacing属性表示表格间隔; -->
+        <hr><hr><hr>
+        <div align="center">
+            <h1>罗德岛制药公司 - 战术情报与人员档案</h1>
+            <div>
+                档案编号:<small>RHI-ACT-04-DeepHunter</small><br>
+                安全许可等级：<strong>机密</strong>
+            </div>
+            <table border="7" cellspacing="0" height="600">
+                <caption align="center" valign="middle">深海猎人项目成员生理数据与作战能力对比分析报告</caption>
+                <thead align="center" valign="middle"><tr><th>档案分类</th><th>具体属性</th><th>乌尔比安</th><th colspan="2">斯卡蒂</th><th>歌蕾蒂娅</th><th colspan="2">幽灵鲨</th></tr></thead>
+                <tbody align="center" valign="middle">
+                    <tr><td rowspan="3">身份信息</td><td>代号</td><td>乌尔比安</td><td>斯卡蒂</td><td>浊心斯卡蒂</td><td>歌蕾蒂娅</td><td>幽灵鲨</td><td>归溟幽灵鲨</td></tr>
+                    <tr><td>外部识别名称</td><td>Ulpianus</td><td>Skadi</td><td>Skadi the Corrupting Heart</td><td>Gladiia</td><td>Specter</td><td>Specter the Unchained</td></tr>
+                    <tr><td>性别</td><td>男</td><td>女</td><td>女</td><td>女</td><td>女</td><td>女</td></tr>
+                    <tr><td rowspan="2">背景履历</td><td>累计作战时长</td><td>二十二年</td><td>十三年</td><td>——</td><td>十七年</td><td>七年</td><td>七年</td></tr>
+                    <tr><td>地理来源</td><td>阿戈尔</td><td>阿戈尔</td><td>阿戈尔</td><td>阿戈尔</td><td>阿戈尔</td><td>阿戈尔</td></tr>
+                    <tr><td rowspan="4">生理数据</td><td>出生日期</td><td>4月13日</td><td>3月7日</td><td>3月7日</td><td>11月6日</td><td>7月27日</td><td>7月27日</td></tr>
+                    <tr><td>种族</td><td>阿戈尔</td><td>[数据删除]</td><td>[数据删除]</td><td>[数据删除]</td><td>[数据删除]</td><td>阿戈尔</td></tr>
+                    <tr><td>身高</td><td>189cm</td><td>166cm</td><td>166cm</td><td>181cm</td><td>162cm</td><td>165cm</td></tr>
+                    <tr><td>体重</td><td>—</td><td>[已编辑]</td><td>—</td><td>[已编辑]</td><td>[已编辑]</td><td>—</td></tr>
+                    <tr><td rowspan="3">医学报告</td><td>感染状态</td><td>非感染者</td><td>非感染者</td><td>非感染者</td><td>非感染者</td><td>感染者</td><td>感染者</td></tr>
+                    <tr><td>体细胞融合率</td><td>0%</td><td>0%</td><td>0%</td><td>0%</td><td>14%</td><td>14.5%</td></tr>
+                    <tr><td>血液结晶密度</td><td>0.012u/L</td><td>0.013u/L</td><td>0.012u/L</td><td>0.011u/L</td><td>0.31u/L</td><td>0.34u/L</td></tr>
+                    <tr><td rowspan="6">作战能力评估</td><td>物理强度</td><td>卓越</td><td>[数据封存]</td><td>优良</td><td>卓越</td><td>卓越</td><td>卓越</td></tr>
+                    <tr><td>战场机动</td><td>优良</td><td>标准</td><td>优良</td><td>[数据封存]</td><td>普通</td><td>优良</td></tr>
+                    <tr><td>生理耐受</td><td>卓越</td><td>卓越</td><td>卓越</td><td>卓越</td><td>卓越</td><td>卓越</td></tr>
+                    <tr><td>战术规划</td><td>优良</td><td>标准</td><td>——</td><td>优良</td><td>缺陷</td><td>标准</td></tr>
+                    <tr><td>战斗技巧</td><td>卓越</td><td>优良</td><td>——</td><td>卓越</td><td>优良</td><td>优良</td></tr>
+                    <tr><td>源石技艺适应性</td><td>缺陷</td><td>缺陷</td><td>缺陷</td><td>缺陷</td><td>缺陷</td><td>缺陷</td></tr>
+                </tbody>
+                <tfoot align="center" valign="middle"><tr><td colspan="2">杯论</td><td>超大杯</td><td colspan="2">中杯</td><td>超大杯</td><td colspan="2">大杯</td></tr></tfoot>
+            </table>
+        </div>
+        <hr><hr><hr>
+    </div>
+
+    <div class="form-elements-demo">
+        <a href="https://www.baidu.com/s?wd=斯卡蒂" target="_blank">去百度搜索斯卡蒂</a>
+        <form action="https://www.baidu.com/s" target="_blank" method="get"> 
+            <input type="text" name="wd">
+            <!-- input是行内块元素，表示输入框;type属性表示输入框类型;text表示文本输入框;password表示密码输入框 -->
+            <button type="submit">去百度搜索</button>
+            <!-- button是行级元素，表示按钮;type属性表示按钮类型，submit表示提交按钮，点击后会将表单数据提交给action属性指定的URL;
+            若不写type属性，默认也是submit类型 -->
+            <input type="reset" value="重置">
+            <!-- button和type在type相同时没有什么区别。reset表示重置按钮，点击后会将表单数据重置为默认值 -->
+        </form><hr><hr><hr>
+
+        <!-- 以下为架空部分 -->
+
+        <div align="center">罗德岛制药公司登陆和调查系统</div>
+        <form action="https://www.baidu.com/s" target="_blank" method="get">
+            <fieldset>
+                <legend>主要信息</legend>
+                <label for="account">账号:</label><input id="account" type="text" name="account" value="ace" maxlength="10" placeholder="请输入账号"><br>
+                <label>密码:<input type="password" name="pwd" value="ace666" maxlength="10" placeholder="请输入密码"></label><br>
+                <!-- value属性表示输入框的默认值,账号密码之类的一般不写，但是单选框和复选框必须写，要不然收集不走数据;maxlength属性表示输入框的最大长度;
+                placeholder属性表示输入框的占位符，当输入框为空时显示 -->
+                <!-- label标签用于为表单元素提供可点击的标签，for属性与input的id属性对应，点击标签时input元素会获得焦点;或者直接包起来 -->
+                性别:
+                <input id="male" type="radio" name="gender" value="male" checked><label for="male">男</label>
+                <label><input type="radio" name="gender" value="female">女</label>
+                <!-- action和name需要和后端对应;checked表示默认选中 -->
+            </fieldset>
+            <!-- fieldset是块级元素，表示字段集，用于将表单控件分组;legend是块级元素，表示字段集的标题 -->
+            <fieldset>
+                <legend>附加信息</legend>
+                <input type="hidden" name="internal_login" value="true">
+                <!-- hidden表示隐藏域，用于在表单提交时传递数据，但是用户无法看到;value属性表示隐藏域的值 -->
+                爱好:
+                <label><input type="checkbox" name="hobby" value="smoking">抽烟</label>
+                <label><input type="checkbox" name="hobby" value="drinking">喝酒</label>
+                <input type="checkbox" name="hobby" value="perm" id="perm"><label for="perm">烫头</label><br>
+                <label for="city">城市:</label>
+                <select name="city" id="city" multiple>
+                    <option value="beijing">北京</option>
+                    <option value="shanghai" selected>上海</option>
+                    <option value="guangzhou">广州</option>
+                    <option value="shenzhen">深圳</option>
+                    <!-- 现在的网站一般只认value值，再比如value是特殊代号，比如邮政编码，后面才是地区名;selected表示默认选中 -->
+                </select><br>
+                <!-- select是块级元素，表示选择框，用于选择一个或多个选项;name属性表示选择框的名称，用于服务器端接收数据，city是城市;
+                id属性表示选择框的唯一标识，用于JS操作，一般不写
+                multiple属性表示选择框可以选择多个选项，不写表示只能选择一个选项
+                -->
+                <label for="others">细节补充:</label><textarea name="others" id="others" cols="40" rows="10" placeholder="请输入其他补充信息">ciallo</textarea><br>
+                <!-- textarea是块级元素，表示文本域，用于输入多行文本.
+                name属性表示文本域的名称，用于服务器端接收数据，other是其他内容
+                id属性表示文本域的唯一标识，用于JS操作，一般不写
+                cols属性表示文本域的列数，默认是20
+                rows属性表示文本域的行数，默认是2
+                -->
+                条例协议:<input type="radio" name="regulations" value="agree" checked disabled id="agree"><label for="agree">同意</label>
+                <input type="radio" name="regulations" value="disagree" id="disagree" disabled><label for="disagree">不同意</label>
+                <!-- disabled属性表示禁用，不能输入，不能提交;如果和checked或者selected同时出现，就是单程车票，最好不要，整活例外 -->
+            </fieldset>
+            <button type="submit">提交</button>
+            <input type="reset" value="重置">
+            <input type="button" value="检测提交环境是否安全">
+            <button type="button">忘记账号密码</button>
+            <!-- 自定义按钮（普通按钮），也是这两种写法。效果得靠JS实现 -->
+        </form>
+        <!-- form是块级元素，表示表单，表单控件;action属性表示表单交给谁处理，https://www.baidu.com/s之类的，/s表示搜索;
+        name属性表示表单控件的名称，用于服务器端接收数据，wd是百度搜索关键词 -->
+        <!-- method属性表示表单提交方式，get表示通过URL传递数据(默认)，post表示通过请求体传递数据 -->
+    </div>
+
+    <div class="iframe-elements-demo">
+        <iframe src="https://www.bilibili.com/" frameborder="1" width="400" height="200"></iframe>
+        <!-- iframe是行内元素，表示内联框架，用于在当前页面嵌入其他页面;src属性表示嵌入页面的URL，frameborder属性表示是否显示边框，0表示不显示，1表示显示;
+        width属性表示宽度，height属性表示高度;可嵌入广告或者其他网页,图片也可。准确来说src能嵌的都可以嵌入，一样的，能打开就打开，不能打开就触发下载 -->
+
+        <a href="https://www.bilibili.com/" target="blbl">点我看bilibili</a><br>
+        <!-- a标签的target属性设置为"blbl"，表示点击链接时，页面内容将在name属性为"blbl"的iframe中打开 -->
+        <iframe name="blbl" frameborder="0"></iframe>
+        <!-- iframe的name属性设置为"blbl"，与a标签的target属性值对应，用于接收链接打开的内容 -->
+
+        <form action="https://www.baidu.com/s" target="bd" method="get">
+            <input type="text" name="wd">
+            <button type="submit">百度搜索</button>
+            <input type="submit" value="百度搜索">
+        </form>
+        <iframe name="bd" frameborder="0"></iframe><br>
+        <!-- target属性设置为"bd"，表示点击链接时，页面内容将在name属性为"bd"的iframe中打开 -->
+        
+        <iframe src="css/style.css" frameborder="0"></iframe>
+        <!-- 文件也可以 -->
+    </div>
+
+    <div class="character-entitles-demo">
+        <p>我&nbsp;&nbsp;&nbsp;&nbsp;斯卡蒂</p>
+        <p>me&#160;&#160;skadi</p>
+        <!-- 字符实体:用特殊表达表示字符。&nbsp;或者&#160;表示空格，可以多写，用在非p标签中，如pre标签 -->
+        <p>&lt;h1&gt;最nb</p>
+        <!-- 字符实体:用特殊表达表示字符。&lt;或者&#60;表示小于号，&gt;或者&#62;表示大于号 -->
+        <p>&amp;nbsp;</p>
+        <!-- 字符实体:用特殊表达表示字符。&amp;或者&#38;表示和号 -->
+        <p>¥199/&yen;199</p>
+        <p>&copy;版权所有</p>
+        <p>&trade;商标所有</p>
+        <p>2 &times; 2 = 4</p>
+        <p>2 &divide; 2 = 1</p>
+        <!-- 重要性不大，不会的网上查 -->
+    </div>
+
+    <div class="meta-elements-demo">
+        <!-- 全局属性 -->
+        <p>id属性</p>
+        <div id="hello">你好</div>
+        <div id="hello2">你好2</div>
+        <!-- id属性：唯一标识，用于JS操作，一般不写，同一文件不可重复 -->
+        <p>class属性</p>
+        <div class="dog">德国牧羊犬</div>
+        <div class="dog">边境牧羊犬</div>
+        <!-- class属性：类选择器，用于CSS操作，一般不写，可重复 -->
+        <p>style属性</p>
+        <div style="color: red;">你好</div>
+        <!-- style属性：行内样式，用于CSS操作，一般不写，可重复 -->
+        <p>title属性</p>
+        <div title="你好">hello</div>
+        <a href="https://www,baidu,com" title="去百度">去百度</a>
+        <!-- title属性：鼠标悬停在元素上显示的提示信息，一般不写，可重复 -->
+        <p>lang属性</p>
+        <div lang="en">hello</div>
+        <!-- 和html中的lang不冲突，一个整体大部分和局部小部分的区别 -->
+        <!-- lang属性：语言属性，用于指定元素的语言，一般不写，可重复 -->
+        <p>dir属性</p>
+        <bdo dir="rtl">你好</bdo>
+        <div dir="rtl">你好</div>
+        <!-- 在bdo和非bdo的标签中使用，效果很明显的不同，前者只是调换文本的前后顺序，后者直接镜像转换 -->
+        <!-- dir属性：方向属性，用于指定元素的文本方向，一般不写，可重复 -->
+        <div>
+            <p>tabindex属性</p>
+            <!-- tabindex属性： tabindex属性用于指定元素的Tab键顺序，一般不写 -->
+            <p>accesskey属性</p>
+            <!-- accesskey属性：访问键属性，用于指定元素的访问键，一般不写 -->
+            <p>contenteditable属性</p>
+            <!-- contenteditable属性：可编辑属性，用于指定元素是否可编辑，一般不写 -->
+            <p>draggable属性</p>
+            <!-- draggable属性：可拖动属性，用于指定元素是否可拖动，一般不写 -->
+            <p>hidden属性</p>
+            <!-- hidden属性：隐藏属性，用于指定元素是否隐藏，一般不写 -->
+            <p>spellcheck属性</p>
+            <!-- spellcheck属性：拼写检查属性，用于指定元素是否进行拼写检查，一般不写 -->
+            <p>translate属性</p>
+            <!-- translate属性：翻译属性，用于指定元素是否进行翻译，一般不写 -->
+        </div>
+    </div>
+
+    <div class="inline-css-demo">
+        <p style="color: red;font-size: 60px;">欢迎来到CSS</p>
+        <!-- CSS行内样式。color属性表示颜色。font-size属性表示字体大小。 -->
+        <!-- 多个声明加分号隔开 -->
+    </div>
+
+    <div class="internal-css-demo">
+        <h2 class="demo1">CSS基础结构名称1</h2>
+        <h2 class="demo1">CSS基础结构名称2</h2>
+        <!-- 演示部分 -->
+
+        <!-- 元素选择器 -->
+        <h1 class="demo2">元素选择器</h1>
+        <h2 class="demo2">元素选择器</h2>
+
+        <!-- 交集选择器 -->
+        <div class="demo3" id="demo3">
+            <p class="demo4">交集选择器</p>
+        </div>
+
+        <!-- 并集选择器 -->
+        <h1 class="demo5">并集选择器</h1>
+        <p class="demo5">并集选择器</p>
+
+        <!-- 类选择器 -->
+        <p class="demo6 demo6-1">类选择器</p><!-- 写多个类可以，记得空格 -->
+        <p class="demo6">类选择器</p>
+
+        <!-- id选择器 -->
+        <p class="demo7" id="demo7-1">id选择器</p>
+
+        <!-- 子代选择器 -->
+        <div class="demo8">
+            <h1>子1</h1>
+            <p>子2</p>
+            <p>子3</p>
+            <p>子4</p>
+            <div>
+                <!-- div是子5 -->
+                <p>孙1</p>
+            </div>
+        </div>
+
+        <!-- 后代选择器 -->
+        <div class="demo9">
+            <h1>子1</h1>
+            <p>子2</p>
+            <p>子3</p>
+            <div>
+                <!-- div是子4 -->
+                <p>孙1</p>
+            </div>
+        </div>
+
+        <!-- 兄弟选择器 -->
+        <div class="demo10">
+            <h1>大哥</h1>
+            <p class="demo10-1">二弟</p>
+            <p>三弟</p>
+            <p>四弟</p>
+            <div>
+                <!-- div是五弟 -->
+                <p>孙</p>
+            </div>
+        </div>
+        <div class="demo11">
+            <h1>大哥</h1>
+            <p class="demo11-1">二弟</p>
+            <p>三弟</p>
+            <p>四弟</p>
+            <div>
+                <!-- div是五弟 -->
+                <p>孙</p>
+            </div>
+        </div>
+
+        <!-- 属性选择器 -->
+        <div class="demo12">
+            <h2 title="demo12-1">诶嘿嘿</h2>
+            <h2 title="demo12-2">诶嘿嘿</h2>
+            <h2 title="demo12-2-1">诶嘿嘿</h2>
+        </div>
+
+        <!-- 伪类选择器 -->
+        <div class="demo13">
+            <!-- 超链接a独有 -->
+            <a class="demo13-1" href="https://www.toutiao.com">超链接1</a>
+            <a class="demo13-1" href="https://www.baidu.com">超链接2</a>
+
+            <!-- 通用 -->
+            <a class="demo13-1" href="https://www.jd.com">超链接3</a>
+            <a class="demo13-1" href="https://www.bilibili.com">超链接4</a>
+
+            <!-- 表单独有 -->
+            <form action="https://www.baidu.com/s" method="get" class="demo13-2-form">
+                <label>搜索:<input class="demo13-2" type="text" name="wd" placeholder="输入关键词以搜索"></label>
+                <input type="submit" value="搜索"><br>
+                <!-- 以下为架空部分 -->
+                性别:
+                <input class="demo13-2-radio" type="radio" name="demo13-2-radio" value="male" id="demo13-2-radio-male"><label for="demo13-2-radio-male">男</label>
+                <input class="demo13-2-radio" type="radio" name="demo13-2-radio" value="female" id="demo13-2-radio-female"><label for="demo13-2-radio-female">女</label><br>
+                <input type="text" name="demo13-2-text" class="demo13-2-text" placeholder="禁用状态" disabled>
+                <input type="text" name="demo13-2-text" class="demo13-2-text" placeholder="启用状态" enabled>
+            </form>
+
+            <!-- 目标伪类和语言伪类 -->
+            <a href="#Gladiia">看歌蕾蒂娅</a>
+            <p class="demo13-3" lang="en">Gladiia is a female character in the game.</p>
+            <!-- 有时候英语识别不出来，需要加lang="en" -->
+            <!-- lorem+数字，会生成指定数量的随机文字 --> 
+            <p class="demo13-4">歌蕾蒂娅是游戏中的一个女性角色。</p>
+        </div>
+
+        <!-- 一些杂七杂八的类选择器 -->
+        <div class="demo14">
+            <h2>第一个儿子</h2>
+            <p>第二个儿子</p>
+            <p>第三个儿子</p>
+            <p>第四个儿子</p>
+            <h2>第五个儿子</h2>
+            <p>第六个儿子</p>
+            <div>
+                <h2>第一个孙子</h2>
+                <p>第二个孙子</p>
+            </div>
+            <p>第八个儿子</p>
+        </div>
+        <div class="demo14-1"></div>
+
+        <!-- 否定伪类选择器 -->
+        <div class="demo15">
+            <p title="demo15-1">我是甜菜</p>
+            <p>我不是甜菜</p>
+        </div>
+
+        <!-- 伪元素选择器 -->
+        <div class="demo16">
+            <p class="demo16-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint, beatae.</p>
+            <input type="text" placeholder="请输入内容" class="demo16-2">
+            <p>199</p>
+            <p>199</p>
+            <p>199</p>
+            <p>199</p>
+            <p>199</p>
+        </div>
+
+        <!-- !important -->
+        <div class="demo17">
+            <p class="demo17-1">诶嘿嘿嘿</p>
+        </div>
+    </div>
+
+    <div class="css-style-demo">
+        <div class="demo18-1"></div>
+        <div class="demo18-2"></div>
+        <div class="demo18-3"></div>
+
+        <div class="demo19"> 
+            <p class="demo19-1">Snell Roundhand</p>
+            <p class="demo19-2">娃娃体-简</p>
+            <p class="demo19-3">クレー</p>
+            <p class="demo19-4">行楷-简</p>
+        </div>
+    </div>
+</body>
+</html><!-- 主要结构由<html><head></head><body></body></html>构成 -->
+
+<!-- command+/ 意为快捷整行注释 -->
+<!-- command+C 意为复制 -->
+<!-- command+V 意为粘贴 -->
+<!-- command+S 意为保存 -->
+<!-- command+F 意为查找和覆盖 -->
+<!-- command+Z 意为撤销 -->
+<!-- command+Shift+K 意为快速删除光标所在行 -->
+<!-- command++/- 意为放大和缩小全局界面，+鼠标滑轮才是局部界面 -->
+<!-- command+enter 意为快速到达并创建下一行 --> 
+<!-- command+shift+enter 意为快速到达并创建上一行 -->
+<!-- live Server:command+L+O 注意顺序，意为在浏览器运行html程序-->
+<!-- Shift+option+方向键上/下 意为将本行复制并创建到上/下一行上 -->
+<!-- Shift+tab+鼠标选中的部分 意为往前缩进一个tab -->
+<!-- option+方向键上下 意为将本行移动到上下行 -->
+<!-- option+鼠标点击，可以快速在多行进行删增，可用方向键上下左右进行调节 -->
+<!-- Trae cn:command+U表示打开AI问答功能 -->
+<!-- Trae cn:control+Shift+Enter 意为打开建议增加代码功能 -->
