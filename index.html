@@ -1,217 +1,509 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <title>一个记录fumimutsumi前端学习的地方</title>
+    <title>mutsumi的妙妙屋</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="这是一个前端学习网站的主页">
-    <meta name="keywords" content="HTML,前端,CSS,学习">
+    <meta name="description" content="这是一个记录个人学习的个人博客">
+    <meta name="keywords" content="HTML,前端,CSS,学习,javascript">
     <meta name="author" content="fumimutsumi">
     <link rel="icon" type="image/x-icon" href="assets/favico.ico">
     <style>
-        /* 全局重置与基础样式 */
+        /* ===== CSS重置与全局变量 ===== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            /* 字体栈：娃娃体优先，兼容系统默认字体 */
-            font-family: "娃娃体-简", "幼圆", "Microsoft YaHei", sans-serif;
+            font-family: "幼圆", "Microsoft YaHei", "Segoe UI", sans-serif;
+        }
+
+        :root {
+            /* 主色调定义 */
+            --primary-color: #8b5a2b;      /* 主棕色 */
+            --secondary-color: #6d4c41;    /* 次棕色 */
+            --accent-color: #b8860b;       /* 强调金色 */
+            --bg-color: #f9f6ed;          /* 背景米白 */
+            --card-bg: #ffffff;           /* 卡片背景 */
+            --text-primary: #5c4033;      /* 主要文字 */
+            --text-secondary: #795548;    /* 次要文字 */
+            
+            /* 阴影系统 */
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+            --shadow-md: 0 4px 16px rgba(0,0,0,0.12);
+            --shadow-lg: 0 8px 24px rgba(0,0,0,0.15);
+            
+            /* 圆角系统 */
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            
+            /* 过渡动画 */
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         body {
-            /* 主色调：舒适米白色 */
-            background-color: #f9f6ed;
+            background: linear-gradient(135deg, #f9f6ed 0%, #f0e6d2 100%);
             min-height: 100vh;
             padding: 2rem;
-            color: #5c4033; /* 文本主色：浅棕色，柔和不刺眼 */
+            color: var(--text-primary);
+            line-height: 1.6;
         }
 
-        /* 容器样式 */
+        /* ===== 布局容器 ===== */
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            background-color: #fff;
-            border-radius: 20px;
-            padding: 3rem;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
         }
 
-        /* 随机欢迎语样式 */
-        .welcome {
-            font-size: 2.2rem;
-            margin-bottom: 1.5rem;
-            color: #8b5a2b; /* 暖棕色标题 */
+        /* ===== 欢迎语区域 ===== */
+        .welcome-section {
             text-align: center;
-            letter-spacing: 3px;
-            font-weight: normal;
+            padding: 2rem;
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(139, 90, 43, 0.1);
         }
 
-        /* 标题样式 */
-        h2 {
-            font-size: 1.8rem;
-            margin: 2.5rem 0 1rem;
-            padding-bottom: 0.8rem;
-            border-bottom: 2px solid #f0e6d2; /* 浅米色下划线 */
-            color: #6d4c41; /* 深棕色标题 */
+        .welcome-text {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            transition: var(--transition);
+        }
+
+        .welcome-text:hover {
+            transform: translateY(-2px);
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.15);
+        }
+
+        /* ===== 搜索框区域 ===== */
+        .search-section {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            text-align: center;
+        }
+
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto;
             position: relative;
         }
 
-        h2::after {
+        .search-input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            border: 2px solid var(--accent-color);
+            border-radius: 50px;
+            font-size: 1.1rem;
+            outline: none;
+            transition: var(--transition);
+            background: linear-gradient(135deg, #fff, #f8f4e9);
+        }
+
+        .search-input:focus {
+            box-shadow: 0 0 0 3px rgba(184, 134, 11, 0.3);
+            transform: scale(1.02);
+        }
+
+        .search-engine-selector {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .engine-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--accent-color);
+            border-radius: var(--radius-sm);
+            background: transparent;
+            color: var(--primary-color);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .engine-btn.active {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        /* ===== 应用网格布局 ===== */
+        .apps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        /* ===== 应用卡片样式 ===== */
+        .app-card {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            border: 1px solid rgba(139, 90, 43, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .app-card::before {
             content: '';
             position: absolute;
-            bottom: -2px;
+            top: 0;
             left: 0;
-            width: 50px;
-            height: 2px;
-            background: #b8860b; /* 金色强调线 */
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-color), var(--primary-color));
         }
 
-        /* 段落样式 */
-        p {
-            margin: 0.8rem 0;
-            font-size: 1.2rem;
-            line-height: 1.8;
-            color: #795548; /* 文本副色：深棕色 */
+        .app-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
         }
 
-        /* 按钮全状态样式 */
-        .btn {
-            display: inline-block;
-            padding: 0.8rem 1.8rem;
-            margin: 0.5rem 0;
-            border-radius: 50px;
+        .app-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+            text-align: center;
+        }
+
+        .app-title {
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .app-desc {
+            color: var(--text-secondary);
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .app-link {
+            display: block;
+            text-align: center;
+            padding: 0.8rem 1.5rem;
+            background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+            color: white;
             text-decoration: none;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            font-weight: normal;
+            border-radius: var(--radius-md);
+            transition: var(--transition);
+            font-weight: 500;
         }
 
-        /* 未访问状态 */
-        .btn:link {
-            background-color: #e8f5e9;
-            color: #2e7d32; /* 浅绿色文字 */
+        .app-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(184, 134, 11, 0.4);
         }
 
-        /* 已访问状态 */
-        .btn:visited {
-            background-color: #f3e5f5;
-            color: #6a1b9a; /* 浅紫色文字 */
+        /* ===== 特殊应用卡片样式 ===== */
+        .app-card.bing {
+            background: linear-gradient(135deg, #00809d, #00a4e4);
+            color: white;
         }
 
-        /* 悬停状态 */
-        .btn:hover {
-            background-color: #fff3e0;
-            color: #e65100; /* 橙色文字 */
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 4px 12px rgba(230, 81, 0, 0.2);
+        .app-card.baidu {
+            background: linear-gradient(135deg, #2932e1, #36c);
+            color: white;
         }
 
-        /* 点击状态 */
-        .btn:active {
-            background-color: #ffe0b2;
-            color: #c0392b; /* 红色文字 */
-            transform: translateY(1px);
+        .app-card.bilibili {
+            background: linear-gradient(135deg, #fb7299, #ff85ad);
+            color: white;
         }
 
-        /* 分隔线样式 */
-        hr {
-            border: none;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, #f0e6d2, transparent);
-            margin: 2.5rem 0;
+        .app-card.special .app-title,
+        .app-card.special .app-desc {
+            color: white;
         }
 
-        /* 区域布局 */
-        .section {
-            margin: 2rem 0;
+        .app-card.special .app-link {
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
         }
 
-        .qna-list {
-            display: flex;
-            flex-direction: column;
-            gap: 1.2rem;
-        }
-
-        /* 响应式调整 */
+        /* ===== 响应式设计 ===== */
         @media (max-width: 768px) {
-            .container {
-                padding: 2rem 1rem;
+            body {
+                padding: 1rem;
             }
-
-            .welcome {
+            
+            .welcome-text {
                 font-size: 1.8rem;
             }
-
-            h2 {
-                font-size: 1.5rem;
+            
+            .apps-grid {
+                grid-template-columns: 1fr;
             }
-
-            .btn {
-                width: 100%;
-                text-align: center;
+            
+            .search-engine-selector {
+                flex-wrap: wrap;
             }
         }
+
+        @media (max-width: 480px) {
+            .welcome-text {
+                font-size: 1.5rem;
+            }
+            
+            .app-card {
+                padding: 1rem;
+            }
+        }
+
+        /* ===== 动画效果 ===== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .app-card {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .app-card:nth-child(1) { animation-delay: 0.1s; }
+        .app-card:nth-child(2) { animation-delay: 0.2s; }
+        .app-card:nth-child(3) { animation-delay: 0.3s; }
+        .app-card:nth-child(4) { animation-delay: 0.4s; }
+        .app-card:nth-child(5) { animation-delay: 0.5s; }
+        .app-card:nth-child(6) { animation-delay: 0.6s; }
+        .app-card:nth-child(7) { animation-delay: 0.7s; }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- 随机欢迎语（中/英/日） -->
-        <div class="welcome" id="randomWelcome"></div>
+        <!-- 欢迎语区域 -->
+        <section class="welcome-section">
+            <div class="welcome-text" id="randomWelcome">加载中...(♡-𖥦-)/♥</div>
+            <p style="color: var(--text-secondary); font-size: 1.1rem;">每一天都是新的开始</p>
+        </section>
 
-        <div class="section">
-            <h2>📝 笔记小站</h2>
-            <p>记录HTML和CSS的学习点滴，每一个知识点都值得被珍藏～</p >
-            <a href="html/note.html" class="btn">进入笔记区</a >
-        </div>
-
-        <hr>
-
-        <div class="section">
-            <h2>❓ 问答解惑</h2>
-            <div class="qna-list">
-                <div>
-                    <p>CSS变量(自定义属性)详解</p >
-                    <a href="troubleshooting/css_variables_explanation.html" class="btn">查看解答</a >
-                </div>
-                <div>
-                    <p>HTML表单:focus与checked状态的区别详解</p >
-                    <a href="troubleshooting/HTML_focus_vs_checked_explanation.html" class="btn">查看解答</a >
-                </div>
-                <div>
-                    <p>CSS目标伪类(:target)详解</p >
-                    <a href="troubleshooting/target_pseudo_class_explanation.html" class="btn">查看解答</a >
-                </div>
-                <div>
-                    <p>Markdown语法完全指南</p >
-                    <a href="troubleshooting/Markdown语法完全指南.md" class="btn">查看指南</a >
+        <!-- 搜索框区域 -->
+        <section class="search-section">
+            <div class="search-container">
+                <input type="text" class="search-input" id="searchInput" 
+                       placeholder="请输入搜索内容..." autocomplete="off">
+                <div class="search-engine-selector">
+                    <button class="engine-btn active" data-engine="bing">🔍 Bing</button>
+                    <button class="engine-btn" data-engine="baidu">🔍 Baidu</button>
+                    <button class="engine-btn" data-engine="bilibili">🔍 Bilibili</button>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <hr>
+        <!-- 应用网格区域 -->
+        <section class="apps-section">
+            <div class="apps-grid">
+                <!-- 笔记应用 -->
+                <div class="app-card">
+                    <div class="app-icon">📚</div>
+                    <h3 class="app-title">学习笔记</h3>
+                    <p class="app-desc">HTML、CSS、JavaScript的一些知识</p>
+                    <a href="html/note.html" class="app-link">进入笔记</a>
+                </div>
 
-        <div class="section">
-            <h2>🎨 资源宝库</h2>
-            <p>收集了学习中常用的图片和视频素材，助力前端学习～</p >
-            <a href="html/assets_resource.html" class="btn">浏览资源</a >
-        </div>
+                <!-- 问答应用 -->
+                <div class="app-card">
+                    <div class="app-icon">❓</div>
+                    <h3 class="app-title">问题解答</h3>
+                    <p class="app-desc">我遇到的个别当时看不懂的问题</p>
+                    <a href="html/troubleshooting.html" class="app-link">查看解答</a>
+                </div>
+
+                <!-- 资源应用 -->
+                <div class="app-card">
+                    <div class="app-icon">🎨</div>
+                    <h3 class="app-title">素材资源</h3>
+                    <p class="app-desc">用到的不限于图片的素材</p>
+                    <a href="html/assets_resource.html" class="app-link">浏览资源</a>
+                </div>
+
+                <!-- 作者介绍 -->
+                <div class="app-card">
+                    <div class="app-icon">👨‍💻</div>
+                    <h3 class="app-title">关于我</h3>
+                    <p class="app-desc">一些关于我的个人介绍</p>
+                    <a href="html/about.html" class="app-link">了解我</a>
+                </div>
+
+                <!-- Bing应用 -->
+                <div class="app-card bing special">
+                    <div class="app-icon">🌐</div>
+                    <h3 class="app-title">Bing</h3>
+                    <p class="app-desc">bing搜索</p>
+                    <a href="https://www.bing.com" target="_blank" class="app-link">立即搜索</a>
+                </div>
+
+                <!-- 百度应用 -->
+                <div class="app-card baidu special">
+                    <div class="app-icon">🔍</div>
+                    <h3 class="app-title">Baidu</h3>
+                    <p class="app-desc">百度搜索</p>
+                    <a href="https://www.baidu.com" target="_blank" class="app-link">立即搜索</a>
+                </div>
+
+                <!-- B站应用 -->
+                <div class="app-card bilibili special">
+                    <div class="app-icon">📺</div>
+                    <h3 class="app-title">Bilibili</h3>
+                    <p class="app-desc">b站</p>
+                    <a href="https://www.bilibili.com" target="_blank" class="app-link">前往B站</a>
+                </div>
+            </div>
+        </section>
     </div>
 
-    <!-- 随机欢迎语JS（极简语法，仅实现随机功能） -->
     <script>
-        // 欢迎语数组（中/英/日）
+        // ===== 随机欢迎语功能 =====
         const welcomeTexts = [
             "加油！今天也是进步的一天～",
             "Keep going! Every step counts!",
             "がんばれ！今日も一歩前へ！",
             "学习前端超有趣，坚持就是胜利！",
             "Learning front-end is fun, never give up!",
-            "フロントエンド学習は楽しい！諦めないで！"
+            "フロントエンド学習は楽しい！諦めないで！",
+            "代码如诗，用心书写每一行～",
+            "Code is poetry, write with heart!",
+            "コードは詩のようで、心を込めて書こう！"
         ];
-        // 随机获取一条欢迎语并显示
-        const randomIndex = Math.floor(Math.random() * welcomeTexts.length);
-        document.getElementById("randomWelcome").innerText = welcomeTexts[randomIndex];
+
+        function updateWelcomeText() {
+            const welcomeElement = document.getElementById('randomWelcome');
+            const randomIndex = Math.floor(Math.random() * welcomeTexts.length);
+            welcomeElement.textContent = welcomeTexts[randomIndex];
+            
+            // 添加打字机效果
+            welcomeElement.style.opacity = '0';
+            setTimeout(() => {
+                welcomeElement.style.opacity = '1';
+                welcomeElement.style.transition = 'opacity 0.5s ease';
+            }, 100);
+        }
+
+        // ===== 搜索功能 =====
+        let currentEngine = 'bing'; // 默认搜索引擎
+        
+        // 搜索引擎配置
+        const searchEngines = {
+            bing: 'https://www.bing.com/search?q=',
+            baidu: 'https://www.baidu.com/s?wd=',
+            bilibili: 'https://search.bilibili.com/all?keyword='
+        };
+
+        // 初始化搜索功能
+        function initSearch() {
+            const searchInput = document.getElementById('searchInput');
+            const engineButtons = document.querySelectorAll('.engine-btn');
+            
+            // 引擎切换事件
+            engineButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // 移除其他按钮的active类
+                    engineButtons.forEach(b => b.classList.remove('active'));
+                    // 为当前按钮添加active类
+                    this.classList.add('active');
+                    // 更新当前引擎
+                    currentEngine = this.dataset.engine;
+                });
+            });
+            
+            // 搜索提交事件
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    const query = this.value.trim();
+                    if (query) {
+                        // 构建搜索URL并跳转
+                        const searchUrl = searchEngines[currentEngine] + encodeURIComponent(query);
+                        window.open(searchUrl, '_blank');
+                        this.value = ''; // 清空输入框
+                    }
+                }
+            });
+        }
+
+        // ===== 卡片交互效果 =====
+        function initCardInteractions() {
+            const cards = document.querySelectorAll('.app-card');
+            
+            cards.forEach(card => {
+                // 鼠标进入效果
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-8px) scale(1.02)';
+                });
+                
+                // 鼠标离开效果
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+                
+                // 点击效果
+                card.addEventListener('click', function(e) {
+                    if (!e.target.classList.contains('app-link')) {
+                        this.style.transform = 'scale(0.95)';
+                        setTimeout(() => {
+                            this.style.transform = 'scale(1)';
+                        }, 150);
+                    }
+                });
+            });
+        }
+
+        // ===== 页面加载完成后初始化 =====
+        document.addEventListener('DOMContentLoaded', function() {
+            // 初始化欢迎语
+            updateWelcomeText();
+            
+            // 每10秒更换一次欢迎语
+            setInterval(updateWelcomeText, 10000);
+            
+            // 初始化搜索功能
+            initSearch();
+            
+            // 初始化卡片交互
+            initCardInteractions();
+            
+            // 添加加载完成动画
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.5s ease';
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+
+        // ===== 键盘快捷键支持 =====
+        document.addEventListener('keydown', function(e) {
+            // Ctrl + K 聚焦搜索框
+            if (e.ctrlKey && e.key === 'k') {
+                e.preventDefault();
+                document.getElementById('searchInput').focus();
+            }
+            
+            // ESC 键清除搜索框
+            if (e.key === 'Escape') {
+                document.getElementById('searchInput').value = '';
+                document.getElementById('searchInput').blur();
+            }
+        });
     </script>
 </body>
 </html>
