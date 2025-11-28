@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>macOS 终端指令完全指南</title>
+    <style>
+        /* 基础样式设置 */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        /* 容器样式 */
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 标题样式 */
+        h1 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+        
+        h2 {
+            color: #2980b9;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+        
+        h3 {
+            color: #16a085;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        
+        /* 段落样式 */
+        p {
+            margin-bottom: 20px;
+        }
+        
+        /* 代码块样式 */
+        .code-block {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+        
+        /* 代码行样式 */
+        .code-line {
+            display: block;
+            padding: 5px 0;
+        }
+        
+        /* 指令示例样式 */
+        .command-example {
+            background-color: #e8f4f8;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 15px 0;
+        }
+        
+        /* 指令名称样式 */
+        .command {
+            font-weight: bold;
+            color: #e74c3c;
+        }
+        
+        /* 表格样式 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        
+        /* 注意框样式 */
+        .note {
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        
+        /* 警告框样式 */
+        .warning {
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>macOS 终端指令完全指南</h1>
+        
+        <!-- 终端介绍部分 -->
+        <h2>1. 终端简介</h2>
+        <p>终端（Terminal）是一种命令行界面（CLI），允许用户通过输入文本命令来与计算机系统进行交互。与图形用户界面（GUI）不同，终端通过纯文本方式执行操作，虽然看似复杂，但熟练掌握后可以大幅提高工作效率。</p>
+        
+        <!-- 两个终端的区别 -->
+        <h2>2. macOS 终端与 Trae CN 集成终端的区别</h2>
+        <p>macOS 自带的终端和 Trae CN 里面的集成终端虽然功能类似，但它们有以下几个重要区别：</p>
+        
+        <table>
+            <tr>
+                <th>特性</th>
+                <th>macOS 终端</th>
+                <th>Trae CN 集成终端</th>
+            </tr>
+            <tr>
+                <td>运行环境</td>
+                <td>直接运行在 macOS 系统上</td>
+                <td>运行在 Trae CN IDE 内部</td>
+            </tr>
+            <tr>
+                <td>系统访问权限</td>
+                <td>完全访问 macOS 系统功能</td>
+                <td>访问权限可能受到 IDE 限制</td>
+            </tr>
+            <tr>
+                <td>命令支持</td>
+                <td>支持所有 macOS 内置命令和安装的命令行工具</td>
+                <td>主要支持与开发相关的命令，部分系统级命令可能受限</td>
+            </tr>
+            <tr>
+                <td>集成度</td>
+                <td>独立应用程序</td>
+                <td>与 IDE 深度集成，可以直接操作项目文件</td>
+            </tr>
+            <tr>
+                <td>主要用途</td>
+                <td>系统管理、文件操作、软件开发等</td>
+                <td>主要用于软件开发、代码编译、运行测试等开发任务</td>
+            </tr>
+        </table>
+        
+        <div class="note">
+            <strong>注意：</strong>本指南主要介绍 macOS 系统自带终端的使用方法和常用命令。
+        </div>
+        
+        <!-- 终端基础 -->
+        <h2>3. 终端基础</h2>
+        
+        <h3>3.1 打开终端</h3>
+        <p>在 macOS 中打开终端的方法：</p>
+        <ul>
+            <li>使用 Spotlight 搜索：按下 <code>Command + Space</code>，然后输入 "终端" 并按回车</li>
+            <li>在 Launchpad 中找到 "其他" 文件夹，然后点击 "终端" 图标</li>
+            <li>通过应用程序文件夹：前往 <code>应用程序 > 实用工具 > 终端</code></li>
+        </ul>
+        
+        <h3>3.2 终端界面介绍</h3>
+        <p>打开终端后，你会看到一个类似这样的界面：</p>
+        <div class="code-block">
+            <span class="code-line">user@MacBook-Pro ~ % </span>
+        </div>
+        <p>其中：</p>
+        <ul>
+            <li><code>user</code> 是你的用户名</li>
+            <li><code>MacBook-Pro</code> 是你的计算机名称</li>
+            <li><code>~</code> 表示当前目录是你的用户主目录</li>
+            <li><code>%</code> 是命令提示符，表示终端正在等待你输入命令</li>
+        </ul>
+        
+        <!-- 简单的终端指令 -->
+        <h2>4. 简单的终端指令</h2>
+        
+        <div class="command-example">
+            <p><span class="command">whoami</span> - 显示当前用户名</p>
+            <div class="code-block">
+                <span class="code-line">% whoami</span>
+                <span class="code-line">user</span>
+            </div>
+        </div>
+        
+        <div class="command-example">
+            <p><span class="command">date</span> - 显示当前日期和时间</p>
+            <div class="code-block">
+                <span class="code-line">% date</span>
+                <span class="code-line">Wed Sep 20 14:30:45 CST 2023</span>
+            </div>
+        </div>
+        
+        <div class="command-example">
+            <p><span class="command">cal</span> - 显示当前月份的日历</p>
+            <div class="code-block">
+                <span class="code-line">% cal</span>
+                <span class="code-line">    September 2023  </span>
+                <span class="code-line">Su Mo Tu We Th Fr Sa</span>
+                <span class="code-line">          1  2  3  4</span>
+                <span class="code-line"> 5  6  7  8  9 10 11</span>
+                <span class="code-line">12 13 14 15 16 17 18</span>
+                <span class="code-line">19 20 21 22 23 24 25</span>
+                <span class="code-line">26 27 28 29 30</span>
+            </div>
+        </div>
+        
+        <div class="command-example">
+            <p><span class="command">clear</span> 或 <code>Command + K</code> - 清屏</p>
+            <div class="code-block">
+                <span class="code-line">% clear</span>
+            </div>
+        </div>
+        
+        <!-- 常用、重要的终端指令 -->
+        <h2>5. 常用、重要的终端指令</h2>
+        
+        <h3>5.1 文件和目录操作</h3>
+        
+        <div class="command-example">
+            <p><span class="command">ls</span> - 列出当前目录下的文件和文件夹</p>
+            <ul>
+                <li><code>ls -la</code>: 显示所有文件（包括隐藏文件）的详细信息</li>
+                <li><code>ls -lh</code>: 以人类可读的格式显示文件大小</li>
+            </ul>
+            <div class="code-block">
+                <span class="code-line">% ls</span>
+                <span class="code-line">Documents  Downloads  Library  Movies  Music  Pictures  Public</span>
+            </div>
+        </div>
+        
+        <div class="command-example">
+            <p><span class="command">cd</span> - 更改当前目录</p>
+            <ul>
+                <li><code>cd Documents</code>: 进入 Documents 目录</li>
+                <li><code>cd ..</code>: 返回到上一级目录</li>
+                <li><code>cd /</code>: 进入根目录</li>
+                <li><code>cd ~</code>: 进入用户主目录</li>
+                <li><code>cd -</code>: 返回到上一个工作目录</li>
+            </ul>
+            <div class="code-block">
+                <span class="code-line">% cd Documents</span>
+                <span class="code-line">% cd ..</span>
+            </div>
+        </div>
+        
+        <div class="command-example">
+            <p><span class="command">pwd</span> - 显示当前工作目录的完整路径</p>
+            <div class="code-block">
+                <span class="code-line">% pwd</span>
+                <span class="code-line">/Users/user</span>
+            </div>
+        </div>
+        
+        <div class="command-example">
+            <p><span class="command">mkdir</span> - 创建新目录</p>
+            <div class="code-block">
+                <span class="code-line">% mkdir new_folder</span>
+            </div>
+        </div>
+        
+        <div class="command-example">
+            <p><span class="command">rm</span> - 删除文件或目录</p>
+            <ul>
+                <li><code>rm file.txt</code>: 删除文件 file.txt</li>
+                <li><code>rm -r folder</code>: 递归删除文件夹及其内容</li>
+                <li><code>rm -f file.txt</code>: 强制删除文件，不显示确认提示</li>
+                <li><code>rm -rf folder</code>: 强制递归删除文件夹及其内容</li>
+            </ul>
+            <div class="warning">
+                <strong>警告：</strong>使用 <code>rm -rf</code> 命令要格外小心，因为它会永久删除文件，且无法从垃圾桶恢复！
+            </div>
+        </div>
+        
+        <div class="command-example">
+            <p><span class="command">cp</span> - 复制文件或目录</p>
+            <ul>
+                <li><code>cp file.txt backup.txt</code>: 将 file.txt 复制为 backup.txt</li>
+                <li><code>cp -r folder backup_folder</code>: 递归复制整个文件夹</li>
+            </ul>
+            <div class="code-block">
+                <span class="code-line">% cp resume.pdf resume_backup.pdf</span>
+            </div>
+        </div>
+        
+        <div class="command-example">
+            <p><span class="command">mv</span> - 移动或重命名文件</p>
+            <ul>
+                <li><code>mv file.txt new_location/</code>: 将 file.txt 移动到 new_location 目录</li>
+                <li><code>mv old_name.txt new_name.txt</code>: 将文件重命名</li>
+            </ul>
+            <div class="code-block">
+                <span class="code-line">% mv report.txt Documents/reports/</span>
+                <span class="code-line">% mv old_file.txt new_file.txt</span>
+            </div>
+        </div>
+        
+        <h3>5.2 文件查看和编辑</h3>
+        
+        <div class="command-example">
+            <p><span class="command">cat</span> - 查看文件内容</p>
+            <div class="code-block">
+                <span class="code-line">% cat readme.txt</span>
+                <span class="code-line">This is a readme file.</span>
+            </div>
+        </div>
+        
+        <div class="command-example">
+            <p><span class="command">less</span> - 分页查看长文件内容</p>
+            <ul>
+                <li>使用箭头键上下滚动</li>
+                <li>按 <code>q</code> 退出</li>
+            </ul>
+            <div class="code-block">
+                <span class="code-line">% less long_document.txt</span>
+            </div>
+        </div>
+        
+        <div class="command-example">
+            <p><span class="command">head</span> / <span class="command">tail</span> - 查看文件的开头或结尾部分</p>
+            <ul>
+                <li><code>head -n 10 file.txt</code>: 显示文件的前 10 行</li>
+                <li><code>tail -n 10 file.txt</code>: 显示文件的最后 10 行</li>
+                <li><code>tail -f log.txt</code>: 实时显示文件的新内容（常用于查看日志）</li>
+            </ul>
+            <div class="code-block">
+                <span class="code-line">% head -n 5 report.txt</span>
+                <span class="code-line">% tail -f server.log</span>
+            </div>
+        </div>
+        
+        <div class="command-example">
+            <p><span class="command">open</span> - 打开文件或目录（使用默认应用程序）</p>
+            <ul>
+                <li><code>open file.txt</code>: 用默认文本编辑器打开 file.txt</li>
+                <li><code>open .</code>: 打开当前目录（在 Finder 中）</li>
+            </ul>
+            <div class="code-block">
+                <span class="code-line">% open index.html</span>
+                <span class="code-line">% open .</span>
+            </div>
+        </div>
+        
+        <h3>5.3 系统信息和管理</h3>
+        
+        <div class="command-example">
+            <p><span class="command">top</span> - 显示当前运行的进程和系统资源使用情况</p>
+            <ul>
+                <li>按 <code>q</code> 退出</li>
+            </ul>
+            <div class="code-block">
+                <span class="code-line">% top</span>
+            </div>
+        </div>
+        
+        <div class="command-example">
+            <p><span class="command">ps</span> - 显示当前用户的进程</p>
+            <ul>
+                <li><code>ps aux</code>: 显示所有用户的所有进程的详细信息</li>
+            </ul>
+            <div class="code-block">
+                <span class="code-line">% ps aux | grep safari</span>
+            </div>
+        </div>
+        
+        <div class="command-example">
+            <p><span class="command">kill</span> - 终止进程</p>
+            <ul>
+                <li><code>kill process_id</code>: 终止指定进程 ID 的进程</li>
+                <li><code>kill -9 process_id</code>: 强制终止进程</li>
+            </ul>
+            <div class="code-block">
+                <span class="code-line">% kill 12345</span>
+            </div>
+            <div class="note">
+                <strong>提示：</strong>可以使用 <code>ps aux</code> 或 <code>top</code> 命令查找要终止的进程 ID。
+            </div>
+        </div>
+        
+        <div class="command-example">
+            <p><span class="command">df</span> - 显示磁盘空间使用情况</p>
+            <ul>
+                <li><code>df -h</code>: 以人类可读的格式显示</li>
+            </ul>
+            <div class="code-block">
+                <span class="code-line">% df -h</span>
+            </div>
+        </div>
+        
+        <div class="command-example">
+            <p><span class="command">du</span> - 显示目录或文件的磁盘使用情况</p>
+            <ul>
+                <li><code>du -sh *</code>: 显示当前目录下所有文件和文件夹的大小（人类可读格式）</li>
+            </ul>
+            <div class="code-block">
+                <span class="code-line">% du -sh Documents</span>
+            </div>
+        </div>
+        
+        <h3>5.4 网络相关命令</h3>
+        
+        <div class="command-example">
+            <p><span class="command">ping</span> - 测试网络连接</p>
+            <div class="code-block">
+                <span class="code-line">% ping www.google.com</span>
+            </div>
+            <div class="note">
+                <strong>提示：</strong>按 <code>Control + C</code> 停止 ping 命令。
+            </div>
+        </div>
+        
+        <div class="command-example">
+            <p><span class="command">curl</span> - 从网络上获取数据</p>
+            <ul>
+                <li><code>curl https://www.example.com</code>: 获取网页内容</li>
+                <li><code>curl -O https://example.com/file.zip</code>: 下载文件</li>
+            </ul>
+            <div class="code-block">
+                <span class="code-line">% curl https://api.github.com</span>
+            </div>
+        </div>
+        
+        <div class="command-example">
+            <p><span class="command">ifconfig</span> - 显示或配置网络接口</p>
+            <div class="code-block">
+                <span class="code-line">% ifconfig</span>
+            </div>
+        </div>
+        
+        <h3>5.5 实用工具命令</h3>
+        
+        <div class="command-example">
+            <p><span class="command">grep</span> - 搜索文本</p>
+            <ul>
+                <li><code>grep "search_text" file.txt</code>: 在文件中搜索文本</li>
+                <li><code>grep -r "search_text" directory/</code>: 在目录中递归搜索文本</li>
+            </ul>
+            <div class="code-block">
+                <span class="code-line">% grep "error" server.log</span>
+            </div>
+        </div>
+        
+        <div class="command-example">
+            <p><span class="command">find</span> - 搜索文件</p>
+            <ul>
+                <li><code>find . -name "*.txt"</code>: 在当前目录及其子目录中查找所有 .txt 文件</li>
+            </ul>
+            <div class="code-block">
+                <span class="code-line">% find ~/Documents -name "*.pdf"</span>
+            </div>
+        </div>
+        
+        <div class="command-example">
+            <p><span class="command">which</span> - 显示命令的路径</p>
+            <div class="code-block">
+                <span class="code-line">% which python</span>
+                <span class="code-line">/usr/bin/python</span>
+            </div>
+        </div>
+        
+        <div class="command-example">
+            <p><span class="command">man</span> - 显示命令的手册页</p>
+            <ul>
+                <li>按 <code>q</code> 退出手册页</li>
+            </ul>
+            <div class="code-block">
+                <span class="code-line">% man ls</span>
+            </div>
+            <div class="note">
+                <strong>提示：</strong>这是学习命令详细用法的最佳途径，每个命令都有详细的手册页。
+            </div>
+        </div>
+        
+        <!-- 终端技巧 -->
+        <h2>6. 终端使用技巧</h2>
+        
+        <h3>6.1 命令历史和自动补全</h3>
+        <ul>
+            <li>使用 <code>上/下箭头键</code> 浏览之前输入的命令</li>
+            <li>按下 <code>Control + R</code> 进入历史命令搜索模式</li>
+            <li>输入命令的前几个字符，然后按 <code>Tab</code> 键自动补全</li>
+        </ul>
+        
+        <h3>6.2 命令组合</h3>
+        <p>可以使用管道（<code>|</code>）将一个命令的输出作为另一个命令的输入：</p>
+        <div class="code-block">
+            <span class="code-line">% ls -la | grep ".txt"  # 列出所有 .txt 文件</span>
+            <span class="code-line">% ps aux | grep "chrome"  # 查找与 Chrome 相关的进程</span>
+        </div>
+        
+        <h3>6.3 快捷键</h3>
+        <ul>
+            <li><code>Control + C</code>: 终止当前正在运行的命令</li>
+            <li><code>Control + D</code>: 退出当前终端会话</li>
+            <li><code>Control + L</code>: 清屏（与 clear 命令相同）</li>
+            <li><code>Control + A</code>: 移动光标到命令行的开头</li>
+            <li><code>Control + E</code>: 移动光标到命令行的结尾</li>
+            <li><code>Control + U</code>: 清除从光标位置到行首的内容</li>
+            <li><code>Control + K</code>: 清除从光标位置到行尾的内容</li>
+        </ul>
+        
+        <!-- 总结 -->
+        <h2>7. 总结</h2>
+        <p>终端是 macOS 系统中非常强大的工具，掌握基本的终端命令可以帮助你更高效地完成各种任务。本指南介绍了终端的基础知识、常用命令和使用技巧，希望对你有所帮助。</p>
+        
+        <div class="note">
+            <strong>提示：</strong>学习终端命令最好的方法是多实践。尝试在日常工作中使用这些命令，逐渐你会发现它们的强大之处！
+        </div>
+    </div>
+</body>
+</html>
