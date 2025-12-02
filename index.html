@@ -10,119 +10,36 @@
     <meta name="author" content="fumimutsumi">
     <link rel="icon" type="image/x-icon" href="assets/images/ico/hoshina-avatar-round.ico">
     <style>
-        /* ===== CSS重置与全局变量（新增金色流星+调整透明度）===== */
+        /* ===== 全局重置 + 核心变量 ===== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: "幼圆", "Microsoft YaHei", "Segoe UI", sans-serif;
+            -webkit-tap-highlight-color: transparent;
+            transition: all 0.2s ease; /* 统一温和过渡，避免突兀 */
         }
 
         :root {
-            /* 青蓝色主色调系统 */
-            --primary-color: #4a90e2;      /* 主青蓝 */
-            --secondary-color: #5bb3e8;    /* 次青蓝 */
-            --accent-color: #87ceeb;       /* 强调淡蓝 */
-            --bg-gradient: linear-gradient(135deg, #e0f7fa, #b2ebf2); /* 青蓝背景 */
-            --card-bg: rgba(255, 255, 255, 0.25); /* 降低卡片透明度（原0.35→0.25） */
-            --text-primary: #2d3748;       /* 深灰文字（高可读性） */
-            --text-secondary: #4a5568;     /* 中灰文字 */
-            --border-gradient: linear-gradient(135deg, #4a90e2, #87ceeb, #5bb3e8); /* 卡片边框渐变 */
-            
-            /* 金色流星相关变量 */
-            --meteor-color-1: #ffd700;     /* 金色主色 */
-            --meteor-color-2: #ffb900;     /* 金色亮色 */
-            --meteor-color-3: #ff9f0a;     /* 金色暗调 */
-            
-            /* 阴影系统（适配青蓝色） */
-            --shadow-sm: 0 2px 8px rgba(74, 144, 226, 0.08);
-            --shadow-md: 0 4px 16px rgba(74, 144, 226, 0.12);
-            --shadow-lg: 0 8px 24px rgba(74, 144, 226, 0.15);
-            
-            /* 圆角与过渡 */
-            --radius-sm: 8px;
+            --primary: #4a90e2;
+            --secondary: #5bb3e8;
+            --card-bg: rgba(255, 255, 255, 0.3);
+            --card-border: rgba(255, 255, 255, 0.6);
+            --shadow-sm: 0 2px 6px rgba(74, 144, 226, 0.08);
+            --shadow-md: 0 4px 12px rgba(74, 144, 226, 0.15);
             --radius-md: 12px;
-            --radius-lg: 20px;
-            --radius-full: 50px;
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --radius-full: 30px;
         }
 
-        /* ===== 页面基础样式（支持3D震动效果）===== */
+        /* ===== 基础样式（稳定优先）===== */
         body {
-            background: var(--bg-gradient);
+            background: linear-gradient(135deg, #e0f7fa, #b2ebf2); /* 恢复温和渐变 */
             min-height: 100vh;
-            padding: 2rem;
-            color: var(--text-primary);
+            padding: 1rem;
+            padding-bottom: 2rem;
+            color: #2d3748;
             line-height: 1.6;
-            position: relative;
-            overflow: auto; /* 允许页面滚动 */
-            padding-bottom: 3rem; /* 底部留空，避免内容被截断 */
-            perspective: 1000px; /* 开启3D透视，支持向前震动 */
-        }
-
-        /* ===== 金色流星动画效果（增大+醒目）===== */
-        .meteor {
-            position: absolute;
-            top: 0;
-            width: 3px; /* 增大宽度（原2px→3px） */
-            height: 120px; /* 增大高度（原100px→120px） */
-            background: linear-gradient(to bottom, rgba(255, 215, 0, 0.3), var(--meteor-color-1), var(--meteor-color-2)); /* 金色渐变 */
-            animation: meteor 3.5s linear infinite; /* 调整动画时长，更醒目 */
-            opacity: 0;
-            z-index: 0;
-            pointer-events: none; /* 避免遮挡交互 */
-            box-shadow: 0 0 10px 1px var(--meteor-color-1); /* 金色光晕，增强视觉 */
-        }
-
-        /* 点击发射的临时流星（向四周扩散） */
-        .meteor-temp {
-            position: absolute;
-            width: 2px;
-            height: 60px;
-            background: linear-gradient(to bottom, rgba(255, 215, 0, 0.5), var(--meteor-color-1));
-            opacity: 0;
-            pointer-events: none;
-            box-shadow: 0 0 8px 1px var(--meteor-color-1);
-            z-index: 2; /* 高于卡片，低于气泡 */
-        }
-
-        @keyframes meteor {
-            0% {
-                transform: translateY(-120px) translateX(0);
-                opacity: 0;
-            }
-            8% {
-                opacity: 1; /* 延长可见时间 */
-            }
-            85% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(calc(100vh + 120px)) translateX(180px); /* 加长位移 */
-                opacity: 0;
-            }
-        }
-
-        /* 临时流星扩散动画（8个方向） */
-        @keyframes meteorSpread {
-            0% {
-                opacity: 1;
-                transform: scale(1);
-            }
-            100% {
-                opacity: 0;
-                transform: scale(1.5) translateY(50px);
-            }
-        }
-
-        /* 图片向前震动动画 */
-        @keyframes shakeForward {
-            0% { transform: translateZ(0) translateX(0) rotate(0); }
-            20% { transform: translateZ(15px) translateX(-3px) rotate(-1deg); } /* 向前+左偏 */
-            40% { transform: translateZ(25px) translateX(3px) rotate(1deg); }  /* 向前+右偏 */
-            60% { transform: translateZ(20px) translateX(-2px) rotate(-0.5deg); }
-            80% { transform: translateZ(10px) translateX(2px) rotate(0.5deg); }
-            100% { transform: translateZ(0) translateX(0) rotate(0); }
+            overflow-x: hidden;
         }
 
         /* ===== 布局容器 ===== */
@@ -131,459 +48,402 @@
             margin: 0 auto;
             display: flex;
             flex-direction: column;
-            gap: 2rem;
+            gap: 1.2rem;
             position: relative;
-            z-index: 1; /* 确保内容在流星上方 */
         }
 
-        /* ===== 欢迎语区域 ===== */
+        /* ===== 欢迎语区域（恢复渐变文字+微元素）===== */
         .welcome-section {
             text-align: center;
-            padding: 2rem;
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-md);
-            border: 2px solid transparent;
-            background-clip: padding-box, border-box;
-            background-origin: padding-box, border-box;
-            background-image: 
-                linear-gradient(var(--card-bg), var(--card-bg)),
-                var(--border-gradient);
-        }
-
-        .welcome-text {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            font-weight: 500;
-            letter-spacing: 2px;
-            text-shadow: 1px 1px 3px rgba(74, 144, 226, 0.1);
-            transition: var(--transition);
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            height: 4rem; /* 固定高度，避免打字时布局跳动 */
-            line-height: 4rem; /* 垂直居中 */
-            overflow: hidden; /* 隐藏溢出内容 */
-        }
-
-        .welcome-text:hover {
-            transform: translateY(-3px);
-            text-shadow: 2px 2px 6px rgba(74, 144, 226, 0.2);
-        }
-
-        /* ===== 搜索框区域 ===== */
-        .search-section {
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
             padding: 1.5rem;
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-md);
-            text-align: center;
-            border: 2px solid transparent;
-            background-clip: padding-box, border-box;
-            background-origin: padding-box, border-box;
-            background-image: 
-                linear-gradient(var(--card-bg), var(--card-bg)),
-                var(--border-gradient);
-        }
-
-        .search-container {
-            max-width: 600px;
-            margin: 0 auto;
+            background: var(--card-bg);
+            backdrop-filter: blur(6px); /* 降低模糊度，减少性能压力 */
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--card-border);
             position: relative;
         }
 
-        .search-input {
-            width: 100%;
-            padding: 1.1rem 1.8rem;
-            border: 2px solid transparent;
-            border-radius: var(--radius-full);
-            font-size: 1.1rem;
-            outline: none;
-            transition: var(--transition);
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            color: var(--text-primary);
-            box-shadow: var(--shadow-sm);
-            background-clip: padding-box, border-box;
-            background-origin: padding-box, border-box;
-            background-image: 
-                linear-gradient(var(--card-bg), var(--card-bg)),
-                var(--border-gradient);
-        }
-
-        .search-input::placeholder {
-            color: var(--text-secondary);
-            opacity: 0.8;
-        }
-
-        .search-input:focus {
-            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.3), var(--shadow-md);
-            transform: scale(1.02);
-        }
-
-        .search-engine-selector {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-top: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .engine-btn {
-            padding: 0.5rem 1rem;
-            border: 2px solid transparent;
-            border-radius: var(--radius-full);
-            background: rgba(255, 255, 255, 0.4); /* 同步降低透明度（原0.5→0.4） */
-            backdrop-filter: blur(5px);
-            color: var(--primary-color);
-            cursor: pointer;
-            transition: var(--transition);
-            background-clip: padding-box, border-box;
-            background-origin: padding-box, border-box;
-            background-image: 
-                linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)),
-                var(--border-gradient);
-        }
-
-        .engine-btn.active {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .engine-btn:hover:not(.active) {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
-        }
-
-        /* ===== 应用网格布局 ===== */
-        .apps-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.8rem;
-            margin-top: 1rem;
-        }
-
-        /* ===== 应用卡片样式（统一降低透明度）===== */
-        .app-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            border-radius: var(--radius-lg);
-            padding: 1.5rem;
-            box-shadow: var(--shadow-sm);
-            transition: var(--transition);
-            border: 2px solid transparent;
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-            background-clip: padding-box, border-box;
-            background-origin: padding-box, border-box;
-            background-image: 
-                linear-gradient(var(--card-bg), var(--card-bg)),
-                var(--border-gradient);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-
-        /* 特殊卡片同步降低透明度 */
-        .app-card.bing {
-            background: linear-gradient(135deg, rgba(0, 128, 157, 0.3), rgba(0, 164, 228, 0.3)); /* 原0.4→0.3 */
-            backdrop-filter: blur(10px);
-            color: white;
-            background-image: 
-                linear-gradient(rgba(0, 128, 157, 0.3), rgba(0, 164, 228, 0.3)),
-                linear-gradient(135deg, #00809d, #00a4e4);
-        }
-
-        .app-card.baidu {
-            background: linear-gradient(135deg, rgba(41, 50, 225, 0.3), rgba(54, 192, 255, 0.3)); /* 原0.4→0.3 */
-            backdrop-filter: blur(10px);
-            color: white;
-            background-image: 
-                linear-gradient(rgba(41, 50, 225, 0.3), rgba(54, 192, 255, 0.3)),
-                linear-gradient(135deg, #2932e1, #36c);
-        }
-
-        .app-card.bilibili {
-            background: linear-gradient(135deg, rgba(251, 114, 153, 0.3), rgba(255, 133, 173, 0.3)); /* 原0.4→0.3 */
-            backdrop-filter: blur(10px);
-            color: white;
-            background-image: 
-                linear-gradient(rgba(251, 114, 153, 0.3), rgba(255, 133, 173, 0.3)),
-                linear-gradient(135deg, #fb7299, #ff85ad);
-        }
-
-        .app-card::before {
+        .welcome-section::before {
+            /* 顶部渐变条微元素 */
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             height: 3px;
-            background: var(--border-gradient);
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-top-left-radius: var(--radius-md);
+            border-top-right-radius: var(--radius-md);
         }
 
+        .welcome-text {
+            font-size: 1.6rem;
+            margin-bottom: 0.8rem;
+            font-weight: 500;
+            height: 2.8rem;
+            line-height: 2.8rem;
+            /* 恢复渐变文字 */
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .welcome-desc {
+            color: #4a5568;
+            font-size: 1rem;
+        }
+
+        /* ===== 搜索框区域（恢复交互+伪类）===== */
+        .search-section {
+            background: var(--card-bg);
+            backdrop-filter: blur(6px);
+            padding: 1.2rem;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--card-border);
+            text-align: center;
+            position: relative;
+        }
+
+        .search-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--secondary), var(--primary));
+            border-top-left-radius: var(--radius-md);
+            border-top-right-radius: var(--radius-md);
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.9rem 1.5rem;
+            border: 1px solid transparent;
+            border-radius: var(--radius-full);
+            font-size: 1rem;
+            outline: none;
+            background: rgba(255, 255, 255, 0.6);
+            color: #2d3748;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .search-input::placeholder {
+            color: #718096;
+            opacity: 0.8;
+        }
+
+        .search-input:focus {
+            /* focus伪类效果 */
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2), var(--shadow-md);
+            background: white;
+        }
+
+        .search-engine-selector {
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-top: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .engine-btn {
+            padding: 0.4rem 0.9rem;
+            border: 1px solid transparent;
+            border-radius: var(--radius-full);
+            background: rgba(255, 255, 255, 0.6);
+            color: var(--primary);
+            cursor: pointer;
+            font-size: 0.9rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .engine-btn.active {
+            /* active伪类渐变背景 */
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: white;
+            box-shadow: var(--shadow-md);
+        }
+
+        .engine-btn:hover:not(.active) {
+            /* hover伪类效果 */
+            background: white;
+            box-shadow: var(--shadow-md);
+            transform: translateY(-1px);
+        }
+
+        .engine-btn:active:not(.active) {
+            /* active按压效果 */
+            transform: translateY(0);
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* ===== 应用网格 ===== */
+        .apps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1rem;
+        }
+
+        /* ===== 应用卡片（恢复透明渐变+伪类+微元素）===== */
+        .app-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(6px);
+            border-radius: var(--radius-md);
+            padding: 1rem;
+            border: 1px solid var(--card-border);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            min-height: 180px; /* 固定最小高度，避免抖动 */
+            position: relative;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .app-card::before {
+            /* 顶部渐变条微元素 */
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-top-left-radius: var(--radius-md);
+            border-top-right-radius: var(--radius-md);
+        }
+
+        /* 特殊卡片渐变背景 */
+        .app-card.bing {
+            background: linear-gradient(135deg, rgba(0, 164, 228, 0.2), rgba(0, 128, 157, 0.2));
+            color: #00809d;
+            border-color: rgba(0, 164, 228, 0.4);
+        }
+
+        .app-card.bing::before {
+            background: linear-gradient(90deg, #00a4e4, #00809d);
+        }
+
+        .app-card.baidu {
+            background: linear-gradient(135deg, rgba(54, 192, 255, 0.2), rgba(41, 50, 225, 0.2));
+            color: #2932e1;
+            border-color: rgba(54, 192, 255, 0.4);
+        }
+
+        .app-card.baidu::before {
+            background: linear-gradient(90deg, #36c0ff, #2932e1);
+        }
+
+        .app-card.bilibili {
+            background: linear-gradient(135deg, rgba(255, 133, 173, 0.2), rgba(251, 114, 153, 0.2));
+            color: #fb7299;
+            border-color: rgba(255, 133, 173, 0.4);
+        }
+
+        .app-card.bilibili::before {
+            background: linear-gradient(90deg, #ff85ad, #fb7299);
+        }
+
+        /* 卡片hover伪类效果（温和不突兀） */
         .app-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: var(--shadow-lg);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: var(--shadow-md);
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        .app-card:active {
+            transform: translateY(0) scale(0.99);
+            box-shadow: var(--shadow-sm);
         }
 
         .app-icon {
-            font-size: 2.8rem;
-            margin-bottom: 1rem;
-            display: block;
-            color: var(--primary-color);
-            transition: var(--transition);
+            font-size: 2rem;
+            margin-bottom: 0.6rem;
+            color: var(--primary);
         }
 
-        .app-card:hover .app-icon {
-            transform: scale(1.1) rotate(5deg);
+        .app-card.bing .app-icon,
+        .app-card.baidu .app-icon,
+        .app-card.bilibili .app-icon {
+            color: inherit;
         }
 
         .app-title {
-            font-size: 1.3rem;
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
             font-weight: 500;
         }
 
         .app-desc {
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-            font-size: 0.95rem;
+            color: #4a5568;
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
             flex-grow: 1;
         }
 
         .app-link {
             display: block;
             width: 100%;
-            padding: 0.8rem 1.5rem;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 0.6rem 1rem;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
             color: white;
             text-decoration: none;
-            border-radius: var(--radius-md);
-            transition: var(--transition);
+            border-radius: 8px;
             font-weight: 500;
-            border: 2px solid transparent;
+            font-size: 0.9rem;
+            border: 1px solid transparent;
         }
 
         .app-link:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(74, 144, 226, 0.3);
-            border-color: rgba(255, 255, 255, 0.5);
-        }
-
-        .app-card.special .app-title,
-        .app-card.special .app-desc {
-            color: white;
-        }
-
-        .app-card.special .app-icon {
-            color: white;
-        }
-
-        .app-card.special .app-link {
-            background: rgba(255, 255, 255, 0.2); /* 同步降低透明度（原0.25→0.2） */
-            backdrop-filter: blur(5px);
-            color: white;
-        }
-
-        .app-card.special .app-link:hover {
-            background: rgba(255, 255, 255, 0.3);
+            background: linear-gradient(90deg, #3a80d2, #4ba3d8);
             border-color: rgba(255, 255, 255, 0.7);
+            box-shadow: 0 2px 8px rgba(74, 144, 226, 0.2);
         }
 
-        /* ===== 星奈专属卡片（去掉文字描述，比例平衡）===== */
+        .app-link:active {
+            transform: scale(0.98);
+            box-shadow: none;
+        }
+
+        /* 特殊卡片按钮 */
+        .app-card.bing .app-link {
+            background: linear-gradient(90deg, #00a4e4, #00809d);
+        }
+
+        .app-card.baidu .app-link {
+            background: linear-gradient(90deg, #36c0ff, #2932e1);
+        }
+
+        .app-card.bilibili .app-link {
+            background: linear-gradient(90deg, #ff85ad, #fb7299);
+        }
+
+        /* ===== 星奈专属卡片（去掉对话框，仅保留图片+渐变背景）===== */
         .hoshina-card {
-            padding: 1.5rem;
-            justify-content: center; /* 垂直居中，确保比例与其他卡片一致 */
+            padding: 1rem;
+            justify-content: center;
+            min-height: 180px;
+            background: linear-gradient(135deg, rgba(255, 193, 203, 0.2), rgba(255, 154, 158, 0.2));
+            border-color: rgba(255, 154, 158, 0.4);
+        }
+
+        .hoshina-card::before {
+            background: linear-gradient(90deg, #ff9a9e, #ff6b8b);
         }
 
         .hoshina-img-container {
             position: relative;
             width: 100%;
-            height: 180px; /* 保持图片高度，确保比例平衡 */
-            border-radius: var(--radius-md);
+            height: 140px; /* 固定高度，确保图片完整 */
+            border-radius: 8px;
             overflow: hidden;
-            margin: 0 0 1.5rem; /* 只保留底部间距，去掉上下多余间距 */
-            box-shadow: 0 4px 12px rgba(255, 154, 158, 0.15);
-            border: 2px solid rgba(255, 255, 255, 0.6);
-            transform-style: preserve-3d; /* 开启3D效果，支持向前震动 */
+            border: 1px solid rgba(255, 154, 158, 0.5);
         }
 
         .hoshina-img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: var(--transition);
         }
 
-        /* 震动激活状态 */
-        .hoshina-img.shake {
-            animation: shakeForward 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
-        }
-
-        .hoshina-bubble {
-            position: absolute;
-            top: -35px;
-            left: 50%;
-            transform: translateX(-50%) scale(0);
-            padding: 0.6rem 1.2rem;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 25px;
-            color: #ff6b8b; /* 粉色系，更贴合星奈风格 */
-            font-size: 0.95rem;
-            box-shadow: 0 4px 8px rgba(255, 154, 158, 0.2);
-            transition: transform 0.3s ease, opacity 0.3s ease;
-            z-index: 2;
-            font-weight: 500;
-        }
-
-        .hoshina-bubble::after {
-            content: "";
-            position: absolute;
-            bottom: -8px;
-            left: 50%;
-            transform: translateX(-50%);
-            border-width: 8px 8px 0;
-            border-style: solid;
-            border-color: rgba(255, 255, 255, 0.95) transparent transparent;
-        }
-
+        /* 星奈卡片hover效果 */
         .hoshina-card:hover .hoshina-img {
-            transform: scale(1.08);
+            transform: scale(1.05);
         }
 
-        .hoshina-card:hover .hoshina-bubble {
-            transform: translateX(-50%) scale(1);
-            opacity: 1;
-        }
-
-        .hoshina-card:active .hoshina-img {
-            transform: scale(0.95) rotate(2deg);
-        }
-
-        .hoshina-link {
-            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%) !important;
-            color: #4a5568 !important;
-            padding: 0.9rem 1.5rem;
-        }
-
-        .hoshina-link:hover {
-            box-shadow: 0 6px 12px rgba(255, 154, 158, 0.3) !important;
-            transform: translateY(-3px);
-        }
-
-        /* ===== 动画效果 ===== */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .app-card {
-            animation: fadeInUp 0.6s ease-out forwards;
-            opacity: 0;
-        }
-
-        .app-card:nth-child(1) { animation-delay: 0.1s; }
-        .app-card:nth-child(2) { animation-delay: 0.2s; }
-        .app-card:nth-child(3) { animation-delay: 0.3s; }
-        .app-card:nth-child(4) { animation-delay: 0.4s; }
-        .app-card:nth-child(5) { animation-delay: 0.5s; }
-        .app-card:nth-child(6) { animation-delay: 0.6s; }
-        .app-card:nth-child(7) { animation-delay: 0.7s; }
-        .app-card:nth-child(8) { animation-delay: 0.8s; } /* 星奈卡片 */
-
-        /* ===== 响应式设计 ===== */
+        /* ===== 响应式适配（保持稳定）===== */
         @media (max-width: 768px) {
-            body {
-                padding: 1rem;
-                padding-bottom: 2rem;
+            .container {
+                gap: 1rem;
             }
-            
+
             .welcome-text {
-                font-size: 1.8rem;
-                height: 3rem;
-                line-height: 3rem;
+                font-size: 1.4rem;
+                height: 2.5rem;
+                line-height: 2.5rem;
             }
-            
+
             .apps-grid {
                 grid-template-columns: 1fr 1fr;
-                gap: 1.2rem;
+                gap: 0.8rem;
             }
-            
+
             .hoshina-img-container {
-                height: 140px;
+                height: 120px;
             }
-            
+
             .app-card {
-                padding: 1.2rem;
-            }
-            
-            .app-icon {
-                font-size: 2.2rem;
+                padding: 0.8rem;
+                min-height: 160px;
             }
         }
 
         @media (max-width: 480px) {
+            body {
+                padding: 0.8rem;
+                padding-bottom: 1.5rem;
+            }
+
             .welcome-text {
-                font-size: 1.5rem;
-                height: 2.8rem;
-                line-height: 2.8rem;
+                font-size: 1.2rem;
+                height: 2.2rem;
+                line-height: 2.2rem;
             }
-            
+
             .apps-grid {
-                grid-template-columns: 1fr;
+                gap: 0.6rem;
             }
-            
+
             .hoshina-img-container {
-                height: 120px;
+                height: 100px;
             }
-            
+
             .app-card {
-                padding: 1rem;
+                padding: 0.6rem;
+                min-height: 140px;
             }
-            
-            .search-input {
-                padding: 0.9rem 1.5rem;
-                font-size: 1rem;
+
+            .app-icon {
+                font-size: 1.6rem;
             }
-            
-            .engine-btn {
-                padding: 0.4rem 0.8rem;
+
+            .app-title {
                 font-size: 0.9rem;
+            }
+
+            .app-desc {
+                font-size: 0.75rem;
+            }
+
+            .app-link {
+                padding: 0.5rem 0.8rem;
+                font-size: 0.8rem;
+            }
+        }
+
+        /* iOS安全区适配 */
+        @supports (padding-bottom: env(safe-area-inset-bottom)) {
+            body {
+                padding-bottom: env(safe-area-inset-bottom);
+                padding-bottom: max(env(safe-area-inset-bottom), 1.5rem);
             }
         }
     </style>
 </head>
 <body>
-    <!-- 金色背景流星 -->
-    <div class="meteor" style="left: 8%; animation-delay: 0s;"></div>
-    <div class="meteor" style="left: 23%; animation-delay: 1.2s;"></div>
-    <div class="meteor" style="left: 39%; animation-delay: 0.7s;"></div>
-    <div class="meteor" style="left: 57%; animation-delay: 2.1s;"></div>
-    <div class="meteor" style="left: 72%; animation-delay: 1.5s;"></div>
-    <div class="meteor" style="left: 88%; animation-delay: 0.3s;"></div>
-    <!-- 临时流星容器（点击发射用） -->
-    <div id="tempMeteorContainer"></div>
-
     <div class="container">
+        <!-- 欢迎语区域 -->
         <section class="welcome-section">
-            <div class="welcome-text" id="randomWelcome">加载中...(♡-𖥦-)/♥</div>
-            <p style="color: var(--text-secondary); font-size: 1.1rem;">每一天都是新的开始</p>
+            <div class="welcome-text" id="randomWelcome">加油！今天也是进步的一天～</div>
+            <p class="welcome-desc">每一天都是新的开始</p>
         </section>
 
+        <!-- 搜索框区域 -->
         <section class="search-section">
             <div class="search-container">
                 <input type="text" class="search-input" id="searchInput" 
@@ -596,6 +456,7 @@
             </div>
         </section>
 
+        <!-- 应用卡片区域 -->
         <section class="apps-section">
             <div class="apps-grid">
                 <div class="app-card">
@@ -626,47 +487,39 @@
                     <a href="pages/html/about-me.html" class="app-link">了解我</a>
                 </div>
 
-                <div class="app-card bing special">
+                <div class="app-card bing">
                     <div class="app-icon">🌐</div>
                     <h3 class="app-title">Bing</h3>
                     <p class="app-desc">bing搜索</p>
                     <a href="https://www.bing.com" target="_blank" class="app-link">立即搜索</a>
                 </div>
 
-                <div class="app-card baidu special">
+                <div class="app-card baidu">
                     <div class="app-icon">🔍</div>
                     <h3 class="app-title">Baidu</h3>
                     <p class="app-desc">百度搜索</p>
                     <a href="https://www.baidu.com" target="_blank" class="app-link">立即搜索</a>
                 </div>
 
-                <div class="app-card bilibili special">
+                <div class="app-card bilibili">
                     <div class="app-icon">📺</div>
                     <h3 class="app-title">Bilibili</h3>
                     <p class="app-desc">b站</p>
                     <a href="https://www.bilibili.com" target="_blank" class="app-link">前往B站</a>
                 </div>
 
-                <!-- 星奈卡片：去掉文字描述（app-icon、app-title、app-desc），只留图片+按钮 -->
+                <!-- 星奈卡片：去掉对话框，仅保留图片 -->
                 <div class="app-card hoshina-card">
                     <div class="hoshina-img-container">
                         <img src="assets/images/jpg/hoshina-error-404.jpg" alt="hoshina" class="hoshina-img" id="hoshinaImage">
-                        <div class="hoshina-bubble" id="hoshinaBubble">✨ 点击我呀～</div>
                     </div>
-                    <a href="pages/html/about-me.html" class="app-link hoshina-link" id="hoshinaLink">了解星奈项目</a>
                 </div>
             </div>
         </section>
     </div>
 
     <script>
-        // ===== 辅助函数：获取CSS变量值 =====
-        function getCssVar(varName) {
-            const pureVarName = varName.startsWith('--') ? varName : `--${varName}`;
-            return getComputedStyle(document.documentElement).getPropertyValue(pureVarName).trim();
-        }
-
-        // ===== 1. 随机欢迎语功能 =====
+        // ===== 1. 欢迎语随机循环切换（温和替换，无抖动）=====
         const welcomeTexts = [
             "加油！今天也是进步的一天～",
             "Keep going! Every step counts!",
@@ -679,31 +532,47 @@
             "コードは詩のようで、心を込めて書こう！"
         ];
 
-        function updateWelcomeText() {
+        function cycleWelcomeText() {
             const welcomeElement = document.getElementById('randomWelcome');
-            const randomIndex = Math.floor(Math.random() * welcomeTexts.length);
-            const text = welcomeTexts[randomIndex];
+            let currentIndex = 0;
             
-            // 优化打字机效果：先隐藏再渐变显示，避免跳动
-            welcomeElement.style.opacity = '0';
-            welcomeElement.textContent = '';
-            
-            setTimeout(() => {
-                welcomeElement.style.opacity = '1';
-                let i = 0;
-                const typeInterval = setInterval(() => {
-                    if (i < text.length) {
-                        welcomeElement.textContent += text.charAt(i);
-                        i++;
-                    } else {
-                        clearInterval(typeInterval);
-                    }
-                }, 60); // 调整打字速度，更平滑
-            }, 300); // 延迟显示，减少刷新抽搐
+            setInterval(() => {
+                currentIndex = (currentIndex + 1) % welcomeTexts.length;
+                // 温和过渡，避免抖动
+                welcomeElement.style.opacity = '0.6';
+                setTimeout(() => {
+                    welcomeElement.textContent = welcomeTexts[currentIndex];
+                    welcomeElement.style.opacity = '1';
+                }, 200);
+            }, 5000);
         }
 
-        // ===== 2. 搜索功能 =====
-        let currentEngine = 'bing'; // 默认搜索引擎
+        // ===== 2. 星奈图片循环切换（仅淡入，无多余效果）=====
+        const hoshinaConfig = [
+            { img: "assets/images/jpg/hoshina-error-404.jpg" },
+            { img: "assets/images/jpg/hoshina-profile.jpg" },
+            { img: "assets/images/jpg/hoshina-avatar-square.jpg" }
+        ];
+
+        function cycleHoshinaContent() {
+            const imgElement = document.getElementById('hoshinaImage');
+            let currentIndex = 0;
+            
+            setInterval(() => {
+                currentIndex = (currentIndex + 1) % hoshinaConfig.length;
+                const config = hoshinaConfig[currentIndex];
+                
+                // 简单淡入，避免布局变化
+                imgElement.style.opacity = '0.5';
+                setTimeout(() => {
+                    imgElement.src = config.img;
+                    imgElement.style.opacity = '1';
+                }, 300);
+            }, 8000);
+        }
+
+        // ===== 3. 搜索功能（带交互，无抽搐）=====
+        let currentEngine = 'bing';
         const searchEngines = {
             bing: 'https://www.bing.com/search?q=',
             baidu: 'https://www.baidu.com/s?wd=',
@@ -713,23 +582,17 @@
         function initSearch() {
             const searchInput = document.getElementById('searchInput');
             const engineButtons = document.querySelectorAll('.engine-btn');
-            const shadowSm = getCssVar('shadow-sm');
-            const shadowMd = getCssVar('shadow-md');
             
-            // 引擎切换事件
+            // 引擎切换
             engineButtons.forEach(btn => {
                 btn.addEventListener('click', function() {
                     engineButtons.forEach(b => b.classList.remove('active'));
                     this.classList.add('active');
                     currentEngine = this.dataset.engine;
-                    searchInput.style.boxShadow = `0 0 0 3px rgba(74, 144, 226, 0.2), ${shadowSm}`;
-                    setTimeout(() => {
-                        searchInput.style.boxShadow = shadowSm;
-                    }, 500);
                 });
             });
             
-            // 搜索提交事件
+            // 搜索提交
             searchInput.addEventListener('keypress', function(e) {
                 if (e.key === 'Enter') {
                     const query = this.value.trim();
@@ -737,240 +600,16 @@
                         const searchUrl = searchEngines[currentEngine] + encodeURIComponent(query);
                         window.open(searchUrl, '_blank');
                         this.value = '';
-                        this.style.transform = 'scale(0.98)';
-                        setTimeout(() => {
-                            this.style.transform = 'scale(1)';
-                        }, 150);
                     }
                 }
             });
         }
 
-        // ===== 3. 通用卡片交互优化 =====
-        function initCardInteractions() {
-            const cards = document.querySelectorAll('.app-card:not(.hoshina-card)');
-            const shadowSm = getCssVar('shadow-sm');
-            const shadowMd = getCssVar('shadow-md');
-            
-            cards.forEach(card => {
-                card.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateY(-8px) scale(1.02)';
-                    this.style.boxShadow = shadowMd;
-                });
-                
-                card.addEventListener('mouseleave', function() {
-                    this.style.transform = 'translateY(0) scale(1)';
-                    this.style.boxShadow = shadowSm;
-                });
-                
-                card.addEventListener('click', function(e) {
-                    if (!e.target.closest('.app-link')) {
-                        this.style.transform = 'scale(0.95)';
-                        this.style.boxShadow = shadowSm;
-                        setTimeout(() => {
-                            this.style.transform = 'translateY(-8px) scale(1.02)';
-                            this.style.boxShadow = shadowMd;
-                        }, 150);
-                    }
-                });
-            });
-        }
-
-        // ===== 4. 星奈专属卡片增强互动（点击计数+震动+发射流星）=====
-        const hoshinaConfig = [
-            {
-                img: "assets/images/jpg/hoshina-error-404.jpg",
-                link: "pages/html/about-me.html",
-                linkText: "了解星奈项目",
-                bubble: "✨ 你找到我啦！"
-            },
-            {
-                img: "assets/images/jpg/hoshina-profile.jpg",
-                link: "pages/html/note.html",
-                linkText: "查看学习笔记",
-                bubble: "😊 一起加油呀～"
-            },
-            {
-                img: "assets/images/jpg/hoshina-avatar-square.jpg",
-                link: "pages/html/images.html",
-                linkText: "浏览素材资源",
-                bubble: "🌟 星奈喜欢你！"
-            }
-        ];
-
-        let currentHoshinaIndex = 0;
-        let clickCount = 0; // 点击计数器
-        const clickThreshold = 3; // 触发特效的点击次数阈值（3次点击触发）
-        const hoshinaImageElem = document.getElementById('hoshinaImage');
-        const hoshinaBubbleElem = document.getElementById('hoshinaBubble');
-        const hoshinaLinkElem = document.getElementById('hoshinaLink');
-        const tempMeteorContainer = document.getElementById('tempMeteorContainer');
-
-        // 初始化星奈卡片
-        function initHoshinaImage() {
-            currentHoshinaIndex = Math.floor(Math.random() * hoshinaConfig.length);
-            updateHoshinaCard();
-        }
-
-        // 更新星奈图片、链接、气泡文字
-        function updateHoshinaCard() {
-            const config = hoshinaConfig[currentHoshinaIndex];
-            // 更新图片（淡入效果）
-            hoshinaImageElem.style.opacity = '0';
-            setTimeout(() => {
-                hoshinaImageElem.src = config.img;
-                hoshinaImageElem.style.opacity = '1';
-            }, 300);
-            
-            // 更新链接和文字
-            hoshinaLinkElem.href = config.link;
-            hoshinaLinkElem.textContent = config.linkText;
-            
-            // 更新气泡文字
-            hoshinaBubbleElem.textContent = config.bubble;
-        }
-
-        // 10秒自动切换卡片内容
-        function autoSwitchHoshinaCard() {
-            setInterval(() => {
-                currentHoshinaIndex = (currentHoshinaIndex + 1) % hoshinaConfig.length;
-                updateHoshinaCard();
-            }, 10000);
-        }
-
-        // 创建向四周发射的临时流星（8个方向）
-        function createSpreadMeteors(cardRect) {
-            const directions = [
-                { top: -20, left: cardRect.width/2, transform: 'rotate(0deg)' },    // 上
-                { top: cardRect.height/2, left: cardRect.width+20, transform: 'rotate(90deg)' }, // 右
-                { top: cardRect.height+20, left: cardRect.width/2, transform: 'rotate(180deg)' }, // 下
-                { top: cardRect.height/2, left: -20, transform: 'rotate(-90deg)' }, // 左
-                { top: -10, left: 20, transform: 'rotate(45deg)' }, // 左上
-                { top: -10, left: cardRect.width-20, transform: 'rotate(-45deg)' }, // 右上
-                { top: cardRect.height-10, left: 20, transform: 'rotate(135deg)' }, // 左下
-                { top: cardRect.height-10, left: cardRect.width-20, transform: 'rotate(-135deg)' } // 右下
-            ];
-
-            directions.forEach((dir, index) => {
-                const meteor = document.createElement('div');
-                meteor.className = 'meteor-temp';
-                meteor.style.top = `${dir.top}px`;
-                meteor.style.left = `${dir.left}px`;
-                meteor.style.transform = dir.transform;
-                meteor.style.animation = `meteorSpread 1s ease-out forwards ${index * 0.1}s`;
-                
-                tempMeteorContainer.appendChild(meteor);
-                
-                // 动画结束后移除临时流星，避免DOM冗余
-                setTimeout(() => {
-                    meteor.remove();
-                }, 1500);
-            });
-        }
-
-        // 星奈卡片增强互动逻辑
-        function initHoshinaCardInteraction() {
-            const hoshinaCard = document.querySelector('.hoshina-card');
-            const shadowMd = getCssVar('shadow-md');
-            
-            hoshinaCard.addEventListener('click', function(e) {
-                // 排除按钮点击（只响应图片区域点击）
-                if (!e.target.closest('.app-link')) {
-                    clickCount++; // 点击计数+1
-                    
-                    // 普通点击动画（轻微缩放旋转）
-                    this.style.transform = 'translateY(-8px) scale(0.95) rotate(2deg)';
-                    this.style.boxShadow = shadowMd;
-                    setTimeout(() => {
-                        this.style.transform = 'translateY(-8px) scale(1.03) rotate(-1deg)';
-                    }, 150);
-                    setTimeout(() => {
-                        this.style.transform = 'translateY(-8px) scale(1.02)';
-                    }, 300);
-                    
-                    // 随机切换气泡文字，增加趣味性
-                    const randomBubbleIndex = Math.floor(Math.random() * hoshinaConfig.length);
-                    hoshinaBubbleElem.textContent = hoshinaConfig[randomBubbleIndex].bubble;
-                    
-                    // 达到点击阈值：触发「向前震动+四周发射流星」特效
-                    if (clickCount >= clickThreshold) {
-                        // 1. 图片向前震动
-                        hoshinaImageElem.classList.add('shake');
-                        // 震动结束后移除类，避免重复触发
-                        setTimeout(() => {
-                            hoshinaImageElem.classList.remove('shake');
-                        }, 500);
-                        
-                        // 2. 发射四周金色流星
-                        const cardRect = hoshinaCard.getBoundingClientRect();
-                        const containerRect = document.querySelector('.container').getBoundingClientRect();
-                        // 计算卡片在容器内的相对位置，确保流星从卡片中心发射
-                        tempMeteorContainer.style.position = 'absolute';
-                        tempMeteorContainer.style.top = `${cardRect.top - containerRect.top}px`;
-                        tempMeteorContainer.style.left = `${cardRect.left - containerRect.left}px`;
-                        tempMeteorContainer.style.width = `${cardRect.width}px`;
-                        tempMeteorContainer.style.height = `${cardRect.height}px`;
-                        
-                        createSpreadMeteors(cardRect);
-                        
-                        // 3. 重置计数器，准备下次触发
-                        clickCount = 0;
-                    }
-                }
-            });
-        }
-
-        // ===== 5. 键盘快捷键优化 =====
-        function initKeyboardShortcuts() {
-            const shadowSm = getCssVar('shadow-sm');
-            const shadowMd = getCssVar('shadow-md');
-            
-            document.addEventListener('keydown', function(e) {
-                // Ctrl + K 快速聚焦搜索框
-                if (e.ctrlKey && e.key === 'k') {
-                    e.preventDefault();
-                    const searchInput = document.getElementById('searchInput');
-                    searchInput.focus();
-                    searchInput.style.boxShadow = `0 0 0 3px rgba(74, 144, 226, 0.3), ${shadowMd}`;
-                    setTimeout(() => {
-                        searchInput.style.boxShadow = shadowSm;
-                    }, 500);
-                }
-                
-                // ESC 键清除搜索框内容并失焦
-                if (e.key === 'Escape') {
-                    const searchInput = document.getElementById('searchInput');
-                    searchInput.value = '';
-                    searchInput.blur();
-                    searchInput.style.transform = 'scale(0.98)';
-                    setTimeout(() => {
-                        searchInput.style.transform = 'scale(1)';
-                    }, 100);
-                }
-            });
-        }
-
-        // ===== 页面加载完成后初始化所有功能 =====
+        // ===== 页面加载后初始化 =====
         document.addEventListener('DOMContentLoaded', function() {
-            // 页面整体淡入效果
-            document.body.style.opacity = '0';
-            setTimeout(() => {
-                document.body.style.transition = 'opacity 0.8s ease';
-                document.body.style.opacity = '1';
-            }, 100);
-
-            // 初始化各功能模块
-            updateWelcomeText();
-            setInterval(updateWelcomeText, 10000); // 10秒换一次欢迎语
-            
-            initSearch();
-            initCardInteractions();
-            initKeyboardShortcuts();
-            
-            // 星奈卡片专属功能初始化
-            initHoshinaImage();
-            autoSwitchHoshinaCard();
-            initHoshinaCardInteraction();
+            cycleWelcomeText();    // 欢迎语循环
+            cycleHoshinaContent(); // 星奈图片循环
+            initSearch();          // 搜索功能
         });
     </script>
 </body>
