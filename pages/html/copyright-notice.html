@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" type="image/x-icon" href="../../assets/images/ico/hoshina-avatar-round.ico">
+    <title>项目版权声明</title>
+    <style>
+        /* 全局基础样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", "Segoe UI", "Monaco", monospace;
+        }
+        body {
+            background-color: #fadadd; /* 主背景色 */
+            color: #6d6875; /* 主字体色 */
+            padding: 2rem 5% 5rem; /* 顶部预留按钮空间,底部预留按钮空间 */
+            min-height: 100vh;
+            line-height: 1.8;
+            /* 轻微背景纹理,增强层次 */
+            background-image: radial-gradient(rgba(109, 104, 117, 0.04) 1px, transparent 1px);
+            background-size: 25px 25px;
+            scroll-behavior: smooth; /* 平滑滚动 */
+        }
+
+        /* 顶部长方形渐变透明返回按钮 */
+        .top-home-btn {
+            display: block;
+            width: 100%;
+            max-width: 380px;
+            margin: 0 auto 3rem;
+            padding: 0.8rem 1.5rem;
+            background: linear-gradient(135deg, rgba(240, 200, 204, 0.6), rgba(191, 160, 176, 0.4));
+            color: #6d6875;
+            text-decoration: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 500;
+            text-align: center;
+            white-space: nowrap; /* 确保文案一行 */
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(109, 104, 117, 0.08);
+        }
+        .top-home-btn:hover {
+            background: linear-gradient(135deg, rgba(240, 200, 204, 0.7), rgba(191, 160, 176, 0.5));
+            color: #5a5565;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 14px rgba(109, 104, 117, 0.12);
+        }
+        .top-home-btn:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 6px rgba(109, 104, 117, 0.08);
+        }
+
+        /* 主标题样式 */
+        .main-title {
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 3px rgba(109, 104, 117, 0.1);
+        }
+
+        /* 版本信息栏 */
+        .version-info {
+            max-width: 800px;
+            margin: 0 auto 2.5rem;
+            padding: 1.2rem 1.5rem;
+            background-color: rgba(255, 255, 255, 0.6);
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(109, 104, 117, 0.08);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            justify-content: center;
+        }
+        .version-info span {
+            font-size: 1rem;
+        }
+        .version-info strong {
+            color: #6d6875;
+        }
+
+        /* 正文卡片样式:渐变圆角边框+透明背景 */
+        .copyright-card {
+            position: relative;
+            background-color: rgba(255, 255, 255, 0.75); /* 高透明背景,不影响阅读 */
+            border-radius: 16px;
+            padding: 2.2rem;
+            margin: 0 auto 2.5rem;
+            max-width: 800px;
+            /* 渐变边框 */
+            border: 2px solid transparent;
+            background-clip: padding-box, border-box;
+            background-origin: padding-box, border-box;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.75)),
+                linear-gradient(135deg, #f0c8cc, #d8b0c0, #bfa0b0); /* 贴合主色调的柔和渐变 */
+            box-shadow: 0 6px 18px rgba(109, 104, 117, 0.08);
+        }
+
+        /* 章节标题样式 */
+        .copyright-card h2 {
+            font-size: 1.5rem;
+            margin: 2.5rem 0 1.2rem;
+            color: #6d6875;
+            border-bottom: 1px solid rgba(109, 104, 117, 0.15);
+            padding-bottom: 0.6rem;
+        }
+        .copyright-card h2:first-child {
+            margin-top: 0;
+        }
+        .copyright-card h3 {
+            font-size: 1.25rem;
+            margin: 1.8rem 0 1rem;
+            color: #6d6875;
+        }
+
+        /* 列表样式 */
+        .copyright-card ul {
+            margin: 1rem 0 1rem 2.2rem;
+        }
+        .copyright-card li {
+            margin-bottom: 0.8rem;
+        }
+        .copyright-card ul ul {
+            margin: 0.5rem 0 0.5rem 2rem;
+        }
+
+        /* 分隔线样式 */
+        .copyright-card hr {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #d8b0c0, transparent);
+            margin: 2.5rem 0;
+            border: none;
+        }
+
+        /* 图片样式 */
+        .copyright-card img {
+            display: block;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(109, 104, 117, 0.1);
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* 表格样式 */
+        .copyright-card table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.95rem;
+        }
+        .copyright-card th, .copyright-card td {
+            padding: 0.8rem 1rem;
+            text-align: left;
+            border: 1px solid #e0c4c8; /* 淡色边框,不刺眼 */
+        }
+        .copyright-card th {
+            background-color: rgba(109, 104, 117, 0.08);
+            font-weight: 600;
+        }
+        .copyright-card tr:nth-child(even) {
+            background-color: rgba(109, 104, 117, 0.03);
+        }
+
+        /* 引用样式 */
+        .copyright-card blockquote {
+            font-style: italic;
+            color: #7a7585;
+            margin: 1.5rem 0;
+            padding: 1.2rem;
+            background-color: rgba(109, 104, 117, 0.03);
+            border-left: 3px solid #d8b0c0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        /* 链接样式 */
+        .copyright-card a {
+            color: #6d6875;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+            transition: color 0.2s ease;
+        }
+        .copyright-card a:hover {
+            color: #5a5565;
+        }
+
+        /* 底部按钮容器 */
+        .bottom-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 4rem 0 2rem;
+        }
+        /* 底部圆形渐变透明按钮(与之前完全一致) */
+        .bottom-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 140px; /* 固定宽度,确保一样大 */
+            height: 140px; /* 固定高度,圆形 */
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(109, 104, 117, 0.2), rgba(255, 255, 255, 0.3));
+            color: #6d6875;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            white-space: nowrap; /* 文案一行显示 */
+            padding: 1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(109, 104, 117, 0.1);
+        }
+        .bottom-btn:hover {
+            background: linear-gradient(135deg, rgba(109, 104, 117, 0.3), rgba(255, 255, 255, 0.4));
+            color: #5a5565;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(109, 104, 117, 0.15);
+        }
+        .bottom-btn:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 8px rgba(109, 104, 117, 0.1);
+        }
+
+        /* 移动端适配 */
+        @media (max-width: 768px) {
+            body {
+                padding: 1.5rem 3% 2rem;
+            }
+            .top-home-btn {
+                max-width: 100%;
+                padding: 0.7rem 1rem;
+                font-size: 0.9rem;
+                margin-bottom: 2.5rem;
+            }
+            .main-title {
+                font-size: 1.6rem;
+                margin-bottom: 1.5rem;
+            }
+            .version-info {
+                gap: 1rem;
+                padding: 1rem;
+                font-size: 0.95rem;
+            }
+            .copyright-card {
+                padding: 1.8rem;
+                border-width: 1.5px;
+            }
+            .copyright-card h2 {
+                font-size: 1.3rem;
+                margin: 2rem 0 1rem;
+            }
+            .copyright-card h3 {
+                font-size: 1.15rem;
+            }
+            .copyright-card ul {
+                margin-left: 1.8rem;
+            }
+            .copyright-card table {
+                font-size: 0.85rem;
+            }
+            .copyright-card th, .copyright-card td {
+                padding: 0.6rem 0.8rem;
+            }
+            /* 移动端底部按钮调整 */
+            .bottom-btn {
+                width: 120px;
+                height: 120px;
+                font-size: 0.85rem;
+                padding: 0.8rem;
+            }
+            .bottom-buttons {
+                gap: 1.5rem;
+            }
+        }
+
+        /* 小屏幕移动端适配 */
+        @media (max-width: 480px) {
+            .copyright-card {
+                padding: 1.5rem;
+            }
+            .top-home-btn {
+                font-size: 0.85rem;
+                padding: 0.65rem 0.8rem;
+            }
+            /* 小屏幕底部按钮 */
+            .bottom-btn {
+                width: 110px;
+                height: 110px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="../../index.html" class="top-home-btn">星奈のファン応援会に戻る</a>
+
+    <h1 class="main-title">项目版权声明</h1>
+
+    <div class="version-info">
+        <span><strong>版本</strong>: 1.1</span>
+        <span><strong>最后更新</strong>: 2025-12-02</span>
+        <span><strong>维护者</strong>: fumimutsumi</span>
+    </div>
+
+    <div class="copyright-card">
+        <h2>通用声明</h2>
+        <ol>
+            <li>本项目是维护者 <strong>fumimutsumi</strong> 的<strong>个人学习与交流项目</strong>,所有内容均用于技术实践、样式展示等非商业目的,不涉及任何盈利行为。</li>
+            <li>项目中使用的第三方内容(如图片、文案)均已尽力标注来源。若您认为任何内容侵犯了您的合法权益,请通过 <strong><a href="mailto:15175969957@163.com">15175969957@163.com</a></strong> 与我联系,我将在核实后第一时间进行处理。</li>
+            <li>未经本人明确许可,<strong>禁止</strong>将本项目的任何部分用于商业、盈利或其他非法用途。</li>
+        </ol>
+
+        <hr>
+
+        <h2>图片素材版权说明</h2>
+        <h3>1. 原创图片</h3>
+        <ul>
+            <li><strong>内容</strong>:由本人独立创作或拥有的图片素材(如网站吉祥物)。</li>
+            <li><strong>示例</strong>:<code>"assets/images/"和"docs/images/"等中的所有"hoshina"</code></li>
+            <li><img src="../../assets/images/jpg/hoshina-error-404.jpg" alt="hoshina" width="300"></li>
+            <li><strong>声明</strong>:此部分图片的著作权归本人(fumimutsumi)所有。<strong>任何商业性使用均需获得我的事先许可</strong>；非商业性的学习、参考和分享则不受此限。</li>
+        </ul>
+
+        <h3>2. 免费授权图片</h3>
+        <ul>
+            <li><strong>来源</strong>:来自明确提供免费商用许可的公共资源平台(如 Unsplash, Pexels 等)。</li>
+            <li><strong>声明</strong>:这些图片遵循其原平台的许可协议。本项目在使用时已遵守相应规定(如必要的署名要求),您也可依据原协议规定使用它们。</li>
+        </ul>
+
+        <h3>3. 官方版权图片</h3>
+        <ul>
+            <li><strong>来源</strong>:源自《明日方舟》、《鸣潮》等游戏的官方素材。</li>
+            <li><strong>涉及版权方</strong>:
+                <ul>
+                    <li>《明日方舟》 - Hypergryph / 鹰角网络</li>
+                    <li>《鸣潮》 - Kuro Games / 库洛游戏</li>
+                </ul>
+            </li>
+            <li><strong>声明</strong>:此部分所有内容的著作权均归属于上述官方版权方。本项目仅为个人学习目的进行非商业性引用,<strong>未获得官方正式授权</strong>。严禁任何商业用途或侵害版权方权益的行为。</li>
+            <li><strong>官方链接</strong>:
+                <ul>
+                    <li><a href="https://user.hypergryph.com/protocol/ak/service" target="_blank">明日方舟版权声明页面</a></li>
+                    <li><a href="https://sdk.kurogames.com/p/agreement_public.html" target="_blank">鸣潮版权声明页面</a></li>
+                </ul>
+            </li>
+        </ul>
+
+        <h3>4. 二次创作作品</h3>
+        <ul>
+            <li><strong>来源</strong>:由其他创作者基于官方作品衍生的二次创作(二创)图片。</li>
+            <li><strong>权利方</strong>:
+                <ul>
+                    <li><strong>作品著作权</strong>:归属原画师。</li>
+                    <li><strong>原作元素著作权</strong>:归属对应的游戏官方版权方。</li>
+                </ul>
+            </li>
+            <li><strong>声明</strong>:本项目的使用已获得画师授权,或为个人学习性质的合理使用。<strong>严禁</strong>将此部分内容用于任何商业目的。若您是相关权利人并对展示有异议,请联系我进行移除。</li>
+            <li><strong>画师信息表</strong>(请根据实际情况填写和增减行):</li>
+        </ul>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>作品名称</th>
+                    <th>画师昵称</th>
+                    <th>平台/ID</th>
+                    <th>授权状态</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>鸣潮-朽叶千咲同人插画:chisaki-matcha.jpg</td>
+                    <td>Matcha</td>
+                    <td>Pixiv-id:2583663</td>
+                    <td>个人学习引用,如有异议请联系删除</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <hr>
+
+        <h2>文案与设定版权说明</h2>
+        <ul>
+            <li><strong>涉及内容</strong>:项目中引用的《明日方舟》、《鸣潮》等游戏的角色设定、世界观描述、剧情文本等。</li>
+            <li><strong>版权声明</strong>:所有相关文案、设定的著作权均归属于其各自的官方版权方(鹰角网络、库洛游戏等)。本项目仅为学习交流目的进行非商业性引用,<strong>未获得官方正式授权</strong>。任何组织或个人不得将其用于商业目的。</li>
+        </ul>
+
+        <hr>
+
+        <blockquote>
+            <strong>重要提示</strong>:本声明文档将随着项目内容的更新而持续修订。您对项目的访问和使用即视为理解并同意本声明的所有条款。更新此文档请一并更新html文件。
+        </blockquote>
+    </div>
+
+    <div class="bottom-buttons">
+        <a href="../../index.html" class="bottom-btn">星奈のファン応援会に戻る</a>
+        <a href="#" class="bottom-btn">再看一遍(♡-𖥦-)/♥</a>
+    </div>
+</body>
+</html>

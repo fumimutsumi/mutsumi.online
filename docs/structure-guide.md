@@ -42,9 +42,9 @@
 assets/
 ├──styles/          # CSS 样式资源
 └──images/          # 图片文件
-├── ico/         # .ico 格式图标
-├── jpg/         # .jpg 格式图片
-└── png/         # .png 格式图片
+    ├── ico/         # .ico 格式图标
+    ├── jpg/         # .jpg 格式图片
+    └── png/         # .png 格式图片
 
 ```
 
@@ -69,7 +69,7 @@ docs/
 pages/
 ├──html/            # HTML 页面资源
 ├──mini-project/    # 小项目文件
-└──troubleshooting/ # 疑难解答文档
+└──troubleshooting/ # 疑难解答文档(markdown文件夹下为修改版本，html文件夹下为正式版本)
 
 ```
 

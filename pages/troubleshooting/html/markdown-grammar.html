@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" type="image/x-icon" href="../../../assets/images/ico/hoshina-avatar-round.ico">
+    <title>Markdown 语法</title>
+    <style>
+        /* 全局基础样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", "Segoe UI", "Monaco", monospace;
+        }
+        body {
+            background-color: #fadadd; /* 主背景色 */
+            color: #6d6875; /* 主字体色 */
+            padding: 8rem 5% 5rem; /* 顶部预留导航空间,底部预留按钮空间 */
+            min-height: 100vh;
+            line-height: 1.8;
+            /* 轻微背景纹理,增强层次 */
+            background-image: radial-gradient(rgba(109, 104, 117, 0.04) 1px, transparent 1px);
+            background-size: 25px 25px;
+            scroll-behavior: smooth; /* 平滑滚动 */
+        }
+
+        /* 顶部悬挂锚点导航 */
+        .top-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px); /* 毛玻璃效果 */
+            border-bottom: 2px solid transparent;
+            border-image: linear-gradient(90deg, #f0c8cc, #d8b0c0, #bfa0b0, #d8b0c0, #f0c8cc) 1;
+            box-shadow: 0 4px 12px rgba(109, 104, 117, 0.08);
+            z-index: 1000;
+            padding: 0.8rem 0;
+            overflow-x: auto; /* 横向滚动适配多锚点 */
+        }
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            gap: 0.8rem;
+            padding: 0 1rem;
+            align-items: center;
+        }
+        /* 导航栏返回主页按钮 */
+        .nav-home-btn {
+            background-color: rgba(109, 104, 117, 0.1);
+            font-weight: 500;
+            padding: 0.5rem 1.2rem;
+            margin-right: 0.5rem;
+        }
+        .top-nav a {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            color: #6d6875;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            white-space: nowrap; /* 确保文案一行 */
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+        }
+        /* 导航锚点伪类效果 */
+        .top-nav a:link {
+            opacity: 0.9;
+        }
+        .top-nav a:visited {
+            color: #8a8497;
+        }
+        .top-nav a:hover {
+            background-color: #6d6875;
+            color: #fadadd;
+            transform: translateY(-2px);
+            box-shadow: 0 3px 6px rgba(109, 104, 117, 0.2);
+            border-color: #6d6875;
+        }
+        .top-nav a:active {
+            transform: translateY(1px);
+            box-shadow: 0 1px 3px rgba(109, 104, 117, 0.15);
+        }
+        /* 隐藏导航滚动条 */
+        .top-nav::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* 主标题样式 */
+        .main-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 1px 1px 3px rgba(109, 104, 117, 0.1);
+        }
+        .intro {
+            max-width: 1000px;
+            margin: 0 auto 3rem;
+            background-color: rgba(255, 255, 255, 0.6);
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(109, 104, 117, 0.08);
+        }
+
+        /* 正文卡片样式:渐变圆角边框+透明背景 */
+        .md-card {
+            position: relative;
+            background-color: rgba(255, 255, 255, 0.75); /* 高透明背景,不影响阅读 */
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2.5rem;
+            /* 渐变边框 */
+            border: 2px solid transparent;
+            background-clip: padding-box, border-box;
+            background-origin: padding-box, border-box;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.75)),
+                linear-gradient(135deg, #f0c8cc, #d8b0c0, #bfa0b0); /* 贴合主色调的柔和渐变 */
+            box-shadow: 0 6px 18px rgba(109, 104, 117, 0.08);
+            transition: all 0.3s ease;
+            scroll-margin-top: 70px; /* 解决导航栏遮挡问题,值大于导航栏高度 */
+        }
+        /* 卡片悬浮效果 */
+        .md-card:hover {
+            box-shadow: 0 10px 24px rgba(109, 104, 117, 0.12);
+            transform: translateY(-3px);
+        }
+
+        /* 章节标题样式 */
+        .md-card h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #6d6875;
+            border-bottom: 1px solid rgba(109, 104, 117, 0.15);
+            padding-bottom: 0.5rem;
+        }
+        .md-card h3 {
+            font-size: 1.25rem;
+            margin: 1.5rem 0 0.8rem;
+            color: #6d6875;
+        }
+
+        /* 代码块样式 */
+        .md-card pre {
+            background-color: rgba(109, 104, 117, 0.05);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+            font-family: "Monaco", "Consolas", monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        .md-card code {
+            font-family: inherit;
+            color: #6d6875;
+            background-color: rgba(109, 104, 117, 0.05);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+        }
+        .md-card pre code {
+            padding: 0;
+            background: none;
+        }
+
+        /* 表格样式 */
+        .md-card table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.95rem;
+        }
+        .md-card th, .md-card td {
+            padding: 0.8rem 1rem;
+            text-align: left;
+            border: 1px solid #e0c4c8; /* 淡色边框,不刺眼 */
+        }
+        .md-card th {
+            background-color: rgba(109, 104, 117, 0.08);
+            font-weight: 600;
+        }
+        .md-card tr:nth-child(even) {
+            background-color: rgba(109, 104, 117, 0.03);
+        }
+
+        /* 引用样式 */
+        .md-card blockquote {
+            font-style: italic;
+            color: #7a7585;
+            margin: 1rem 0;
+            padding: 1rem;
+            background-color: rgba(109, 104, 117, 0.03);
+            border-left: 3px solid #d8b0c0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        /* 列表样式 */
+        .md-card ul, .md-card ol {
+            margin: 1rem 0 1rem 2rem;
+        }
+        .md-card li {
+            margin-bottom: 0.5rem;
+        }
+        .md-card ul ul, .md-card ol ol, .md-card ul ol, .md-card ol ul {
+            margin: 0.5rem 0 0.5rem 2rem;
+        }
+
+        /* 强调样式(粗体、斜体、删除线) */
+        .md-card strong {
+            font-weight: 600;
+            color: #6d6875;
+        }
+        .md-card em {
+            font-style: italic;
+            color: #7a7585;
+        }
+        .md-card del {
+            text-decoration: line-through;
+            color: #9a94a7;
+        }
+
+        /* 链接样式 */
+        .md-card a {
+            color: #6d6875;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+            transition: color 0.2s ease;
+        }
+        .md-card a:hover {
+            color: #5a5565;
+        }
+
+        /* 任务列表样式 */
+        .md-card .task-list {
+            list-style-type: none;
+            margin-left: 0;
+            padding-left: 0;
+        }
+        .md-card .task-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            padding-left: 0;
+        }
+        .md-card .task-list input[type="checkbox"] {
+            margin-right: 0.8rem;
+            accent-color: #6d6875;
+        }
+
+        /* 脚注样式 */
+        .md-card .footnote-ref {
+            vertical-align: super;
+            font-size: 0.8rem;
+            text-decoration: none;
+            margin: 0 0.2rem;
+        }
+        .md-card .footnote-definition {
+            margin: 1rem 0 0 2rem;
+            font-size: 0.9rem;
+            color: #7a7585;
+        }
+
+        /* 分隔线样式 */
+        .md-card hr {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #d8b0c0, transparent);
+            margin: 2rem 0;
+            border: none;
+        }
+
+        /* 底部按钮容器 */
+        .bottom-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 4rem 0 2rem;
+        }
+        /* 底部圆形渐变透明按钮 */
+        .bottom-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 140px; /* 固定宽度,确保一样大 */
+            height: 140px; /* 固定高度,圆形 */
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(109, 104, 117, 0.2), rgba(255, 255, 255, 0.3));
+            color: #6d6875;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            white-space: nowrap; /* 文案一行显示 */
+            padding: 1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(109, 104, 117, 0.1);
+        }
+        .bottom-btn:hover {
+            background: linear-gradient(135deg, rgba(109, 104, 117, 0.3), rgba(255, 255, 255, 0.4));
+            color: #5a5565;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(109, 104, 117, 0.15);
+        }
+        .bottom-btn:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 8px rgba(109, 104, 117, 0.1);
+        }
+
+        /* 移动端适配 */
+        @media (max-width: 768px) {
+            body {
+                padding: 7rem 3% 2rem;
+            }
+            .main-title {
+                font-size: 1.7rem;
+                margin-bottom: 1.2rem;
+            }
+            .intro {
+                padding: 1.2rem;
+                margin-bottom: 2rem;
+            }
+            .md-card {
+                padding: 1.5rem;
+                border-width: 1.5px;
+                margin-bottom: 2rem;
+                scroll-margin-top: 60px; /* 移动端导航栏高度略低 */
+            }
+            .md-card h2 {
+                font-size: 1.3rem;
+            }
+            .md-card h3 {
+                font-size: 1.15rem;
+            }
+            .nav-container {
+                gap: 0.6rem;
+                padding: 0 0.8rem;
+            }
+            .top-nav a {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.85rem;
+            }
+            .nav-home-btn {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.8rem;
+            }
+            .md-card table {
+                font-size: 0.85rem;
+            }
+            .md-card th, .md-card td {
+                padding: 0.6rem 0.8rem;
+            }
+            /* 移动端底部按钮调整 */
+            .bottom-btn {
+                width: 120px;
+                height: 120px;
+                font-size: 0.85rem;
+                padding: 0.8rem;
+            }
+            .bottom-buttons {
+                gap: 1.5rem;
+            }
+        }
+
+        /* 小屏幕移动端适配 */
+        @media (max-width: 480px) {
+            .md-card {
+                padding: 1.2rem;
+            }
+            .top-nav a {
+                padding: 0.35rem 0.7rem;
+                font-size: 0.8rem;
+            }
+            .nav-home-btn {
+                font-size: 0.75rem;
+                padding: 0.35rem 0.7rem;
+            }
+            /* 小屏幕底部按钮 */
+            .bottom-btn {
+                width: 110px;
+                height: 110px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="top-nav">
+        <div class="nav-container">
+            <a href="../../../index.html" class="nav-home-btn">星奈のファン応援会に戻る</a>
+            <a href="#md-title">标题</a>
+            <a href="#md-paragraph">段落与换行</a>
+            <a href="#md-emphasis">强调</a>
+            <a href="#md-list">列表</a>
+            <a href="#md-link">链接</a>
+            <a href="#md-image">图片</a>
+            <a href="#md-code">代码</a>
+            <a href="#md-quote">引用</a>
+            <a href="#md-table">表格</a>
+            <a href="#md-divider">分隔线</a>
+            <a href="#md-escape">转义字符</a>
+            <a href="#md-task">任务列表</a>
+            <a href="#md-footnote">脚注</a>
+            <a href="#md-delete">删除线</a>
+            <a href="#md-advanced">高级功能</a>
+            <a href="#md-editor">编辑器推荐</a>
+            <a href="#md-tips">实用技巧</a>
+            <a href="#md-faq">常见问题</a>
+        </div>
+    </nav>
+
+    <h1 class="main-title">Markdown语法完全指南</h1>
+    <div class="intro">
+        <p>Markdown是一种轻量级的标记语言,允许人们使用简单易读的纯文本格式编写文档,然后转换成格式丰富的HTML页面。它被广泛应用于GitHub、博客平台、文档系统等场景。本指南将详细介绍Markdown的所有常用语法,并提供实用示例。</p>
+    </div>
+
+    <div class="content-container">
+        <div class="md-card" id="md-title">
+            <h2>一、标题</h2>
+            <p>Markdown支持6级标题,使用<code>#</code>符号表示,<code>#</code>的数量代表标题级别。</p>
+            <pre><code># 一级标题
+## 二级标题
+### 三级标题
+#### 四级标题
+##### 五级标题
+###### 六级标题</code></pre>
+            <p><strong>显示效果</strong></p>
+            <h1 style="font-size: 1.8rem; margin: 1rem 0; color: #6d6875;">一级标题</h1>
+            <h2 style="font-size: 1.5rem; margin: 1rem 0; color: #6d6875;">二级标题</h2>
+            <h3 style="font-size: 1.25rem; margin: 1rem 0; color: #6d6875;">三级标题</h3>
+            <h4 style="font-size: 1.1rem; margin: 1rem 0; color: #6d6875;">四级标题</h4>
+            <h5 style="font-size: 1rem; margin: 1rem 0; color: #6d6875;">五级标题</h5>
+            <h6 style="font-size: 0.9rem; margin: 1rem 0; color: #6d6875;">六级标题</h6>
+            <p><strong>注意事项</strong>:<code>#</code>和标题文本之间最好保留一个空格,这是标准写法,虽然有些解析器不要求,但为了兼容性最好加上。</p>
+        </div>
+
+        <div class="md-card" id="md-paragraph">
+            <h2>二、段落与换行</h2>
+            <h3>2.1 段落</h3>
+            <p>在Markdown中,一个段落就是一段连续的文本,前后需要空一行。不需要缩进,缩进在Markdown中通常没有特殊含义(除非是代码块)。</p>
+            <pre><code>这是第一个段落。这是一个普通的Markdown段落,不需要任何特殊的格式标记。
+
+这是第二个段落。注意两个段落之间需要有一个空行分隔。</code></pre>
+            <h3>2.2 换行</h3>
+            <p>如果需要在段落内换行(而不是开始一个新段落),需要在行尾添加两个或更多空格,然后按回车键。</p>
+            <pre><code>这是第一行末尾添加了两个空格  
+这是第二行,会另起一行显示
+
+这是新的段落,因为上面有一个空行</code></pre>
+            <p><strong>常见问题</strong>:有些编辑器支持直接按回车换行,但这不是标准的Markdown语法,为了确保在所有平台上的兼容性,最好使用行尾加两个空格的方法。</p>
+        </div>
+
+        <div class="md-card" id="md-emphasis">
+            <h2>三、强调</h2>
+            <h3>3.1 斜体</h3>
+            <p>使用<code>*</code>或<code>_</code>包裹文本可以创建斜体效果。</p>
+            <pre><code>*这段文本是斜体* 或者 _这段文本也是斜体_</code></pre>
+            <p><strong>显示效果</strong></p>
+            <p><em>这段文本是斜体</em> 或者 <em>这段文本也是斜体</em></p>
+
+            <h3>3.2 粗体</h3>
+            <p>使用<code>**</code>或<code>__</code>包裹文本可以创建粗体效果。</p>
+            <pre><code>**这段文本是粗体** 或者 __这段文本也是粗体__</code></pre>
+            <p><strong>显示效果</strong></p>
+            <p><strong>这段文本是粗体</strong> 或者 <strong>这段文本也是粗体</strong></p>
+
+            <h3>3.3 粗斜体</h3>
+            <p>使用<code>***</code>或<code>___</code>包裹文本可以创建粗斜体效果。</p>
+            <pre><code>***这段文本是粗斜体*** 或者 ___这段文本也是粗斜体___</code></pre>
+            <p><strong>显示效果</strong></p>
+            <p><strong><em>这段文本是粗斜体</em></strong> 或者 <strong><em>这段文本也是粗斜体</em></strong></p>
+        </div>
+
+        <div class="md-card" id="md-list">
+            <h2>四、列表</h2>
+            <h3>4.1 无序列表</h3>
+            <p>无序列表使用<code>*</code>、<code>+</code>或<code>-</code>作为列表标记,后面跟一个空格和列表项内容。</p>
+            <pre><code>* 列表项1
+* 列表项2
+* 列表项3
+
++ 另一种无序列表方式
++ 列表项2
+
+- 还有一种无序列表方式
+- 列表项2</code></pre>
+            <p><strong>显示效果</strong></p>
+            <ul>
+                <li>列表项1</li>
+                <li>列表项2</li>
+                <li>列表项3</li>
+            </ul>
+            <p><strong>注意</strong>:这三种标记(<code>*</code>、<code>+</code>、<code>-</code>)在功能上是完全相同的,可以根据个人喜好选择使用。</p>
+
+            <h3>4.2 有序列表</h3>
+            <p>有序列表使用数字加<code>.</code>作为列表标记,后面跟一个空格和列表项内容。</p>
+            <pre><code>1. 第一项
+2. 第二项
+3. 第三项</code></pre>
+            <p><strong>显示效果</strong></p>
+            <ol>
+                <li>第一项</li>
+                <li>第二项</li>
+                <li>第三项</li>
+            </ol>
+            <p><strong>小技巧</strong>:有序列表的数字实际上不会影响输出结果的编号,Markdown会自动按顺序编号。例如,即使你写成<code>1. 第一项 3. 第二项 2. 第三项</code>,最终显示出来的仍然是1、2、3的顺序。</p>
+
+            <h3>4.3 嵌套列表</h3>
+            <p>列表可以嵌套,只需要在子列表项前添加缩进(通常是4个空格或1个制表符)。</p>
+            <pre><code>1. 第一项
+    * 子列表项1
+    * 子列表项2
+2. 第二项
+    1. 子列表项1
+    2. 子列表项2</code></pre>
+            <p><strong>显示效果</strong></p>
+            <ol>
+                <li>第一项
+                    <ul>
+                        <li>子列表项1</li>
+                        <li>子列表项2</li>
+                    </ul>
+                </li>
+                <li>第二项
+                    <ol>
+                        <li>子列表项1</li>
+                        <li>子列表项2</li>
+                    </ol>
+                </li>
+            </ol>
+        </div>
+
+        <div class="md-card" id="md-link">
+            <h2>五、链接</h2>
+            <h3>5.1 行内链接</h3>
+            <p>行内链接的基本格式是<code>[链接文本](链接地址 "可选的标题")</code>。</p>
+            <pre><code>这是一个[百度](https://www.baidu.com)的链接。
+这是一个带有标题的[GitHub](https://github.com "GitHub官网")链接。</code></pre>
+            <p><strong>显示效果</strong></p>
+            <p>这是一个<a href="https://www.baidu.com" target="_blank">百度</a>的链接。</p>
+            <p>这是一个带有标题的<a href="https://github.com" target="_blank" title="GitHub官网">GitHub</a>链接。</p>
+            <p><strong>注意</strong>:标题部分是可选的,当鼠标悬停在链接上时会显示这个标题。</p>
+
+            <h3>5.2 引用链接</h3>
+            <p>引用链接允许你在文档末尾定义链接,然后在正文中引用它们,适合在文档中多次使用同一链接的情况。</p>
+            <pre><code>这是一个[百度][1]的链接,这也是一个[百度][1]的链接。
+
+[1]: https://www.baidu.com "百度官网"</code></pre>
+            <p><strong>显示效果</strong></p>
+            <p>这是一个<a href="https://www.baidu.com" target="_blank" title="百度官网">百度</a>的链接,这也是一个<a href="https://www.baidu.com" target="_blank" title="百度官网">百度</a>的链接。</p>
+
+            <h3>5.3 自动链接</h3>
+            <p>对于简单的URL或电子邮件地址,可以用尖括号包裹,Markdown会自动将其转换为链接。</p>
+            <pre><code>&lt;https://www.baidu.com&gt;
+&lt;example@example.com&gt;</code></pre>
+            <p><strong>显示效果</strong></p>
+            <p><a href="https://www.baidu.com" target="_blank">https://www.baidu.com</a></p>
+            <p><a href="mailto:example@example.com">example@example.com</a></p>
+        </div>
+
+        <div class="md-card" id="md-image">
+            <h2>六、图片</h2>
+            <p>图片的语法与链接类似,只是在前面多了一个感叹号<code>!</code>。基本格式是<code>![替代文本](图片地址 "可选的标题")</code>。</p>
+            <pre><code>![GitHub Logo](https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png "GitHub的Logo")
+
+![GitHub Logo][logo]
+
+[logo]: https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png "GitHub的Logo"</code></pre>
+            <p><strong>注意</strong>:替代文本是当图片无法显示时显示的文本,对可访问性很重要。标题部分同样是鼠标悬停时显示的文本。</p>
+            <p><strong>显示效果</strong></p>
+            <p><img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub Logo" title="GitHub的Logo" style="max-width: 200px; margin: 1rem 0;"></p>
+        </div>
+
+        <div class="md-card" id="md-code">
+            <h2>七、代码</h2>
+            <h3>7.1 行内代码</h3>
+            <p>使用反引号<code>`</code>包裹代码片段可以创建行内代码。</p>
+            <pre><code>在HTML中,我们使用`&lt;div&gt;`标签来创建一个区块。</code></pre>
+            <p><strong>显示效果</strong></p>
+            <p>在HTML中,我们使用<code>&lt;div&gt;</code>标签来创建一个区块。</p>
+
+            <h3>7.2 代码块</h3>
+            <p>有两种方式创建代码块:</p>
+            <p>1. 缩进4个空格或1个制表符(适合在列表中嵌入代码块)</p>
+            <pre><code>普通文本
+    这是一个代码块
+    可以有多行
+普通文本</code></pre>
+            <p>2. 使用三个反引号<code>```</code>包裹代码块,可以指定语言以启用语法高亮</p>
+            <pre><code>```python
+def hello_world():
+    print("Hello, Markdown!")
+```</code></pre>
+            <p><strong>显示效果</strong></p>
+            <pre><code class="language-python">def hello_world():
+    print("Hello, Markdown!")</code></pre>
+            <p><strong>注意</strong>:指定语言时,语言名称要小写,且不要有空格。常见的语言包括<code>python</code>、<code>javascript</code>、<code>html</code>、<code>css</code>、<code>java</code>等。</p>
+        </div>
+
+        <div class="md-card" id="md-quote">
+            <h2>八、引用</h2>
+            <h3>8.1 基本引用</h3>
+            <p>使用<code>&gt;</code>符号可以创建引用块。</p>
+            <pre><code>&gt; 这是一段引用内容。
+&gt; 引用可以有多行。</code></pre>
+            <p><strong>显示效果</strong></p>
+            <blockquote>
+                这是一段引用内容。<br>
+                引用可以有多行。
+            </blockquote>
+
+            <h3>8.2 嵌套引用</h3>
+            <p>引用可以嵌套,只需要在嵌套的引用前添加多个<code>&gt;</code>符号。</p>
+            <pre><code>&gt; 这是外层引用
+&gt;&gt; 这是内层引用
+&gt;&gt;&gt; 这是更深层的引用</code></pre>
+            <p><strong>显示效果</strong></p>
+            <blockquote>
+                这是外层引用
+                <blockquote>
+                    这是内层引用
+                    <blockquote>
+                        这是更深层的引用
+                    </blockquote>
+                </blockquote>
+            </blockquote>
+
+            <h3>8.3 引用中包含其他元素</h3>
+            <p>引用中可以包含Markdown的其他元素,如标题、列表、代码块等。</p>
+            <pre><code>&gt; ### 引用中的标题
+&gt;
+&gt; * 引用中的列表项1
+&gt; * 引用中的列表项2
+&gt;
+&gt; ```
+&gt; 引用中的代码块
+&gt; ```</code></pre>
+            <p><strong>显示效果</strong></p>
+            <blockquote>
+                <h3 style="font-size: 1.2rem; margin: 0 0 0.5rem;">引用中的标题</h3>
+                <ul>
+                    <li>引用中的列表项1</li>
+                    <li>引用中的列表项2</li>
+                </ul>
+                <pre><code>引用中的代码块</code></pre>
+            </blockquote>
+        </div>
+
+        <div class="md-card" id="md-table">
+            <h2>九、表格</h2>
+            <p>使用<code>|</code>和<code>-</code>可以创建表格。<code>-</code>用于分隔表头和表格体,<code>:</code>可以用来指定对齐方式。</p>
+            <pre><code>| 姓名 | 年龄 | 职业 |
+|------|------|------|
+| 张三 | 25   | 工程师 |
+| 李四 | 30   | 设计师 |
+| 王五 | 28   | 产品经理 |
+
+| 左对齐 | 居中对齐 | 右对齐 |
+|:-------|:--------:|-------:|
+| 内容 | 内容 | 内容 |
+| 长文本内容 | 长文本内容 | 长文本内容 |</code></pre>
+            <p><strong>显示效果</strong></p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>姓名</th>
+                        <th>年龄</th>
+                        <th>职业</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>张三</td>
+                        <td>25</td>
+                        <td>工程师</td>
+                    </tr>
+                    <tr>
+                        <td>李四</td>
+                        <td>30</td>
+                        <td>设计师</td>
+                    </tr>
+                    <tr>
+                        <td>王五</td>
+                        <td>28</td>
+                        <td>产品经理</td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+            <table>
+                <thead>
+                    <tr>
+                        <th style="text-align: left;">左对齐</th>
+                        <th style="text-align: center;">居中对齐</th>
+                        <th style="text-align: right;">右对齐</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="text-align: left;">内容</td>
+                        <td style="text-align: center;">内容</td>
+                        <td style="text-align: right;">内容</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;">长文本内容</td>
+                        <td style="text-align: center;">长文本内容</td>
+                        <td style="text-align: right;">长文本内容</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p><strong>注意</strong>:</p>
+            <ul>
+                <li>表格的每一行必须有相同数量的单元格</li>
+                <li>表头行和内容行之间的分隔线不能省略</li>
+                <li>对齐方式的冒号必须放在分隔线的相应位置</li>
+            </ul>
+        </div>
+
+        <div class="md-card" id="md-divider">
+            <h2>十、分隔线</h2>
+            <p>使用三个或更多的<code>*</code>、<code>-</code>或<code>_</code>可以创建分隔线,它们之间可以有空格。</p>
+            <pre><code>这是上面的内容
+
+***
+
+这是中间的内容
+
+---
+
+这是下面的内容
+
+___</code></pre>
+            <p><strong>显示效果</strong></p>
+            <p>这是上面的内容</p>
+            <hr>
+            <p>这是中间的内容</p>
+            <hr>
+            <p>这是下面的内容</p>
+            <hr>
+            <p><strong>注意</strong>:为了避免被解析为标题,使用<code>-</code>创建分隔线时,前后最好要有空行,或者确保上一行不是以<code>-</code>开头的文本。</p>
+        </div>
+
+        <div class="md-card" id="md-escape">
+            <h2>十一、转义字符</h2>
+            <p>使用反斜杠<code>\</code>可以转义Markdown中的特殊字符,使它们显示为普通字符。</p>
+            <pre><code>\* 这不是斜体文本,因为星号被转义了 \
+\` 这不是代码,因为反引号被转义了 \
+\# 这不是标题,因为井号被转义了 \
+\[ 这不是链接的开始 \
+\] 这不是链接的结束 \
+\( 这不是链接地址的开始 \
+\) 这不是链接地址的结束</code></pre>
+            <p><strong>显示效果</strong></p>
+            <p>* 这不是斜体文本,因为星号被转义了 <br></p>
+            <p>` 这不是代码,因为反引号被转义了 <br></p>
+            <p># 这不是标题,因为井号被转义了 <br></p>
+            <p>[ 这不是链接的开始 <br></p>
+            <p>] 这不是链接的结束 <br></p>
+            <p>( 这不是链接地址的开始 <br></p>
+            <p>) 这不是链接地址的结束</p>
+            <p><strong>常见转义字符</strong>:<code>\</code> <code>*</code> <code>_</code> <code>{</code> <code>}</code> <code>[</code> <code>]</code> <code>(</code> <code>)</code> <code>#</code> <code>+</code> <code>-</code> <code>.</code> <code>!</code> <code>|</code> <code>`</code></p>
+        </div>
+
+        <div class="md-card" id="md-task">
+            <h2>十二、任务列表</h2>
+            <p>任务列表是一种特殊的列表,允许你创建可勾选的项目。使用<code>- [ ]</code>表示未勾选,<code>- [x]</code>表示已勾选。</p>
+            <pre><code>- [x] 完成Markdown基础语法学习
+- [ ] 练习创建表格
+- [ ] 学习高级Markdown功能</code></pre>
+            <p><strong>显示效果</strong></p>
+            <ul class="task-list">
+                <li><input type="checkbox" checked disabled> 完成Markdown基础语法学习</li>
+                <li><input type="checkbox" disabled> 练习创建表格</li>
+                <li><input type="checkbox" disabled> 学习高级Markdown功能</li>
+            </ul>
+            <p><strong>注意</strong>:任务列表在GitHub等平台上支持良好,但在某些Markdown编辑器中可能不被支持。</p>
+        </div>
+
+        <div class="md-card" id="md-footnote">
+            <h2>十三、脚注</h2>
+            <p>脚注允许你在文档中添加注释或引用,而不会干扰正文的阅读。使用<code>[^标识符]</code>在正文中标记脚注,然后在文档末尾定义脚注内容。</p>
+            <pre><code>这是一个带有脚注的句子。[^1]
+
+[^1]: 这是脚注的内容,可以包含详细的解释或引用来源。</code></pre>
+            <p><strong>显示效果</strong></p>
+            <p>这是一个带有脚注的句子。<a href="#footnote-1" class="footnote-ref">[1]</a></p>
+            <p id="footnote-1" class="footnote-definition">[1]: 这是脚注的内容,可以包含详细的解释或引用来源。</p>
+        </div>
+
+        <div class="md-card" id="md-delete">
+            <h2>十四、删除线</h2>
+            <p>使用<code>~~</code>包裹文本可以创建删除线效果。</p>
+            <pre><code>~~这段文本被删除了~~</code></pre>
+            <p><strong>显示效果</strong></p>
+            <p><del>这段文本被删除了</del></p>
+        </div>
+
+        <div class="md-card" id="md-advanced">
+            <h2>十五、Markdown的高级功能</h2>
+            <h3>15.1 HTML标签</h3>
+            <p>在Markdown中,你可以直接使用HTML标签来实现一些Markdown不支持的功能。</p>
+            <pre><code>这是一个使用HTML的&lt;span style="color:red"&gt;红色文本&lt;/span&gt;。
+
+&lt;div align="center"&gt;这是居中对齐的文本&lt;/div&gt;
+
+&lt;details&gt;
+&lt;summary&gt;点击展开详情&lt;/summary&gt;
+这里是详细内容
+&lt;/details&gt;</code></pre>
+            <p><strong>显示效果</strong></p>
+            <p>这是一个使用HTML的<span style="color:red">红色文本</span>。</p>
+            <div align="center">这是居中对齐的文本</div>
+            <details>
+                <summary>点击展开详情</summary>
+                <p>这里是详细内容</p>
+            </details>
+            <p><strong>注意</strong>:并非所有的Markdown解析器都完全支持HTML标签,使用时需要注意兼容性。</p>
+
+            <h3>15.2 表情符号</h3>
+            <p>在支持的平台上(如GitHub),你可以使用表情符号代码来添加表情。</p>
+            <pre><code>我很开心 :smile:
+这个功能很棒 :+1:</code></pre>
+            <p><strong>显示效果</strong></p>
+            <p>我很开心 😄</p>
+            <p>这个功能很棒 👍</p>
+            <p><strong>提示</strong>:GitHub支持的表情符号代码可以在其官方文档中找到。</p>
+
+            <h3>15.3 自动生成目录</h3>
+            <p>在一些Markdown编辑器中,你可以使用<code>[TOC]</code>标记来自动生成目录。</p>
+            <pre><code>[TOC]
+
+# 第一章
+## 1.1 小节
+# 第二章</code></pre>
+            <p><strong>注意</strong>:<code>[TOC]</code>功能的支持程度因编辑器而异。</p>
+        </div>
+
+        <div class="md-card" id="md-editor">
+            <h2>十六、Markdown编辑器推荐</h2>
+            <p>以下是一些常用的Markdown编辑器:</p>
+            <ol>
+                <li><strong>Typora</strong> - 所见即所得的Markdown编辑器,支持实时预览</li>
+                <li><strong>VS Code</strong> - 配合Markdown插件,功能强大</li>
+                <li><strong>Atom</strong> - GitHub开发的编辑器,支持Markdown预览</li>
+                <li><strong>Sublime Text</strong> - 轻量级编辑器,配合插件使用</li>
+                <li><strong>MarkText</strong> - 开源的Markdown编辑器</li>
+                <li><strong>在线编辑器</strong> - 如Dillinger、StackEdit等</li>
+            </ol>
+        </div>
+
+        <div class="md-card" id="md-tips">
+            <h2>十七、实用技巧与建议</h2>
+            <ol>
+                <li><strong>文件扩展名</strong>:Markdown文件通常使用<code>.md</code>或<code>.markdown</code>作为扩展名</li>
+                <li><strong>保持简洁</strong>:Markdown的优势在于简洁易读,避免过度使用复杂格式</li>
+                <li><strong>版本控制</strong>:Markdown文本文件非常适合使用Git等版本控制系统管理</li>
+                <li><strong>格式兼容性</strong>:不同的Markdown解析器可能有细微的差异,编写时要考虑目标平台的支持情况</li>
+                <li><strong>练习方法</strong>:
+                    <ul>
+                        <li>从简单的文本开始,逐步添加格式</li>
+                        <li>创建一个个人笔记或项目文档来练习</li>
+                        <li>参考优秀的Markdown文档示例</li>
+                    </ul>
+                </li>
+            </ol>
+        </div>
+
+        <div class="md-card" id="md-faq">
+            <h2>十八、常见问题解答</h2>
+            <h3>18.1 为什么有些格式在我的编辑器中不显示？</h3>
+            <p>不同的Markdown解析器对语法的支持程度可能不同。如果你发现某些格式不显示,可能是因为你的编辑器或平台不支持该特性。</p>
+
+            <h3>18.2 如何在Markdown中添加数学公式？</h3>
+            <p>一些高级Markdown解析器(如GitHub的某些功能或专用的文档系统)支持使用LaTeX语法添加数学公式,使用<code>$</code>包裹行内公式,<code>$$</code>包裹块级公式。</p>
+            <pre><code>行内公式:$E=mc^2$
+
+块级公式:
+$$
+\sum_{i=1}^{n} i = \frac{n(n+1)}{2}
+$$</code></pre>
+
+            <h3>18.3 如何在Markdown中添加流程图或图表？</h3>
+            <p>同样,这需要特定的解析器支持。一些平台(如GitHub)支持使用Mermaid语法创建流程图、时序图等。</p>
+            <pre><code>```mermaid
+flowchart TD
+    A[Start] --&gt; B{Is it?}
+    B -- Yes --&gt; C[OK]
+    B -- No --&gt; D[NG]
+```</code></pre>
+        </div>
+
+        <div class="bottom-buttons">
+            <a href="../../../index.html" class="bottom-btn">星奈のファン応援会に戻る</a>
+            <a href="#" class="bottom-btn">再看一遍(♡-𖥦-)/♥</a>
+        </div>
+    </div>
+</body>
+</html>

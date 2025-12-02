@@ -11,7 +11,7 @@
     <!-- 声明网页的兼容模式为IE=edge,即使用最新的IE浏览器引擎渲染网页 -->
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- 声明网页的视口（viewport）,即浏览器显示网页的区域,width=device-width表示视口宽度与设备宽度相同,initial-scale=1.0表示初始缩放比例为100% -->
+    <!-- 声明网页的视口(viewport),即浏览器显示网页的区域,width=device-width表示视口宽度与设备宽度相同,initial-scale=1.0表示初始缩放比例为100% -->
 
     <meta name="description" content="这是前端复习的笔记网页">
     <!-- 网页的描述,会显示在搜索引擎的搜索结果中 -->
@@ -35,17 +35,58 @@
     <!-- 引入外部CSS文件 -->
 
     <style>
-        /* 三大特性 */
-        /* 层叠性：相同选择器给设置相同的样式,此时一个样式就会覆盖（层叠）另一个冲突的样式。层叠性主要解决冲突的问题 */
-        /* 继承性：子元素会继承父元素的某些样式,如颜色、字体、字号等。继承性主要解决后代元素的问题。谁近听谁的,权重低的听权重高的 */
-        /* 优先级：当一个元素有多个选择器同时作用于它时,会根据选择器的权重来确定最终的样式。权重高的样式会覆盖权重低的样式。优先级主要解决冲突的问题 */
 
-        /* 风格：展开风格即编写、维护代码时的样式；紧凑风格即项目上线时,为了压缩文件体积用工具进行压缩的样式 */
+
+
+        /* 专为版权声明 */
+        /* 专为版权声明 */
+        /* 版权声明页脚样式 - 使用ID选择器确保唯一性 */
+        #copyright-footer {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-size: 0.9rem;
+            color: #666;
+            text-align: center;
+            padding: 1.5rem 1rem; /* 在所有设备上保持此内边距 */
+            margin-top: 3rem;
+            border-top: 1px solid #eee;
+            line-height: 1.5;
+        }
+
+        #copyright-footer a {
+            color: #4a6fa5;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        #copyright-footer a:hover {
+            color: #2c4a7a;
+            text-decoration: underline;
+        }
+
+        #copyright-footer .footer-links {
+            margin-top: 0.5rem;
+        }
+
+        #copyright-footer .footer-links span {
+            margin: 0 0.5rem;
+            color: #ddd;
+        }
+        /* 专为版权声明 */
+        /* 专为版权声明 */
+
+
+
+        /* 三大特性 */
+        /* 层叠性:相同选择器给设置相同的样式,此时一个样式就会覆盖(层叠)另一个冲突的样式。层叠性主要解决冲突的问题 */
+        /* 继承性:子元素会继承父元素的某些样式,如颜色、字体、字号等。继承性主要解决后代元素的问题。谁近听谁的,权重低的听权重高的 */
+        /* 优先级:当一个元素有多个选择器同时作用于它时,会根据选择器的权重来确定最终的样式。权重高的样式会覆盖权重低的样式。优先级主要解决冲突的问题 */
+
+        /* 风格:展开风格即编写、维护代码时的样式;紧凑风格即项目上线时,为了压缩文件体积用工具进行压缩的样式 */
         .internal-css-demo>h2.demo1:first-child {
             background-color: pink;/* 背景颜色 */
             color: aqua;/* 文字颜色 */
         }
-        /* h2是选择器,{}是声明块,里面是声明。选择器和声明块之间用空格隔开；属性名和属性值之间也用空格隔开 */
+        /* h2是选择器,{}是声明块,里面是声明。选择器和声明块之间用空格隔开;属性名和属性值之间也用空格隔开 */
         /* 展开风格 */
         .internal-css-demo>h2.demo1:nth-child(2){background-color:aqua;color:pink;}
         /* 紧凑风格 */
@@ -55,8 +96,8 @@
             color: red;
         } */
 
-        /* ：root伪类选择器,应用于文档的根元素,即<html>元素,常用于定义全局CSS变量或设置根元素样式 */
-        /* :root（或者“html”） {
+        /* :root伪类选择器,应用于文档的根元素,即<html>元素,常用于定义全局CSS变量或设置根元素样式 */
+        /* :root(或者“html”) {
             --color: red;
         } */
         /* CSS变量还没有学到 */
@@ -212,8 +253,8 @@
         }
         div.demo13>p.demo13-4:lang(zh-CN) {
             color: red;
-            /* 因为全局语言是中文,所以这里可以省略写成：":lang"(zh-CN) {}" */
-            /* 和上面一样,是局部的,只作用于指定元素；写在html标签里面的是全局的 */
+            /* 因为全局语言是中文,所以这里可以省略写成:":lang"(zh-CN) {}" */
+            /* 和上面一样,是局部的,只作用于指定元素;写在html标签里面的是全局的 */
         }
 
         /* 一些杂七杂八的类选择器 */
@@ -260,7 +301,7 @@
         div.demo15 p:not([title^="demo"]) {
             color: red;
             /* 记得加引号,不过不加也没影响 */
-            /* not()里几乎可以包所有选择器。例如：div>p:first-child什么什么的,否定可以略去：not(:first-child) */
+            /* not()里几乎可以包所有选择器。例如:div>p:first-child什么什么的,否定可以略去:not(:first-child) */
         }
 
         /* 伪元素选择器 */
@@ -361,7 +402,7 @@
             /* 前来者居上 */
             /* 备胎尽量是同一类型的字体 */
         }
-        /* 衬线字体,棱角分明；非衬线字体,棱角平滑 */
+        /* 衬线字体,棱角分明;非衬线字体,棱角平滑 */
         /* 会部署在服务器上,不用担心不同设备之间字体不同 */
     </style><!-- 内部CSS -->
     <!-- 不同属性换行处理。理论上style标签可以写在head或者body中,但是为了方便阅读,一般写在head中 -->
@@ -372,7 +413,7 @@
     <!-- 块级元素:标签呈现的元素独占一行 -->
     <!-- 行级元素:标签呈现的元素不独占一行 -->
     <!-- 行内块元素:特性几乎和行级元素相同,也不独占一行 -->
-    <!-- 规则:块级元素内可以嵌套块级元素和行级元素（几乎,例如p和h不能嵌套块级元素,有限制）;
+    <!-- 规则:块级元素内可以嵌套块级元素和行级元素(几乎,例如p和h不能嵌套块级元素,有限制);
     行级元素不可以嵌套块级元素,但行级元素可以嵌套;行内块元素也不可嵌套块级元素 -->
 
     <div class="block-elements-demo">
@@ -382,7 +423,7 @@
         <h1>第一级标题</h1>
         <h2>第二级标题</h2>
         <!-- h1~h6表示标题,特殊块级元素,不可嵌套其他块级元素,数字越小,标题的重要性越高。
-        h1在同一界面只能出现一次,其余可以多次出现；标题的使用需注意先后顺序,不可先使用h2再使用h1之类的； -->
+        h1在同一界面只能出现一次,其余可以多次出现;标题的使用需注意先后顺序,不可先使用h2再使用h1之类的; -->
 
         <p>这是一个段落</p>
         <!-- p表示段落,和h1一样的特殊块级元素,不可嵌套块级元素 -->
@@ -454,7 +495,7 @@
         <!-- b是行级元素,表示摘要中的关键字或者评论中的产品名称 -->
 
         <p>乌尔比安:<i>“它们必须吐出些有价值的情报”</i></p>
-        <!-- i是行级元素,表示人物的心理活动或者语言,呈现字体图标（重要） -->
+        <!-- i是行级元素,表示人物的心理活动或者语言,呈现字体图标(重要) -->
 
         <p>“<u>五二饼干</u>”,乌尔比安</p>
         <!-- u是行级元素,表示反差文本,错误的单词之类的 -->
@@ -475,11 +516,11 @@
         <a href="#">回到顶部</a>
         <a href="">刷新页面</a>
         <a href="javascript:alert('hello world');">JS脚本</a>
-        <a href="tel:+86 10086">联系客服（10086）</a>
+        <a href="tel:+86 10086">联系客服(10086)</a>
         <a href="mailto:15175969957@163.com">邮件联系</a>
-        <a href="sms:+86 10086">短信联系（10086）</a>
+        <a href="sms:+86 10086">短信联系(10086)</a>
         <!-- 超链接href属性:#为回到顶部;空着为刷新页面;javascript:;为JS脚本,:和;之间写入脚本;
-        tel:为拨打电话号码,可以写上+86 具体电话号码（空格）;
+        tel:为拨打电话号码,可以写上+86 具体电话号码(空格);
         mailto:具体邮箱地址,为向该地址发送邮件;sms:+86 10086同理,为向其发送短信 -->
 
         <br>
@@ -488,6 +529,10 @@
     </div>
 
     <div class="inline-block-elements-demo">
+        <hr>
+        <p>[注意⚠️]本界面使用了受 版权©️ 保护的图片,本网站仅用来学习使用,我也是玩家或者画师粉丝。另外,如需保存或者使用这些图片,请在遵守版权法的前提下使用。</p>
+        <a href="../html/copyright-notice.html">查看本项目的版权声明</a>
+        <hr>
         <img src="../../assets/images/jpg/chisaki-matcha.jpg" alt="朽叶千咲" height="280px">
         <img src="../../assets/images/png/skadi-the-corrupting-heart.png" alt="浊心斯卡蒂" height="280px">
         <img src="../../assets/images/png/gladiia.png" alt="歌蕾蒂娅" height="280px">
@@ -500,7 +545,7 @@
 
         <img src="file:/Users/fumimutsumi/ddate/写真/珂莱塔.jpg" alt="珂莱塔" height="280px">
         <img src="https://web.hycdn.cn/arknights/official/pic/20250422/cea7367d1c3293399e51d4d3aeaa29a6.jpg" alt="逻各斯" height="280px">
-        <!-- 绝对路径:一:本地绝对路径:因为Live Server插件（弊端:上传到服务器找不到、安全问题）,不能打开本地绝对路径的图片,需要用Finder打开,选中需打开文件鼠标左击,或者command+option+R。
+        <!-- 绝对路径:一:本地绝对路径:因为Live Server插件(弊端:上传到服务器找不到、安全问题),不能打开本地绝对路径的图片,需要用Finder打开,选中需打开文件鼠标左击,或者command+option+R。
         二:网络绝对路径:仍然因为该插件而无法打开,打开方法同上。如果未经授权可能因为防盗链而无法拉图。 -->
         <!-- mac本地路径从file:/开始找 -->
     </div>
@@ -552,7 +597,7 @@
             <thead height="50" align="center" valign="middle"><tr><th>表头1</th><th>表头2</th><th>表头3</th></tr></thead>
             <!-- tr是单元行,th是表头单元格,td是主体和脚注单元格;都没有块级行级属性区分 -->
             <!-- thead是块级元素,表示表头;thead可+height属性,此时整个表格的高度会超出设定值,表头给撑大了;
-            align属性表示水平对齐方式,left是左对齐,center（默认）是中间对齐,right是右对齐;
+            align属性表示水平对齐方式,left是左对齐,center(默认)是中间对齐,right是右对齐;
             valign属性表示垂直对齐方式,top是上对齐,middle是中间对齐,bottom是下对齐 -->
             <tbody height="100" align="center" valign="middle">
                 <tr><td>第一行第一列</td><td>第一行第二列</td><td>第一行第三列</td></tr>
@@ -572,7 +617,7 @@
             <h1>罗德岛制药公司 - 战术情报与人员档案</h1>
             <div>
                 档案编号:<small>RHI-ACT-04-DeepHunter</small><br>
-                安全许可等级：<strong>机密</strong>
+                安全许可等级:<strong>机密</strong>
             </div>
             <table border="7" cellspacing="0" height="600">
                 <caption align="center" valign="middle">深海猎人项目成员生理数据与作战能力对比分析报告</caption>
@@ -667,7 +712,7 @@
             <input type="reset" value="重置">
             <input type="button" value="检测提交环境是否安全">
             <button type="button">忘记账号密码</button>
-            <!-- 自定义按钮（普通按钮）,也是这两种写法。效果得靠JS实现 -->
+            <!-- 自定义按钮(普通按钮),也是这两种写法。效果得靠JS实现 -->
         </form>
         <!-- form是块级元素,表示表单,表单控件;action属性表示表单交给谁处理,https://www.baidu.com/s之类的,/s表示搜索;
         name属性表示表单控件的名称,用于服务器端接收数据,wd是百度搜索关键词 -->
@@ -717,42 +762,42 @@
         <p>id属性</p>
         <div id="hello">你好</div>
         <div id="hello2">你好2</div>
-        <!-- id属性：唯一标识,用于JS操作,一般不写,同一文件不可重复 -->
+        <!-- id属性:唯一标识,用于JS操作,一般不写,同一文件不可重复 -->
         <p>class属性</p>
         <div class="dog">德国牧羊犬</div>
         <div class="dog">边境牧羊犬</div>
-        <!-- class属性：类选择器,用于CSS操作,一般不写,可重复 -->
+        <!-- class属性:类选择器,用于CSS操作,一般不写,可重复 -->
         <p>style属性</p>
         <div style="color: red;">你好</div>
-        <!-- style属性：行内样式,用于CSS操作,一般不写,可重复 -->
+        <!-- style属性:行内样式,用于CSS操作,一般不写,可重复 -->
         <p>title属性</p>
         <div title="你好">hello</div>
         <a href="https://www,baidu,com" title="去百度">去百度</a>
-        <!-- title属性：鼠标悬停在元素上显示的提示信息,一般不写,可重复 -->
+        <!-- title属性:鼠标悬停在元素上显示的提示信息,一般不写,可重复 -->
         <p>lang属性</p>
         <div lang="en">hello</div>
         <!-- 和html中的lang不冲突,一个整体大部分和局部小部分的区别 -->
-        <!-- lang属性：语言属性,用于指定元素的语言,一般不写,可重复 -->
+        <!-- lang属性:语言属性,用于指定元素的语言,一般不写,可重复 -->
         <p>dir属性</p>
         <bdo dir="rtl">你好</bdo>
         <div dir="rtl">你好</div>
         <!-- 在bdo和非bdo的标签中使用,效果很明显的不同,前者只是调换文本的前后顺序,后者直接镜像转换 -->
-        <!-- dir属性：方向属性,用于指定元素的文本方向,一般不写,可重复 -->
+        <!-- dir属性:方向属性,用于指定元素的文本方向,一般不写,可重复 -->
         <div>
             <p>tabindex属性</p>
-            <!-- tabindex属性： tabindex属性用于指定元素的Tab键顺序,一般不写 -->
+            <!-- tabindex属性: tabindex属性用于指定元素的Tab键顺序,一般不写 -->
             <p>accesskey属性</p>
-            <!-- accesskey属性：访问键属性,用于指定元素的访问键,一般不写 -->
+            <!-- accesskey属性:访问键属性,用于指定元素的访问键,一般不写 -->
             <p>contenteditable属性</p>
-            <!-- contenteditable属性：可编辑属性,用于指定元素是否可编辑,一般不写 -->
+            <!-- contenteditable属性:可编辑属性,用于指定元素是否可编辑,一般不写 -->
             <p>draggable属性</p>
-            <!-- draggable属性：可拖动属性,用于指定元素是否可拖动,一般不写 -->
+            <!-- draggable属性:可拖动属性,用于指定元素是否可拖动,一般不写 -->
             <p>hidden属性</p>
-            <!-- hidden属性：隐藏属性,用于指定元素是否隐藏,一般不写 -->
+            <!-- hidden属性:隐藏属性,用于指定元素是否隐藏,一般不写 -->
             <p>spellcheck属性</p>
-            <!-- spellcheck属性：拼写检查属性,用于指定元素是否进行拼写检查,一般不写 -->
+            <!-- spellcheck属性:拼写检查属性,用于指定元素是否进行拼写检查,一般不写 -->
             <p>translate属性</p>
-            <!-- translate属性：翻译属性,用于指定元素是否进行翻译,一般不写 -->
+            <!-- translate属性:翻译属性,用于指定元素是否进行翻译,一般不写 -->
         </div>
     </div>
 
@@ -920,6 +965,27 @@
             <p class="demo19-4">行楷-简</p>
         </div>
     </div>
+    <footer id="copyright-footer">
+        <div class="footer-content">
+            <p>
+                &copy; 2025 <a href="./copyright-notice.html">fumimutsumi</a>. All rights reserved.
+            </p>
+            <div class="footer-links">
+                <a href="../../index.html">首页</a>
+                <span>|</span>
+                <a href="/pages/html/about.html">关于</a>
+                <span>|</span>
+                <a href="/pages/html/copyright-notice.html">版权声明</a>
+                <span>|</span>
+                <a href="mailto:15175969957@163.com">联系反馈</a>
+            </div>
+            <p class="footer-disclaimer">
+                本站部分内容基于游戏、动漫二次创作，相关素材版权归原作者所有。
+                <br>
+                如涉及侵权，请通过邮件联系，我们将第一时间处理。
+            </p>
+        </div>
+    </footer>
 </body>
 </html><!-- 主要结构由<html><head></head><body></body></html>构成 -->
 

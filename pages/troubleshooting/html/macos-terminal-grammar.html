@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" type="image/x-icon" href="../../../assets/images/ico/hoshina-avatar-round.ico">
+    <title>macOS 终端指令速查手册</title>
+    <style>
+        /* 全局基础样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", "Segoe UI", "Monaco", monospace;
+        }
+        body {
+            background-color: #fadadd; /* 主背景色 */
+            color: #6d6875; /* 主字体色 */
+            padding: 8rem 5% 5rem; /* 顶部预留导航空间，底部预留按钮空间 */
+            min-height: 100vh;
+            line-height: 1.8;
+            /* 轻微背景纹理，增强层次 */
+            background-image: radial-gradient(rgba(109, 104, 117, 0.04) 1px, transparent 1px);
+            background-size: 25px 25px;
+            scroll-behavior: smooth; /* 平滑滚动 */
+        }
+
+        /* 顶部悬挂锚点导航 */
+        .top-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px); /* 毛玻璃效果 */
+            border-bottom: 2px solid transparent;
+            border-image: linear-gradient(90deg, #f0c8cc, #d8b0c0, #bfa0b0, #d8b0c0, #f0c8cc) 1;
+            box-shadow: 0 4px 12px rgba(109, 104, 117, 0.08);
+            z-index: 1000;
+            padding: 0.8rem 0;
+            overflow-x: auto; /* 横向滚动适配多锚点 */
+        }
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            gap: 0.8rem;
+            padding: 0 1rem;
+            align-items: center;
+        }
+        /* 导航栏返回主页按钮 */
+        .nav-home-btn {
+            background-color: rgba(109, 104, 117, 0.1);
+            font-weight: 500;
+            padding: 0.5rem 1.2rem;
+            margin-right: 0.5rem;
+        }
+        .top-nav a {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            color: #6d6875;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            white-space: nowrap; /* 确保文案一行 */
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+        }
+        /* 导航锚点伪类效果 */
+        .top-nav a:link {
+            opacity: 0.9;
+        }
+        .top-nav a:visited {
+            color: #8a8497;
+        }
+        .top-nav a:hover {
+            background-color: #6d6875;
+            color: #fadadd;
+            transform: translateY(-2px);
+            box-shadow: 0 3px 6px rgba(109, 104, 117, 0.2);
+            border-color: #6d6875;
+        }
+        .top-nav a:active {
+            transform: translateY(1px);
+            box-shadow: 0 1px 3px rgba(109, 104, 117, 0.15);
+        }
+        /* 隐藏导航滚动条 */
+        .top-nav::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* 主标题样式 */
+        .main-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            text-shadow: 1px 1px 3px rgba(109, 104, 117, 0.1);
+        }
+
+        /* 正文卡片样式：渐变圆角边框+透明背景 */
+        .command-card {
+            position: relative;
+            background-color: rgba(255, 255, 255, 0.75); /* 高透明背景，不影响阅读 */
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2.5rem;
+            /* 渐变边框 */
+            border: 2px solid transparent;
+            background-clip: padding-box, border-box;
+            background-origin: padding-box, border-box;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.75)),
+                linear-gradient(135deg, #f0c8cc, #d8b0c0, #bfa0b0); /* 贴合主色调的柔和渐变 */
+            box-shadow: 0 6px 18px rgba(109, 104, 117, 0.08);
+            transition: all 0.3s ease;
+            scroll-margin-top: 70px; /* 解决导航栏遮挡问题，值大于导航栏高度 */
+        }
+        /* 卡片悬浮效果 */
+        .command-card:hover {
+            box-shadow: 0 10px 24px rgba(109, 104, 117, 0.12);
+            transform: translateY(-3px);
+        }
+
+        /* 命令标题样式 */
+        .command-card h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #6d6875;
+            border-bottom: 1px solid rgba(109, 104, 117, 0.15);
+            padding-bottom: 0.5rem;
+        }
+
+        /* 说明文本样式 */
+        .command-card blockquote {
+            font-style: italic;
+            color: #7a7585;
+            margin: 1rem 0;
+            padding-left: 1rem;
+            border-left: 3px solid #d8b0c0;
+        }
+
+        /* 代码块样式 */
+        .command-card pre {
+            background-color: rgba(109, 104, 117, 0.05);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+            font-family: "Monaco", "Consolas", monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        .command-card code {
+            font-family: inherit;
+            color: #6d6875;
+        }
+
+        /* 表格样式 */
+        .command-card table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.95rem;
+        }
+        .command-card th, .command-card td {
+            padding: 0.8rem 1rem;
+            text-align: left;
+            border: 1px solid #e0c4c8; /* 淡色边框，不刺眼 */
+        }
+        .command-card th {
+            background-color: rgba(109, 104, 117, 0.08);
+            font-weight: 600;
+        }
+        .command-card tr:nth-child(even) {
+            background-color: rgba(109, 104, 117, 0.03);
+        }
+
+        /* 章节分隔线（保留原markdown的---） */
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #d8b0c0, transparent);
+            margin: 3rem 0;
+            border: none;
+        }
+
+        /* 底部按钮容器 */
+        .bottom-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 4rem 0 2rem;
+        }
+        /* 底部圆形渐变透明按钮 */
+        .bottom-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 140px; /* 固定宽度，确保一样大 */
+            height: 140px; /* 固定高度，圆形 */
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(109, 104, 117, 0.2), rgba(255, 255, 255, 0.3));
+            color: #6d6875;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            white-space: nowrap; /* 文案一行显示 */
+            padding: 1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(109, 104, 117, 0.1);
+        }
+        .bottom-btn:hover {
+            background: linear-gradient(135deg, rgba(109, 104, 117, 0.3), rgba(255, 255, 255, 0.4));
+            color: #5a5565;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(109, 104, 117, 0.15);
+        }
+        .bottom-btn:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 8px rgba(109, 104, 117, 0.1);
+        }
+
+        /* 移动端适配 */
+        @media (max-width: 768px) {
+            body {
+                padding: 7rem 3% 2rem;
+            }
+            .main-title {
+                font-size: 1.7rem;
+                margin-bottom: 2rem;
+            }
+            .command-card {
+                padding: 1.5rem;
+                border-width: 1.5px;
+                margin-bottom: 2rem;
+                scroll-margin-top: 60px; /* 移动端导航栏高度略低 */
+            }
+            .command-card h2 {
+                font-size: 1.3rem;
+            }
+            .nav-container {
+                gap: 0.6rem;
+                padding: 0 0.8rem;
+            }
+            .top-nav a {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.85rem;
+            }
+            .nav-home-btn {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.8rem;
+            }
+            .command-card table {
+                font-size: 0.85rem;
+            }
+            .command-card th, .command-card td {
+                padding: 0.6rem 0.8rem;
+            }
+            /* 移动端底部按钮调整 */
+            .bottom-btn {
+                width: 120px;
+                height: 120px;
+                font-size: 0.85rem;
+                padding: 0.8rem;
+            }
+            .bottom-buttons {
+                gap: 1.5rem;
+            }
+        }
+
+        /* 小屏幕移动端适配 */
+        @media (max-width: 480px) {
+            .command-card {
+                padding: 1.2rem;
+            }
+            .top-nav a {
+                padding: 0.35rem 0.7rem;
+                font-size: 0.8rem;
+            }
+            .nav-home-btn {
+                font-size: 0.75rem;
+                padding: 0.35rem 0.7rem;
+            }
+            /* 小屏幕底部按钮 */
+            .bottom-btn {
+                width: 110px;
+                height: 110px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="top-nav">
+        <div class="nav-container">
+            <a href="../../../index.html" class="nav-home-btn">星奈のファン応援会に戻る</a>
+            <a href="#cd-命令">cd 命令</a>
+            <a href="#ls-命令">ls 命令</a>
+            <a href="#pwd-命令">pwd 命令</a>
+            <a href="#cp-命令">cp 命令</a>
+            <a href="#mv-命令">mv 命令</a>
+            <a href="#mkdir-命令">mkdir 命令</a>
+            <a href="#rm-命令">rm 命令</a>
+            <a href="#clear-命令">clear 命令</a>
+            <a href="#cat-命令">cat 命令</a>
+            <a href="#open-命令">open 命令</a>
+            <a href="#grep-命令">grep 命令</a>
+            <a href="#find-命令">find 命令</a>
+            <a href="#chmod-命令">chmod 命令</a>
+            <a href="#命令连接符">命令连接符</a>
+            <a href="#go-run-命令">go run 命令</a>
+            <a href="#go-build-命令">go build 命令</a>
+            <a href="#golang在macos上的交叉编译方法">交叉编译</a>
+        </div>
+    </nav>
+
+    <h1 class="main-title">macOS 终端指令速查手册</h1>
+
+    <div class="content-container">
+        <div class="command-card" id="cd-命令">
+            <h2>cd 命令</h2>
+            <blockquote>切换当前工作目录</blockquote>
+            <h3>语法</h3>
+            <pre><code>cd [目录路径]</code></pre>
+            <p>（请注意：实际使用时需删除反引号之间的空格，此处为展示语法而添加）</p>
+            <h3>说明</h3>
+            <p><code>cd</code> 命令用于切换当前工作目录到指定的目录。如果不指定目录路径，则切换到用户的主目录 (<code>~</code>)。</p>
+            <h3>示例</h3>
+            <p><strong>切换到用户主目录：</strong></p>
+            <pre><code>cd
+# 或
+cd ~</code></pre>
+            <p><strong>切换到特定目录：</strong></p>
+            <pre><code>cd /Users/fumimutsumi/Desktop/golang</code></pre>
+            <p><strong>切换到上一级目录：</strong></p>
+            <pre><code>cd ..</code></pre>
+            <p><strong>切换到上一次所在的目录：</strong></p>
+            <pre><code>cd -</code></pre>
+        </div>
+
+        <hr class="divider">
+
+        <div class="command-card" id="ls-命令">
+            <h2>ls 命令</h2>
+            <blockquote>列出当前目录下的文件和子目录</blockquote>
+            <h3>语法</h3>
+            <pre><code>ls [选项] [目录路径]</code></pre>
+            <h3>常用选项</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>选项</th>
+                        <th>描述</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>-a</code></td>
+                        <td>列出所有文件，包括以 <code>.</code> 开头的隐藏文件。</td>
+                    </tr>
+                    <tr>
+                        <td><code>-l</code></td>
+                        <td>使用长格式列出详细信息（权限、所有者、大小、修改时间）。</td>
+                    </tr>
+                    <tr>
+                        <td><code>-h</code></td>
+                        <td>与 <code>-l</code> 合用，将文件大小转换为易读的单位（KB, MB）。</td>
+                    </tr>
+                    <tr>
+                        <td><code>-t</code></td>
+                        <td>按修改时间排序，最新的在前。</td>
+                    </tr>
+                    <tr>
+                        <td><code>-r</code></td>
+                        <td>反向排序。</td>
+                    </tr>
+                    <tr>
+                        <td><code>-S</code></td>
+                        <td>按文件大小排序。</td>
+                    </tr>
+                </tbody>
+            </table>
+            <h3>说明</h3>
+            <p>如果不指定 <code>目录路径</code>，则默认列出当前目录的内容。</p>
+            <h3>示例</h3>
+            <p><strong>列出当前目录所有内容（含隐藏文件）的详细信息：</strong></p>
+            <pre><code>ls -la</code></pre>
+            <p><strong>按时间倒序列出文件：</strong></p>
+            <pre><code>ls -lt</code></pre>
+            <p><strong>按大小倒序列出文件：</strong></p>
+            <pre><code>ls -lSh</code></pre>
+        </div>
+
+        <hr class="divider">
+
+        <div class="command-card" id="pwd-命令">
+            <h2>pwd 命令</h2>
+            <blockquote>显示当前工作目录的路径</blockquote>
+            <h3>语法</h3>
+            <pre><code>pwd</code></pre>
+            <h3>说明</h3>
+            <p><code>pwd</code> 命令会打印出当前所在目录的绝对路径。</p>
+            <h3>示例</h3>
+            <pre><code>pwd
+# 输出示例：/Users/fumimutsumi/Desktop/golang</code></pre>
+        </div>
+
+        <hr class="divider">
+
+        <div class="command-card" id="cp-命令">
+            <h2>cp 命令</h2>
+            <blockquote>复制文件或目录</blockquote>
+            <h3>语法</h3>
+            <pre><code>cp [选项] 源文件 目标文件
+cp [选项] 源文件... 目标目录</code></pre>
+            <h3>常用选项</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>选项</th>
+                        <th>描述</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>-r</code> 或 <code>-R</code></td>
+                        <td><strong>递归复制</strong>，用于复制目录及其全部内容。</td>
+                    </tr>
+                    <tr>
+                        <td><code>-i</code></td>
+                        <td><strong>交互模式</strong>，覆盖前会询问确认。</td>
+                    </tr>
+                    <tr>
+                        <td><code>-v</code></td>
+                        <td><strong>显示过程</strong>，输出正在复制的文件名。</td>
+                    </tr>
+                    <tr>
+                        <td><code>-n</code></td>
+                        <td><strong>不覆盖</strong>，如果目标已存在，则跳过。</td>
+                    </tr>
+                </tbody>
+            </table>
+            <h3>说明</h3>
+            <p>复制时，如果 <code>目标</code> 是一个已存在的目录，则 <code>源文件</code> 会被复制到该目录下。</p>
+            <h3>示例</h3>
+            <p><strong>复制文件：</strong></p>
+            <pre><code>cp notes.txt notes_backup.txt</code></pre>
+            <p><strong>复制目录（必须加 <code>-r</code>）：</strong></p>
+            <pre><code>cp -r old_project/ new_project/</code></pre>
+            <p><strong>交互式复制到目录：</strong></p>
+            <pre><code>cp -i *.txt ~/Documents/backups/</code></pre>
+        </div>
+
+        <hr class="divider">
+
+        <div class="command-card" id="mv-命令">
+            <h2>mv 命令</h2>
+            <blockquote>移动或重命名文件或目录</blockquote>
+            <h3>语法</h3>
+            <pre><code>mv [选项] 源文件 目标文件
+mv [选项] 源文件... 目标目录</code></pre>
+            <h3>常用选项</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>选项</th>
+                        <th>描述</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>-i</code></td>
+                        <td><strong>交互模式</strong>，覆盖前询问。</td>
+                    </tr>
+                    <tr>
+                        <td><code>-v</code></td>
+                        <td><strong>显示过程</strong>。</td>
+                    </tr>
+                    <tr>
+                        <td><code>-n</code></td>
+                        <td><strong>不覆盖</strong>已存在的文件。</td>
+                    </tr>
+                </tbody>
+            </table>
+            <h3>说明</h3>
+            <ul>
+                <li>当 <code>源</code> 和 <code>目标</code> 在同一目录时，操作为<strong>重命名</strong>。</li>
+                <li>当 <code>目标</code> 是一个目录时，操作为<strong>移动</strong>。</li>
+            </ul>
+            <h3>示例</h3>
+            <p><strong>重命名文件：</strong></p>
+            <pre><code>mv draft.txt final_report.txt</code></pre>
+            <p><strong>移动文件到目录：</strong></p>
+            <pre><code>mv final_report.txt ~/Documents/</code></pre>
+            <p><strong>移动多个文件：</strong></p>
+            <pre><code>mv file1.jpg file2.png ~/Pictures/</code></pre>
+        </div>
+
+        <hr class="divider">
+
+        <div class="command-card" id="mkdir-命令">
+            <h2>mkdir 命令</h2>
+            <blockquote>创建新目录</blockquote>
+            <h3>语法</h3>
+            <pre><code>mkdir [选项] 目录名...</code></pre>
+            <h3>常用选项</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>选项</th>
+                        <th>描述</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>-p</code></td>
+                        <td><strong>递归创建</strong>，自动创建路径中不存在的父目录。</td>
+                    </tr>
+                    <tr>
+                        <td><code>-v</code></td>
+                        <td><strong>显示过程</strong>。</td>
+                    </tr>
+                </tbody>
+            </table>
+            <h3>示例</h3>
+            <p><strong>创建单个目录：</strong></p>
+            <pre><code>mkdir new_folder</code></pre>
+            <p><strong>创建多级目录（父目录不存在也会自动创建）：</strong></p>
+            <pre><code>mkdir -p project/src/components</code></pre>
+        </div>
+
+        <hr class="divider">
+
+        <div class="command-card" id="rm-命令">
+            <h2>rm 命令</h2>
+            <blockquote>删除文件或目录</blockquote>
+            <h3>语法</h3>
+            <pre><code>rm [选项] 文件或目录...</code></pre>
+            <h3>常用选项</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>选项</th>
+                        <th>描述</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>-r</code> 或 <code>-R</code></td>
+                        <td><strong>递归删除</strong>，用于删除目录及其内容。</td>
+                    </tr>
+                    <tr>
+                        <td><code>-f</code></td>
+                        <td><strong>强制删除</strong>，忽略不存在的文件，不作任何提示。</td>
+                    </tr>
+                    <tr>
+                        <td><code>-i</code></td>
+                        <td><strong>交互模式</strong>，删除前逐一询问确认。</td>
+                    </tr>
+                    <tr>
+                        <td><code>-v</code></td>
+                        <td><strong>显示过程</strong>。</td>
+                    </tr>
+                </tbody>
+            </table>
+            <h3>重要警告</h3>
+            <p><code>rm -rf</code> 命令威力巨大且不可逆，请务必<strong>再三确认路径</strong>后再执行，尤其是在根目录或家目录下。</p>
+            <h3>示例</h3>
+            <p><strong>删除文件：</strong></p>
+            <pre><code>rm temp.txt</code></pre>
+            <p><strong>删除目录（必须加 <code>-r</code>）：</strong></p>
+            <pre><code>rm -r old_cache/</code></pre>
+            <p><strong>强制删除（无警告）：</strong></p>
+            <pre><code>rm -rf node_modules/</code></pre>
+        </div>
+
+        <hr class="divider">
+
+        <div class="command-card" id="clear-命令">
+            <h2>clear 命令</h2>
+            <blockquote>清屏</blockquote>
+            <h3>语法</h3>
+            <pre><code>clear</code></pre>
+            <h3>说明</h3>
+            <p>清除当前终端屏幕的所有输出，将光标移至左上角。也可使用快捷键 <strong><code>Command + K</code></strong> 实现同样效果。</p>
+        </div>
+
+        <hr class="divider">
+
+        <div class="command-card" id="cat-命令">
+            <h2>cat 命令</h2>
+            <blockquote>查看、连接或创建文件</blockquote>
+            <h3>语法</h3>
+            <pre><code>cat [选项] [文件...]</code></pre>
+            <h3>常用选项</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>选项</th>
+                        <th>描述</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>-n</code></td>
+                        <td>显示所有行的行号。</td>
+                    </tr>
+                    <tr>
+                        <td><code>-b</code></td>
+                        <td>仅对非空行显示行号。</td>
+                    </tr>
+                </tbody>
+            </table>
+            <h3>说明</h3>
+            <p><code>cat</code> 适合查看<strong>小型</strong>文本文件。对于大文件，建议使用 <code>less</code> 命令（可按页浏览）。</p>
+            <h3>示例</h3>
+            <p><strong>查看文件：</strong></p>
+            <pre><code>cat config.yaml</code></pre>
+            <p><strong>查看文件并显示行号：</strong></p>
+            <pre><code>cat -n server.log</code></pre>
+            <p><strong>合并多个文件：</strong></p>
+            <pre><code>cat part1.txt part2.txt > complete.txt</code></pre>
+            <p><strong>快速创建小文件：</strong></p>
+            <pre><code>cat > note.txt
+# 接着输入内容，按 Ctrl + D 保存退出</code></pre>
+        </div>
+
+        <hr class="divider">
+
+        <div class="command-card" id="open-命令">
+            <h2>open 命令</h2>
+            <blockquote>在macOS中打开文件、目录或URL</blockquote>
+            <h3>语法</h3>
+            <pre><code>open [选项] [文件/目录/URL...]</code></pre>
+            <h3>常用选项</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>选项</th>
+                        <th>描述</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>-a &lt;应用程序名&gt;</code></td>
+                        <td>使用指定的应用程序打开。</td>
+                    </tr>
+                    <tr>
+                        <td><code>-e</code></td>
+                        <td>使用 <code>TextEdit</code> 应用程序打开。</td>
+                    </tr>
+                    <tr>
+                        <td><code>-R</code></td>
+                        <td>在 <code>Finder</code> 中显示该文件/目录，但不打开。</td>
+                    </tr>
+                </tbody>
+            </table>
+            <h3>说明</h3>
+            <p>这是macOS特有命令，使用系统默认应用打开目标。</p>
+            <h3>示例</h3>
+            <p><strong>用默认应用打开：</strong></p>
+            <pre><code>open resume.pdf</code></pre>
+            <p><strong>用指定应用打开：</strong></p>
+            <pre><code>open -a "Visual Studio Code" index.html</code></pre>
+            <p><strong>在Finder中显示：</strong></p>
+            <pre><code>open -R /path/to/important_file</code></pre>
+            <p><strong>打开网址：</strong></p>
+            <pre><code>open https://www.apple.com</code></pre>
+        </div>
+
+        <hr class="divider">
+
+        <div class="command-card" id="grep-命令">
+            <h2>grep 命令</h2>
+            <blockquote>在文件中搜索文本模式</blockquote>
+            <h3>语法</h3>
+            <pre><code>grep [选项] '搜索模式' 文件...</code></pre>
+            <h3>常用选项</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>选项</th>
+                        <th>描述</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>-i</code></td>
+                        <td><strong>忽略大小写</strong>。</td>
+                    </tr>
+                    <tr>
+                        <td><code>-n</code></td>
+                        <td><strong>显示匹配行的行号</strong>。</td>
+                    </tr>
+                    <tr>
+                        <td><code>-r</code> 或 <code>-R</code></td>
+                        <td><strong>递归搜索</strong>子目录。</td>
+                    </tr>
+                    <tr>
+                        <td><code>-l</code></td>
+                        <td><strong>仅打印包含匹配项的文件名</strong>，不显示具体行。</td>
+                    </tr>
+                    <tr>
+                        <td><code>-v</code></td>
+                        <td><strong>反向搜索</strong>，打印<strong>不</strong>匹配的行。</td>
+                    </tr>
+                </tbody>
+            </table>
+            <h3>示例</h3>
+            <p><strong>在文件中搜索：</strong></p>
+            <pre><code>grep -n "error" server.log</code></pre>
+            <p><strong>递归搜索目录（忽略大小写）：</strong></p>
+            <pre><code>grep -ri "TODO" ./src/</code></pre>
+            <p><strong>结合管道使用：</strong></p>
+            <pre><code>ls -la | grep ".txt"</code></pre>
+        </div>
+
+        <hr class="divider">
+
+        <div class="command-card" id="find-命令">
+            <h2>find 命令</h2>
+            <blockquote>在目录树中查找文件</blockquote>
+            <h3>语法</h3>
+            <pre><code>find 起始目录 [选项] [操作]</code></pre>
+            <h3>常用表达式</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>表达式</th>
+                        <th>描述</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>-name "模式"</code></td>
+                        <td>按文件名查找（支持通配符 <code>*</code>, <code>?</code>）。</td>
+                    </tr>
+                    <tr>
+                        <td><code>-type f</code></td>
+                        <td>只查找普通文件。</td>
+                    </tr>
+                    <tr>
+                        <td><code>-type d</code></td>
+                        <td>只查找目录。</td>
+                    </tr>
+                    <tr>
+                        <td><code>-mtime +n</code></td>
+                        <td>查找n天前修改过的文件。</td>
+                    </tr>
+                    <tr>
+                        <td><code>-exec 命令 {} \;</code></td>
+                        <td>对找到的文件执行命令。</td>
+                    </tr>
+                </tbody>
+            </table>
+            <h3>示例</h3>
+            <p><strong>查找当前目录下所有 <code>.html</code> 文件：</strong></p>
+            <pre><code>find . -name "*.html"</code></pre>
+            <p><strong>查找大于 10MB 的文件：</strong></p>
+            <pre><code>find . -type f -size +10M</code></pre>
+            <p><strong>查找 7 天内修改过的文件并删除（谨慎）：</strong></p>
+            <pre><code>find ./cache -type f -mtime -7 -exec rm {} \;</code></pre>
+        </div>
+
+        <hr class="divider">
+
+        <div class="command-card" id="chmod-命令">
+            <h2>chmod 命令</h2>
+            <blockquote>更改文件或目录的权限</blockquote>
+            <h3>语法</h3>
+            <pre><code>chmod [选项] 权限模式 文件...</code></pre>
+            <h3>权限说明</h3>
+            <p>权限用三位数字或字母表示（<code>u</code>用户，<code>g</code>组，<code>o</code>其他）：</p>
+            <ul>
+                <li><code>r</code> = 读 (4)</li>
+                <li><code>w</code> = 写 (2)</li>
+                <li><code>x</code> = 执行 (1)</li>
+            </ul>
+            <h3>示例</h3>
+            <p><strong>数字模式（最常用）：</strong></p>
+            <pre><code>chmod 755 script.sh    # 用户：rwx，组和其他：r-x
+chmod 644 config.json # 用户：rw-，组和其他：r--</code></pre>
+            <p><strong>字母模式：</strong></p>
+            <pre><code>chmod u+x script.sh   # 给文件所有者添加执行权限
+chmod a-w file.txt    # 移除所有用户的写权限（a代表all）</code></pre>
+        </div>
+
+        <hr class="divider">
+
+        <div class="command-card" id="命令连接符">
+            <h2>命令连接符</h2>
+            <blockquote>组合多个命令</blockquote>
+            <h3>管道符 <code>|</code></h3>
+            <p>将前一个命令的<strong>输出</strong>作为后一个命令的<strong>输入</strong>。</p>
+            <pre><code># 查看进程并搜索
+ps aux | grep "node"
+# 统计文件行数
+cat file.txt | wc -l</code></pre>
+            <h3>逻辑与 <code>&&</code></h3>
+            <p>只有前一个命令<strong>成功执行</strong>（返回状态码0），才执行后一个命令。</p>
+            <pre><code># 进入目录，成功后再列出文件
+cd ~/project && ls -la
+# 编译成功后再运行
+go build main.go && ./main</code></pre>
+            <h3>逻辑或 <code>||</code></h3>
+            <p>只有前一个命令<strong>执行失败</strong>，才执行后一个命令。</p>
+            <pre><code># 尝试用code打开，失败则用vim打开
+code file.txt || vim file.txt</code></pre>
+            <h3>顺序执行 <code>;</code></h3>
+            <p>无论前一个命令成功与否，都顺序执行下一个命令。</p>
+            <pre><code>echo "开始清理"; rm -f *.tmp; echo "清理完成"</code></pre>
+        </div>
+
+        <hr class="divider">
+
+        <div class="command-card" id="go-run-命令">
+            <h2>go run 命令</h2>
+            <blockquote>编译并运行 Go 程序</blockquote>
+            <h3>语法</h3>
+            <pre><code>go run [选项] Go源文件...</code></pre>
+            <h3>说明</h3>
+            <p><code>go run</code> 会快速编译代码并在内存中运行，<strong>不会</strong>在磁盘上留下可执行文件。适合快速测试。</p>
+            <h3>示例</h3>
+            <pre><code>go run main.go
+go run .           # 运行当前包</code></pre>
+        </div>
+
+        <hr class="divider">
+
+        <div class="command-card" id="go-build-命令">
+            <h2>go build 命令</h2>
+            <blockquote>编译 Go 程序并生成可执行文件</blockquote>
+            <h3>语法</h3>
+            <pre><code>go build [选项] [包路径]</code></pre>
+            <h3>说明</h3>
+            <p><code>go build</code> 会在当前目录生成一个以包名命名的可执行文件（Windows下加 <code>.exe</code>）。</p>
+            <h3>示例</h3>
+            <pre><code>go build          # 编译当前包，生成可执行文件
+go build -o myapp # 编译并将输出文件命名为 `myapp`</code></pre>
+        </div>
+
+        <hr class="divider">
+
+        <div class="command-card" id="golang在macos上的交叉编译方法">
+            <h2>golang在macos上的交叉编译方法</h2>
+            <blockquote>在一个系统上编译出能在其他系统运行的程序</blockquote>
+            <h3>基本语法</h3>
+            <pre><code>GOOS=目标操作系统 GOARCH=目标架构 go build -o 输出文件名 包路径</code></pre>
+            <h3>常用目标组合</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>目标系统 (<code>GOOS</code>)</th>
+                        <th>目标架构 (<code>GOARCH</code>)</th>
+                        <th>输出文件说明</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>windows</code></td>
+                        <td><code>amd64</code></td>
+                        <td>64位Windows可执行文件 (.exe)</td>
+                    </tr>
+                    <tr>
+                        <td><code>linux</code></td>
+                        <td><code>amd64</code></td>
+                        <td>64位Linux可执行文件</td>
+                    </tr>
+                    <tr>
+                        <td><code>darwin</code> (macOS)</td>
+                        <td><code>arm64</code></td>
+                        <td>Apple Silicon Mac可执行文件</td>
+                    </tr>
+                </tbody>
+            </table>
+            <h3>示例</h3>
+            <p><strong>编译为64位Windows程序：</strong></p>
+            <pre><code>GOOS=windows GOARCH=amd64 go build -o myapp.exe</code></pre>
+            <p><strong>编译为64位Linux程序：</strong></p>
+            <pre><code>GOOS=linux GOARCH=amd64 go build -o myapp-linux</code></pre>
+            <p><strong>编译为Apple Silicon Mac程序：</strong></p>
+            <pre><code>GOOS=darwin GOARCH=arm64 go build -o myapp-mac</code></pre>
+        </div>
+
+        <hr class="divider">
+
+        <div style="text-align: center; color: #8a8497; font-size: 0.9rem; margin-top: 2rem;">
+            本手册会不定期更新，最后更新于 2025-12-2
+        </div>
+
+        <div class="bottom-buttons">
+            <a href="../../../index.html" class="bottom-btn">星奈のファン応援会に戻る</a>
+            <a href="#" class="bottom-btn">再看一遍(♡-𖥦-)/♥</a>
+        </div>
+    </div>
+</body>
+</html>
