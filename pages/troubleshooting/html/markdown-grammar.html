@@ -7,7 +7,7 @@
     <link rel="icon" type="image/x-icon" href="../../../assets/images/ico/hoshina-avatar-round.ico">
     <title>Markdown 语法</title>
     <style>
-        /* 全局基础样式 */
+        /* 全局基础样式 - 优化对比度和细腻度 */
         * {
             margin: 0;
             padding: 0;
@@ -15,226 +15,302 @@
             font-family: "Microsoft YaHei", "Segoe UI", "Monaco", monospace;
         }
         body {
-            background-color: #fadadd; /* 主背景色 */
-            color: #6d6875; /* 主字体色 */
-            padding: 8rem 5% 5rem; /* 顶部预留导航空间,底部预留按钮空间 */
+            background-color: #fadadd; /* 主背景色保持一致 */
+            color: #635e6d; /* 文字颜色微调，提升对比度 */
+            padding: 8rem 5% 5rem;
             min-height: 100vh;
-            line-height: 1.8;
-            /* 轻微背景纹理,增强层次 */
-            background-image: radial-gradient(rgba(109, 104, 117, 0.04) 1px, transparent 1px);
-            background-size: 25px 25px;
-            scroll-behavior: smooth; /* 平滑滚动 */
+            line-height: 1.7; /* 优化行高，提升阅读舒适度 */
+            background-image: radial-gradient(rgba(109, 104, 117, 0.05) 1px, transparent 1px);
+            background-size: 20px 20px; /* 更细腻的背景纹理 */
+            /* 基础平滑滚动，增强兼容性 */
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
         }
 
-        /* 顶部悬挂锚点导航 */
+        /* 顶部导航栏 - 增强视觉层次 */
         .top-nav {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background-color: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(8px); /* 毛玻璃效果 */
+            background-color: rgba(255, 255, 255, 0.9); /* 提高不透明度，增强可读性 */
+            backdrop-filter: blur(10px);
             border-bottom: 2px solid transparent;
             border-image: linear-gradient(90deg, #f0c8cc, #d8b0c0, #bfa0b0, #d8b0c0, #f0c8cc) 1;
-            box-shadow: 0 4px 12px rgba(109, 104, 117, 0.08);
+            box-shadow: 0 4px 15px rgba(109, 104, 117, 0.1);
             z-index: 1000;
-            padding: 0.8rem 0;
-            overflow-x: auto; /* 横向滚动适配多锚点 */
+            padding: 0.9rem 0;
+            overflow-x: auto;
         }
         .nav-container {
             max-width: 1400px;
             margin: 0 auto;
             display: flex;
-            gap: 0.8rem;
-            padding: 0 1rem;
+            gap: 0.9rem;
+            padding: 0 1.2rem;
             align-items: center;
         }
-        /* 导航栏返回主页按钮 */
         .nav-home-btn {
-            background-color: rgba(109, 104, 117, 0.1);
-            font-weight: 500;
-            padding: 0.5rem 1.2rem;
-            margin-right: 0.5rem;
+            background-color: rgba(216, 176, 192, 0.2); /* 主题色淡背景，突出首页按钮 */
+            font-weight: 600;
+            padding: 0.6rem 1.4rem;
+            margin-right: 0.8rem;
+            border-radius: 8px;
         }
         .top-nav a {
             display: inline-block;
-            padding: 0.5rem 1rem;
-            color: #6d6875;
+            padding: 0.6rem 1.1rem;
+            color: #635e6d;
             text-decoration: none;
             border-radius: 8px;
-            font-size: 0.9rem;
-            white-space: nowrap; /* 确保文案一行 */
-            transition: all 0.2s ease;
+            font-size: 0.92rem;
+            white-space: nowrap;
+            transition: all 0.25s ease;
             border: 1px solid transparent;
-        }
-        /* 导航锚点伪类效果 */
-        .top-nav a:link {
-            opacity: 0.9;
-        }
-        .top-nav a:visited {
-            color: #8a8497;
+            cursor: pointer;
         }
         .top-nav a:hover {
-            background-color: #6d6875;
-            color: #fadadd;
+            background-color: #d8b0c0;
+            color: #ffffff;
             transform: translateY(-2px);
-            box-shadow: 0 3px 6px rgba(109, 104, 117, 0.2);
-            border-color: #6d6875;
+            box-shadow: 0 4px 8px rgba(216, 176, 192, 0.3);
+            border-color: #d8b0c0;
         }
         .top-nav a:active {
             transform: translateY(1px);
-            box-shadow: 0 1px 3px rgba(109, 104, 117, 0.15);
+            box-shadow: 0 2px 4px rgba(216, 176, 192, 0.2);
         }
-        /* 隐藏导航滚动条 */
+        .top-nav a.active { /* 激活状态样式 */
+            background-color: #d8b0c0;
+            color: #ffffff;
+            border-color: #d8b0c0;
+        }
         .top-nav::-webkit-scrollbar {
             display: none;
         }
 
-        /* 主标题样式 */
+        /* 主标题 - 渐变文字增强视觉 */
         .main-title {
             text-align: center;
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-            text-shadow: 1px 1px 3px rgba(109, 104, 117, 0.1);
+            font-size: 2.2rem;
+            margin-bottom: 1.8rem;
+            text-shadow: 1px 1px 4px rgba(109, 104, 117, 0.12);
+            background: linear-gradient(90deg, #d8b0c0, #6d6875);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent; /* 渐变文字效果 */
         }
         .intro {
             max-width: 1000px;
-            margin: 0 auto 3rem;
-            background-color: rgba(255, 255, 255, 0.6);
-            padding: 1.5rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(109, 104, 117, 0.08);
+            margin: 0 auto 3.5rem;
+            background-color: rgba(255, 255, 255, 0.85); /* 提高不透明度 */
+            padding: 1.8rem;
+            border-radius: 14px;
+            box-shadow: 0 6px 18px rgba(109, 104, 117, 0.12);
+            border: 1px solid rgba(216, 176, 192, 0.15);
         }
 
-        /* 正文卡片样式:渐变圆角边框+透明背景 */
+        /* 正文卡片 - 增强渐变边框和悬浮效果 */
         .md-card {
             position: relative;
-            background-color: rgba(255, 255, 255, 0.75); /* 高透明背景,不影响阅读 */
-            border-radius: 16px;
-            padding: 2rem;
-            margin-bottom: 2.5rem;
-            /* 渐变边框 */
+            background-color: rgba(255, 255, 255, 0.85);
+            border-radius: 18px;
+            padding: 2.2rem;
+            margin-bottom: 3rem;
             border: 2px solid transparent;
             background-clip: padding-box, border-box;
             background-origin: padding-box, border-box;
             background-image: 
-                linear-gradient(rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.75)),
-                linear-gradient(135deg, #f0c8cc, #d8b0c0, #bfa0b0); /* 贴合主色调的柔和渐变 */
-            box-shadow: 0 6px 18px rgba(109, 104, 117, 0.08);
-            transition: all 0.3s ease;
-            scroll-margin-top: 70px; /* 解决导航栏遮挡问题,值大于导航栏高度 */
+                linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)),
+                linear-gradient(135deg, #f8d1d5, #e9c0d0, #d4b0c0); /* 更柔和的渐变边框 */
+            box-shadow: 0 8px 22px rgba(109, 104, 117, 0.1);
+            transition: all 0.35s ease;
+            /* 优化锚点偏移，确保不被导航栏遮挡 */
+            scroll-margin-top: 90px;
+            overflow: hidden;
         }
-        /* 卡片悬浮效果 */
+        .md-card::before { /* 装饰性伪元素 */
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #f0c8cc, transparent);
+        }
         .md-card:hover {
-            box-shadow: 0 10px 24px rgba(109, 104, 117, 0.12);
-            transform: translateY(-3px);
+            box-shadow: 0 12px 28px rgba(109, 104, 117, 0.15);
+            transform: translateY(-4px);
+            border-image-source: linear-gradient(135deg, #f0c8cc, #d8b0c0, #bfa0b0, #d8b0c0, #f0c8cc);
         }
 
-        /* 章节标题样式 */
+        /* 章节标题 - 增强层次感 */
         .md-card h2 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
+            font-size: 1.6rem;
+            margin-bottom: 1.2rem;
             color: #6d6875;
-            border-bottom: 1px solid rgba(109, 104, 117, 0.15);
-            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(216, 176, 192, 0.25);
+            padding-bottom: 0.7rem;
+            display: flex;
+            align-items: center;
+        }
+        .md-card h2::before { /* 标题前装饰点 */
+            content: "●";
+            color: #d8b0c0;
+            margin-right: 0.8rem;
+            font-size: 0.9rem;
         }
         .md-card h3 {
-            font-size: 1.25rem;
-            margin: 1.5rem 0 0.8rem;
+            font-size: 1.3rem;
+            margin: 1.8rem 0 1rem;
             color: #6d6875;
+            padding-left: 0.5rem;
+            border-left: 3px solid #d8b0c0;
         }
 
-        /* 代码块样式 */
+        /* 代码块 - 优化可读性和视觉效果 */
         .md-card pre {
-            background-color: rgba(109, 104, 117, 0.05);
-            border-radius: 8px;
-            padding: 1rem;
-            margin: 1rem 0;
+            background-color: rgba(109, 104, 117, 0.08);
+            border-radius: 10px;
+            padding: 1.2rem;
+            margin: 1.2rem 0;
             overflow-x: auto;
             font-family: "Monaco", "Consolas", monospace;
-            font-size: 0.9rem;
-            line-height: 1.6;
+            font-size: 0.92rem;
+            line-height: 1.7;
+            border-left: 4px solid #d8b0c0; /* 主题色左侧边框 */
+            box-shadow: 0 2px 8px rgba(109, 104, 117, 0.05);
+            transition: box-shadow 0.3s ease;
+        }
+        .md-card pre:hover {
+            box-shadow: 0 4px 12px rgba(109, 104, 117, 0.08);
         }
         .md-card code {
             font-family: inherit;
-            color: #6d6875;
-            background-color: rgba(109, 104, 117, 0.05);
-            padding: 0.2rem 0.4rem;
-            border-radius: 4px;
+            color: #5a5565;
+            background-color: rgba(216, 176, 192, 0.1);
+            padding: 0.25rem 0.5rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
         }
         .md-card pre code {
             padding: 0;
             background: none;
         }
 
-        /* 表格样式 */
+        /* 表格 - 增强视觉层次和交互 */
         .md-card table {
             width: 100%;
-            border-collapse: collapse;
-            margin: 1.5rem 0;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 1.8rem 0;
             font-size: 0.95rem;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(109, 104, 117, 0.05);
         }
         .md-card th, .md-card td {
-            padding: 0.8rem 1rem;
+            padding: 0.9rem 1.2rem;
             text-align: left;
-            border: 1px solid #e0c4c8; /* 淡色边框,不刺眼 */
+            border: 1px solid #f0c8cc; /* 主题色边框 */
+            border-bottom-width: 2px;
         }
         .md-card th {
-            background-color: rgba(109, 104, 117, 0.08);
-            font-weight: 600;
-        }
-        .md-card tr:nth-child(even) {
-            background-color: rgba(109, 104, 117, 0.03);
-        }
-
-        /* 引用样式 */
-        .md-card blockquote {
-            font-style: italic;
-            color: #7a7585;
-            margin: 1rem 0;
-            padding: 1rem;
-            background-color: rgba(109, 104, 117, 0.03);
-            border-left: 3px solid #d8b0c0;
-            border-radius: 0 8px 8px 0;
-        }
-
-        /* 列表样式 */
-        .md-card ul, .md-card ol {
-            margin: 1rem 0 1rem 2rem;
-        }
-        .md-card li {
-            margin-bottom: 0.5rem;
-        }
-        .md-card ul ul, .md-card ol ol, .md-card ul ol, .md-card ol ul {
-            margin: 0.5rem 0 0.5rem 2rem;
-        }
-
-        /* 强调样式(粗体、斜体、删除线) */
-        .md-card strong {
+            background: linear-gradient(135deg, #f8d1d5, #fadadd); /* 表头渐变背景 */
             font-weight: 600;
             color: #6d6875;
+            border-color: #f0c8cc;
+        }
+        .md-card tr:nth-child(even) {
+            background-color: rgba(240, 200, 204, 0.05);
+        }
+        .md-card tr:hover {
+            background-color: rgba(240, 200, 204, 0.15); /* 行悬停效果 */
+            transition: background-color 0.2s ease;
+        }
+        .md-card tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* 引用 - 优化样式 */
+        .md-card blockquote {
+            font-style: italic;
+            color: #6d6875;
+            margin: 1.2rem 0;
+            padding: 1.2rem 1.5rem;
+            background-color: rgba(240, 200, 204, 0.1);
+            border-left: 4px solid #f0c8cc; /* 加粗左侧边框 */
+            border-radius: 0 10px 10px 0;
+            box-shadow: 0 2px 8px rgba(109, 104, 117, 0.05);
+        }
+
+        /* 列表 - 增强视觉一致性 */
+        .md-card ul, .md-card ol {
+            margin: 1.2rem 0 1.2rem 2.5rem;
+        }
+        .md-card ul {
+            list-style-type: disc;
+            color: #d8b0c0; /* 列表项颜色主题化 */
+        }
+        .md-card ul li {
+            color: #635e6d; /* 恢复文字颜色 */
+        }
+        .md-card ol {
+            list-style-type: decimal;
+            color: #d8b0c0;
+        }
+        .md-card ol li {
+            color: #635e6d;
+        }
+        .md-card li {
+            margin-bottom: 0.7rem;
+            padding-left: 0.5rem;
+        }
+        .md-card ul ul, .md-card ol ol, .md-card ul ol, .md-card ol ul {
+            margin: 0.7rem 0 0.7rem 2rem;
+            padding-left: 0.5rem;
+        }
+
+        /* 强调样式 - 优化颜色 */
+        .md-card strong {
+            font-weight: 600;
+            color: #5a5565;
         }
         .md-card em {
             font-style: italic;
-            color: #7a7585;
+            color: #6d6875;
         }
         .md-card del {
             text-decoration: line-through;
             color: #9a94a7;
+            text-decoration-color: #d8b0c0; /* 删除线主题色 */
         }
 
-        /* 链接样式 */
+        /* 链接 - 渐变下划线动画 */
         .md-card a {
-            color: #6d6875;
-            text-decoration: underline;
-            text-underline-offset: 2px;
-            transition: color 0.2s ease;
+            color: #8a8497;
+            text-decoration: none;
+            position: relative;
+            transition: color 0.25s ease;
+        }
+        .md-card a::after {
+            content: "";
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #f0c8cc, #d8b0c0);
+            transition: width 0.25s ease;
         }
         .md-card a:hover {
-            color: #5a5565;
+            color: #d8b0c0;
+        }
+        .md-card a:hover::after {
+            width: 100%; /* 下划线展开动画 */
         }
 
-        /* 任务列表样式 */
+        /* 任务列表 - 美化复选框 */
         .md-card .task-list {
             list-style-type: none;
             margin-left: 0;
@@ -243,144 +319,224 @@
         .md-card .task-list li {
             display: flex;
             align-items: center;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.8rem;
             padding-left: 0;
         }
         .md-card .task-list input[type="checkbox"] {
-            margin-right: 0.8rem;
-            accent-color: #6d6875;
+            margin-right: 1rem;
+            accent-color: #d8b0c0;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            border: 2px solid #f0c8cc;
+            border-radius: 4px;
         }
 
-        /* 脚注样式 */
+        /* 脚注 - 优化样式 */
         .md-card .footnote-ref {
             vertical-align: super;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             text-decoration: none;
-            margin: 0 0.2rem;
+            margin: 0 0.3rem;
+            color: #d8b0c0;
         }
         .md-card .footnote-definition {
-            margin: 1rem 0 0 2rem;
-            font-size: 0.9rem;
+            margin: 1.2rem 0 0 2.5rem;
+            font-size: 0.92rem;
             color: #7a7585;
+            padding-left: 0.8rem;
+            border-left: 2px solid #f0c8cc;
         }
 
-        /* 分隔线样式 */
+        /* 分隔线 - 增强视觉 */
         .md-card hr {
-            height: 1px;
-            background: linear-gradient(90deg, transparent, #d8b0c0, transparent);
-            margin: 2rem 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #f0c8cc, transparent);
+            margin: 2.5rem 0;
             border: none;
         }
 
-        /* 底部按钮容器 */
+        /* 底部按钮 - 增强质感 */
         .bottom-buttons {
             display: flex;
             justify-content: center;
-            gap: 2rem;
-            margin: 4rem 0 2rem;
+            gap: 2.5rem;
+            margin: 5rem 0 3rem;
+            flex-wrap: wrap; /* 适配小屏幕 */
         }
-        /* 底部圆形渐变透明按钮 */
         .bottom-btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 140px; /* 固定宽度,确保一样大 */
-            height: 140px; /* 固定高度,圆形 */
+            width: 150px;
+            height: 150px;
             border-radius: 50%;
-            background: linear-gradient(135deg, rgba(109, 104, 117, 0.2), rgba(255, 255, 255, 0.3));
-            color: #6d6875;
+            background: linear-gradient(135deg, #f0c8cc, #d8b0c0);
+            color: #ffffff;
             text-decoration: none;
-            font-size: 0.95rem;
-            font-weight: 500;
-            white-space: nowrap; /* 文案一行显示 */
-            padding: 1rem;
+            font-size: 1rem;
+            font-weight: 600;
+            white-space: nowrap;
+            padding: 1.2rem;
             text-align: center;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(109, 104, 117, 0.1);
+            transition: all 0.35s ease;
+            box-shadow: 0 6px 16px rgba(216, 176, 192, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            cursor: pointer;
         }
         .bottom-btn:hover {
-            background: linear-gradient(135deg, rgba(109, 104, 117, 0.3), rgba(255, 255, 255, 0.4));
-            color: #5a5565;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 16px rgba(109, 104, 117, 0.15);
+            background: linear-gradient(135deg, #e9c0d0, #c9a0b0);
+            color: #ffffff;
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 10px 22px rgba(216, 176, 192, 0.4);
+            border-color: rgba(255, 255, 255, 0.5);
         }
         .bottom-btn:active {
-            transform: translateY(1px);
-            box-shadow: 0 2px 8px rgba(109, 104, 117, 0.1);
+            transform: translateY(2px) scale(0.98);
+            box-shadow: 0 4px 12px rgba(216, 176, 192, 0.25);
         }
 
-        /* 移动端适配 */
+        /* 回到顶部按钮 - 优化样式和位置 */
+        .back-to-top {
+            position: fixed;
+            bottom: 3rem;
+            right: 3rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #f0c8cc, #d8b0c0);
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 4px 12px rgba(216, 176, 192, 0.3);
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 999;
+            font-size: 1.2rem;
+        }
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .back-to-top:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(216, 176, 192, 0.4);
+            background: linear-gradient(135deg, #e9c0d0, #c9a0b0);
+        }
+
+        /* 移动端适配 - 精细化调整 */
         @media (max-width: 768px) {
             body {
-                padding: 7rem 3% 2rem;
+                padding: 7.5rem 3% 2.5rem;
             }
             .main-title {
-                font-size: 1.7rem;
-                margin-bottom: 1.2rem;
+                font-size: 1.8rem;
+                margin-bottom: 1.5rem;
             }
             .intro {
-                padding: 1.2rem;
-                margin-bottom: 2rem;
+                padding: 1.5rem;
+                margin-bottom: 2.5rem;
             }
             .md-card {
-                padding: 1.5rem;
+                padding: 1.8rem;
                 border-width: 1.5px;
-                margin-bottom: 2rem;
-                scroll-margin-top: 60px; /* 移动端导航栏高度略低 */
+                margin-bottom: 2.5rem;
+                scroll-margin-top: 80px;
             }
             .md-card h2 {
-                font-size: 1.3rem;
+                font-size: 1.4rem;
             }
             .md-card h3 {
-                font-size: 1.15rem;
+                font-size: 1.2rem;
             }
             .nav-container {
-                gap: 0.6rem;
-                padding: 0 0.8rem;
+                gap: 0.7rem;
+                padding: 0 1rem;
             }
             .top-nav a {
-                padding: 0.4rem 0.8rem;
-                font-size: 0.85rem;
+                padding: 0.5rem 0.9rem;
+                font-size: 0.88rem;
             }
             .nav-home-btn {
-                padding: 0.4rem 0.8rem;
-                font-size: 0.8rem;
+                padding: 0.5rem 1rem;
+                font-size: 0.85rem;
             }
             .md-card table {
-                font-size: 0.85rem;
+                font-size: 0.88rem;
             }
             .md-card th, .md-card td {
-                padding: 0.6rem 0.8rem;
+                padding: 0.7rem 0.9rem;
             }
-            /* 移动端底部按钮调整 */
             .bottom-btn {
-                width: 120px;
-                height: 120px;
-                font-size: 0.85rem;
-                padding: 0.8rem;
+                width: 130px;
+                height: 130px;
+                font-size: 0.9rem;
+                padding: 1rem;
             }
             .bottom-buttons {
-                gap: 1.5rem;
+                gap: 1.8rem;
+            }
+            .back-to-top {
+                width: 45px;
+                height: 45px;
+                bottom: 2rem;
+                right: 2rem;
             }
         }
 
         /* 小屏幕移动端适配 */
         @media (max-width: 480px) {
+            body {
+                padding: 7rem 2% 2rem;
+            }
             .md-card {
-                padding: 1.2rem;
+                padding: 1.5rem;
+            }
+            .top-nav a {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.85rem;
+            }
+            .nav-home-btn {
+                font-size: 0.8rem;
+                padding: 0.4rem 0.9rem;
+                margin-right: 0.5rem;
+            }
+            .bottom-btn {
+                width: 115px;
+                height: 115px;
+                font-size: 0.85rem;
+                padding: 0.9rem;
+            }
+            .bottom-buttons {
+                gap: 1.5rem;
+            }
+            .md-card ul, .md-card ol {
+                margin-left: 1.8rem;
+            }
+            .back-to-top {
+                width: 40px;
+                height: 40px;
+                bottom: 1.5rem;
+                right: 1.5rem;
+            }
+        }
+
+        /* 超小屏幕适配 */
+        @media (max-width: 320px) {
+            .bottom-btn {
+                width: 100px;
+                height: 100px;
+                font-size: 0.8rem;
+            }
+            .nav-container {
+                gap: 0.5rem;
+                padding: 0 0.8rem;
             }
             .top-nav a {
                 padding: 0.35rem 0.7rem;
-                font-size: 0.8rem;
-            }
-            .nav-home-btn {
-                font-size: 0.75rem;
-                padding: 0.35rem 0.7rem;
-            }
-            /* 小屏幕底部按钮 */
-            .bottom-btn {
-                width: 110px;
-                height: 110px;
                 font-size: 0.8rem;
             }
         }
@@ -390,24 +546,24 @@
     <nav class="top-nav">
         <div class="nav-container">
             <a href="../../../index.html" class="nav-home-btn">星奈のファン応援会に戻る</a>
-            <a href="#md-title">标题</a>
-            <a href="#md-paragraph">段落与换行</a>
-            <a href="#md-emphasis">强调</a>
-            <a href="#md-list">列表</a>
-            <a href="#md-link">链接</a>
-            <a href="#md-image">图片</a>
-            <a href="#md-code">代码</a>
-            <a href="#md-quote">引用</a>
-            <a href="#md-table">表格</a>
-            <a href="#md-divider">分隔线</a>
-            <a href="#md-escape">转义字符</a>
-            <a href="#md-task">任务列表</a>
-            <a href="#md-footnote">脚注</a>
-            <a href="#md-delete">删除线</a>
-            <a href="#md-advanced">高级功能</a>
-            <a href="#md-editor">编辑器推荐</a>
-            <a href="#md-tips">实用技巧</a>
-            <a href="#md-faq">常见问题</a>
+            <a href="#md-title" class="anchor-link">标题</a>
+            <a href="#md-paragraph" class="anchor-link">段落与换行</a>
+            <a href="#md-emphasis" class="anchor-link">强调</a>
+            <a href="#md-list" class="anchor-link">列表</a>
+            <a href="#md-link" class="anchor-link">链接</a>
+            <a href="#md-image" class="anchor-link">图片</a>
+            <a href="#md-code" class="anchor-link">代码</a>
+            <a href="#md-quote" class="anchor-link">引用</a>
+            <a href="#md-table" class="anchor-link">表格</a>
+            <a href="#md-divider" class="anchor-link">分隔线</a>
+            <a href="#md-escape" class="anchor-link">转义字符</a>
+            <a href="#md-task" class="anchor-link">任务列表</a>
+            <a href="#md-footnote" class="anchor-link">脚注</a>
+            <a href="#md-delete" class="anchor-link">删除线</a>
+            <a href="#md-advanced" class="anchor-link">高级功能</a>
+            <a href="#md-editor" class="anchor-link">编辑器推荐</a>
+            <a href="#md-tips" class="anchor-link">实用技巧</a>
+            <a href="#md-faq" class="anchor-link">常见问题</a>
         </div>
     </nav>
 
@@ -570,7 +726,7 @@
 [logo]: https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png "GitHub的Logo"</code></pre>
             <p><strong>注意</strong>:替代文本是当图片无法显示时显示的文本,对可访问性很重要。标题部分同样是鼠标悬停时显示的文本。</p>
             <p><strong>显示效果</strong></p>
-            <p><img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub Logo" title="GitHub的Logo" style="max-width: 200px; margin: 1rem 0;"></p>
+            <p><img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub Logo" title="GitHub的Logo" style="max-width: 200px; margin: 1rem 0; border-radius: 8px; box-shadow: 0 2px 8px rgba(109, 104, 117, 0.1);"></p>
         </div>
 
         <div class="md-card" id="md-code">
@@ -801,19 +957,19 @@ ___</code></pre>
             <h2>十五、Markdown的高级功能</h2>
             <h3>15.1 HTML标签</h3>
             <p>在Markdown中,你可以直接使用HTML标签来实现一些Markdown不支持的功能。</p>
-            <pre><code>这是一个使用HTML的&lt;span style="color:red"&gt;红色文本&lt;/span&gt;。
+            <pre><code>这是一个使用HTML的&lt;span style="color:#d8b0c0"&gt;主题色文本&lt;/span&gt;。
 
 &lt;div align="center"&gt;这是居中对齐的文本&lt;/div&gt;
 
 &lt;details&gt;
-&lt;summary&gt;点击展开详情&lt;/summary&gt;
+&lt;summary style="cursor:pointer;color:#6d6875;font-weight:500"&gt;点击展开详情&lt;/summary&gt;
 这里是详细内容
 &lt;/details&gt;</code></pre>
             <p><strong>显示效果</strong></p>
-            <p>这是一个使用HTML的<span style="color:red">红色文本</span>。</p>
+            <p>这是一个使用HTML的<span style="color:#d8b0c0">主题色文本</span>。</p>
             <div align="center">这是居中对齐的文本</div>
             <details>
-                <summary>点击展开详情</summary>
+                <summary style="cursor:pointer;color:#6d6875;font-weight:500">点击展开详情</summary>
                 <p>这里是详细内容</p>
             </details>
             <p><strong>注意</strong>:并非所有的Markdown解析器都完全支持HTML标签,使用时需要注意兼容性。</p>
@@ -821,10 +977,12 @@ ___</code></pre>
             <h3>15.2 表情符号</h3>
             <p>在支持的平台上(如GitHub),你可以使用表情符号代码来添加表情。</p>
             <pre><code>我很开心 :smile:
-这个功能很棒 :+1:</code></pre>
+这个功能很棒 :+1:
+Markdown真好用 :heart:</code></pre>
             <p><strong>显示效果</strong></p>
             <p>我很开心 😄</p>
             <p>这个功能很棒 👍</p>
+            <p>Markdown真好用 ❤️</p>
             <p><strong>提示</strong>:GitHub支持的表情符号代码可以在其官方文档中找到。</p>
 
             <h3>15.3 自动生成目录</h3>
@@ -893,8 +1051,133 @@ flowchart TD
 
         <div class="bottom-buttons">
             <a href="../../../index.html" class="bottom-btn">星奈のファン応援会に戻る</a>
-            <a href="#" class="bottom-btn">再看一遍(♡-𖥦-)/♥</a>
+            <a href="#" class="bottom-btn scroll-top-btn">再看一遍(♡-𖥦-)/♥</a>
         </div>
     </div>
+
+    <!-- 回到顶部按钮 -->
+    <a href="#" class="back-to-top">↑</a>
+
+    <script>
+        // 等待DOM加载完成
+        document.addEventListener('DOMContentLoaded', function() {
+            // 锚点链接元素
+            const anchorLinks = document.querySelectorAll('.anchor-link');
+            // 回到顶部按钮
+            const backToTopBtn = document.querySelector('.back-to-top');
+            // 重新开始按钮
+            const scrollTopBtn = document.querySelector('.scroll-top-btn');
+            
+            // 自定义锚点跳转动画
+            anchorLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault(); // 阻止默认跳转行为
+                    
+                    // 获取目标锚点ID
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    // 获取目标元素
+                    const targetElement = document.querySelector(targetId);
+                    if (!targetElement) return;
+                    
+                    // 计算目标位置（考虑导航栏高度）
+                    const navbarHeight = document.querySelector('.top-nav').offsetHeight;
+                    const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navbarHeight - 20;
+                    
+                    // 平滑滚动动画
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                    
+                    // 高亮当前激活的导航项
+                    anchorLinks.forEach(item => item.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+            
+            // 回到顶部按钮逻辑
+            backToTopBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // 重新开始按钮逻辑
+            scrollTopBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // 滚动监听 - 显示/隐藏回到顶部按钮
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 300) {
+                    backToTopBtn.classList.add('show');
+                } else {
+                    backToTopBtn.classList.remove('show');
+                }
+                
+                // 滚动时更新导航激活状态
+                updateActiveAnchor();
+            });
+            
+            // 更新当前激活的锚点导航
+            function updateActiveAnchor() {
+                const sections = document.querySelectorAll('.md-card');
+                let currentSectionId = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - 120; // 偏移量，提前激活
+                    const sectionHeight = section.offsetHeight;
+                    
+                    if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+                        currentSectionId = '#' + section.getAttribute('id');
+                    }
+                });
+                
+                // 更新激活状态
+                anchorLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === currentSectionId) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+            
+            // 初始化时触发一次滚动监听，设置初始激活状态
+            updateActiveAnchor();
+            
+            // 为所有内部锚点链接添加平滑滚动
+            document.querySelectorAll('a[href^="#"]').forEach(link => {
+                // 排除已经处理过的锚点链接
+                if (!link.classList.contains('anchor-link') && 
+                    !link.classList.contains('back-to-top') && 
+                    !link.classList.contains('scroll-top-btn')) {
+                    
+                    link.addEventListener('click', function(e) {
+                        const targetId = this.getAttribute('href');
+                        if (targetId === '#' || !document.querySelector(targetId)) return;
+                        
+                        e.preventDefault();
+                        
+                        const navbarHeight = document.querySelector('.top-nav').offsetHeight;
+                        const targetElement = document.querySelector(targetId);
+                        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navbarHeight - 20;
+                        
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>

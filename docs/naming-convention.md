@@ -101,4 +101,4 @@ pages/troubleshooting/
 - 具体问题：简短描述核心问题
 - 示例：`css-flexbox-center.md`、`git-merge-conflict.md`
 
-> 本规范会随着项目发展和团队需求进行更新
+> 本规范会随着项目发展和团队需求进行更新。更新此文档请一并更新html文件。

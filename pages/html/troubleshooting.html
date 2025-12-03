@@ -7,52 +7,93 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="icon" type="image/x-icon" href="../../assets/images/ico/hoshina-avatar-round.ico">
     <style>
-        /* 全局基础样式 */
+        /* 全局基础样式 - 与参考代码完全对齐 */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: "Microsoft YaHei", "Segoe UI", "Hiragino Sans GB", sans-serif;
+            font-family: "Microsoft YaHei", "Segoe UI", "Monaco", monospace;
         }
         body {
             background-color: #fadadd; /* 主背景色 */
             color: #6d6875; /* 主字体色 */
-            padding: 3rem 5%;
+            padding: 3rem 5% 5rem;
             min-height: 100vh;
             line-height: 1.8;
-            /* 轻微背景纹理，增加层次不单调 */
-            background-image: radial-gradient(rgba(109, 104, 117, 0.05) 1px, transparent 1px);
-            background-size: 20px 20px;
+            /* 双层背景纹理 - 保持与参考代码一致 */
+            background-image: 
+                radial-gradient(rgba(109, 104, 117, 0.04) 1px, transparent 1px),
+                url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%236d6875' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+            background-size: 25px 25px, 100px 100px;
+            scroll-behavior: smooth;
+            overflow-x: hidden; /* 隐藏浮动元素溢出 */
         }
 
-        /* 主容器：居中布局 */
+        /* 浮动彩蛋元素 - 与参考代码一致 */
+        .floating-egg {
+            position: fixed;
+            pointer-events: none; /* 不影响点击 */
+            opacity: 0.6;
+            z-index: 10;
+            transition: opacity 0.3s ease;
+        }
+        .floating-egg:hover {
+            opacity: 1;
+        }
+        .egg-star {
+            top: 20%;
+            left: 5%;
+            font-size: 1.5rem;
+            animation: float 8s linear infinite;
+        }
+        .egg-code {
+            top: 45%;
+            right: 5%;
+            font-size: 1.2rem;
+            animation: float 10s linear infinite reverse;
+        }
+        .egg-heart {
+            top: 75%;
+            left: 8%;
+            font-size: 1rem;
+            animation: float 12s linear infinite;
+        }
+
+        /* 主容器：保持居中布局，补充间距 */
         .main-container {
             max-width: 850px;
             margin: 0 auto;
             display: flex;
             flex-direction: column;
-            gap: 2rem;
+            gap: 2.5rem; /* 增大间距更透气 */
         }
 
-        /* 卡片基础样式：渐变边框+透明背景 */
+        /* 卡片基础样式：统一渐变边框和背景 */
         .card {
             position: relative;
-            background-color: rgba(255, 255, 255, 0.35); /* 内部透明背景 */
+            background-color: rgba(255, 255, 255, 0.85); /* 与参考代码一致的高透明度 */
             border-radius: 16px;
-            padding: 2rem;
-            /* 伪元素实现渐变边框 */
+            padding: 2.2rem;
             border: 2px solid transparent;
             background-clip: padding-box, border-box;
             background-origin: padding-box, border-box;
+            /* 替换为参考代码的辅助色渐变 */
             background-image: 
-                linear-gradient(rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.35)),
-                linear-gradient(135deg, #e8c6c8, #c4a7b8, #a89ba8); /* 渐变边框 */
-            box-shadow: 0 8px 24px rgba(109, 104, 117, 0.12);
+                linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)),
+                linear-gradient(135deg, #f0c8cc, #d8b0c0, #bfa0b0);
+            box-shadow: 0 6px 18px rgba(109, 104, 117, 0.08);
             transition: all 0.3s ease;
             overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
         }
+        /* 卡片递进动画延迟 */
+        .card:nth-child(1) { animation-delay: 0.2s; }
+        .card:nth-child(2) { animation-delay: 0.4s; }
+        .card:nth-child(3) { animation-delay: 0.6s; }
 
-        /* 卡片装饰细节：角落渐变光斑 */
+        /* 卡片装饰细节：优化光斑样式 */
         .card::before {
             content: "";
             position: absolute;
@@ -60,70 +101,82 @@
             right: -20%;
             width: 40%;
             height: 40%;
-            background: linear-gradient(45deg, rgba(255, 255, 255, 0.2), transparent);
+            background: linear-gradient(45deg, rgba(240, 200, 204, 0.3), transparent);
             border-radius: 50%;
             z-index: 0;
+            animation: shine 8s linear infinite;
         }
 
-        /* 卡片内容层：避免被装饰元素遮挡 */
+        /* 卡片内容层：确保层级 */
         .card-content {
             position: relative;
             z-index: 1;
         }
 
-        /* 卡片悬浮效果 */
+        /* 卡片悬浮效果：增强动感 */
         .card:hover {
-            box-shadow: 0 12px 30px rgba(109, 104, 117, 0.18);
-            transform: translateY(-3px);
+            box-shadow: 0 12px 24px rgba(109, 104, 117, 0.15);
+            transform: translateY(-5px) scale(1.02);
         }
 
-        /* 文本描述样式 */
+        /* 文本描述样式：优化可读性 */
         .card p {
             font-size: 1.1rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.8rem;
             font-weight: 500;
             color: #6d6875;
+            text-shadow: 1px 1px 2px rgba(109, 104, 117, 0.05);
         }
 
-        /* 链接按钮样式：统一风格+伪类全覆盖 */
+        /* 按钮样式：统一渐变+光泽动画 */
         .btn {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             padding: 0.9rem 2rem;
-            background-color: rgba(255, 255, 255, 0.5);
+            background: linear-gradient(135deg, rgba(240, 200, 204, 0.5), rgba(191, 160, 176, 0.3));
             color: #6d6875;
             text-decoration: none;
             border-radius: 12px;
             font-size: 1.05rem;
             font-weight: 500;
-            transition: all 0.25s ease;
-            border: 1px solid rgba(109, 104, 117, 0.1);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(109, 104, 117, 0.08);
+            position: relative;
+            overflow: hidden;
+            border: none;
+        }
+        /* 按钮光泽动画 */
+        .btn::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(transparent, rgba(255, 255, 255, 0.2), transparent);
+            transform: rotate(30deg);
+            animation: shine 6s linear infinite;
         }
 
-        /* 链接伪类效果 */
-        .btn:link {
-            opacity: 0.95;
-        }
-        .btn:visited {
-            color: #8a8497;
-            background-color: rgba(240, 235, 245, 0.5);
-        }
+        /* 按钮伪类效果：统一交互逻辑 */
         .btn:hover {
-            background-color: #6d6875;
-            color: #fadadd;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(109, 104, 117, 0.25);
-            border-color: #6d6875;
+            background: linear-gradient(135deg, rgba(240, 200, 204, 0.7), rgba(191, 160, 176, 0.5));
+            color: #5a5565;
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 6px 14px rgba(109, 104, 117, 0.12);
         }
         .btn:active {
-            transform: translateY(1px);
-            box-shadow: 0 3px 8px rgba(109, 104, 117, 0.18);
+            transform: translateY(1px) scale(0.98);
+            box-shadow: 0 2px 6px rgba(109, 104, 117, 0.08);
         }
+        /* 移除多余的:link/:visited伪类，保持与参考代码一致 */
 
-        /* 返回按钮卡片：特殊样式区分 */
+        /* 返回按钮卡片：统一渐变风格 */
         .back-card {
             background-image: 
-                linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)),
-                linear-gradient(135deg, #c4a7b8, #8a8497, #6d6875); /* 更深的渐变边框 */
+                linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)),
+                linear-gradient(135deg, #d8b0c0, #bfa0b0, #6d6875); /* 贴合辅助色的深色渐变 */
             text-align: center;
             margin-top: 1rem;
         }
@@ -131,20 +184,53 @@
             padding: 1rem 2.2rem;
             font-size: 1.1rem;
             letter-spacing: 0.5px;
+            width: auto; /* 移动端再全屏 */
         }
 
-        /* 移动端适配 */
+        /* 按钮图标点缀（可选，增强风格） */
+        .btn-icon {
+            margin-right: 0.6rem;
+            font-size: 1.15rem;
+        }
+
+        /* 核心动画 - 与参考代码完全一致 */
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(10px, -15px) rotate(5deg); }
+            50% { transform: translate(0, -20px) rotate(0deg); }
+            75% { transform: translate(-10px, -15px) rotate(-5deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+        @keyframes shine {
+            0% { transform: rotate(30deg) translateX(-100%); }
+            100% { transform: rotate(30deg) translateX(100%); }
+        }
+
+        /* 移动端适配 - 保持与参考代码一致 */
         @media (max-width: 768px) {
             body {
-                padding: 2rem 3%;
+                padding: 2rem 3% 2rem;
+            }
+            .floating-egg {
+                display: none; /* 隐藏移动端浮动元素 */
+            }
+            .main-container {
+                gap: 2rem;
             }
             .card {
-                padding: 1.5rem;
+                padding: 1.8rem;
                 border-width: 1.5px;
             }
             .card p {
                 font-size: 1rem;
-                margin-bottom: 1.2rem;
+                margin-bottom: 1.5rem;
             }
             .btn {
                 padding: 0.8rem 1.8rem;
@@ -156,27 +242,51 @@
                 padding: 0.9rem 2rem;
             }
         }
+
+        @media (max-width: 480px) {
+            .card {
+                padding: 1.5rem;
+            }
+            .card:hover {
+                transform: translateY(-3px) scale(1.01); /* 弱化移动端hover缩放 */
+            }
+            .btn {
+                font-size: 0.95rem;
+                padding: 0.75rem 1.5rem;
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- 浮动彩蛋元素 - 保持风格统一 -->
+    <div class="floating-egg egg-star">✦</div>
+    <div class="floating-egg egg-code">✨</div>
+    <div class="floating-egg egg-heart">♥</div>
+
     <div class="main-container">
         <div class="card">
             <div class="card-content">
                 <p>macOS一些常用命令（包含部分golang相关命令，可根据需求选择性参考，涵盖文件操作、系统设置、进程管理等高频使用场景）</p>
-                <a href="../troubleshooting/html/macos-terminal-grammar.html" class="btn">macOS终端命令</a>
+                <a href="../troubleshooting/html/macos-terminal-grammar.html" class="btn">
+                    <span class="btn-icon">💻</span> macOS终端命令
+                </a>
             </div>
         </div>
 
         <div class="card">
             <div class="card-content">
                 <p>Markdown语法（部分核心用法）：详细整理标题、列表、链接、图片、代码块、表格等常用格式，适合快速入门和日常编辑参考，简单易用</p>
-                <a href="../troubleshooting/html/markdown-grammar.html" class="btn">markdown语法</a>
+                <a href="../troubleshooting/html/markdown-grammar.html" class="btn">
+                    <span class="btn-icon">📝</span> markdown语法
+                </a>
             </div>
         </div>
 
         <div class="card back-card">
             <div class="card-content">
-                <a href="../../index.html" class="btn back-btn">星奈のファン応援会に戻る</a>
+                <a href="../../index.html" class="btn back-btn">
+                    <span class="btn-icon">🏠</span> 星奈のファン応援会に戻る
+                </a>
             </div>
         </div>
     </div>

@@ -20,9 +20,12 @@
             padding: 8rem 5% 5rem; /* 顶部预留导航空间，底部预留按钮空间 */
             min-height: 100vh;
             line-height: 1.8;
-            /* 轻微背景纹理，增强层次 */
-            background-image: radial-gradient(rgba(109, 104, 117, 0.04) 1px, transparent 1px);
-            background-size: 25px 25px;
+            /* 增强背景纹理，让花纹更明显 */
+            background-image: 
+                radial-gradient(rgba(109, 104, 117, 0.06) 1px, transparent 1px),
+                radial-gradient(rgba(109, 104, 117, 0.04) 1px, transparent 1px);
+            background-size: 25px 25px, 50px 50px;
+            background-position: 0 0, 12.5px 12.5px;
             scroll-behavior: smooth; /* 平滑滚动 */
         }
 
@@ -85,6 +88,14 @@
             transform: translateY(1px);
             box-shadow: 0 1px 3px rgba(109, 104, 117, 0.15);
         }
+        /* 新增：导航锚点激活状态（当前视图高亮） */
+        .top-nav a.active {
+            background: linear-gradient(135deg, #f0c8cc, #d8b0c0);
+            color: #6d6875;
+            font-weight: 600;
+            box-shadow: 0 3px 8px rgba(109, 104, 117, 0.15);
+            border-color: transparent;
+        }
         /* 隐藏导航滚动条 */
         .top-nav::-webkit-scrollbar {
             display: none;
@@ -120,6 +131,28 @@
         .command-card:hover {
             box-shadow: 0 10px 24px rgba(109, 104, 117, 0.12);
             transform: translateY(-3px);
+        }
+        /* 新增：锚点选中卡片高亮+脉冲动画 */
+        .command-card:target {
+            border-color: #bfa0b0;
+            box-shadow: 0 0 0 4px rgba(191, 160, 176, 0.15), 0 10px 24px rgba(109, 104, 117, 0.15);
+            transform: translateY(-5px);
+            animation: pulse 2s ease-in-out;
+        }
+        /* 新增：锚点选中提示文本 */
+        .command-card:target::after {
+            content: "当前查看 ✨";
+            position: absolute;
+            top: -12px;
+            right: 2rem;
+            background: linear-gradient(135deg, #f0c8cc, #d8b0c0);
+            color: #6d6875;
+            font-size: 0.8rem;
+            padding: 0.2rem 0.8rem;
+            border-radius: 12px;
+            white-space: nowrap;
+            box-shadow: 0 2px 4px rgba(109, 104, 117, 0.1);
+            animation: fadeIn 0.5s ease forwards;
         }
 
         /* 命令标题样式 */
@@ -221,10 +254,27 @@
             box-shadow: 0 2px 8px rgba(109, 104, 117, 0.1);
         }
 
+        /* 新增：锚点相关动画 */
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 4px rgba(191, 160, 176, 0.15), 0 10px 24px rgba(109, 104, 117, 0.15); }
+            50% { box-shadow: 0 0 0 6px rgba(191, 160, 176, 0.2), 0 12px 28px rgba(109, 104, 117, 0.2); }
+            100% { box-shadow: 0 0 0 4px rgba(191, 160, 176, 0.15), 0 10px 24px rgba(109, 104, 117, 0.15); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         /* 移动端适配 */
         @media (max-width: 768px) {
             body {
                 padding: 7rem 3% 2rem;
+                /* 移动端保持同样的背景纹理效果 */
+                background-image: 
+                    radial-gradient(rgba(109, 104, 117, 0.06) 1px, transparent 1px),
+                    radial-gradient(rgba(109, 104, 117, 0.04) 1px, transparent 1px);
+                background-size: 20px 20px, 40px 40px;
+                background-position: 0 0, 10px 10px;
             }
             .main-title {
                 font-size: 1.7rem;
@@ -235,6 +285,12 @@
                 border-width: 1.5px;
                 margin-bottom: 2rem;
                 scroll-margin-top: 60px; /* 移动端导航栏高度略低 */
+            }
+            /* 移动端锚点提示文本位置调整 */
+            .command-card:target::after {
+                right: 1rem;
+                font-size: 0.75rem;
+                padding: 0.15rem 0.6rem;
             }
             .command-card h2 {
                 font-size: 1.3rem;
@@ -295,23 +351,23 @@
     <nav class="top-nav">
         <div class="nav-container">
             <a href="../../../index.html" class="nav-home-btn">星奈のファン応援会に戻る</a>
-            <a href="#cd-命令">cd 命令</a>
-            <a href="#ls-命令">ls 命令</a>
-            <a href="#pwd-命令">pwd 命令</a>
-            <a href="#cp-命令">cp 命令</a>
-            <a href="#mv-命令">mv 命令</a>
-            <a href="#mkdir-命令">mkdir 命令</a>
-            <a href="#rm-命令">rm 命令</a>
-            <a href="#clear-命令">clear 命令</a>
-            <a href="#cat-命令">cat 命令</a>
-            <a href="#open-命令">open 命令</a>
-            <a href="#grep-命令">grep 命令</a>
-            <a href="#find-命令">find 命令</a>
-            <a href="#chmod-命令">chmod 命令</a>
-            <a href="#命令连接符">命令连接符</a>
-            <a href="#go-run-命令">go run 命令</a>
-            <a href="#go-build-命令">go build 命令</a>
-            <a href="#golang在macos上的交叉编译方法">交叉编译</a>
+            <a href="#cd-命令" data-target="cd-命令">cd 命令</a>
+            <a href="#ls-命令" data-target="ls-命令">ls 命令</a>
+            <a href="#pwd-命令" data-target="pwd-命令">pwd 命令</a>
+            <a href="#cp-命令" data-target="cp-命令">cp 命令</a>
+            <a href="#mv-命令" data-target="mv-命令">mv 命令</a>
+            <a href="#mkdir-命令" data-target="mkdir-命令">mkdir 命令</a>
+            <a href="#rm-命令" data-target="rm-命令">rm 命令</a>
+            <a href="#clear-命令" data-target="clear-命令">clear 命令</a>
+            <a href="#cat-命令" data-target="cat-命令">cat 命令</a>
+            <a href="#open-命令" data-target="open-命令">open 命令</a>
+            <a href="#grep-命令" data-target="grep-命令">grep 命令</a>
+            <a href="#find-命令" data-target="find-命令">find 命令</a>
+            <a href="#chmod-命令" data-target="chmod-命令">chmod 命令</a>
+            <a href="#命令连接符" data-target="命令连接符">命令连接符</a>
+            <a href="#go-run-命令" data-target="go-run-命令">go run 命令</a>
+            <a href="#go-build-命令" data-target="go-build-命令">go build 命令</a>
+            <a href="#golang在macos上的交叉编译方法" data-target="golang在macos上的交叉编译方法">交叉编译</a>
         </div>
     </nav>
 
@@ -891,8 +947,83 @@ go build -o myapp # 编译并将输出文件命名为 `myapp`</code></pre>
 
         <div class="bottom-buttons">
             <a href="../../../index.html" class="bottom-btn">星奈のファン応援会に戻る</a>
-            <a href="#" class="bottom-btn">再看一遍(♡-𖥦-)/♥</a>
+            <a href="#" class="bottom-btn back-to-top">再看一遍(♡-𖥦-)/♥</a>
         </div>
     </div>
+
+    <!-- 新增：锚点跳转动画与导航联动JavaScript -->
+    <script>
+        // 1. 平滑滚动增强（兼容所有浏览器）
+        document.querySelectorAll('.top-nav a:not(.nav-home-btn)').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('data-target');
+                const targetElement = document.getElementById(targetId);
+                
+                if (targetElement) {
+                    // 滚动偏移量与scroll-margin-top一致（桌面70px，移动端60px）
+                    const scrollOffset = window.innerWidth <= 768 ? 60 : 70;
+                    window.scrollTo({
+                        top: targetElement.offsetTop - scrollOffset,
+                        behavior: 'smooth'
+                    });
+
+                    // 跳转后高亮卡片（增强视觉反馈）
+                    setTimeout(() => {
+                        targetElement.setAttribute('data-active', 'true');
+                        setTimeout(() => {
+                            targetElement.removeAttribute('data-active');
+                        }, 2000);
+                    }, 100);
+                }
+            });
+        });
+
+        // 2. 滚动时导航联动高亮
+        function highlightNavOnScroll() {
+            const scrollPosition = window.scrollY + 100; // 提前100px高亮，体验更流畅
+            const navLinks = document.querySelectorAll('.top-nav a:not(.nav-home-btn)');
+            const commandCards = document.querySelectorAll('.command-card');
+
+            commandCards.forEach(card => {
+                const cardTop = card.offsetTop;
+                const cardBottom = cardTop + card.offsetHeight;
+                const cardId = card.getAttribute('id');
+
+                // 判断卡片是否在当前视图中
+                if (scrollPosition >= cardTop && scrollPosition < cardBottom) {
+                    navLinks.forEach(link => {
+                        if (link.getAttribute('data-target') === cardId) {
+                            link.classList.add('active');
+                        } else {
+                            link.classList.remove('active');
+                        }
+                    });
+                }
+            });
+        }
+
+        // 3. 底部"再看一遍"按钮平滑回到顶部
+        document.querySelector('.back-to-top').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+
+            // 回到顶部后取消所有导航高亮
+            setTimeout(() => {
+                document.querySelectorAll('.top-nav a.active').forEach(link => {
+                    link.classList.remove('active');
+                });
+            }, 500);
+        });
+
+        // 监听滚动事件，实时更新导航高亮
+        window.addEventListener('scroll', highlightNavOnScroll);
+
+        // 页面加载完成后初始化高亮状态
+        window.addEventListener('load', highlightNavOnScroll);
+    </script>
 </body>
 </html>
