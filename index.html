@@ -10,14 +10,13 @@
     <meta name="author" content="fumimutsumi">
     <link rel="icon" type="image/x-icon" href="assets/images/ico/hoshina-avatar-round.ico">
     <style>
-        /* ===== 全局重置 + 核心变量 ===== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: "幼圆", "Microsoft YaHei", "Segoe UI", sans-serif;
             -webkit-tap-highlight-color: transparent;
-            transition: all 0.2s ease; /* 统一温和过渡，避免突兀 */
+            transition: all 0.2s ease;
         }
 
         :root {
@@ -31,9 +30,8 @@
             --radius-full: 30px;
         }
 
-        /* ===== 基础样式（稳定优先）===== */
         body {
-            background: linear-gradient(135deg, #e0f7fa, #b2ebf2); /* 恢复温和渐变 */
+            background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
             min-height: 100vh;
             padding: 1rem;
             padding-bottom: 2rem;
@@ -42,7 +40,6 @@
             overflow-x: hidden;
         }
 
-        /* ===== 布局容器 ===== */
         .container {
             max-width: 1400px;
             margin: 0 auto;
@@ -52,12 +49,11 @@
             position: relative;
         }
 
-        /* ===== 欢迎语区域（恢复渐变文字+微元素）===== */
         .welcome-section {
             text-align: center;
             padding: 1.5rem;
             background: var(--card-bg);
-            backdrop-filter: blur(6px); /* 降低模糊度，减少性能压力 */
+            backdrop-filter: blur(6px);
             border-radius: var(--radius-md);
             box-shadow: var(--shadow-sm);
             border: 1px solid var(--card-border);
@@ -65,7 +61,6 @@
         }
 
         .welcome-section::before {
-            /* 顶部渐变条微元素 */
             content: '';
             position: absolute;
             top: 0;
@@ -83,7 +78,6 @@
             font-weight: 500;
             height: 2.8rem;
             line-height: 2.8rem;
-            /* 恢复渐变文字 */
             background: linear-gradient(90deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             background-clip: text;
@@ -95,7 +89,6 @@
             font-size: 1rem;
         }
 
-        /* ===== 搜索框区域（恢复交互+伪类）===== */
         .search-section {
             background: var(--card-bg);
             backdrop-filter: blur(6px);
@@ -137,7 +130,6 @@
         }
 
         .search-input:focus {
-            /* focus伪类效果 */
             border-color: var(--primary);
             box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2), var(--shadow-md);
             background: white;
@@ -163,33 +155,37 @@
         }
 
         .engine-btn.active {
-            /* active伪类渐变背景 */
             background: linear-gradient(90deg, var(--primary), var(--secondary));
             color: white;
             box-shadow: var(--shadow-md);
         }
 
         .engine-btn:hover:not(.active) {
-            /* hover伪类效果 */
             background: white;
             box-shadow: var(--shadow-md);
             transform: translateY(-1px);
         }
 
         .engine-btn:active:not(.active) {
-            /* active按压效果 */
             transform: translateY(0);
             box-shadow: var(--shadow-sm);
         }
 
-        /* ===== 应用网格 ===== */
+        .apps-section {
+            background: var(--card-bg);
+            backdrop-filter: blur(6px);
+            border-radius: var(--radius-md);
+            padding: 1.2rem;
+            border: 1px solid var(--card-border);
+            box-shadow: var(--shadow-sm);
+        }
+
         .apps-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
             gap: 1rem;
         }
 
-        /* ===== 应用卡片（恢复透明渐变+伪类+微元素）===== */
         .app-card {
             background: var(--card-bg);
             backdrop-filter: blur(6px);
@@ -200,13 +196,12 @@
             flex-direction: column;
             align-items: center;
             text-align: center;
-            min-height: 180px; /* 固定最小高度，避免抖动 */
+            min-height: 180px;
             position: relative;
             box-shadow: var(--shadow-sm);
         }
 
         .app-card::before {
-            /* 顶部渐变条微元素 */
             content: '';
             position: absolute;
             top: 0;
@@ -218,7 +213,6 @@
             border-top-right-radius: var(--radius-md);
         }
 
-        /* 特殊卡片渐变背景 */
         .app-card.bing {
             background: linear-gradient(135deg, rgba(0, 164, 228, 0.2), rgba(0, 128, 157, 0.2));
             color: #00809d;
@@ -249,7 +243,6 @@
             background: linear-gradient(90deg, #ff85ad, #fb7299);
         }
 
-        /* 卡片hover伪类效果（温和不突兀） */
         .app-card:hover {
             transform: translateY(-3px) scale(1.02);
             box-shadow: var(--shadow-md);
@@ -310,7 +303,6 @@
             box-shadow: none;
         }
 
-        /* 特殊卡片按钮 */
         .app-card.bing .app-link {
             background: linear-gradient(90deg, #00a4e4, #00809d);
         }
@@ -323,7 +315,6 @@
             background: linear-gradient(90deg, #ff85ad, #fb7299);
         }
 
-        /* ===== 星奈专属卡片（去掉对话框，仅保留图片+渐变背景）===== */
         .hoshina-card {
             padding: 1rem;
             justify-content: center;
@@ -339,7 +330,7 @@
         .hoshina-img-container {
             position: relative;
             width: 100%;
-            height: 140px; /* 固定高度，确保图片完整 */
+            height: 140px;
             border-radius: 8px;
             overflow: hidden;
             border: 1px solid rgba(255, 154, 158, 0.5);
@@ -351,12 +342,10 @@
             object-fit: cover;
         }
 
-        /* 星奈卡片hover效果 */
         .hoshina-card:hover .hoshina-img {
             transform: scale(1.05);
         }
 
-        /* ===== 响应式适配（保持稳定）===== */
         @media (max-width: 768px) {
             .container {
                 gap: 1rem;
@@ -426,7 +415,6 @@
             }
         }
 
-        /* iOS安全区适配 */
         @supports (padding-bottom: env(safe-area-inset-bottom)) {
             body {
                 padding-bottom: env(safe-area-inset-bottom);
@@ -437,13 +425,11 @@
 </head>
 <body>
     <div class="container">
-        <!-- 欢迎语区域 -->
         <section class="welcome-section">
             <div class="welcome-text" id="randomWelcome">加油！今天也是进步的一天～</div>
             <p class="welcome-desc">每一天都是新的开始</p>
         </section>
 
-        <!-- 搜索框区域 -->
         <section class="search-section">
             <div class="search-container">
                 <input type="text" class="search-input" id="searchInput" 
@@ -456,7 +442,6 @@
             </div>
         </section>
 
-        <!-- 应用卡片区域 -->
         <section class="apps-section">
             <div class="apps-grid">
                 <div class="app-card">
@@ -508,7 +493,6 @@
                     <a href="https://www.bilibili.com" target="_blank" class="app-link">前往B站</a>
                 </div>
 
-                <!-- 星奈卡片：去掉对话框，仅保留图片 -->
                 <div class="app-card hoshina-card">
                     <div class="hoshina-img-container">
                         <img src="assets/images/jpg/hoshina-error-404.jpg" alt="hoshina" class="hoshina-img" id="hoshinaImage">
@@ -519,15 +503,14 @@
     </div>
 
     <script>
-        // ===== 1. 欢迎语随机循环切换（温和替换，无抖动）=====
         const welcomeTexts = [
             "加油！今天也是进步的一天～",
             "Keep going! Every step counts!",
             "がんばれ！今日も一歩前へ！",
-            "学习前端超有趣，坚持就是胜利！",
+            "学习前端超有趣,坚持就是胜利！",
             "Learning front-end is fun, never give up!",
             "フロントエンド学習は楽しい！諦めないで！",
-            "代码如诗，用心书写每一行～",
+            "代码如诗,用心书写每一行～",
             "Code is poetry, write with heart!",
             "コードは詩のようで、心を込めて書こう！"
         ];
@@ -538,7 +521,6 @@
             
             setInterval(() => {
                 currentIndex = (currentIndex + 1) % welcomeTexts.length;
-                // 温和过渡，避免抖动
                 welcomeElement.style.opacity = '0.6';
                 setTimeout(() => {
                     welcomeElement.textContent = welcomeTexts[currentIndex];
@@ -547,7 +529,6 @@
             }, 5000);
         }
 
-        // ===== 2. 星奈图片循环切换（仅淡入，无多余效果）=====
         const hoshinaConfig = [
             { img: "assets/images/jpg/hoshina-error-404.jpg" },
             { img: "assets/images/jpg/hoshina-profile.jpg" },
@@ -562,7 +543,6 @@
                 currentIndex = (currentIndex + 1) % hoshinaConfig.length;
                 const config = hoshinaConfig[currentIndex];
                 
-                // 简单淡入，避免布局变化
                 imgElement.style.opacity = '0.5';
                 setTimeout(() => {
                     imgElement.src = config.img;
@@ -571,7 +551,6 @@
             }, 8000);
         }
 
-        // ===== 3. 搜索功能（带交互，无抽搐）=====
         let currentEngine = 'bing';
         const searchEngines = {
             bing: 'https://www.bing.com/search?q=',
@@ -583,7 +562,6 @@
             const searchInput = document.getElementById('searchInput');
             const engineButtons = document.querySelectorAll('.engine-btn');
             
-            // 引擎切换
             engineButtons.forEach(btn => {
                 btn.addEventListener('click', function() {
                     engineButtons.forEach(b => b.classList.remove('active'));
@@ -592,7 +570,6 @@
                 });
             });
             
-            // 搜索提交
             searchInput.addEventListener('keypress', function(e) {
                 if (e.key === 'Enter') {
                     const query = this.value.trim();
@@ -605,11 +582,10 @@
             });
         }
 
-        // ===== 页面加载后初始化 =====
         document.addEventListener('DOMContentLoaded', function() {
-            cycleWelcomeText();    // 欢迎语循环
-            cycleHoshinaContent(); // 星奈图片循环
-            initSearch();          // 搜索功能
+            cycleWelcomeText();    
+            cycleHoshinaContent(); 
+            initSearch();          
         });
     </script>
 </body>

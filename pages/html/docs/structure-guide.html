@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="icon" type="image/x-icon" href="../../assets/images/ico/hoshina-avatar-round.ico">
+    <link rel="icon" type="image/x-icon" href="../../../assets/images/ico/hoshina-avatar-round.ico">
     <title>文件结构规范说明</title>
     <style>
-        /* 全局基础样式 - 与版权声明HTML完全对齐 */
+        /* 全局基础样式 */
         * {
             margin: 0;
             padding: 0;
@@ -20,7 +20,7 @@
             padding: 2rem 5% 5rem;
             min-height: 100vh;
             line-height: 1.8;
-            /* 双层背景纹理 - 保持与参考代码一致 */
+            /* 双层背景纹理 */
             background-image: 
                 radial-gradient(rgba(109, 104, 117, 0.04) 1px, transparent 1px),
                 url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%236d6875' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
@@ -29,7 +29,7 @@
             overflow-x: hidden; /* 隐藏浮动元素溢出 */
         }
 
-        /* 浮动彩蛋元素 - 与参考代码风格统一 */
+        /* 浮动彩蛋元素 */
         .floating-egg {
             position: fixed;
             pointer-events: none; /* 不影响点击 */
@@ -59,7 +59,7 @@
             animation: float 12s linear infinite;
         }
 
-        /* 顶部长方形渐变按钮 - 优化交互细节 */
+        /* 顶部长方形渐变按钮 */
         .top-home-btn {
             display: block;
             width: 100%;
@@ -82,7 +82,7 @@
             position: relative;
             overflow: hidden;
         }
-        /* 按钮光泽效果 - 与底部按钮统一 */
+        /* 按钮光泽效果 */
         .top-home-btn::before {
             content: "";
             position: absolute;
@@ -105,7 +105,7 @@
             box-shadow: 0 2px 6px rgba(109, 104, 117, 0.08);
         }
 
-        /* 主标题样式 - 补充渐变文字和淡入动画 */
+        /* 主标题样式 */
         .main-title {
             text-align: center;
             font-size: 1.8rem;
@@ -120,7 +120,7 @@
             animation: fadeInUp 1s ease 0.3s forwards;
         }
 
-        /* 版本信息栏 - 优化样式融入整体风格 */
+        /* 版本信息栏 */
         .version-info {
             max-width: 800px;
             margin: 0 auto 2.5rem;
@@ -157,10 +157,10 @@
             color: #6d6875;
         }
 
-        /* 正文卡片样式 - 统一卡片参数 */
+        /* 正文卡片样式 */
         .copyright-card {
             position: relative;
-            background-color: rgba(255, 255, 255, 0.85); /* 与参考代码一致的透明度 */
+            background-color: rgba(255, 255, 255, 0.85); 
             border-radius: 16px;
             padding: 2.2rem;
             margin: 0 auto 2.5rem;
@@ -177,7 +177,7 @@
             animation: fadeInUp 0.8s ease 0.7s forwards;
         }
 
-        /* 章节标题样式 - 补充装饰符号和动画 */
+        /* 章节标题样式 */
         .copyright-card h2 {
             font-size: 1.5rem;
             margin: 2.5rem 0 1.2rem;
@@ -209,7 +209,7 @@
             color: #bfa0b0;
         }
 
-        /* 列表样式 - 优化间距和颜色 */
+        /* 列表样式 */
         .copyright-card ul {
             margin: 1rem 0 1rem 2.2rem;
         }
@@ -234,7 +234,7 @@
             transform: translateX(5px);
         }
 
-        /* 分隔线样式 - 优化渐变效果 */
+        /* 分隔线样式 */
         .copyright-card hr {
             height: 1px;
             background: linear-gradient(90deg, transparent, #d8b0c0, transparent);
@@ -242,7 +242,7 @@
             border: none;
         }
 
-        /* 图片样式 - 补充hover交互 */
+        /* 图片样式 */
         .copyright-card img {
             display: block;
             margin: 1.5rem auto; /* 居中显示 */
@@ -257,7 +257,7 @@
             box-shadow: 0 6px 16px rgba(109, 104, 117, 0.15);
         }
 
-        /* 表格样式 - 优化配色贴合主风格 */
+        /* 表格样式 */
         .copyright-card table {
             width: 100%;
             border-collapse: collapse;
@@ -282,7 +282,7 @@
             background-color: rgba(240, 200, 204, 0.1);
         }
 
-        /* 引用样式 - 优化背景和边框 */
+        /* 引用样式 */
         .copyright-card blockquote {
             font-style: italic;
             color: #7a7585;
@@ -294,7 +294,7 @@
             box-shadow: 0 2px 8px rgba(109, 104, 117, 0.05);
         }
 
-        /* 链接样式 - 与参考代码统一下划线动画 */
+        /* 链接样式 */
         .copyright-card a {
             color: #6d6875;
             text-decoration: none;
@@ -318,7 +318,7 @@
             width: 100%;
         }
 
-        /* 代码样式 - 补充基础样式 */
+        /* 代码样式 */
         .copyright-card code {
             background-color: rgba(109, 104, 117, 0.05);
             padding: 0.2rem 0.4rem;
@@ -337,7 +337,7 @@
             border-left: 3px solid #d8b0c0;
         }
 
-        /* 底部按钮容器 - 补充淡入动画 */
+        /* 底部按钮容器 */
         .bottom-buttons {
             display: flex;
             justify-content: center;
@@ -347,7 +347,7 @@
             transform: translateY(30px);
             animation: fadeInUp 0.8s ease 0.9s forwards;
         }
-        /* 底部圆形按钮 - 补充光泽动画 */
+        /* 底部圆形按钮 */
         .bottom-btn {
             display: inline-flex;
             align-items: center;
@@ -390,7 +390,7 @@
             box-shadow: 0 2px 8px rgba(109, 104, 117, 0.1);
         }
 
-        /* 核心动画 - 与参考代码完全一致 */
+        /* 核心动画 */
         @keyframes float {
             0% { transform: translate(0, 0) rotate(0deg); }
             25% { transform: translate(10px, -15px) rotate(5deg); }
@@ -410,7 +410,7 @@
             100% { transform: rotate(30deg) translateX(100%); }
         }
 
-        /* 移动端适配 - 保持与参考代码一致的逻辑 */
+        /* 移动端适配 */
         @media (max-width: 768px) {
             body {
                 padding: 1.5rem 3% 2rem;
@@ -491,7 +491,6 @@
     </style>
 </head>
 <body>
-    <!-- 浮动彩蛋元素 - 与版权声明HTML一致 -->
     <div class="floating-egg egg-star">✦</div>
     <div class="floating-egg egg-code">✨</div>
     <div class="floating-egg egg-heart">♥</div>
@@ -501,8 +500,8 @@
     <h1 class="main-title">文件结构规范说明</h1>
 
     <div class="version-info">
-        <span><strong>版本</strong>: 1.1</span>
-        <span><strong>最后更新</strong>: 2025-12-1</span>
+        <span><strong>版本</strong>: 1.2</span>
+        <span><strong>最后更新</strong>: 2025-12-4</span>
         <span><strong>维护者</strong>: fumimutsumi</span>
     </div>
 
@@ -561,17 +560,31 @@ docs/
         <p>存放所有页面文件</p>
         <pre>
 pages/
-├── html/            # HTML 页面资源
-├── mini-project/    # 小项目文件
-└── troubleshooting/ # 疑难解答文档(markdown文件夹下为修改版本，html文件夹下为正式版本)</pre>
+├──html/        # 一般HTML页面资源
+│├──docs/        # 文档页面资源
+││└──详细文件
+│├──root-directory/        # 根目录页面资源
+││└──详细文件
+│├──troubleshooting/        # 疑难解答页面资源
+││└──详细文件
+│└──其它文件
+└──mini-project/        # 非独立仓库或者暂时的完整小项目文件
+    └──详细文件</pre>
+
+        <h3>troubleshooting/</h3>
+        <p>存放疑难解答文档</p>
+        <pre>
+├──macos-terminal-grammar.md        # macOS终端语法文档
+└──markdown-grammar.md        # markdown语法文档
+</pre>
 
         <hr>
 
         <h2>使用说明</h2>
         <ol>
             <li>所有路径均从根目录开始计算</li>
-            <li>文件命名使用英文符号，避免兼容性问题</li>
-            <li>各文件夹按功能明确分类，便于维护</li>
+            <li>文件命名使用英文符号,避免兼容性问题</li>
+            <li>各文件夹按功能明确分类,便于维护</li>
         </ol>
 
         <blockquote>
@@ -580,7 +593,7 @@ pages/
     </div>
 
     <div class="bottom-buttons">
-        <a href="../../index.html" class="bottom-btn">星奈のファン応援会に戻る</a>
+        <a href="/" class="bottom-btn">星奈のファン応援会に戻る</a>
         <a href="#" class="bottom-btn">再看一遍(♡-𖥦-)/♥</a>
     </div>
 

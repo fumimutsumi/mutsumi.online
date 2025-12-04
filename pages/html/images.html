@@ -20,7 +20,7 @@
             padding: 2rem 5%;
             line-height: 1.6;
             scroll-behavior: smooth; /* 平滑滚动基础 */
-            /* 双层背景纹理 - 与参考代码一致 */
+            /* 双层背景纹理 */
             background-image: 
                 radial-gradient(rgba(109, 104, 117, 0.04) 1px, transparent 1px),
                 url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%236d6875' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
@@ -94,7 +94,7 @@
         h2:nth-of-type(2) { animation-delay: 0.4s; }
         h2:nth-of-type(3) { animation-delay: 0.6s; }
 
-        /* 图片卡片容器 - 保持布局，优化间距 */
+        /* 图片卡片容器 - 保持布局,优化间距 */
         .image-container {
             display: flex;
             flex-wrap: wrap;
@@ -102,15 +102,15 @@
             margin-bottom: 2rem;
         }
         .image-card {
-            flex: 1 1 280px; /* 响应式适配，最小宽度280px */
+            flex: 1 1 280px; /* 响应式适配,最小宽度280px */
             background-color: rgba(255, 255, 255, 0.85); /* 高透明背景 */
-            border-radius: 16px; /* 与参考代码统一圆角 */
+            border-radius: 16px;
             padding: 1.5rem;
             box-shadow: 0 6px 18px rgba(109, 104, 117, 0.08); /* 柔和阴影 */
             transition: all 0.3s ease; /* 过渡动画 */
-            scroll-margin-top: 6rem; /* 锚点跳转偏移（增大，避免被导航遮挡） */
+            scroll-margin-top: 6rem; /* 锚点跳转偏移(增大,避免被导航遮挡) */
             position: relative;
-            /* 渐变边框 - 参考卡片样式 */
+            /* 渐变边框 */
             border: 2px solid transparent;
             background-clip: padding-box, border-box;
             background-origin: padding-box, border-box;
@@ -136,8 +136,8 @@
         .image-card img {
             width: 100%;
             height: auto; /* 自然适配卡片高度 */
-            max-height: 350px; /* 限制最大高度，避免过高 */
-            object-fit: contain; /* 完整显示图片，不裁剪 */
+            max-height: 350px; /* 限制最大高度,避免过高 */
+            object-fit: contain; /* 完整显示图片,不裁剪 */
             border-radius: 12px; /* 统一圆角 */
             display: block;
             margin: 0 auto; /* 水平居中 */
@@ -153,16 +153,16 @@
         .image-card:hover img {
             transform: scale(1.03);
         }
-        /* :target伪类：锚点跳转后高亮目标卡片（新增平滑过渡） */
+        /* :target伪类:锚点跳转后高亮目标卡片 */
         .image-card:target {
             border-color: #bfa0b0; /* 辅助色边框 */
             box-shadow: 0 0 0 4px rgba(191, 160, 176, 0.15), 0 8px 24px rgba(109, 104, 117, 0.3); /* 双层阴影 */
             transform: translateY(-8px) scale(1.02);
             z-index: 10;
-            /* 新增脉冲动画，强调选中状态 */
+            /* 脉冲动画,强调选中状态 */
             animation: pulse 2s ease-in-out;
         }
-        /* 可选：添加高亮提示文本（锚点选中时显示） */
+        /* 添加高亮提示文本(锚点选中时显示) */
         .image-card:target::after {
             content: "当前选中 ✨";
             position: absolute;
@@ -180,7 +180,7 @@
             animation: fadeIn 0.5s ease forwards;
         }
 
-        /* 右侧锚点样式（完全保留原有样式，新增.active状态） */
+        /* 右侧锚点样式 */
         .anchor-nav {
             position: fixed;
             top: 50%;
@@ -205,7 +205,7 @@
             transition: all 0.2s ease;
             white-space: nowrap;
         }
-        /* 新增：锚点激活状态（当前视图卡片对应的导航项高亮） */
+        /* 锚点激活状态(当前视图卡片对应的导航项高亮) */
         .anchor-nav a.active {
             background: linear-gradient(135deg, #f0c8cc, #d8b0c0);
             color: #6d6875;
@@ -275,7 +275,7 @@
             font-size: 1.2rem;
         }
 
-        /* 核心动画 - 新增锚点相关动画 */
+        /* 核心动画 */
         @keyframes float {
             0% { transform: translate(0, 0) rotate(0deg); }
             25% { transform: translate(10px, -15px) rotate(5deg); }
@@ -294,19 +294,19 @@
             0% { transform: rotate(30deg) translateX(-100%); }
             100% { transform: rotate(30deg) translateX(100%); }
         }
-        /* 新增：锚点选中脉冲动画 */
+        /* 锚点选中脉冲动画 */
         @keyframes pulse {
             0% { box-shadow: 0 0 0 4px rgba(191, 160, 176, 0.15), 0 8px 24px rgba(109, 104, 117, 0.3); }
             50% { box-shadow: 0 0 0 6px rgba(191, 160, 176, 0.2), 0 10px 28px rgba(109, 104, 117, 0.35); }
             100% { box-shadow: 0 0 0 4px rgba(191, 160, 176, 0.15), 0 8px 24px rgba(109, 104, 117, 0.3); }
         }
-        /* 新增：提示文本淡入动画 */
+        /* 提示文本淡入动画 */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateX(-50%) translateY(-10px); }
             to { opacity: 1; transform: translateX(-50%) translateY(0); }
         }
 
-        /* 移动端适配（保留原有导航逻辑，仅优化动画适配） */
+        /* 移动端适配(保留原有导航逻辑,仅优化动画适配) */
         @media (max-width: 768px) {
             body {
                 padding: 1.5rem 3%;
@@ -326,16 +326,16 @@
             .image-card {
                 padding: 1.2rem;
                 border-width: 1.5px;
-                scroll-margin-top: 10rem; /* 移动端增大偏移，避免被底部导航遮挡 */
+                scroll-margin-top: 10rem; /* 移动端增大偏移,避免被底部导航遮挡 */
             }
-            /* 移动端图片最大高度调整，避免占满屏幕 */
+            /* 移动端图片最大高度调整,避免占满屏幕 */
             .image-card img {
                 max-height: 280px;
             }
             .image-card:hover {
                 transform: translateY(-3px) scale(1.01); /* 弱化移动端缩放 */
             }
-            /* 右侧锚点样式（完全保留原有移动端逻辑） */
+            /* 右侧锚点样式(完全保留原有移动端逻辑) */
             .anchor-nav {
                 position: fixed;
                 top: auto;
@@ -380,14 +380,12 @@
     </style>
 </head>
 <body>
-    <!-- 浮动彩蛋元素 - 补充装饰 -->
     <div class="floating-egg egg-star">✦</div>
     <div class="floating-egg egg-code">✨</div>
     <div class="floating-egg egg-heart">♥</div>
 
     <h1>星奈の秘密収集室へようこそ</h1>
 
-    <!-- 悬浮导航完全保留，仅新增.active状态用于联动 -->
     <div class="anchor-nav">
         <a href="#anchor1" data-target="anchor1">星奈酱圆角头像</a>
         <a href="#anchor2" data-target="anchor2">星奈酱头像</a>
@@ -439,13 +437,12 @@
         </div>
     </div>
 
-    <a href="../../index.html" class="back-link">
+    <a href="/" class="back-link">
         <span class="btn-icon">🏠</span> 星奈のファン応援会に戻る
     </a>
 
-    <!-- 新增：锚点跳转动画与导航联动JavaScript -->
     <script>
-        // 1. 平滑滚动增强（兼容部分浏览器）
+        // 1. 平滑滚动增强(兼容部分浏览器)
         document.querySelectorAll('.anchor-nav a').forEach(link => {
             link.addEventListener('click', function(e) {
                 e.preventDefault(); // 阻止默认跳转
@@ -453,13 +450,13 @@
                 const targetElement = document.getElementById(targetId);
                 
                 if (targetElement) {
-                    // 平滑滚动到目标元素，偏移量与scroll-margin-top一致
+                    // 平滑滚动到目标元素,偏移量与scroll-margin-top一致
                     window.scrollTo({
-                        top: targetElement.offsetTop - 96, // 96px = 6rem（与scroll-margin-top对应）
+                        top: targetElement.offsetTop - 96, // 96px = 6rem(与scroll-margin-top对应)
                         behavior: 'smooth'
                     });
 
-                    // 跳转后给目标元素添加:target效果（部分浏览器需要手动触发）
+                    // 跳转后给目标元素添加:target效果(部分浏览器需要手动触发)
                     setTimeout(() => {
                         targetElement.setAttribute('data-target-active', 'true');
                         setTimeout(() => {
@@ -472,7 +469,7 @@
 
         // 2. 滚动时导航联动高亮
         function highlightAnchorOnScroll() {
-            const scrollPosition = window.scrollY + 150; // 偏移150px，提前高亮
+            const scrollPosition = window.scrollY + 150; // 偏移150px,提前高亮
             const anchorLinks = document.querySelectorAll('.anchor-nav a');
             const imageCards = document.querySelectorAll('.image-card');
 
@@ -495,7 +492,7 @@
             });
         }
 
-        // 监听滚动事件，实时更新导航高亮
+        // 监听滚动事件,实时更新导航高亮
         window.addEventListener('scroll', highlightAnchorOnScroll);
 
         // 页面加载完成后初始化一次高亮

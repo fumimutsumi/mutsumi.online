@@ -17,10 +17,9 @@
         body {
             background-color: #fadadd; /* 主背景色 */
             color: #6d6875; /* 主字体色 */
-            padding: 8rem 5% 5rem; /* 顶部预留导航空间，底部预留按钮空间 */
+            padding: 8rem 5% 5rem; /* 顶部预留导航空间,底部预留按钮空间 */
             min-height: 100vh;
             line-height: 1.8;
-            /* 增强背景纹理，让花纹更明显 */
             background-image: 
                 radial-gradient(rgba(109, 104, 117, 0.06) 1px, transparent 1px),
                 radial-gradient(rgba(109, 104, 117, 0.04) 1px, transparent 1px);
@@ -88,7 +87,6 @@
             transform: translateY(1px);
             box-shadow: 0 1px 3px rgba(109, 104, 117, 0.15);
         }
-        /* 新增：导航锚点激活状态（当前视图高亮） */
         .top-nav a.active {
             background: linear-gradient(135deg, #f0c8cc, #d8b0c0);
             color: #6d6875;
@@ -109,10 +107,10 @@
             text-shadow: 1px 1px 3px rgba(109, 104, 117, 0.1);
         }
 
-        /* 正文卡片样式：渐变圆角边框+透明背景 */
+        /* 正文卡片样式:渐变圆角边框+透明背景 */
         .command-card {
             position: relative;
-            background-color: rgba(255, 255, 255, 0.75); /* 高透明背景，不影响阅读 */
+            background-color: rgba(255, 255, 255, 0.75); /* 高透明背景,不影响阅读 */
             border-radius: 16px;
             padding: 2rem;
             margin-bottom: 2.5rem;
@@ -125,21 +123,21 @@
                 linear-gradient(135deg, #f0c8cc, #d8b0c0, #bfa0b0); /* 贴合主色调的柔和渐变 */
             box-shadow: 0 6px 18px rgba(109, 104, 117, 0.08);
             transition: all 0.3s ease;
-            scroll-margin-top: 70px; /* 解决导航栏遮挡问题，值大于导航栏高度 */
+            scroll-margin-top: 70px; /* 解决导航栏遮挡问题,值大于导航栏高度 */
         }
         /* 卡片悬浮效果 */
         .command-card:hover {
             box-shadow: 0 10px 24px rgba(109, 104, 117, 0.12);
             transform: translateY(-3px);
         }
-        /* 新增：锚点选中卡片高亮+脉冲动画 */
+        /* 锚点选中卡片高亮+脉冲动画 */
         .command-card:target {
             border-color: #bfa0b0;
             box-shadow: 0 0 0 4px rgba(191, 160, 176, 0.15), 0 10px 24px rgba(109, 104, 117, 0.15);
             transform: translateY(-5px);
             animation: pulse 2s ease-in-out;
         }
-        /* 新增：锚点选中提示文本 */
+        /* 锚点选中提示文本 */
         .command-card:target::after {
             content: "当前查看 ✨";
             position: absolute;
@@ -199,7 +197,7 @@
         .command-card th, .command-card td {
             padding: 0.8rem 1rem;
             text-align: left;
-            border: 1px solid #e0c4c8; /* 淡色边框，不刺眼 */
+            border: 1px solid #e0c4c8; /* 淡色边框,不刺眼 */
         }
         .command-card th {
             background-color: rgba(109, 104, 117, 0.08);
@@ -209,7 +207,7 @@
             background-color: rgba(109, 104, 117, 0.03);
         }
 
-        /* 章节分隔线（保留原markdown的---） */
+        /* 章节分隔线 */
         .divider {
             height: 1px;
             background: linear-gradient(90deg, transparent, #d8b0c0, transparent);
@@ -229,8 +227,8 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 140px; /* 固定宽度，确保一样大 */
-            height: 140px; /* 固定高度，圆形 */
+            width: 140px; /* 固定宽度,确保一样大 */
+            height: 140px; /* 固定高度,圆形 */
             border-radius: 50%;
             background: linear-gradient(135deg, rgba(109, 104, 117, 0.2), rgba(255, 255, 255, 0.3));
             color: #6d6875;
@@ -254,7 +252,7 @@
             box-shadow: 0 2px 8px rgba(109, 104, 117, 0.1);
         }
 
-        /* 新增：锚点相关动画 */
+        /* 锚点相关动画 */
         @keyframes pulse {
             0% { box-shadow: 0 0 0 4px rgba(191, 160, 176, 0.15), 0 10px 24px rgba(109, 104, 117, 0.15); }
             50% { box-shadow: 0 0 0 6px rgba(191, 160, 176, 0.2), 0 12px 28px rgba(109, 104, 117, 0.2); }
@@ -379,19 +377,19 @@
             <blockquote>切换当前工作目录</blockquote>
             <h3>语法</h3>
             <pre><code>cd [目录路径]</code></pre>
-            <p>（请注意：实际使用时需删除反引号之间的空格，此处为展示语法而添加）</p>
+            <p>(请注意:实际使用时需删除反引号之间的空格,此处为展示语法而添加)</p>
             <h3>说明</h3>
-            <p><code>cd</code> 命令用于切换当前工作目录到指定的目录。如果不指定目录路径，则切换到用户的主目录 (<code>~</code>)。</p>
+            <p><code>cd</code> 命令用于切换当前工作目录到指定的目录。如果不指定目录路径,则切换到用户的主目录 (<code>~</code>)。</p>
             <h3>示例</h3>
-            <p><strong>切换到用户主目录：</strong></p>
+            <p><strong>切换到用户主目录:</strong></p>
             <pre><code>cd
 # 或
 cd ~</code></pre>
-            <p><strong>切换到特定目录：</strong></p>
+            <p><strong>切换到特定目录:</strong></p>
             <pre><code>cd /Users/fumimutsumi/Desktop/golang</code></pre>
-            <p><strong>切换到上一级目录：</strong></p>
+            <p><strong>切换到上一级目录:</strong></p>
             <pre><code>cd ..</code></pre>
-            <p><strong>切换到上一次所在的目录：</strong></p>
+            <p><strong>切换到上一次所在的目录:</strong></p>
             <pre><code>cd -</code></pre>
         </div>
 
@@ -413,19 +411,19 @@ cd ~</code></pre>
                 <tbody>
                     <tr>
                         <td><code>-a</code></td>
-                        <td>列出所有文件，包括以 <code>.</code> 开头的隐藏文件。</td>
+                        <td>列出所有文件,包括以 <code>.</code> 开头的隐藏文件。</td>
                     </tr>
                     <tr>
                         <td><code>-l</code></td>
-                        <td>使用长格式列出详细信息（权限、所有者、大小、修改时间）。</td>
+                        <td>使用长格式列出详细信息(权限、所有者、大小、修改时间)。</td>
                     </tr>
                     <tr>
                         <td><code>-h</code></td>
-                        <td>与 <code>-l</code> 合用，将文件大小转换为易读的单位（KB, MB）。</td>
+                        <td>与 <code>-l</code> 合用,将文件大小转换为易读的单位(KB, MB)。</td>
                     </tr>
                     <tr>
                         <td><code>-t</code></td>
-                        <td>按修改时间排序，最新的在前。</td>
+                        <td>按修改时间排序,最新的在前。</td>
                     </tr>
                     <tr>
                         <td><code>-r</code></td>
@@ -438,13 +436,13 @@ cd ~</code></pre>
                 </tbody>
             </table>
             <h3>说明</h3>
-            <p>如果不指定 <code>目录路径</code>，则默认列出当前目录的内容。</p>
+            <p>如果不指定 <code>目录路径</code>,则默认列出当前目录的内容。</p>
             <h3>示例</h3>
-            <p><strong>列出当前目录所有内容（含隐藏文件）的详细信息：</strong></p>
+            <p><strong>列出当前目录所有内容(含隐藏文件)的详细信息:</strong></p>
             <pre><code>ls -la</code></pre>
-            <p><strong>按时间倒序列出文件：</strong></p>
+            <p><strong>按时间倒序列出文件:</strong></p>
             <pre><code>ls -lt</code></pre>
-            <p><strong>按大小倒序列出文件：</strong></p>
+            <p><strong>按大小倒序列出文件:</strong></p>
             <pre><code>ls -lSh</code></pre>
         </div>
 
@@ -459,7 +457,7 @@ cd ~</code></pre>
             <p><code>pwd</code> 命令会打印出当前所在目录的绝对路径。</p>
             <h3>示例</h3>
             <pre><code>pwd
-# 输出示例：/Users/fumimutsumi/Desktop/golang</code></pre>
+# 输出示例:/Users/fumimutsumi/Desktop/golang</code></pre>
         </div>
 
         <hr class="divider">
@@ -481,30 +479,30 @@ cp [选项] 源文件... 目标目录</code></pre>
                 <tbody>
                     <tr>
                         <td><code>-r</code> 或 <code>-R</code></td>
-                        <td><strong>递归复制</strong>，用于复制目录及其全部内容。</td>
+                        <td><strong>递归复制</strong>,用于复制目录及其全部内容。</td>
                     </tr>
                     <tr>
                         <td><code>-i</code></td>
-                        <td><strong>交互模式</strong>，覆盖前会询问确认。</td>
+                        <td><strong>交互模式</strong>,覆盖前会询问确认。</td>
                     </tr>
                     <tr>
                         <td><code>-v</code></td>
-                        <td><strong>显示过程</strong>，输出正在复制的文件名。</td>
+                        <td><strong>显示过程</strong>,输出正在复制的文件名。</td>
                     </tr>
                     <tr>
                         <td><code>-n</code></td>
-                        <td><strong>不覆盖</strong>，如果目标已存在，则跳过。</td>
+                        <td><strong>不覆盖</strong>,如果目标已存在,则跳过。</td>
                     </tr>
                 </tbody>
             </table>
             <h3>说明</h3>
-            <p>复制时，如果 <code>目标</code> 是一个已存在的目录，则 <code>源文件</code> 会被复制到该目录下。</p>
+            <p>复制时,如果 <code>目标</code> 是一个已存在的目录,则 <code>源文件</code> 会被复制到该目录下。</p>
             <h3>示例</h3>
-            <p><strong>复制文件：</strong></p>
+            <p><strong>复制文件:</strong></p>
             <pre><code>cp notes.txt notes_backup.txt</code></pre>
-            <p><strong>复制目录（必须加 <code>-r</code>）：</strong></p>
+            <p><strong>复制目录(必须加 <code>-r</code>):</strong></p>
             <pre><code>cp -r old_project/ new_project/</code></pre>
-            <p><strong>交互式复制到目录：</strong></p>
+            <p><strong>交互式复制到目录:</strong></p>
             <pre><code>cp -i *.txt ~/Documents/backups/</code></pre>
         </div>
 
@@ -527,7 +525,7 @@ mv [选项] 源文件... 目标目录</code></pre>
                 <tbody>
                     <tr>
                         <td><code>-i</code></td>
-                        <td><strong>交互模式</strong>，覆盖前询问。</td>
+                        <td><strong>交互模式</strong>,覆盖前询问。</td>
                     </tr>
                     <tr>
                         <td><code>-v</code></td>
@@ -541,15 +539,15 @@ mv [选项] 源文件... 目标目录</code></pre>
             </table>
             <h3>说明</h3>
             <ul>
-                <li>当 <code>源</code> 和 <code>目标</code> 在同一目录时，操作为<strong>重命名</strong>。</li>
-                <li>当 <code>目标</code> 是一个目录时，操作为<strong>移动</strong>。</li>
+                <li>当 <code>源</code> 和 <code>目标</code> 在同一目录时,操作为<strong>重命名</strong>。</li>
+                <li>当 <code>目标</code> 是一个目录时,操作为<strong>移动</strong>。</li>
             </ul>
             <h3>示例</h3>
-            <p><strong>重命名文件：</strong></p>
+            <p><strong>重命名文件:</strong></p>
             <pre><code>mv draft.txt final_report.txt</code></pre>
-            <p><strong>移动文件到目录：</strong></p>
+            <p><strong>移动文件到目录:</strong></p>
             <pre><code>mv final_report.txt ~/Documents/</code></pre>
-            <p><strong>移动多个文件：</strong></p>
+            <p><strong>移动多个文件:</strong></p>
             <pre><code>mv file1.jpg file2.png ~/Pictures/</code></pre>
         </div>
 
@@ -571,7 +569,7 @@ mv [选项] 源文件... 目标目录</code></pre>
                 <tbody>
                     <tr>
                         <td><code>-p</code></td>
-                        <td><strong>递归创建</strong>，自动创建路径中不存在的父目录。</td>
+                        <td><strong>递归创建</strong>,自动创建路径中不存在的父目录。</td>
                     </tr>
                     <tr>
                         <td><code>-v</code></td>
@@ -580,9 +578,9 @@ mv [选项] 源文件... 目标目录</code></pre>
                 </tbody>
             </table>
             <h3>示例</h3>
-            <p><strong>创建单个目录：</strong></p>
+            <p><strong>创建单个目录:</strong></p>
             <pre><code>mkdir new_folder</code></pre>
-            <p><strong>创建多级目录（父目录不存在也会自动创建）：</strong></p>
+            <p><strong>创建多级目录(父目录不存在也会自动创建):</strong></p>
             <pre><code>mkdir -p project/src/components</code></pre>
         </div>
 
@@ -604,15 +602,15 @@ mv [选项] 源文件... 目标目录</code></pre>
                 <tbody>
                     <tr>
                         <td><code>-r</code> 或 <code>-R</code></td>
-                        <td><strong>递归删除</strong>，用于删除目录及其内容。</td>
+                        <td><strong>递归删除</strong>,用于删除目录及其内容。</td>
                     </tr>
                     <tr>
                         <td><code>-f</code></td>
-                        <td><strong>强制删除</strong>，忽略不存在的文件，不作任何提示。</td>
+                        <td><strong>强制删除</strong>,忽略不存在的文件,不作任何提示。</td>
                     </tr>
                     <tr>
                         <td><code>-i</code></td>
-                        <td><strong>交互模式</strong>，删除前逐一询问确认。</td>
+                        <td><strong>交互模式</strong>,删除前逐一询问确认。</td>
                     </tr>
                     <tr>
                         <td><code>-v</code></td>
@@ -621,13 +619,13 @@ mv [选项] 源文件... 目标目录</code></pre>
                 </tbody>
             </table>
             <h3>重要警告</h3>
-            <p><code>rm -rf</code> 命令威力巨大且不可逆，请务必<strong>再三确认路径</strong>后再执行，尤其是在根目录或家目录下。</p>
+            <p><code>rm -rf</code> 命令威力巨大且不可逆,请务必<strong>再三确认路径</strong>后再执行,尤其是在根目录或家目录下。</p>
             <h3>示例</h3>
-            <p><strong>删除文件：</strong></p>
+            <p><strong>删除文件:</strong></p>
             <pre><code>rm temp.txt</code></pre>
-            <p><strong>删除目录（必须加 <code>-r</code>）：</strong></p>
+            <p><strong>删除目录(必须加 <code>-r</code>):</strong></p>
             <pre><code>rm -r old_cache/</code></pre>
-            <p><strong>强制删除（无警告）：</strong></p>
+            <p><strong>强制删除(无警告):</strong></p>
             <pre><code>rm -rf node_modules/</code></pre>
         </div>
 
@@ -639,7 +637,7 @@ mv [选项] 源文件... 目标目录</code></pre>
             <h3>语法</h3>
             <pre><code>clear</code></pre>
             <h3>说明</h3>
-            <p>清除当前终端屏幕的所有输出，将光标移至左上角。也可使用快捷键 <strong><code>Command + K</code></strong> 实现同样效果。</p>
+            <p>清除当前终端屏幕的所有输出,将光标移至左上角。也可使用快捷键 <strong><code>Command + K</code></strong> 实现同样效果。</p>
         </div>
 
         <hr class="divider">
@@ -669,17 +667,17 @@ mv [选项] 源文件... 目标目录</code></pre>
                 </tbody>
             </table>
             <h3>说明</h3>
-            <p><code>cat</code> 适合查看<strong>小型</strong>文本文件。对于大文件，建议使用 <code>less</code> 命令（可按页浏览）。</p>
+            <p><code>cat</code> 适合查看<strong>小型</strong>文本文件。对于大文件,建议使用 <code>less</code> 命令(可按页浏览)。</p>
             <h3>示例</h3>
-            <p><strong>查看文件：</strong></p>
+            <p><strong>查看文件:</strong></p>
             <pre><code>cat config.yaml</code></pre>
-            <p><strong>查看文件并显示行号：</strong></p>
+            <p><strong>查看文件并显示行号:</strong></p>
             <pre><code>cat -n server.log</code></pre>
-            <p><strong>合并多个文件：</strong></p>
+            <p><strong>合并多个文件:</strong></p>
             <pre><code>cat part1.txt part2.txt > complete.txt</code></pre>
-            <p><strong>快速创建小文件：</strong></p>
+            <p><strong>快速创建小文件:</strong></p>
             <pre><code>cat > note.txt
-# 接着输入内容，按 Ctrl + D 保存退出</code></pre>
+# 接着输入内容,按 Ctrl + D 保存退出</code></pre>
         </div>
 
         <hr class="divider">
@@ -708,20 +706,20 @@ mv [选项] 源文件... 目标目录</code></pre>
                     </tr>
                     <tr>
                         <td><code>-R</code></td>
-                        <td>在 <code>Finder</code> 中显示该文件/目录，但不打开。</td>
+                        <td>在 <code>Finder</code> 中显示该文件/目录,但不打开。</td>
                     </tr>
                 </tbody>
             </table>
             <h3>说明</h3>
-            <p>这是macOS特有命令，使用系统默认应用打开目标。</p>
+            <p>这是macOS特有命令,使用系统默认应用打开目标。</p>
             <h3>示例</h3>
-            <p><strong>用默认应用打开：</strong></p>
+            <p><strong>用默认应用打开:</strong></p>
             <pre><code>open resume.pdf</code></pre>
-            <p><strong>用指定应用打开：</strong></p>
+            <p><strong>用指定应用打开:</strong></p>
             <pre><code>open -a "Visual Studio Code" index.html</code></pre>
-            <p><strong>在Finder中显示：</strong></p>
+            <p><strong>在Finder中显示:</strong></p>
             <pre><code>open -R /path/to/important_file</code></pre>
-            <p><strong>打开网址：</strong></p>
+            <p><strong>打开网址:</strong></p>
             <pre><code>open https://www.apple.com</code></pre>
         </div>
 
@@ -755,20 +753,20 @@ mv [选项] 源文件... 目标目录</code></pre>
                     </tr>
                     <tr>
                         <td><code>-l</code></td>
-                        <td><strong>仅打印包含匹配项的文件名</strong>，不显示具体行。</td>
+                        <td><strong>仅打印包含匹配项的文件名</strong>,不显示具体行。</td>
                     </tr>
                     <tr>
                         <td><code>-v</code></td>
-                        <td><strong>反向搜索</strong>，打印<strong>不</strong>匹配的行。</td>
+                        <td><strong>反向搜索</strong>,打印<strong>不</strong>匹配的行。</td>
                     </tr>
                 </tbody>
             </table>
             <h3>示例</h3>
-            <p><strong>在文件中搜索：</strong></p>
+            <p><strong>在文件中搜索:</strong></p>
             <pre><code>grep -n "error" server.log</code></pre>
-            <p><strong>递归搜索目录（忽略大小写）：</strong></p>
+            <p><strong>递归搜索目录(忽略大小写):</strong></p>
             <pre><code>grep -ri "TODO" ./src/</code></pre>
-            <p><strong>结合管道使用：</strong></p>
+            <p><strong>结合管道使用:</strong></p>
             <pre><code>ls -la | grep ".txt"</code></pre>
         </div>
 
@@ -790,7 +788,7 @@ mv [选项] 源文件... 目标目录</code></pre>
                 <tbody>
                     <tr>
                         <td><code>-name "模式"</code></td>
-                        <td>按文件名查找（支持通配符 <code>*</code>, <code>?</code>）。</td>
+                        <td>按文件名查找(支持通配符 <code>*</code>, <code>?</code>)。</td>
                     </tr>
                     <tr>
                         <td><code>-type f</code></td>
@@ -811,11 +809,11 @@ mv [选项] 源文件... 目标目录</code></pre>
                 </tbody>
             </table>
             <h3>示例</h3>
-            <p><strong>查找当前目录下所有 <code>.html</code> 文件：</strong></p>
+            <p><strong>查找当前目录下所有 <code>.html</code> 文件:</strong></p>
             <pre><code>find . -name "*.html"</code></pre>
-            <p><strong>查找大于 10MB 的文件：</strong></p>
+            <p><strong>查找大于 10MB 的文件:</strong></p>
             <pre><code>find . -type f -size +10M</code></pre>
-            <p><strong>查找 7 天内修改过的文件并删除（谨慎）：</strong></p>
+            <p><strong>查找 7 天内修改过的文件并删除(谨慎):</strong></p>
             <pre><code>find ./cache -type f -mtime -7 -exec rm {} \;</code></pre>
         </div>
 
@@ -827,19 +825,19 @@ mv [选项] 源文件... 目标目录</code></pre>
             <h3>语法</h3>
             <pre><code>chmod [选项] 权限模式 文件...</code></pre>
             <h3>权限说明</h3>
-            <p>权限用三位数字或字母表示（<code>u</code>用户，<code>g</code>组，<code>o</code>其他）：</p>
+            <p>权限用三位数字或字母表示(<code>u</code>用户,<code>g</code>组,<code>o</code>其他):</p>
             <ul>
                 <li><code>r</code> = 读 (4)</li>
                 <li><code>w</code> = 写 (2)</li>
                 <li><code>x</code> = 执行 (1)</li>
             </ul>
             <h3>示例</h3>
-            <p><strong>数字模式（最常用）：</strong></p>
-            <pre><code>chmod 755 script.sh    # 用户：rwx，组和其他：r-x
-chmod 644 config.json # 用户：rw-，组和其他：r--</code></pre>
-            <p><strong>字母模式：</strong></p>
+            <p><strong>数字模式(最常用):</strong></p>
+            <pre><code>chmod 755 script.sh    # 用户:rwx,组和其他:r-x
+chmod 644 config.json # 用户:rw-,组和其他:r--</code></pre>
+            <p><strong>字母模式:</strong></p>
             <pre><code>chmod u+x script.sh   # 给文件所有者添加执行权限
-chmod a-w file.txt    # 移除所有用户的写权限（a代表all）</code></pre>
+chmod a-w file.txt    # 移除所有用户的写权限(a代表all)</code></pre>
         </div>
 
         <hr class="divider">
@@ -854,17 +852,17 @@ ps aux | grep "node"
 # 统计文件行数
 cat file.txt | wc -l</code></pre>
             <h3>逻辑与 <code>&&</code></h3>
-            <p>只有前一个命令<strong>成功执行</strong>（返回状态码0），才执行后一个命令。</p>
-            <pre><code># 进入目录，成功后再列出文件
+            <p>只有前一个命令<strong>成功执行</strong>(返回状态码0),才执行后一个命令。</p>
+            <pre><code># 进入目录,成功后再列出文件
 cd ~/project && ls -la
 # 编译成功后再运行
 go build main.go && ./main</code></pre>
             <h3>逻辑或 <code>||</code></h3>
-            <p>只有前一个命令<strong>执行失败</strong>，才执行后一个命令。</p>
-            <pre><code># 尝试用code打开，失败则用vim打开
+            <p>只有前一个命令<strong>执行失败</strong>,才执行后一个命令。</p>
+            <pre><code># 尝试用code打开,失败则用vim打开
 code file.txt || vim file.txt</code></pre>
             <h3>顺序执行 <code>;</code></h3>
-            <p>无论前一个命令成功与否，都顺序执行下一个命令。</p>
+            <p>无论前一个命令成功与否,都顺序执行下一个命令。</p>
             <pre><code>echo "开始清理"; rm -f *.tmp; echo "清理完成"</code></pre>
         </div>
 
@@ -876,7 +874,7 @@ code file.txt || vim file.txt</code></pre>
             <h3>语法</h3>
             <pre><code>go run [选项] Go源文件...</code></pre>
             <h3>说明</h3>
-            <p><code>go run</code> 会快速编译代码并在内存中运行，<strong>不会</strong>在磁盘上留下可执行文件。适合快速测试。</p>
+            <p><code>go run</code> 会快速编译代码并在内存中运行,<strong>不会</strong>在磁盘上留下可执行文件。适合快速测试。</p>
             <h3>示例</h3>
             <pre><code>go run main.go
 go run .           # 运行当前包</code></pre>
@@ -890,9 +888,9 @@ go run .           # 运行当前包</code></pre>
             <h3>语法</h3>
             <pre><code>go build [选项] [包路径]</code></pre>
             <h3>说明</h3>
-            <p><code>go build</code> 会在当前目录生成一个以包名命名的可执行文件（Windows下加 <code>.exe</code>）。</p>
+            <p><code>go build</code> 会在当前目录生成一个以包名命名的可执行文件(Windows下加 <code>.exe</code>)。</p>
             <h3>示例</h3>
-            <pre><code>go build          # 编译当前包，生成可执行文件
+            <pre><code>go build          # 编译当前包,生成可执行文件
 go build -o myapp # 编译并将输出文件命名为 `myapp`</code></pre>
         </div>
 
@@ -931,29 +929,29 @@ go build -o myapp # 编译并将输出文件命名为 `myapp`</code></pre>
                 </tbody>
             </table>
             <h3>示例</h3>
-            <p><strong>编译为64位Windows程序：</strong></p>
+            <p><strong>编译为64位Windows程序:</strong></p>
             <pre><code>GOOS=windows GOARCH=amd64 go build -o myapp.exe</code></pre>
-            <p><strong>编译为64位Linux程序：</strong></p>
+            <p><strong>编译为64位Linux程序:</strong></p>
             <pre><code>GOOS=linux GOARCH=amd64 go build -o myapp-linux</code></pre>
-            <p><strong>编译为Apple Silicon Mac程序：</strong></p>
+            <p><strong>编译为Apple Silicon Mac程序:</strong></p>
             <pre><code>GOOS=darwin GOARCH=arm64 go build -o myapp-mac</code></pre>
         </div>
 
         <hr class="divider">
 
         <div style="text-align: center; color: #8a8497; font-size: 0.9rem; margin-top: 2rem;">
-            本手册会不定期更新，最后更新于 2025-12-2
+            本手册会不定期更新,最后更新于 2025-12-2
         </div>
 
         <div class="bottom-buttons">
-            <a href="../../../index.html" class="bottom-btn">星奈のファン応援会に戻る</a>
+            <a href="/" class="bottom-btn">星奈のファン応援会に戻る</a>
             <a href="#" class="bottom-btn back-to-top">再看一遍(♡-𖥦-)/♥</a>
         </div>
     </div>
 
-    <!-- 新增：锚点跳转动画与导航联动JavaScript -->
+    <!-- 锚点跳转动画与导航联动JavaScript -->
     <script>
-        // 1. 平滑滚动增强（兼容所有浏览器）
+        // 1. 平滑滚动增强(兼容所有浏览器)
         document.querySelectorAll('.top-nav a:not(.nav-home-btn)').forEach(link => {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -961,14 +959,14 @@ go build -o myapp # 编译并将输出文件命名为 `myapp`</code></pre>
                 const targetElement = document.getElementById(targetId);
                 
                 if (targetElement) {
-                    // 滚动偏移量与scroll-margin-top一致（桌面70px，移动端60px）
+                    // 滚动偏移量与scroll-margin-top一致(桌面70px,移动端60px)
                     const scrollOffset = window.innerWidth <= 768 ? 60 : 70;
                     window.scrollTo({
                         top: targetElement.offsetTop - scrollOffset,
                         behavior: 'smooth'
                     });
 
-                    // 跳转后高亮卡片（增强视觉反馈）
+                    // 跳转后高亮卡片(增强视觉反馈)
                     setTimeout(() => {
                         targetElement.setAttribute('data-active', 'true');
                         setTimeout(() => {
@@ -981,7 +979,7 @@ go build -o myapp # 编译并将输出文件命名为 `myapp`</code></pre>
 
         // 2. 滚动时导航联动高亮
         function highlightNavOnScroll() {
-            const scrollPosition = window.scrollY + 100; // 提前100px高亮，体验更流畅
+            const scrollPosition = window.scrollY + 100; // 提前100px高亮,体验更流畅
             const navLinks = document.querySelectorAll('.top-nav a:not(.nav-home-btn)');
             const commandCards = document.querySelectorAll('.command-card');
 
@@ -1019,7 +1017,7 @@ go build -o myapp # 编译并将输出文件命名为 `myapp`</code></pre>
             }, 500);
         });
 
-        // 监听滚动事件，实时更新导航高亮
+        // 监听滚动事件,实时更新导航高亮
         window.addEventListener('scroll', highlightNavOnScroll);
 
         // 页面加载完成后初始化高亮状态

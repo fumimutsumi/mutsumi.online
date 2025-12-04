@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="icon" type="image/x-icon" href="../../assets/images/ico/hoshina-avatar-round.ico">
     <style>
-        /* 全局基础样式 - 与参考代码完全对齐 */
+        /* 全局基础样式 */
         * {
             margin: 0;
             padding: 0;
@@ -20,7 +20,7 @@
             padding: 3rem 5% 5rem;
             min-height: 100vh;
             line-height: 1.8;
-            /* 双层背景纹理 - 保持与参考代码一致 */
+            /* 双层背景纹理 */
             background-image: 
                 radial-gradient(rgba(109, 104, 117, 0.04) 1px, transparent 1px),
                 url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%236d6875' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
@@ -29,7 +29,7 @@
             overflow-x: hidden; /* 隐藏浮动元素溢出 */
         }
 
-        /* 浮动彩蛋元素 - 与参考代码一致 */
+        /* 浮动彩蛋元素 */
         .floating-egg {
             position: fixed;
             pointer-events: none; /* 不影响点击 */
@@ -59,7 +59,7 @@
             animation: float 12s linear infinite;
         }
 
-        /* 主容器：保持居中布局，补充间距 */
+        /* 主容器:保持居中布局,补充间距 */
         .main-container {
             max-width: 850px;
             margin: 0 auto;
@@ -68,16 +68,15 @@
             gap: 2.5rem; /* 增大间距更透气 */
         }
 
-        /* 卡片基础样式：统一渐变边框和背景 */
+        /* 卡片基础样式:统一渐变边框和背景 */
         .card {
             position: relative;
-            background-color: rgba(255, 255, 255, 0.85); /* 与参考代码一致的高透明度 */
+            background-color: rgba(255, 255, 255, 0.85);
             border-radius: 16px;
             padding: 2.2rem;
             border: 2px solid transparent;
             background-clip: padding-box, border-box;
             background-origin: padding-box, border-box;
-            /* 替换为参考代码的辅助色渐变 */
             background-image: 
                 linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)),
                 linear-gradient(135deg, #f0c8cc, #d8b0c0, #bfa0b0);
@@ -93,7 +92,7 @@
         .card:nth-child(2) { animation-delay: 0.4s; }
         .card:nth-child(3) { animation-delay: 0.6s; }
 
-        /* 卡片装饰细节：优化光斑样式 */
+        /* 卡片装饰细节:优化光斑样式 */
         .card::before {
             content: "";
             position: absolute;
@@ -107,19 +106,19 @@
             animation: shine 8s linear infinite;
         }
 
-        /* 卡片内容层：确保层级 */
+        /* 卡片内容层:确保层级 */
         .card-content {
             position: relative;
             z-index: 1;
         }
 
-        /* 卡片悬浮效果：增强动感 */
+        /* 卡片悬浮效果:增强动感 */
         .card:hover {
             box-shadow: 0 12px 24px rgba(109, 104, 117, 0.15);
             transform: translateY(-5px) scale(1.02);
         }
 
-        /* 文本描述样式：优化可读性 */
+        /* 文本描述样式:优化可读性 */
         .card p {
             font-size: 1.1rem;
             margin-bottom: 1.8rem;
@@ -128,7 +127,7 @@
             text-shadow: 1px 1px 2px rgba(109, 104, 117, 0.05);
         }
 
-        /* 按钮样式：统一渐变+光泽动画 */
+        /* 按钮样式:统一渐变+光泽动画 */
         .btn {
             display: inline-flex;
             align-items: center;
@@ -159,7 +158,7 @@
             animation: shine 6s linear infinite;
         }
 
-        /* 按钮伪类效果：统一交互逻辑 */
+        /* 按钮伪类效果:统一交互逻辑 */
         .btn:hover {
             background: linear-gradient(135deg, rgba(240, 200, 204, 0.7), rgba(191, 160, 176, 0.5));
             color: #5a5565;
@@ -170,9 +169,8 @@
             transform: translateY(1px) scale(0.98);
             box-shadow: 0 2px 6px rgba(109, 104, 117, 0.08);
         }
-        /* 移除多余的:link/:visited伪类，保持与参考代码一致 */
 
-        /* 返回按钮卡片：统一渐变风格 */
+        /* 返回按钮卡片:统一渐变风格 */
         .back-card {
             background-image: 
                 linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)),
@@ -187,13 +185,13 @@
             width: auto; /* 移动端再全屏 */
         }
 
-        /* 按钮图标点缀（可选，增强风格） */
+        /* 按钮图标点缀 */
         .btn-icon {
             margin-right: 0.6rem;
             font-size: 1.15rem;
         }
 
-        /* 核心动画 - 与参考代码完全一致 */
+        /* 核心动画 */
         @keyframes float {
             0% { transform: translate(0, 0) rotate(0deg); }
             25% { transform: translate(10px, -15px) rotate(5deg); }
@@ -213,7 +211,7 @@
             100% { transform: rotate(30deg) translateX(100%); }
         }
 
-        /* 移动端适配 - 保持与参考代码一致 */
+        /* 移动端适配 */
         @media (max-width: 768px) {
             body {
                 padding: 2rem 3% 2rem;
@@ -258,7 +256,6 @@
     </style>
 </head>
 <body>
-    <!-- 浮动彩蛋元素 - 保持风格统一 -->
     <div class="floating-egg egg-star">✦</div>
     <div class="floating-egg egg-code">✨</div>
     <div class="floating-egg egg-heart">♥</div>
@@ -266,8 +263,8 @@
     <div class="main-container">
         <div class="card">
             <div class="card-content">
-                <p>macOS一些常用命令（包含部分golang相关命令，可根据需求选择性参考，涵盖文件操作、系统设置、进程管理等高频使用场景）</p>
-                <a href="../troubleshooting/html/macos-terminal-grammar.html" class="btn">
+                <p>macOS一些常用命令(包含部分golang相关命令,可根据需求选择性参考,涵盖文件操作、系统设置、进程管理等高频使用场景)</p>
+                <a href="troubleshooting/macos-terminal-grammar.html" class="btn">
                     <span class="btn-icon">💻</span> macOS终端命令
                 </a>
             </div>
@@ -275,8 +272,8 @@
 
         <div class="card">
             <div class="card-content">
-                <p>Markdown语法（部分核心用法）：详细整理标题、列表、链接、图片、代码块、表格等常用格式，适合快速入门和日常编辑参考，简单易用</p>
-                <a href="../troubleshooting/html/markdown-grammar.html" class="btn">
+                <p>Markdown语法(部分核心用法):详细整理标题、列表、链接、图片、代码块、表格等常用格式,适合快速入门和日常编辑参考,简单易用</p>
+                <a href="troubleshooting/markdown-grammar.html" class="btn">
                     <span class="btn-icon">📝</span> markdown语法
                 </a>
             </div>
@@ -284,7 +281,7 @@
 
         <div class="card back-card">
             <div class="card-content">
-                <a href="../../index.html" class="btn back-btn">
+                <a href="/" class="btn back-btn">
                     <span class="btn-icon">🏠</span> 星奈のファン応援会に戻る
                 </a>
             </div>

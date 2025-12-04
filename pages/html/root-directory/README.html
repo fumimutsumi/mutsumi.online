@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="icon" type="image/x-icon" href="../../assets/images/ico/hoshina-avatar-round.ico">
-    <title>项目版权声明</title>
+    <link rel="icon" type="image/x-icon" href="../../../assets/images/ico/hoshina-avatar-round.ico">
+    <title>README</title>
     <style>
-        /* 全局基础样式 - 与参考代码完全对齐 */
+        /* 全局基础样式 */
         * {
             margin: 0;
             padding: 0;
@@ -20,7 +20,7 @@
             padding: 2rem 5% 5rem;
             min-height: 100vh;
             line-height: 1.8;
-            /* 双层背景纹理 - 保持与参考代码一致 */
+            /* 双层背景纹理 */
             background-image: 
                 radial-gradient(rgba(109, 104, 117, 0.04) 1px, transparent 1px),
                 url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%236d6875' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
@@ -29,7 +29,7 @@
             overflow-x: hidden; /* 隐藏浮动元素溢出 */
         }
 
-        /* 浮动彩蛋元素 - 与参考代码风格统一 */
+        /* 浮动彩蛋元素 */
         .floating-egg {
             position: fixed;
             pointer-events: none; /* 不影响点击 */
@@ -59,7 +59,7 @@
             animation: float 12s linear infinite;
         }
 
-        /* 顶部长方形渐变按钮 - 优化交互细节 */
+        /* 顶部长方形渐变按钮 */
         .top-home-btn {
             display: block;
             width: 100%;
@@ -120,47 +120,15 @@
             animation: fadeInUp 1s ease 0.3s forwards;
         }
 
-        /* 版本信息栏 - 优化样式融入整体风格 */
+        /* 版本信息栏 - 适配当前文档移除版本信息,保留容器样式但隐藏 */
         .version-info {
-            max-width: 800px;
-            margin: 0 auto 2.5rem;
-            padding: 1.2rem 1.5rem;
-            background-color: rgba(255, 255, 255, 0.85);
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(109, 104, 117, 0.08);
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-            justify-content: center;
-            border: 1px solid transparent;
-            background-clip: padding-box, border-box;
-            background-origin: padding-box, border-box;
-            background-image: 
-                linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)),
-                linear-gradient(135deg, #f0c8cc, #d8b0c0);
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 0.8s ease 0.5s forwards;
-        }
-        .version-info span {
-            font-size: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        .version-info span::before {
-            content: "✧";
-            color: #d8b0c0;
-            animation: blink 2s infinite;
-        }
-        .version-info strong {
-            color: #6d6875;
+            display: none;
         }
 
         /* 正文卡片样式 - 统一卡片参数 */
         .copyright-card {
             position: relative;
-            background-color: rgba(255, 255, 255, 0.85); /* 与参考代码一致的透明度 */
+            background-color: rgba(255, 255, 255, 0.85);
             border-radius: 16px;
             padding: 2.2rem;
             margin: 0 auto 2.5rem;
@@ -209,7 +177,22 @@
             color: #bfa0b0;
         }
 
-        /* 列表样式 - 优化间距和颜色 */
+        /* 自定义主标题样式 */
+        .project-title {
+            font-size: 1.6rem;
+            text-align: center;
+            color: #6d6875;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+        .project-title small {
+            font-size: 1.2rem;
+            display: block;
+            margin-top: 0.5rem;
+            color: #8a8497;
+        }
+
+        /* 列表样式 */
         .copyright-card ul {
             margin: 1rem 0 1rem 2.2rem;
         }
@@ -242,7 +225,7 @@
             border: none;
         }
 
-        /* 图片样式 - 补充hover交互 */
+        /* 图片样式 */
         .copyright-card img {
             display: block;
             margin: 1.5rem auto; /* 居中显示 */
@@ -251,13 +234,15 @@
             max-width: 100%;
             height: auto;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            max-height: 400px;
+            object-fit: cover;
         }
         .copyright-card img:hover {
             transform: scale(1.02);
             box-shadow: 0 6px 16px rgba(109, 104, 117, 0.15);
         }
 
-        /* 表格样式 - 优化配色贴合主风格 */
+        /* 表格样式 */
         .copyright-card table {
             width: 100%;
             border-collapse: collapse;
@@ -282,7 +267,7 @@
             background-color: rgba(240, 200, 204, 0.1);
         }
 
-        /* 引用样式 - 优化背景和边框 */
+        /* 引用样式 */
         .copyright-card blockquote {
             font-style: italic;
             color: #7a7585;
@@ -294,7 +279,7 @@
             box-shadow: 0 2px 8px rgba(109, 104, 117, 0.05);
         }
 
-        /* 链接样式 - 与参考代码统一下划线动画 */
+        /* 链接样式 */
         .copyright-card a {
             color: #6d6875;
             text-decoration: none;
@@ -317,13 +302,8 @@
         .copyright-card a:hover::after {
             width: 100%;
         }
-        /* 邮箱链接特殊提示 */
-        .email-link:hover::before {
-            content: "✨ 发送反馈 → ";
-            font-size: 0.85rem;
-        }
 
-        /* 代码样式 - 补充基础样式 */
+        /* 代码样式 */
         .copyright-card code {
             background-color: rgba(109, 104, 117, 0.05);
             padding: 0.2rem 0.4rem;
@@ -331,8 +311,18 @@
             color: #5a5565;
             font-family: "Monaco", monospace;
         }
+        .copyright-card pre {
+            background-color: rgba(109, 104, 117, 0.05);
+            padding: 1rem;
+            border-radius: 8px;
+            color: #5a5565;
+            font-family: "Monaco", monospace;
+            margin: 1rem 0;
+            overflow-x: auto;
+            border-left: 3px solid #d8b0c0;
+        }
 
-        /* 底部按钮容器 - 补充淡入动画 */
+        /* 底部按钮容器 */
         .bottom-buttons {
             display: flex;
             justify-content: center;
@@ -342,7 +332,7 @@
             transform: translateY(30px);
             animation: fadeInUp 0.8s ease 0.9s forwards;
         }
-        /* 底部圆形按钮 - 补充光泽动画 */
+        /* 底部圆形按钮 */
         .bottom-btn {
             display: inline-flex;
             align-items: center;
@@ -385,7 +375,7 @@
             box-shadow: 0 2px 8px rgba(109, 104, 117, 0.1);
         }
 
-        /* 核心动画 - 与参考代码完全一致 */
+        /* 核心动画 */
         @keyframes float {
             0% { transform: translate(0, 0) rotate(0deg); }
             25% { transform: translate(10px, -15px) rotate(5deg); }
@@ -405,7 +395,7 @@
             100% { transform: rotate(30deg) translateX(100%); }
         }
 
-        /* 移动端适配 - 保持与参考代码一致的逻辑 */
+        /* 移动端适配 */
         @media (max-width: 768px) {
             body {
                 padding: 1.5rem 3% 2rem;
@@ -423,10 +413,11 @@
                 font-size: 1.6rem;
                 margin-bottom: 1.5rem;
             }
-            .version-info {
-                gap: 1rem;
-                padding: 1rem;
-                font-size: 0.95rem;
+            .project-title {
+                font-size: 1.4rem;
+            }
+            .project-title small {
+                font-size: 1rem;
             }
             .copyright-card {
                 padding: 1.8rem;
@@ -448,6 +439,10 @@
             .copyright-card th, .copyright-card td {
                 padding: 0.6rem 0.8rem;
             }
+            .copyright-card pre {
+                padding: 0.8rem;
+                font-size: 0.85rem;
+            }
             .bottom-btn {
                 width: 120px;
                 height: 120px;
@@ -467,6 +462,9 @@
                 font-size: 0.85rem;
                 padding: 0.65rem 0.8rem;
             }
+            .project-title {
+                font-size: 1.2rem;
+            }
             .bottom-btn {
                 width: 110px;
                 height: 110px;
@@ -482,145 +480,84 @@
     </style>
 </head>
 <body>
-    <!-- 浮动彩蛋元素 - 与参考代码一致 -->
     <div class="floating-egg egg-star">✦</div>
     <div class="floating-egg egg-code">✨</div>
     <div class="floating-egg egg-heart">♥</div>
 
-    <a href="../../index.html" class="top-home-btn">星奈のファン応援会に戻る</a>
+    <a href="/" class="top-home-btn">星奈のファン応援会に戻る</a>
 
-    <h1 class="main-title">项目版权声明</h1>
-
-    <div class="version-info">
-        <span><strong>版本</strong>: 1.2</span>
-        <span><strong>最后更新</strong>: 2025-12-02</span>
-        <span><strong>维护者</strong>: fumimutsumi</span>
-    </div>
+    <h1 class="main-title">项目首页</h1>
 
     <div class="copyright-card">
-        <h2>通用声明</h2>
-        <ol>
-            <li>本项目是维护者 <strong>fumimutsumi</strong> 的<strong>个人学习与交流项目</strong>,所有内容均用于技术实践、样式展示等非商业目的,不涉及任何盈利行为。</li>
-            <li>项目中使用的第三方内容(如图片、文案)均已尽力标注来源。若您认为任何内容侵犯了您的合法权益,请通过 <strong><a href="mailto:15175969957@163.com" class="email-link">15175969957@163.com</a></strong> 与我联系,我将在核实后第一时间进行处理。</li>
-            <li>未经本人明确许可,<strong>禁止</strong>将本项目的任何部分用于商业、盈利或其他非法用途。</li>
-        </ol>
+        <div class="project-title">
+            fumimutsumi的个人前端学习项目(bushi)
+            <small>hoshinaのファン応援サイト(♡-𖥦-)/♥</small>
+        </div>
 
-        <hr>
+        <h2>简介</h2>
+        <p>这是我的第一个项目,我初步打算将此项目作为浏览器主页的样式。用卡片集成其他小项目的展示和个人博客、学习笔记等功能。<br>
+        如果对你在学习前端有帮助,那很荣幸能收到你的反馈和建议。</p>
+        <p style="text-align: center; color: #d8b0c0; margin: 1rem 0;">猫娘是对的(♡-𖥦-)/♥</p>
 
-        <h2>图片素材版权说明</h2>
-        <h3>1. 原创图片</h3>
+        <h2>目录结构说明</h2>
         <ul>
-            <li><strong>内容</strong>:由本人独立创作或拥有的图片素材(如网站吉祥物)。</li>
-            <li><strong>示例</strong>:<code>"assets/images/"和"docs/images/"等中的所有"hoshina"</code>相关图片</li>
-            <li><img src="../../assets/images/jpg/hoshina-error-404.jpg" alt="hoshina" width="300"></li>
-            <li><strong>声明</strong>:此部分图片的著作权归本人(fumimutsumi)所有。<strong>任何商业性使用均需获得我的事先许可</strong>;非商业性的学习、参考和分享则不受此限。</li>
+            <li>详见:<a href="../docs/structure-guide.html">目录结构说明</a></li>
         </ul>
 
-        <h3>2. 免费授权图片</h3>
+        <h2>版权声明</h2>
         <ul>
-            <li><strong>来源</strong>:来自明确提供免费商用许可的公共资源平台(如 Unsplash, Pexels 等)。</li>
-            <li><strong>声明</strong>:这些图片遵循其原平台的许可协议。本项目在使用时已遵守相应规定(如必要的署名要求),您也可依据原协议规定使用它们。</li>
+            <li>详见:<a href="../docs/copyright-notice.html">版权声明</a></li>
         </ul>
 
-        <h3>3. 官方版权图片</h3>
+        <h2>在线访问</h2>
         <ul>
-            <li><strong>来源</strong>:源自《明日方舟》、《鸣潮》等游戏的官方素材。</li>
-            <li><strong>涉及版权方</strong>:
+            <li>项目已部署在cloudflare pages,可通过以下链接访问:
                 <ul>
-                    <li>《明日方舟》 - Hypergryph / 鹰角网络</li>
-                    <li>《鸣潮》 - Kuro Games / 库洛游戏</li>
-                </ul>
-            </li>
-            <li><strong>声明</strong>:此部分所有内容的著作权均归属于上述官方版权方。本项目仅为个人学习目的进行非商业性引用,<strong>未获得官方正式授权</strong>。严禁任何商业用途或侵害版权方权益的行为。</li>
-            <li><strong>官方链接</strong>:
-                <ul>
-                    <li><a href="https://user.hypergryph.com/protocol/ak/service" target="_blank">明日方舟版权声明页面</a></li>
-                    <li><a href="https://sdk.kurogames.com/p/agreement_public.html" target="_blank">鸣潮版权声明页面</a></li>
+                    <li><a href="https://www.mutsumi.online/" target="_blank">www.mutsumi.online</a></li>
+                    <li><a href="https://mutsumi.online/" target="_blank">mutsumi.online</a></li>
                 </ul>
             </li>
         </ul>
 
-        <h3>4. 二次创作作品</h3>
+        <h2>注意事项</h2>
         <ul>
-            <li><strong>来源</strong>:由其他创作者基于官方作品衍生的二次创作(二创)图片。</li>
-            <li><strong>权利方</strong>:
+            <li>代码示例仅用于学习目的,实际项目中可能需要根据需求进行调整</li>
+            <li>若遇到代码问题,可参考注释或在相关子文件夹中查找解决方案</li>
+        </ul>
+
+        <h2>持续更新</h2>
+        <p>这个项目会随着我的学习进度不断更新,欢迎持续关注。</p>
+
+        <h2>联系我</h2>
+        <ul>
+            <li>若有任何建议或问题,欢迎联系我:
                 <ul>
-                    <li><strong>作品著作权</strong>:归属原画师。</li>
-                    <li><strong>原作元素著作权</strong>:归属对应的游戏官方版权方。</li>
-                </ul>
-            </li>
-            <li><strong>声明</strong>:本项目的使用已获得画师授权,或为个人学习性质的合理使用。<strong>严禁</strong>将此部分内容用于任何商业目的。若您是相关权利人并对展示有异议,请联系我进行移除。</li>
-            <li><strong>画师信息表</strong>(请根据实际情况填写和增减行):</li>
-        </ul>
-
-        <table>
-            <thead>
-                <tr>
-                    <th>作品名称</th>
-                    <th>画师昵称</th>
-                    <th>平台/ID</th>
-                    <th>授权状态</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>鸣潮-朽叶千咲同人插画:chisaki-matcha.jpg</td>
-                    <td>Matcha</td>
-                    <td>Pixiv-id:2583663</td>
-                    <td>个人学习引用,如有异议请联系删除</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <hr>
-
-        <h2>文案与设定版权说明</h2>
-        <ul>
-            <li><strong>涉及内容</strong>:项目中引用的《明日方舟》、《鸣潮》等游戏的角色设定、世界观描述、剧情文本等。</li>
-            <li><strong>版权声明</strong>:所有相关文案、设定的著作权均归属于其各自的官方版权方(鹰角网络、库洛游戏等)。本项目仅为学习交流目的进行非商业性引用,<strong>未获得官方正式授权</strong>。任何组织或个人不得将其用于商业目的。</li>
-        </ul>
-
-        <hr>
-
-        <h2>网站项目版权声明</h2>
-        <h3>1. 项目所有权</h3>
-        <ul>
-            <li><strong>项目名称</strong>:<code>mutsumi.online</code> 及其相关源代码仓库。</li>
-            <li><strong>版权所有者</strong>:<strong>fumimutsumi</strong>(项目维护者)。</li>
-            <li><strong>声明内容</strong>:
-                本项目(包括但不限于网站的整体设计、前端代码结构、HTML/CSS/JavaScript 源代码、自主编写的技术文档、学习笔记、项目规范文件等)的著作权及相关权益归 <strong>fumimutsumi</strong> 所有。</li>
-        </ul>
-
-        <h3>2. 许可使用</h3>
-        <ul>
-            <li><strong>项目性质</strong>:本项目被定义为<strong>个人学习与交流项目</strong>。</li>
-            <li><strong>对访问者的许可</strong>:我们鼓励基于学习目的的<strong>查看、参考、 fork</strong> 及<strong>私下研究</strong>本项目的公开代码与结构。</li>
-            <li><strong>限制条款</strong>:未经本人(fumimutsumi)<strong>明确的事先书面许可</strong>,<strong>禁止</strong>任何形式的:
-                <ul>
-                    <li><strong>商业性使用</strong>:包括但不限于直接出售、打包整合后进行盈利、或用于任何商业产品的开发。</li>
-                    <li><strong>大规模复制与分发</strong>:以非学习目的,系统性、大规模地复制本项目全部或核心部分。</li>
-                    <li><strong>署名移除或篡改</strong>:移除或修改项目中关于原作者(fumimutsumi)的标识及版权声明。</li>
+                    <li>邮箱: <a href="mailto:15175969957@163.com">15175969957@163.com</a></li>
                 </ul>
             </li>
         </ul>
 
-        <h3>3. 开源协议</h3>
+        <h2>网站吉祥物</h2>
         <ul>
-            <li><strong>核心原则</strong>:欢迎任何个人或团体出于<strong>学习、研究或交流的目的</strong>使用、复制或修改本项目代码。</li>
-            <li><strong>保留权利</strong>:本人(fumimutsumi)保留对本项目解释、更新及最终许可方式调整的权利。</li>
-            <li><strong>致谢</strong>:如果你在本项目的基础上获得了灵感或帮助,一个指向原仓库(<a href="https://github.com/fumimutsumi/mutsumi.online" target="_blank">https://github.com/fumimutsumi/mutsumi.online</a>)的引用将是对我们分享精神的最佳鼓励。</li>
+            <li>网站吉祥物:星奈(hoshina)</li>
+            <li>生日:2025年12月1日</li>
         </ul>
-
-        <hr>
-
-        <blockquote>
-            <strong>重要提示</strong>:本声明文档将随着项目内容的更新而持续修订。您对项目的访问和使用即视为理解并同意本声明的所有条款。
-        </blockquote>
+        <img src="../../../assets/images/jpg/hoshina-profile.jpg" alt="hoshina" width="300">
     </div>
 
     <div class="bottom-buttons">
-        <a href="../../index.html" class="bottom-btn">星奈のファン応援会に戻る</a>
+        <a href="/" class="bottom-btn">星奈のファン応援会に戻る</a>
         <a href="#" class="bottom-btn">再看一遍(♡-𖥦-)/♥</a>
     </div>
+
+    <script>
+        document.querySelector('.bottom-btn:last-child').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
 </body>
 </html>

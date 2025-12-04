@@ -1,7 +1,7 @@
 # 文件结构规范说明
 
-**版本**: 1.1  
-**最后更新**: 2025-12-1  
+**版本**: 1.2  
+**最后更新**: 2025-12-4  
 **维护者**: fumimutsumi
 
 ---
@@ -35,11 +35,15 @@
 ```
 
 assets/
-├──styles/          # CSS 样式资源
-└──images/          # 图片文件
-    ├── ico/         # .ico 格式图标
-    ├── jpg/         # .jpg 格式图片
-    └── png/         # .png 格式图片
+├──styles/         # CSS 样式资源
+│└──详细文件
+└──images/         # 图片文件
+ ├── ico/        # .ico 格式图标
+ │└──详细文件
+ ├── jpg/        # .jpg 格式图片
+ │└──详细文件
+ └── png/        # .png 格式图片
+  └──详细文件
 
 ```
 
@@ -49,10 +53,11 @@ assets/
 ```
 
 docs/
-├──images/          # 文档用到的图片文件
-├──copyright-notice.md          # 项目版权声明文档
-├──structure-guide.md          # 文件结构规范文档
-└──naming-convention.md          # 命名规范文档
+├──images/        # 文档用到的图片文件(防止因为"assets/"目录下的图片因为整理而导致文档图片显示异常)
+│└──详细文件
+├──copyright-notice.md        # 项目版权声明文档
+├──structure-guide.md        # 文件结构规范文档
+└──naming-convention.md        # 命名规范文档
 
 ```
 
@@ -62,9 +67,25 @@ docs/
 ```
 
 pages/
-├──html/            # HTML 页面资源
-├──mini-project/    # 小项目文件
-└──troubleshooting/ # 疑难解答文档(markdown文件夹下为修改版本，html文件夹下为正式版本)
+├──html/        # 一般HTML页面资源
+│├──docs/        # 文档页面资源
+││└──详细文件
+│├──root-directory/        # 根目录页面资源
+││└──详细文件
+│├──troubleshooting/        # 疑难解答页面资源
+││└──详细文件
+│└──其它文件
+└──mini-project/        # 非独立仓库或者暂时的完整小项目文件
+    └──详细文件
+
+```
+
+### troubleshooting/
+存放疑难解答文档
+
+```
+├──macos-terminal-grammar.md        # macOS终端语法文档
+└──markdown-grammar.md        # markdown语法文档
 
 ```
 
@@ -73,7 +94,7 @@ pages/
 ## 使用说明
 
 1. 所有路径均从根目录开始计算
-2. 文件命名使用英文符号，避免兼容性问题
-3. 各文件夹按功能明确分类，便于维护
+2. 文件命名使用英文符号,避免兼容性问题
+3. 各文件夹按功能明确分类,便于维护
 
 > 本规范会根据项目发展适时更新。更新此文档请一并更新html文件。
