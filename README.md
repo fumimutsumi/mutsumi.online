@@ -32,4 +32,4 @@
 ## 网站吉祥物
 - 网站吉祥物:星奈(hoshina)
 - 生日:2025年12月1日
-<img src="./docs/images/hoshina-profile.jpg" alt="hoshina" width="300">
+<img src="./docs/images/hoshina-square.png" alt="hoshina" width="300">
