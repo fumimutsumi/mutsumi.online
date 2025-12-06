@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <!-- 声明网页的字符编码为UTF-8 -->
 
-    <title>note</title>
+    <title>html4-note(主要)</title>
     <!-- 网页的标题,会显示在浏览器的标签页上 -->
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -25,8 +25,8 @@
     <meta name="generator" content="Visual Studio Code">
     <!-- 网页的生成器 -->
 
-    <meta name="copyright" content="2025-2100©版权所有">
-    <!-- 网页的版权信息(瞎写的) -->
+    <meta name="copyright" content="2025-40000©版权所有">
+    <!-- 网页的版权信息(瞎写的,战锤40k乱入) -->
 
     <link rel="icon" type="image/x-icon" href="../../assets/images/ico/hoshina.ico">
     <!-- <link>标签用于引入外部资源,这里引入了一个图标文件(吉祥物星奈) -->
@@ -406,7 +406,7 @@
         /* 会部署在服务器上,不用担心不同设备之间字体不同 */
     </style><!-- 内部CSS -->
     <!-- 不同属性换行处理。理论上style标签可以写在head或者body中,但是为了方便阅读,一般写在head中 -->
-    <!-- 一般权重规律:！important > 行内CSS > 内部CSS = 外部CSS ｜
+    <!-- 一般权重规律:!important > 行内CSS > 内部CSS = 外部CSS ｜
     ｜ id选择器 > 类选择器 = 伪类选择器 = 属性选择器 > 元素选择器 = 伪元素选择器 > 通配.demo1选择器:* > 从父元素继承的效果 -->
 </head>
 <body><!-- 网页的主体内容,会显示在网页中 -->
@@ -429,7 +429,7 @@
         <!-- p表示段落,和h1一样的特殊块级元素,不可嵌套块级元素 -->
 
         <p>海猫小故事:</p>
-        <blockquote>海猫小时候上公交车,发现公交车里面还有公交车,公交车里面的公交车里面还有人,那个人直接隐蔽把海猫的糖偷走了</blockquote>
+        <blockquote>海猫小时候上公交车,发现公交车里面还有公交车,公交车里面的公交车里面还有人,那个人直接隐蔽把海猫的糖偷走了(弧光作战)</blockquote>
         <!-- blockquote是块级元素,表示长引用,空两个汉字,不能嵌套在p标签里 -->
 
         <p>网站制作人的地址是:</p>
@@ -507,14 +507,18 @@
         <a href="https://monster-siren.hypergryph.com/about" target="_blank">塞壬唱片</a>
         <a href="../../README.md" target="_blank">自述文件</a>
         <a href="../../assets/styles/note-style.css" target="_blank">外部CSS文件</a>
-        <a href="../../assets/images/jpg/hoshina-profile.jpg" target="_blank">星奈酱</a>
-        <a href="../../assets/images/jpg/hoshina-error-404.jpg" download="404.jpg">下载404</a>
+        <a href="../../assets/images/png/hoshina-1.png" target="_blank">星奈酱</a>
+        <a href="../../assets/images/png/hoshina-square.png" download="hoshina-square.png">下载星奈酱</a>
         <!-- download属性表示下载文件,里面的值为预览名 -->
         <!-- a是行级元素,表示超链接,href属性表示超链接地址。target属性中_blank属性表示在新页签打开超链接;
         _self属性表示在本页签打开超链接(不写就默认此标签)。两个a标签之间不空格就连在一起,空格不管多少浏览器都解析为空一格 -->
 
         <a href="#">回到顶部</a>
         <a href="">刷新页面</a>
+        <a href="/">回到首页</a>
+        <!-- "/"指向Web服务器的根目录,而不是文件。在此处实际指向"https://www.mutsumi.online/";
+        服务器这样处理:在根目录下查找默认文档。默认文档优先级:index.html > index.htm > default.html > home.html。
+        具体顺序由服务器配置决定。详细情况十分复杂,记住可以通过设置来干预结果就行 -->
         <a href="javascript:alert('hello world');">JS脚本</a>
         <a href="tel:+86 10086">联系客服(10086)</a>
         <a href="mailto:15175969957@163.com">邮件联系</a>
@@ -530,7 +534,7 @@
 
     <div class="inline-block-elements-demo">
         <hr>
-        <p>[注意⚠️]本界面使用了受 版权©️ 保护的图片,本网站仅用来学习使用,我也是玩家或者画师粉丝。另外,如需保存或者使用这些图片,请在遵守版权法的前提下使用。</p>
+        <p>[注意!!!]本页面使用了受 知识产权&copy; 保护的图片,本网站仅用来学习举例使用。另外,如需保存或者使用这些图片,请在遵守知识产权规定的前提下使用。</p>
         <a href="docs/copyright-notice.html">查看本项目的版权声明</a>
         <hr>
         <img src="../../assets/images/jpg/chisaki-matcha.jpg" alt="朽叶千咲" height="280px">
@@ -539,14 +543,15 @@
         <img src="../../assets/images/png/ulpianus.png" alt="乌尔比安" height="280px">
         <img src="../../assets/images/png/specter-the-unchained.png" alt="归溟幽灵鲨" height="280px"><br>
         <img src="../../assets/images/png/hoshina-1.png" alt="星奈酱" height="280px"><br>
-        <!-- 相对路径:./表示在和本文件同级的找图片文件;../表示在上一级的找;../../表示在上两级找,以此类推 -->
-        <!-- img是行内块元素,表示导入图片,src属性表示导入地址,地址错误图片不显示;alt属性表示图片文本介绍,在图片不显示时显示文本介绍,在搜索图片会显示图片,打开图片进入原网址;
-        width属性表示图片宽度,height属性表示图片高度,仅设置其一图片会遵照原比例缩放,都设置就根据设置px值缩放 -->
+        <!-- 相对路径:./或者/或者不写,表示在和本文件同级的目录找文件;../表示在上一级的找;../../表示在上两级找,以此类推 -->
+        <!-- img是行内块元素,表示导入图片,src属性表示导入地址,地址错误图片不显示;alt属性表示图片文本介绍,在图片不显示时显示文本介绍,在浏览器搜索图片会显示图片,打开图片进入原网址;
+        width属性表示图片宽度,height属性表示图片高度,仅设置其一图片会遵照原比例缩放,都设置就根据设置px值拉伸、缩放 -->
 
         <img src="file:/Users/fumimutsumi/ddate/写真/珂莱塔.jpg" alt="珂莱塔" height="280px">
         <img src="https://web.hycdn.cn/arknights/official/pic/20250422/cea7367d1c3293399e51d4d3aeaa29a6.jpg" alt="逻各斯" height="280px">
         <!-- 绝对路径:一:本地绝对路径:因为Live Server插件(弊端:上传到服务器找不到、安全问题),不能打开本地绝对路径的图片,需要用Finder打开,选中需打开文件鼠标左击,或者command+option+R。
-        二:网络绝对路径:仍然因为该插件而无法打开,打开方法同上。如果未经授权可能因为防盗链而无法拉图。 -->
+        二:网络绝对路径:仍然因为该插件而无法打开,打开方法同上。如果未经授权可能因为设置防盗链而无法拉图。 -->
+        <!-- 部署到服务器后,网络绝对路径也可以正常打开 -->
         <!-- mac本地路径从file:/开始找 -->
     </div>
 
@@ -965,10 +970,11 @@
             <p class="demo19-4">行楷-简</p>
         </div>
     </div>
+
     <footer id="copyright-footer">
         <div class="footer-content">
             <p>
-                &copy; 2025 <a href="./copyright-notice.html">fumimutsumi</a>. All rights reserved.
+                &copy; 2025 <a href="docs/copyright-notice.html">fumimutsumi</a>. All rights reserved.
             </p>
             <div class="footer-links">
                 <a href="/">回到首页</a>
@@ -994,6 +1000,7 @@
 </html><!-- 主要结构由<html><head></head><body></body></html>构成 -->
 
 <!-- command+/ 意为快捷整行注释 -->
+<!-- command+X 意为剪切 -->
 <!-- command+C 意为复制 -->
 <!-- command+V 意为粘贴 -->
 <!-- command+S 意为保存 -->
@@ -1005,8 +1012,8 @@
 <!-- command+shift+enter 意为快速到达并创建上一行 -->
 <!-- live Server:command+L+O 注意顺序,意为在浏览器运行html程序-->
 <!-- Shift+option+方向键上/下 意为将本行复制并创建到上/下一行上 -->
-<!-- Shift+tab+鼠标选中的部分 意为往前缩进一个tab -->
 <!-- option+方向键上下 意为将本行移动到上下行 -->
 <!-- option+鼠标点击,可以快速在多行进行删增,可用方向键上下左右进行调节 -->
+<!-- Shift+tab+鼠标选中的部分 意为往前缩进一个tab -->
 <!-- Trae cn:command+U表示打开AI问答功能 -->
 <!-- Trae cn:control+Shift+Enter 意为打开建议增加代码功能 -->
