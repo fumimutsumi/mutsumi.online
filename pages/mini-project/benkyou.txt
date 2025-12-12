@@ -1,0 +1,20 @@
+HTML
+CSS
+JavaScript
+Vue
+React
+TypeScript
+Node.js
+
+---------
+
+test
+
+权重、主要类型
+!important    行内CSS    内部、外部CSS
+
+主要选择器
+id    类、伪类、属性    元素、伪元素    *    从父元素继承的效果    
+
+额外选择器
+交集、并集    子代、后代    兄弟    伪类    伪元素

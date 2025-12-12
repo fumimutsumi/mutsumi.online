@@ -22,8 +22,8 @@
     <meta name="author" content="fumimutsumi">
     <!-- 网页的作者 -->
 
-    <meta name="generator" content="Visual Studio Code">
-    <!-- 网页的生成器 -->
+    <meta name="generator" content="trae.cn">
+    <!-- 网页的生成器,我为trae.cn扛大旗.jpg -->
 
     <meta name="copyright" content="2025-40000©版权所有">
     <!-- 网页的版权信息(瞎写的,战锤40k乱入) -->
@@ -86,7 +86,7 @@
             background-color: pink;/* 背景颜色 */
             color: aqua;/* 文字颜色 */
         }
-        /* h2是选择器,{}是声明块,里面是声明。选择器和声明块之间用空格隔开;属性名和属性值之间也用空格隔开 */
+        /* .internal-css-demo>h2.demo1:first-child是选择器,{}是声明块,里面是声明。选择器和声明块之间用空格隔开;属性名和属性值之间也用空格隔开 */
         /* 展开风格 */
         .internal-css-demo>h2.demo1:nth-child(2){background-color:aqua;color:pink;}
         /* 紧凑风格 */
@@ -184,7 +184,7 @@
         /* 往下找全部兄弟版,不往上找 */
 
         /* 属性选择器 */
-        div.demo12 h2[title] {
+        div.demo12 > h2[title] {
             font-size: 50px;
             width: 10%;
         }
@@ -234,7 +234,7 @@
             height: 100px;
         }
         /* checked是持久状态,而focus是临时状态 */
-        /* checked一般用在单选框和复选框和开关按钮上。focus通用,详见文件 */
+        /* checked一般用在单选框和复选框和开关按钮上。focus通用 */
         div.demo13>form.demo13-2-form>input.demo13-2-text:disabled {
             background-color: aquamarine;
             /* 禁用状态下的元素这样写 */
@@ -278,7 +278,7 @@
             /* nth-of-type()表示第n个满足选择器的元素 */
             /* nth-last-of-type()表示从后往前数第n个满足选择器的元素 */
             color: blue;
-            /* 因为看所有儿子时,第五个儿子是p,所以效果生效 */
+            /* 因为看所有儿子时,第四个儿子是p,所以效果生效 */
         }
         div.demo14 p:only-child {
             color: yellow;
@@ -300,7 +300,6 @@
         /* 否定伪类选择器 */
         div.demo15 p:not([title^="demo"]) {
             color: red;
-            /* 记得加引号,不过不加也没影响 */
             /* not()里几乎可以包所有选择器。例如:div>p:first-child什么什么的,否定可以略去:not(:first-child) */
         }
 
@@ -365,6 +364,7 @@
             /* 毫米可以 */
             background-color: rgba(255, 192, 203, 0.5);
             /* rgba()表示红色、绿色、蓝色、透明度,每个值的范围是0-255,透明度的范围是0-1 */
+            /* "0.5"可以简写成".5" */
             /* 也可以用%表示,每个值的范围是0%到100% */
             /* rgb略去 */
         }
@@ -385,25 +385,61 @@
 
         /* 字体 */
         div.demo19>p.demo19-1 {
-            font-size: 80px;/* 字体大小 */
+            font-size: 80px;/* 字体大小,字体高度在变,宽度等比例变化 */
             font-family: "Snell Roundhand";/* 字体族,字体样式。记得加引号 */
+            font-style: normal;/* 字体风格:normal正常字体,不写默认是;italic斜体字体;oblique倾斜字体 */
+            font-weight: bold;/* 字体粗细:bold加粗,不写默认是normal正常字体,还可以是数字(100~1000) */
         }
         div.demo19>p.demo19-2 {
             font-size: 80px;
             font-family: "娃娃体-简";
+            font-style: oblique;/* 倾斜字体,默认倾斜程度 */
+            font-weight: lighter;/* 比正常normal更细 */
         }
         div.demo19>p.demo19-3 {
             font-size: 80px;
-            font-family: "クレー";
+            font-family: "クレー", sans-serif;
+            font-style: italic;/* 斜体字体,找设计好的倾斜程度,没找到就和oblique一样强制倾斜 */
+            font-weight: bolder;/* 比加醋bold更粗 */
         }
         div.demo19>p.demo19-4 {
             font-size: 80px;
-            font-family: "行楷-简", "娃娃体-简";
-            /* 前来者居上 */
-            /* 备胎尽量是同一类型的字体 */
+            font-family: "行楷-简", "宋体-简", serif;
+            font-style: italic;
+            font-weight: 900;/* 100~1000,没有单位,依旧看字体设计时的精度 */
+            /* 前来者居上,推荐写英文命名 */
+            /* 备胎尽量是同一类型的字体,否则可能:布局破坏、视觉风格突变、可读性问题 */
         }
-        /* 衬线字体,棱角分明;非衬线字体,棱角平滑 */
+        div.demo19>p.demo19-5 {
+            font: 100px "凸版文久見出し明朝","クレー";
+            /* 字体复合属性,倒数第一是字体族,倒数第二是字体大小就行 */
+        }
+        /* 衬线字体,棱角分明;非衬线字体,棱角平滑。最后可以加上"sans-serif"非衬线、"serif"衬线字体来兜底,届时系统会根据用户设备的字体设置来选择合适的字体。 */
         /* 会部署在服务器上,不用担心不同设备之间字体不同 */
+
+        /* 文本属性 */
+        div.demo20>p.demo20-1 {
+            color: red;/* 文本颜色 */
+            background-color: rgb(181, 195, 239);/* 背景颜色 */
+            width: 70%;/* 宽度 */
+            letter-spacing: 5px;/* 字母间距 */
+            word-spacing: 10px;/* 单词间距 */
+            text-decoration: none;/* 文本修饰:none无修饰,默认是none */
+        }
+        .demo20-2 {
+            text-decoration: overline dotted red;/* 上划线,虚线,红色 */
+            /* 没有顺序要求 */
+            text-indent: 20px;/* 首行缩进20像素 */
+            text-align: center;/* 文本对齐:center居中对齐,left左对齐,right右对齐 */
+        }
+        .demo20-3 {
+            text-decoration: underline #2c4a7a wavy;/* 下划线,波浪线,蓝色 */
+            font-size: 40px;
+            line-height: 100px;/* 行高 */
+        }
+        .demo20-4 {
+            text-decoration: line-through;/* 删除线 */
+        }
     </style><!-- 内部CSS -->
     <!-- 不同属性换行处理。理论上style标签可以写在head或者body中,但是为了方便阅读,一般写在head中 -->
     <!-- 一般权重规律:!important > 行内CSS > 内部CSS = 外部CSS ｜
@@ -432,7 +468,7 @@
         <blockquote>海猫小时候上公交车,发现公交车里面还有公交车,公交车里面的公交车里面还有人,那个人直接隐蔽把海猫的糖偷走了(弧光作战)</blockquote>
         <!-- blockquote是块级元素,表示长引用,空两个汉字,不能嵌套在p标签里 -->
 
-        <p>网站制作人的地址是:</p>
+        <p>网站制作人的住址是:</p>
         <address>泰拉大陆罗德岛医药企业</address>
         <!-- address是块级元素,表示地址信息,不能嵌套在p标签里 -->
 
@@ -456,7 +492,7 @@
          
         <p>我是一个<strong>重要文本</strong></p>
         <!-- strong是行级元素,表示重要文本 -->
-        <!-- h1>strong>em,强调级别 -->
+        <!-- h1～h6>strong>em,强调级别 -->
 
         <p><cite>《call of silence》</cite></p>
         <!-- cite是行级元素,表示作品名 -->
@@ -520,7 +556,7 @@
         服务器这样处理:在根目录下查找默认文档。默认文档优先级:index.html > index.htm > default.html > home.html。
         具体顺序由服务器配置决定。详细情况十分复杂,记住可以通过设置来干预结果就行 -->
         <a href="javascript:alert('hello world');">JS脚本</a>
-        <a href="tel:+86 10086">联系客服(10086)</a>
+        <a href="tel:+86 10086">电话联系(10086)</a>
         <a href="mailto:15175969957@163.com">邮件联系</a>
         <a href="sms:+86 10086">短信联系(10086)</a>
         <!-- 超链接href属性:#为回到顶部;空着为刷新页面;javascript:;为JS脚本,:和;之间写入脚本;
@@ -543,7 +579,7 @@
         <img src="../../assets/images/png/ulpianus.png" alt="乌尔比安" height="280px">
         <img src="../../assets/images/png/specter-the-unchained.png" alt="归溟幽灵鲨" height="280px"><br>
         <img src="../../assets/images/png/hoshina-1.png" alt="星奈酱" height="280px"><br>
-        <!-- 相对路径:./或者/或者不写,表示在和本文件同级的目录找文件;../表示在上一级的找;../../表示在上两级找,以此类推 -->
+        <!-- 相对路径:./或者不写,表示在和本文件同级的目录找文件;../表示在上一级的找;../../表示在上两级找,以此类推 -->
         <!-- img是行内块元素,表示导入图片,src属性表示导入地址,地址错误图片不显示;alt属性表示图片文本介绍,在图片不显示时显示文本介绍,在浏览器搜索图片会显示图片,打开图片进入原网址;
         width属性表示图片宽度,height属性表示图片高度,仅设置其一图片会遵照原比例缩放,都设置就根据设置px值拉伸、缩放 -->
 
@@ -596,7 +632,7 @@
 
     <div class="table-elements-demo">
         <!-- CSS可以代替写额外的属性,此处不是重点 -->
-         <table border="10" width="500" height="200" cellspcing="2">
+         <table border="10" width="500" height="200" cellspacing="2">
             <caption>表格标题</caption>
             <!-- caption是块级元素,表示表格标题 -->
             <thead height="50" align="center" valign="middle"><tr><th>表头1</th><th>表头2</th><th>表头3</th></tr></thead>
@@ -620,12 +656,13 @@
         <hr><hr><hr>
         <div align="center">
             <h1>罗德岛制药公司 - 战术情报与人员档案</h1>
+            <!-- 此处"h1"标签复用,但是实际上没有影响,语义最重要。嫌不舒服就换成"p"标签,然后调css样式的字体大小 -->
             <div>
                 档案编号:<small>RHI-ACT-04-DeepHunter</small><br>
                 安全许可等级:<strong>机密</strong>
             </div>
             <table border="7" cellspacing="0" height="600">
-                <caption align="center" valign="middle">深海猎人项目成员生理数据与作战能力对比分析报告</caption>
+                <caption align="center" valign="middle"><dfn>深海猎人</dfn>项目成员生理数据与作战能力对比分析报告</caption>
                 <thead align="center" valign="middle"><tr><th>档案分类</th><th>具体属性</th><th>乌尔比安</th><th colspan="2">斯卡蒂</th><th>歌蕾蒂娅</th><th colspan="2">幽灵鲨</th></tr></thead>
                 <tbody align="center" valign="middle">
                     <tr><td rowspan="3">身份信息</td><td>代号</td><td>乌尔比安</td><td>斯卡蒂</td><td>浊心斯卡蒂</td><td>歌蕾蒂娅</td><td>幽灵鲨</td><td>归溟幽灵鲨</td></tr>
@@ -673,7 +710,7 @@
                 <legend>主要信息</legend>
                 <label for="account">账号:</label><input id="account" type="text" name="account" value="ace" maxlength="10" placeholder="请输入账号"><br>
                 <label>密码:<input type="password" name="pwd" value="ace666" maxlength="10" placeholder="请输入密码"></label><br>
-                <!-- value属性表示输入框的默认值,账号密码之类的一般不写,但是单选框和复选框必须写,要不然收集不走数据;maxlength属性表示输入框的最大长度;
+                <!-- value属性表示输入框的默认值,账号密码之类的一般不写,但是单选框和复选框必须写,要不然收集不走数据;maxlength属性表示输入框输入值的最大长度;
                 placeholder属性表示输入框的占位符,当输入框为空时显示 -->
                 <!-- label标签用于为表单元素提供可点击的标签,for属性与input的id属性对应,点击标签时input元素会获得焦点;或者直接包起来 -->
                 性别:
@@ -689,7 +726,7 @@
                 爱好:
                 <label><input type="checkbox" name="hobby" value="smoking">抽烟</label>
                 <label><input type="checkbox" name="hobby" value="drinking">喝酒</label>
-                <input type="checkbox" name="hobby" value="perm" id="perm"><label for="perm">烫头</label><br>
+                <input type="checkbox" name="hobby" value="perm" id="perm" checked><label for="perm">烫头</label><br>
                 <label for="city">城市:</label>
                 <select name="city" id="city" multiple>
                     <option value="beijing">北京</option>
@@ -702,16 +739,17 @@
                 id属性表示选择框的唯一标识,用于JS操作,一般不写
                 multiple属性表示选择框可以选择多个选项,不写表示只能选择一个选项
                 -->
-                <label for="others">细节补充:</label><textarea name="others" id="others" cols="40" rows="10" placeholder="请输入其他补充信息">ciallo</textarea><br>
+                <label for="others">细节补充:</label><textarea name="others" id="others" cols="40" rows="10" placeholder="请输入其他补充信息">Ciallo~(∠・ω&lt; )⌒⭐</textarea><br>
                 <!-- textarea是块级元素,表示文本域,用于输入多行文本.
-                name属性表示文本域的名称,用于服务器端接收数据,other是其他内容
+                name属性表示文本域的名称,用于服务器端接收数据,others是其他内容
                 id属性表示文本域的唯一标识,用于JS操作,一般不写
                 cols属性表示文本域的列数,默认是20
                 rows属性表示文本域的行数,默认是2
                 -->
-                条例协议:<input type="radio" name="regulations" value="agree" checked disabled id="agree"><label for="agree">同意</label>
+                条例协议:<input type="radio" name="regulations" value="agree" checked id="agree"><label for="agree">同意</label>
                 <input type="radio" name="regulations" value="disagree" id="disagree" disabled><label for="disagree">不同意</label>
                 <!-- disabled属性表示禁用,不能输入,不能提交;如果和checked或者selected同时出现,就是单程车票,最好不要,整活例外 -->
+                <!-- "你只有同意可以选择,而且默认选中同意且不能取消。不同意的值不会提交,因为disabled属性禁用了它" -->
             </fieldset>
             <button type="submit">提交</button>
             <input type="reset" value="重置">
@@ -728,6 +766,7 @@
         <iframe src="https://www.bilibili.com/" frameborder="1" width="400" height="200"></iframe>
         <!-- iframe是行内元素,表示内联框架,用于在当前页面嵌入其他页面;src属性表示嵌入页面的URL,frameborder属性表示是否显示边框,0表示不显示,1表示显示;
         width属性表示宽度,height属性表示高度;可嵌入广告或者其他网页,图片也可。准确来说src能嵌的都可以嵌入,一样的,能打开就打开,不能打开就触发下载 -->
+        <!-- href点击呈现,src直接呈现 -->
 
         <a href="https://www.bilibili.com/" target="blbl">点我看bilibili</a><br>
         <!-- a标签的target属性设置为"blbl",表示点击链接时,页面内容将在name属性为"blbl"的iframe中打开 -->
@@ -777,7 +816,7 @@
         <!-- style属性:行内样式,用于CSS操作,一般不写,可重复 -->
         <p>title属性</p>
         <div title="你好">hello</div>
-        <a href="https://www,baidu,com" title="去百度">去百度</a>
+        <a href="https://www.baidu.com" title="去百度">去百度</a>
         <!-- title属性:鼠标悬停在元素上显示的提示信息,一般不写,可重复 -->
         <p>lang属性</p>
         <div lang="en">hello</div>
@@ -844,7 +883,7 @@
             <p>子3</p>
             <p>子4</p>
             <div>
-                <!-- div是子5 -->
+                子5
                 <p>孙1</p>
             </div>
         </div>
@@ -855,7 +894,7 @@
             <p>子2</p>
             <p>子3</p>
             <div>
-                <!-- div是子4 -->
+                子4
                 <p>孙1</p>
             </div>
         </div>
@@ -867,7 +906,7 @@
             <p>三弟</p>
             <p>四弟</p>
             <div>
-                <!-- div是五弟 -->
+                五弟
                 <p>孙</p>
             </div>
         </div>
@@ -877,15 +916,15 @@
             <p>三弟</p>
             <p>四弟</p>
             <div>
-                <!-- div是五弟 -->
+                五弟
                 <p>孙</p>
             </div>
         </div>
 
         <!-- 属性选择器 -->
         <div class="demo12">
-            <h2 title="demo12-1">诶嘿嘿</h2>
-            <h2 title="demo12-2">诶嘿嘿</h2>
+            <h2 title="demo12-1">呼呼呼</h2>
+            <h2 title="demo12-2">哐哐哐</h2>
             <h2 title="demo12-2-1">诶嘿嘿</h2>
         </div>
 
@@ -964,10 +1003,23 @@
         <div class="demo18-3"></div>
 
         <div class="demo19"> 
-            <p class="demo19-1">Snell Roundhand</p>
-            <p class="demo19-2">娃娃体-简</p>
-            <p class="demo19-3">クレー</p>
-            <p class="demo19-4">行楷-简</p>
+            <p class="demo19-1">Snell Roundhand;Fuck you!</p>
+            <p class="demo19-2">娃娃体-简;咕咕嘎嘎!</p>
+            <p class="demo19-3">クレー;馬鹿やろ!</p>
+            <p class="demo19-4">行楷-简;小生没招了。</p>
+            <p class="demo19-5">
+                凸版文久見出し明朝;<br>
+                大晦日、<br>
+                霙が降った、<br>
+                面白い。
+            </p>
+        </div>
+
+        <div class="demo20">
+            <p class="demo20-1">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatum ea consequuntur at tenetur sapiente natus molestias, eius ab. Consectetur, suscipit?</p>
+            <p class="demo20-2">BACKTOSCHOOL</p>
+            <p class="demo20-3">HITTHEROAD</p>
+            <p class="demo20-4">STARCHASER</p>
         </div>
     </div>
 
