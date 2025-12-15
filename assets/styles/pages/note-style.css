@@ -1,0 +1,34 @@
+/* 页脚CSS */
+#webpage-footer {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: 0.9rem;
+    color: #666;
+    text-align: center;
+    padding: 1.5rem 1rem;
+    margin-top: 3rem;
+    border-top: 1px solid #eee;
+    line-height: 1.5;
+}
+#webpage-footer a {
+    color: #4a6fa5;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+#webpage-footer a:hover {
+    color: #2c4a7a;
+    text-decoration: underline;
+}
+#webpage-footer .footer-links {
+    margin-top: 0.5rem;
+}
+#webpage-footer .footer-links span {    
+    margin: 0 0.5rem;
+    color: #ddd;
+}
+/* 页脚CSS */
+/* 外部CSS示例 */
+h1.external-css-demo {
+    color: green;
+    font-size: 40px;
+}
+/* 外部CSS示例 */
