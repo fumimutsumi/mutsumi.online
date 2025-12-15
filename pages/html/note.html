@@ -453,6 +453,66 @@
     </form><hr><hr><hr>
 </div>
 
+<div title="iframe内联框架">
+    <iframe src="https://www.bilibili.com/" frameborder="1" height="600px" width="1200px"></iframe><br>
+    <iframe src="../../assets/styles/pages/note-style.css" frameborder="1" height="600px" width="1200px"></iframe><br>
+    <!--
+        iframe内联框架,行内元素,用于在当前页面嵌入其他页面;
+        href偏向于跳转,src偏向于加载;
+        frameborder属性表示是否显示边框,0表示不显示,1表示显示,没有其它值;
+        还可以通过height和width属性设置高度和宽度;
+        可以嵌入广告、网站、图片、视频等文件,但不建议嵌入大型网站,因为会占用大量资源;
+    -->
+    <a href="https://ak.hypergryph.com/#index" target="iframe-arknights-1">点我看明日方舟官网</a><br>
+    <iframe name="iframe-arknights-1" frameborder="0" height="600px" width="1200px"></iframe>
+    <form action="https://www.baidu.com/s" method="get" target="iframe-baidu-1">
+        <input type="text" name="wd" placeholder="请输入搜索内容">
+        <button type="submit">baidu搜索</button>
+    </form>
+    <iframe name="iframe-baidu-1" frameborder="0" height="600px" width="1200px"></iframe>
+    <!--
+        超链接、表单也可以嵌入,只需将target属性值和iframe的name值对应即可;
+        baidu搜索可能不能使用,服务器可能会拒绝请求 
+    -->
+</div>
+
+<div title="字符实体">
+    <p>
+        字符实体: &lt; 小于号, &gt; 大于号, &amp; 与号,<br>
+        &copy; 版权符号, &trade; 商标符号, &reg; 注册商标符号,<br> 
+        &euro; 欧元符号, &pound; 英镑符号, &yen; 人民币符号,<br>
+        &cent; 分符号, &times; 乘号, &divide; 除号,<br>
+        &nbsp; 空格符号
+    </p>
+    <!-- 一些字符实体可能会有多个写法,总之不会的查文档,记一些常用的就行 -->
+</div>
+
+<div title="全局属性">
+    <p id="test-id-test" class="test-class-test-1 test-class-test-2" title="这是一个测试段落" lang="ja-JP" dir="ltr" style="font:60px '凸版文久見出し明朝';">6つのグローバル属性、俺が持ってやがる!</p>
+    <!-- 
+        id用来制定唯一元素的命名;class用来指定元素的类名,可以多个类名,用空格隔开;
+        title用来指定元素的提示信息,鼠标悬停在元素上时显示,属于字符串;
+        lang用来指定元素的语言,写在html标签里的是全局语言,写在元素里的是局部语言;
+        dir用来指定元素的文本方向,默认是从左到右,ltr表示从左到右,rtl表示从右到左;
+        与bdo不同,bdo是强制改变文本方向,而dir是改变元素的文本方向;
+        style是CSS行内样式
+    -->
+    <!--
+        一些不常用的全局属性:
+        tabindex属性用于指定元素的Tab键顺序; 
+        accesskey属性用于指定元素的访问键;
+        draggable属性用于指定元素是否可拖动;
+        contenteditable属性用于指定元素是否可编辑;
+        hidden属性用于指定元素是否隐藏;
+        spellcheck属性用于指定元素是否检查拼写错误;
+        translate属性用于指定元素是否翻译
+    -->
+</div>
+
+<div title="CSS样式">
+    <p title="外部CSS样式展示">Ciallo~(∠・ω&lt; )⌒★</p>
+</div>
+
 <footer id="webpage-footer">
     <p>
         <a href="docs/copyright-notice.html">&copy; 2025 fumimutsumi . All rights reserved.</a>

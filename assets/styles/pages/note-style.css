@@ -26,9 +26,12 @@
     color: #ddd;
 }
 /* 页脚CSS */
+
 /* 外部CSS示例 */
-h1.external-css-demo {
-    color: green;
-    font-size: 40px;
+[title="外部CSS样式展示"] {
+    color: red;
+    background-color: azure;
+    font: 40px sans-serif;
+    width: 30%;
 }
 /* 外部CSS示例 */
