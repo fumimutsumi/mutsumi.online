@@ -1,3 +1,43 @@
+/* 
+    p {
+        color: red;
+    }
+    p 是选择器, {}及其中的内容是声明块, 内容就是声明, 声明由属性和值组成;
+
+    格式要求仅为方便阅读、维护。自动格式化工具会自动调整格式。所以很多地方空不空格完全没有影响; 
+    一般权重规律:!important > 行内CSS > 内部CSS = 外部CSS;
+    id选择器 > 类选择器 = 伪类选择器 = 属性选择器 = :root根元素选择器 > 元素选择器 = 伪元素选择器 = html元素选择器 > *通配选择器 > 从父元素继承的效果;
+    三大特性:层叠性、继承性、优先级;
+    层叠性:多个选择器选中同一个元素,会根据权重和顺序,将多个样式合并到一起,形成最终的样式;
+    继承性:子元素可以继承父元素的某些样式,例如字体、颜色、行高等;
+    优先级:当多个选择器选中同一个元素,会根据权重和顺序,确定最终的样式;
+    
+    DOM:将HTML代码转化成树状图结构；
+    例如:
+    html
+    ├── head
+    │   └── title
+    └── body
+        └── p
+            ├── (文字"这是一个")
+            └── span
+                └── (文字"例子")
+    剩下的都是元素(标签)
+    伪元素正如其名,并不是元素,而是伪装成装饰挂在DOM树上；
+
+    文档内容是html文件的所有内容;html就是文档内容的根;
+    浏览器在渲染时,会额外增加默认的渲染样式,这些不是html元素;
+    * 通配选择器:权重很低,匹配所有DOM树上的真元素,正因如此伪元素不会被其默认作用;
+    如果想要用通配选择器,可以这样写:
+    *::after,*::after{color:red}
+    相同样式要求的可以用并集选择器;
+
+    html html元素选择器:权重就是元素选择器,只匹配html标签,剩下的样式靠继承;
+
+    :root 根元素选择器:权重和伪类选择器一样,只匹配html文档根元素,即html标签;
+    和html元素选择器继承的方式一样,不过其权重更高,而且是指定写css变量的地方;
+*/
+
 /* 页脚CSS */
 #webpage-footer {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -29,9 +69,193 @@
 
 /* 外部CSS示例 */
 [title="外部CSS样式展示"] {
-    color: red;
-    background-color: azure;
-    font: 40px sans-serif;
-    width: 30%;
+    color: red;/* 字体颜色 */
+    background-color: azure;/* 背景颜色 */
+    font: 40px sans-serif;/* 字体的特殊整合属性,此处表示:字体大小40像素、字体样式默认寻找非衬线字体 */
+    width: 30%;/* 宽度30% */
 }
 /* 外部CSS示例 */
+
+/* css代码风格 */
+[title="css代码风格"] {
+    font: 40px '娃娃体-简', sans-serif;/* ''或者""里面可以引入字体样式,详见后面 */
+}
+#css-0-1 {
+    color: #9b30ff;
+}
+#css-0-2{color:#ff4500}
+/* css代码风格 */
+
+/* 选择器 */
+[title="选择器"] {
+    background-color: #799;
+    color: #ff0;
+    font: 32.5px '娃娃体-简', sans-serif;
+}
+/* 
+    属性选择器:
+    [title]表示选择所有有title属性的元素,
+    [title="xxx"]表示选择所有title属性值为xxx的元素,
+    [title^="xxx"]表示选择所有title属性值以xxx开头的元素,
+    [title$="xxx"]表示选择所有title属性值以xxx结尾的元素,
+    [title*="xxx"]表示选择所有title属性值包含xxx的元素;
+    [title~="xxx"]表示选择所有title属性值包含完整xxx的元素,且不同单词之间用空格隔开,可以实现多个class值一样的效果;
+    属性里面是字符串,所以可以写中文等文本;
+    一个元素只能有一个属性值,毕竟是字符串的描述
+*/
+[title="选择器"]>span {
+    background-color: #7b68ee;
+    color: #fff;
+}
+/* span 就是元素选择器,选中指定的元素(标签) */
+div>span.css-00-1 {
+    background-color: #0a0a2a;
+    color: #ccf2ff;
+}
+/* 
+    .css-00-1 就是类选择器,在类的值前+".";
+    一个元素可以有多个类,用","+空格隔开;
+    类的命名只能用字母、数字、-、_,不能用数字或者下划线_、短杠-开头;
+    可以和属性选择器"~="一样使用
+*/
+#css-00-2 {
+    background-color: #ff6b6b;
+    color: #8b0000;
+}
+/* 
+    #css-00-4 就是id选择器,在id的值前+"#";
+    id的命名也只能用字母、数字、-、_,不能用数字或者下划线_、短杠-开头;
+    一个标签只能有一个id,所以id选择器的权重最高
+*/
+.css-00-3#css-00-4 {
+    background-color: #228b22;
+    color: #fffdd0;
+}
+/* 交集选择器,紧紧贴一起就行,选中同时符合两个选择器的元素 */
+#css-00-5,
+#css-00-6 {
+    background-color: #ff69b4;
+    color: #8b0058;
+}
+#css-00-6 {
+    color: #fff0f5;
+}
+/* 并集选择器,用","隔开就行,选中所有符合其中一个选择器的元素 */
+#css-00-7>q {
+    background-color: #ffd700;
+    color: #333;
+}
+/* 子代选择器,用">"隔开父元素和子元素,只选择直接子元素 */
+#css-00-8 q {
+    background-color: #4b0082;
+    color: #e6e6fa;
+}
+/* 后代选择器,用空格隔开父元素和子元素,选择所有后代元素 */
+#css-00-9>q:first-child+q {
+    font-size: 70px;
+    /* 
+        因为q往下数第一个兄弟不是q,所以效果不生效;
+        但是如果写成: #css-00-9>q:first-child+span+q 就可以生效
+    */
+}
+#css-00-9>q:first-child~q {
+    background-color: #00ff7f;
+    color: #006400;
+    /* 因为q往下数无数个,有兄弟是q,所以效果生效 */
+}
+/* 兄弟选择器,"+"表示往下数一个,"~"表示往下数无数个,都不往上照 */
+/* : 是伪类选择器, :: 是伪元素选择器 */
+[title^="超链接"]:link {
+    background-color: #0a0a2a;
+    color: #ccf2ff;
+    /* 超链接未点击时的样式 */
+}
+[title^="超链接"]:visited {
+    background-color: #ff6b6b;
+    color: #8b0000;
+    /* 超链接已点击时的样式 */
+}
+[title^="超链接"]:hover {
+    background-color: #228b22;
+    color: #fffdd0;
+    /* 超链接鼠标悬停时的样式 */
+}
+[title^="超链接"]:active {
+    background-color: #ff69b4;
+    color: #8b0058;
+    /* 超链接点击时的样式 */
+}
+/* 顺序乱了容易丢失效果,所以对于超链接a,建议按link、visited、hover、active的顺序写 */
+#css-00-10:focus {
+    background-color: #ffd700;
+    color: #333;
+    /* 输入框获得焦点时的样式 */
+}
+#label-00-15:checked,
+#label-00-16:checked {
+    width: 20px;/* 选中后宽度 */
+    height: 20px;/* 选中后高度 */
+}
+/* 
+    checked是持久状态,而focus是临时状态;
+    checked一般用在单选框和复选框和开关按钮上,focus通用 
+*/
+#label-00-17:enabled {
+    width: 20px;
+    height: 20px;
+}
+#label-00-18:disabled {
+    width: 20px;
+    height: 20px;
+}
+/* enabled表示启用状态的元素,disabled表示禁用状态的元素 */
+#Gladiia:target {
+    background-color: aqua;
+    /* 目标元素被选中时的样式 */
+}
+#css-00-11>q:lang(en-US) {
+    font-size: 40px;
+    color: red;
+    /* 语言伪类,选中语言为en-US的元素 */
+}
+#css-00-12 p:first-child {
+    font-size: 60px;
+    /* 在所有元素中,第一个后代元素p会产生效果 */
+    /* 
+        类似的还有:
+        :first-of-type 表示在所有元素中,第一个类型为p的元素会产生效果 
+        :nth-child(n) 表示在所有元素中,第n个后代元素p会产生效果
+        :nth-of-type(n) 表示在所有元素中,第n个类型为p的元素会产生效果
+    */
+}
+#css-00-12 p:last-child {
+    color: red;
+    /* 在所有元素中,最后一个后代元素p会产生效果 */
+    /* 
+        类似的还有:
+        :last-of-type 表示在所有元素中,最后一个类型为p的元素会产生效果
+        :nth-last-child(n) 表示在所有元素中,倒数第n个后代元素p会产生效果
+        :nth-last-of-type(n) 表示在所有元素中,倒数第n个类型为p的元素会产生效果
+    */
+}
+#css-00-12 p:only-child {
+    font-family: "宋体", serif;
+    /* 在所有元素中,只有一个后代元素p会产生效果 */
+    /* 
+        类似的还有:
+        :only-of-type 表示在所有元素中,只有一个类型为p的元素会产生效果
+    */
+}
+#css-00-13:empty {
+    width: 100px;
+    height: 100px;
+    background-color: #7b68ee;
+    /* 表示选中空元素,没有子元素或内容为空的元素 */
+}
+#css-00-14:not([title]) {
+    width: 200px;
+    height: 200px;
+    background-color: #ff6b6b;
+    /* 否定伪类选择器,表示选中没有title属性的元素,()里面可以写任意选择器 */
+}
+/* 选择器 */

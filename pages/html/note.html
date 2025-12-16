@@ -27,7 +27,7 @@
     <link rel="stylesheet" href="../../assets/styles/pages/note-style.css">
     <!-- 引入外部CSS文件 -->
     <style>
-        /* 格式要求仅为方便阅读、维护。自动格式化工具会自动调整格式 */
+    /* 不想写东西呐,全写成外部css了,感觉这样更方便 */
     </style>
     <!-- 内部CSS。理论上style标签可以写在head或者body中,但是为了方便阅读,一般写在head中 -->
 </head>
@@ -488,7 +488,7 @@
 </div>
 
 <div title="全局属性">
-    <p id="test-id-test" class="test-class-test-1 test-class-test-2" title="这是一个测试段落" lang="ja-JP" dir="ltr" style="font:60px '凸版文久見出し明朝';">6つのグローバル属性、俺が持ってやがる!</p>
+    <p id="test-id-test" class="test-class-test-1 test-class-test-2" title="这是一个测试段落" lang="ja-JP" dir="ltr" style="font:60px '凸版文久見出し明朝', sans-serif;">6つのグローバル属性、俺が持ってやがる!</p>
     <!-- 
         id用来制定唯一元素的命名;class用来指定元素的类名,可以多个类名,用空格隔开;
         title用来指定元素的提示信息,鼠标悬停在元素上时显示,属于字符串;
@@ -510,7 +510,102 @@
 </div>
 
 <div title="CSS样式">
-    <p title="外部CSS样式展示">Ciallo~(∠・ω&lt; )⌒★</p>
+    <p title="外部CSS样式展示">Ciallo~(∠・ω&lt; )⌒★</p><br>
+    <!-- 
+        行内css就是style属性,内部css就是head标签里的style标签; 
+        外部css就是note-style.css文件,link rel="stylesheet" href引入的
+    -->
+
+    <p title="css代码风格">
+        css代码风格:
+        <span id="css-0-1">展开风格、</span>
+        <span id="css-0-2">紧凑风格。</span>
+        <!-- 
+            展开风格主要是用于开发、修改的时候;
+            紧凑风格主要是用于项目部署,需要压缩文件以提高加载速度的时候,用工具一键压缩 
+        -->
+    </p><br>
+
+    <div title="选择器">
+        属性选择器<br>
+
+        <span>元素选择器</span><br>
+
+        <span class="css-00-1">类选择器</span><br>
+
+        <span id="css-00-2">id选择器</span><br>
+
+        <span class="css-00-3" id="css-00-4">交集选择器</span><br>
+
+        <span id="css-00-5">并集选择器1</span><br>
+        <span id="css-00-6">并集选择器2</span><br>
+
+        <span id="css-00-7">
+            子代选择器<br>
+            <q>子2:q</q><br>
+            <span>
+                子3:span<br>
+                <q>孙1:q</q>
+            </span>
+        </span><br>
+
+        <span id="css-00-8">
+            后代选择器<br>
+            <q>子1:q</q><br>
+            <span>
+                子2:span<br>
+                <q>孙1:q</q>
+            </span>
+        </span><br>
+
+        <span id="css-00-9">
+            兄弟选择器&nbsp;
+            <q>子1:q</q>&nbsp;
+            <span>子2:span</span>&nbsp;
+            <q>子3:q</q>&nbsp;
+            <q>子4:q</q>
+        </span><br>
+
+        <div title="伪类选择器">
+            <a title="超链接1" href="about-me.html">关于项目</a>&nbsp;&nbsp;&nbsp;
+            <a title="超链接2" href="root-directory/README.html">项目介绍</a>&nbsp;&nbsp;&nbsp;
+            <a title="超链接3" href="docs/structure-guide.html">项目结构</a>&nbsp;&nbsp;&nbsp;
+            <a title="超链接4" href="docs/copyright-notice.html">版权声明</a><br>
+
+            <form action="https://www.baidu.com/s">
+                <input type="text" name="wd" placeholder="baidu搜索" id="css-00-10">
+                <input type="radio" name="radio" value="1" id="label-00-15"><label for="label-00-15">1</label>
+                <input type="radio" name="radio" value="2" id="label-00-16"><label for="label-00-16">2</label>
+                <input type="checkbox" name="checkbox" value="1" id="label-00-17" enabled><label for="label-00-17">1</label>
+                <input type="checkbox" name="checkbox" value="2" id="label-00-18" disabled><label for="label-00-18">2</label>
+                <input type="submit" value="搜索、提交">
+            </form>
+
+            <a href="#Gladiia">看歌蕾蒂娅</a>
+
+            <p id="css-00-11">你好,<q lang="en-US">Hello</q></p>
+
+            <div id="css-00-12">
+                <p>子1</p>
+                <p>子2</p>
+                <div>
+                    子3
+                    <p>孙1</p>
+                </div>
+                <p>子4</p>
+                <p>子4</p>
+                <p>子5</p>
+            </div>
+
+            <div id="css-00-13"></div>
+
+            <div id="css-00-14"></div>
+        </div>
+
+        <div title="伪元素选择器">
+            
+        </div>
+    </div>
 </div>
 
 <footer id="webpage-footer">
