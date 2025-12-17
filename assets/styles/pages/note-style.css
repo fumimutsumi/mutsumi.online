@@ -3,10 +3,15 @@
         color: red;
     }
     p 是选择器, {}及其中的内容是声明块, 内容就是声明, 声明由属性和值组成;
+    字符串类型需要+"",其他类型只需要写值;
 
     格式要求仅为方便阅读、维护。自动格式化工具会自动调整格式。所以很多地方空不空格完全没有影响; 
+
     一般权重规律:!important > 行内CSS > 内部CSS = 外部CSS;
     id选择器 > 类选择器 = 伪类选择器 = 属性选择器 = :root根元素选择器 > 元素选择器 = 伪元素选择器 = html元素选择器 > *通配选择器 > 从父元素继承的效果;
+    css权重计算:权重相同的情况下,后写的声明块会覆盖前写的声明块;将鼠标放到选择器上,可以查看其权重;
+    id选择器权重100,类选择器权重10,伪类选择器权重10,属性选择器权重10,根元素选择器权重1,元素选择器权重1,伪元素选择器权重1,通配选择器权重0;
+
     三大特性:层叠性、继承性、优先级;
     层叠性:多个选择器选中同一个元素,会根据权重和顺序,将多个样式合并到一起,形成最终的样式;
     继承性:子元素可以继承父元素的某些样式,例如字体、颜色、行高等;
@@ -37,6 +42,57 @@
     :root 根元素选择器:权重和伪类选择器一样,只匹配html文档根元素,即html标签;
     和html元素选择器继承的方式一样,不过其权重更高,而且是指定写css变量的地方;
 */
+
+/* 字体 */
+@font-face {
+    font-family: 'zenkurenaido';/* 自定义字体名称 */
+    src:/* 字体文件路径 */ 
+        url('../../fonts/japanese/ZenKurenaido-Regular/ZenKurenaido-Regular.woff2') format('woff2'),
+        /* 优先使用woff2格式,因为woff2格式压缩率更高,加载速度更快 */
+        url('../../fonts/japanese/ZenKurenaido-Regular/ZenKurenaido-Regular.woff') format('woff');
+        /* 然后使用woff格式,因为woff格式兼容所有浏览器 */
+    font-weight: 400;/* 字体粗细,400表示正常粗细 */
+    font-style: normal;/* 字体样式,normal表示正常字体 */
+    font-display: swap;/* 字体加载方式,swap表示先显示默认字体,等自定义字体加载完成后再替换 */
+    unicode-range: 
+        /* 基本假名 */
+        U+3040-U+309F,/* 平假名 */ 
+        U+30A0-U+30FF,/* 片假名 */
+
+        /* 日文标点和符号 */
+        U+3000-U+303F,/* CJK标点和符号(句号、顿号、引号等) */
+
+        /* 全角字符和特殊符号 */
+        U+FF00-U+FFEF,/* 半角、全角形式 */
+
+        /* 注音符号 */
+        U+31F0-U+31FF,/* 假名扩展(小假名、注音等) */
+
+        /* 汉字范围 */
+        U+4E00-U+9FFF,/* CJK统一汉字(基本汉字) */
+        U+3400-U+4DBF;/* CJK扩展A(更多汉字) */
+}/* 日语字体ZenKurenaido-Regular,sans-serif字体 */
+@font-face {
+    font-family: 'kleeone-400';
+    src:
+        url('../../fonts/japanese/KleeOne/KleeOne-Regular/KleeOne-Regular.woff2') format('woff2'),
+        url('../../fonts/japanese/KleeOne/KleeOne-Regular/KleeOne-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+    unicode-range:U+3040-U+309F,U+30A0-U+30FF,U+3000-U+303F,U+FF00-U+FFEF,U+31F0-U+31FF,U+4E00-U+9FFF,U+3400-U+4DBF;
+}/* 日语字体KleeOne-Regular,serif字体 */
+@font-face {
+    font-family: 'kleeone-600';
+    src:
+        url('../../fonts/japanese/KleeOne/KleeOne-SemiBold/KleeOne-SemiBold.woff2') format('woff2'),
+        url('../../fonts/japanese/KleeOne/KleeOne-SemiBold/KleeOne-SemiBold.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+    unicode-range:U+3040-U+309F,U+30A0-U+30FF,U+3000-U+303F,U+FF00-U+FFEF,U+31F0-U+31FF,U+4E00-U+9FFF,U+3400-U+4DBF;
+}/* 日语字体KleeOne-SemiBold,serif字体 */
+/* 字体 */
 
 /* 页脚CSS */
 #webpage-footer {
@@ -76,15 +132,15 @@
 }
 /* 外部CSS示例 */
 
-/* css代码风格 */
-[title="css代码风格"] {
+/* CSS代码风格 */
+[title="CSS代码风格"] {
     font: 40px '娃娃体-简', sans-serif;/* ''或者""里面可以引入字体样式,详见后面 */
 }
 #css-0-1 {
     color: #9b30ff;
 }
 #css-0-2{color:#ff4500}
-/* css代码风格 */
+/* CSS代码风格 */
 
 /* 选择器 */
 [title="选择器"] {
@@ -258,4 +314,121 @@ div>span.css-00-1 {
     background-color: #ff6b6b;
     /* 否定伪类选择器,表示选中没有title属性的元素,()里面可以写任意选择器 */
 }
+#css-00-15::first-letter {
+    font-size: 60px;
+    color: red;
+    /* 伪元素选择器,表示选中第一个字母 */
+}
+#css-00-15::first-line {
+    background-color: rgb(156, 205, 205);
+    /* 伪元素选择器,表示选中第一行 */
+}
+#css-00-15::selection {
+    background-color: #ff69b4;
+    color: #8b0058;
+    /* 伪元素选择器,表示选中被用户选中的元素 */
+}
+#css-00-16::placeholder {
+    background-color: #ffd700;
+    color: #333;
+    /* 伪元素选择器,表示选中输入框中的占位符 */
+}
+#css-00-17::before {
+    content: "dps:";
+    /* 伪元素选择器,表示选中元素之前的内容 */
+}
+#css-00-17::after {
+    content: "差不多是saki酱的十分之一";
+    content: "(呼呼呼の)" !important;
+    /* 伪元素选择器,表示选中元素之后的内容 */
+    /* !important,表示优先级最高,会覆盖其他声明,写在;之前 */
+}
 /* 选择器 */
+
+/* 像素和颜色 */
+[title="像素和颜色"] {
+    width: 5cm;
+    height: 50mm;
+    /* cm和mm可以表示长度,1cm=10mm,不准确;或者用px像素表示,更准确 */
+    background-color: aquamarine;
+    /* 颜色名表示颜色 */
+    background-color: rgba(255, 105, 180, 0.5) !important;
+    /* 
+        rgba()表示红色、绿色、蓝色、透明度;可以去掉透明度写成rgb()
+        每个值的范围是0-255,透明度的范围是0-1;
+        也可以用%表示;"0.5"可以简写成".5" 
+    */
+    background-color: hsla(200, 50%, 50%, 0.5);
+    /* 
+        hsla()表示色相、饱和度、亮度、透明度;可以写成hsl()
+        每个值的范围依次是0-360、0-100%、0-100%、0-1
+    */
+    background-color: #7b68ee11;
+    /* 
+        hexa()表示十六进制颜色值,透明度;可以写hex()
+        一般不写hexa(),直接写#7b68ee11;
+        每个值的范围是00-FF,表示0-255;
+        当两两重复时,比如#FFCCDDAA,可以简写为#FCDA
+    */
+}
+/* 像素和颜色 */
+
+/* 字体 */
+[title="字体"] {
+    background-color: #c7c3ae;
+    font-size: 60px;
+    /* 字体大小,一般用px像素表示,等比例变化字体大小 */
+}
+#css-00-18 {
+    font-family: "zenkurenaido", sans-serif;
+    /*
+        字体族(字体样式),值是字符串类型,需要用引号括起来;
+        多个字体样式之间用逗号隔开,先写覆盖后写,前一个实效才启用后面;
+        最后一个备胎推荐写serif或者sans-serif,届时会使用用户系统默认字体;
+        sans-serif是非衬线字体,serif是衬线字体;棱角分明是衬线字体,否则反之;
+        在此处设置的字体需要用户安装在系统中,否则会使用默认字体;
+        可以在css中引入字体文件,或者在html中引入字体文件
+    */
+}
+#css-00-19 {
+    font-family: "kleeone-400", serif;
+}
+#css-00-20 {
+    font-family: "kleeone-600", serif;
+}
+#css-00-21>q:nth-of-type(1) {
+    background-color: #c7c3ae;
+    font-size: 60px;
+    font-family: "zenkurenaido", sans-serif;
+    font-style: italic;
+    /* 
+        字体样式:normal是正常字体,italic是斜体,oblique是倾斜体; 
+        italic是先找字体设计好的倾斜样式,如果没有,才会使用oblique强制倾斜
+    */
+    font-weight: 400;
+    /*
+        字体粗细:可以用单词表示,也可以用数字表示(100~900);
+        thin(极细)100, extra-light(特细)200, light(细)300, 
+        normal、regular(常规)400, medium(中等)500,
+        semi-bold、demibold(半粗)600,bold(粗)700,
+        extra-bold、ultra-bold(特粗)800,
+        black、heavy(极粗)900
+    */
+}
+#css-00-21>q:nth-of-type(2) {
+    background-color: #c7c3ae;
+    font-size: 60px;
+    font-family: "kleeone-400", serif;
+    font-style: oblique;
+    font-weight: 400;
+}
+#css-00-21>q:nth-of-type(3) {
+    background-color: #c7c3ae;
+    font: normal normal normal 60px "kleeone-600", serif;
+    /* 
+        字体复合属性:
+        font: [font-style] [font-variant] [font-weight] [font-size] [font-family];
+        font-variant是字体变体,可以用small-caps表示小型大写字母,不写就是normal正常字体
+    */
+}
+/* 字体 */

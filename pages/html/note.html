@@ -26,6 +26,10 @@
     <!-- <link>标签用于引入外部资源,这里引入了一个图标文件 -->
     <link rel="stylesheet" href="../../assets/styles/pages/note-style.css">
     <!-- 引入外部CSS文件 -->
+    <link rel="preload" href="../../assets/fonts/japanese/ZenKurenaido-Regular/ZenKurenaido-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../../assets/fonts/japanese/KleeOne/KleeOne-Regular/KleeOne-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../../assets/fonts/japanese/KleeOne/KleeOne-SemiBold/KleeOne-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
+    <!-- 预加载字体文件,提高字体加载速度 -->
     <style>
     /* 不想写东西呐,全写成外部css了,感觉这样更方便 */
     </style>
@@ -510,13 +514,15 @@
 </div>
 
 <div title="CSS样式">
-    <p title="外部CSS样式展示">Ciallo~(∠・ω&lt; )⌒★</p><br>
-    <!-- 
-        行内css就是style属性,内部css就是head标签里的style标签; 
-        外部css就是note-style.css文件,link rel="stylesheet" href引入的
-    -->
+    <p title="外部CSS样式展示">
+        Ciallo~(∠・ω&lt; )⌒★
+        <!-- 
+            行内css就是style属性,内部css就是head标签里的style标签; 
+            外部css就是note-style.css文件,link rel="stylesheet" href引入的
+        -->
+    </p><br>
 
-    <p title="css代码风格">
+    <p title="CSS代码风格">
         css代码风格:
         <span id="css-0-1">展开风格、</span>
         <span id="css-0-2">紧凑风格。</span>
@@ -603,9 +609,29 @@
         </div>
 
         <div title="伪元素选择器">
-            
+            <p id="css-00-15">Lorem ipsum dolor sit amet consectetur adipisicing elit. Et, officia. Ullam eligendi expedita unde quos doloribus soluta consequuntur labore magnam culpa dolore quaerat ipsum hic voluptatem error, obcaecati nobis excepturi.</p>
+
+            <input type="text" id="css-00-16" placeholder="请输入">
+
+            <p id="css-00-17">799</p>
         </div>
     </div>
+
+    <p title="像素和颜色"></p>
+
+    <p title="字体">
+        <q id="css-00-18">ZenKurenaido-Regular;人類社会のすべての構成員の固有の尊厳と平等で譲ることのできない権利とを承認することは</q><br><br>
+        <q id="css-00-19">KleeOne-Regular;白い鶴が朝焼けの空を静かに舞い、争いのない世界に希望の光がゆっくりと昇るように、人々は互いの違いを認め合い、慈愛に満ちた未来を築くことを願い続ける。</q><br><br>
+        <q id="css-00-20">KleeOne-SemiBold;オリーブの枝をかざす手と手がつなぐとき、過去の痛みは知恵の泉となり、子供たちの笑い声が国境を越えて響き渡る、そんな世界が永遠に続くことを星たちが約束しているようだ。</q>
+
+        <p id="css-00-21">
+            <q>おはよう</q><br>
+            <q>こんにちは</q><br>
+            <q>こんばんは</q><br>
+        </p>
+    </p>
+
+    <p title="文本"></p>
 </div>
 
 <footer id="webpage-footer">
