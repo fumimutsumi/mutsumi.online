@@ -1,0 +1,354 @@
+/* 重置和基础样式 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+body {
+  background-color: #a49d9c;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 20px;
+}
+
+/* 切换按钮容器,右上角 */
+#toggle-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 100;
+}
+
+/* 切换按钮样式 */
+.toggle-button {
+  background: none;
+  border: none; 
+  color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  font-size: 24px;
+  padding: 0;
+  margin: 0;
+}
+
+/* 生日祝福内容容器 */
+#birthday-container {
+  text-align: center;
+  width: 100%;
+  max-width: 800px;
+}
+
+/* 生日标题 */
+#birthday-title {
+  color: #262626;
+  font-size: 32px;
+  margin-bottom: 24px;
+  text-align: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 祝福文本 */
+#blessing-text {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 40px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+#blessing-text p {
+  color: #262626;
+  font-size: 18px;
+  line-height: 1.6;
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+/* 按钮包装器 */
+.buttons-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-bottom: 30px;
+  width: 100%;
+}
+
+/* 按钮行 */
+.button-row {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* 基础按钮样式 */
+button {
+  position: relative;
+  background-color: #a49d9c;
+  padding: 14px;
+  color: rgba(255, 255, 255, 0.6);
+  border-radius: 6px;
+  width: 150px;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  font-weight: bold;
+  border: none;
+  box-shadow: 
+    inset 1px 1px rgba(255, 255, 255, 0.4), 
+    inset 0 1px rgba(255, 255, 255, 0.6), 
+    inset 0 1px 12px rgba(0, 0, 0, 0.1),
+    inset 0 -4px 1px rgba(0, 0, 0, 0.2), 
+    inset -1px -1px 2px rgba(0, 0, 0, 0.8),
+    12px 12px 16px rgba(0, 0, 0, 0.4), 
+    24px 24px 32px rgba(0, 0, 0, 0.4);
+  outline: none;
+  cursor: pointer;
+  transition: 0.15s ease-out;
+}
+
+/* 深色按钮样式 */
+.dark-btn {
+  background-color: #262626;
+  box-shadow: 
+    inset 1px 1px rgba(255, 255, 255, 0.1),
+    inset 0 1px rgba(255, 255, 255, 0.3),
+    inset 0 1px 12px rgba(0, 0, 0, 0.1),
+    inset 0 -4px 1px rgba(0, 0, 0, 0.2),
+    inset -1px -1px 2px rgba(0, 0, 0, 0.8),
+    12px 12px 16px rgba(0, 0, 0, 0.4),
+    24px 24px 32px rgba(0, 0, 0, 0.4);
+}
+
+/* 按钮按下状态 */
+button:active {
+  box-shadow: 
+    inset 1px 1px rgba(255, 255, 255, 0.4), 
+    inset 0 1px rgba(255, 255, 255, 0.6), 
+    inset 0 1px 12px rgba(0, 0, 0, 0.1),
+    inset 0 -4px 1px rgba(0, 0, 0, 0.2), 
+    inset -1px -1px 2px rgba(0, 0, 0, 0.8);
+  margin: 2px -2px -2px 2px;
+  background-color: #8f8887;
+}
+
+/* 深色按钮按下状态 */
+.dark-btn:active {
+  box-shadow: 
+    inset 1px 1px rgba(255, 255, 255, 0.15),
+    inset 0 1px rgba(255, 255, 255, 0.3),
+    inset 0 1px 12px rgba(0, 0, 0, 0.1),
+    inset 0 -4px 1px rgba(0, 0, 0, 0.2),
+    inset -1px -1px 2px rgba(0, 0, 0, 0.8);
+  margin: 2px -2px -2px 2px;
+  background-color: #1f1f1f;
+}
+
+/* 按钮的::after伪元素 */
+button::after {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  padding: 5px 8px 5px 5px;
+  z-index: -1;
+  box-shadow: 
+    inset -1.2px -1.2px rgba(255, 255, 255, 0.8),
+    1px 1px 2px rgba(0, 0, 0, 0.2),
+    4px 12px 24px -6px rgba(0, 0, 0, 0.1);
+  transition: 0.15s ease-out;
+}
+
+/* 按钮按下时的伪元素状态 */
+button:active::after {
+  margin: -2px 2px 2px -2px;
+}
+
+/* 说明文本 */
+#instruction {
+  color: #262626;
+  font-size: 16px;
+  font-style: italic;
+  margin-top: 20px;
+  opacity: 0.8;
+}
+
+/* 掉落文字容器 */
+#falling-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 50;
+  overflow: hidden;
+}
+
+/* 掉落文字样式 */
+.falling-text {
+  position: absolute;
+  font-size: 32px;
+  font-weight: bold;
+  z-index: 10;
+  pointer-events: none;
+  user-select: none;
+  top: -60px;
+  left: 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  animation-duration: 4s;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+/* 掉落动画 */
+@keyframes fall {
+  0% {
+    top: -60px;
+    opacity: 1;
+    transform: rotate(0deg);
+  }
+  100% {
+    top: 100vh;
+    opacity: 0;
+    transform: rotate(360deg);
+  }
+}
+
+/* 响应式设计,平板设备 */
+@media (max-width: 768px) {
+  #birthday-title {
+    font-size: 28px;
+  }
+  
+  #blessing-text p {
+    font-size: 16px;
+  }
+  
+  .button-row {
+    gap: 15px;
+  }
+  
+  button {
+    width: 120px;
+    height: 120px;
+    font-size: 36px;
+  }
+}
+
+/* 响应式设计,移动设备 */
+@media (max-width: 480px) {
+  body {
+    padding: 10px;
+    justify-content: flex-start;
+    padding-top: 60px;
+  }
+  
+  #toggle-container {
+    top: 15px;
+    right: 15px;
+  }
+  
+  .toggle-button {
+    width: 35px;
+    height: 35px;
+    font-size: 22px;
+  }
+  
+  #birthday-container {
+    width: 100%;
+  }
+  
+  #birthday-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  #blessing-text {
+    padding: 16px;
+    margin-bottom: 25px;
+  }
+  
+  #blessing-text p {
+    font-size: 15px;
+  }
+  
+  .buttons-wrapper {
+    gap: 25px;
+    width: 100%;
+  }
+  
+  /* 移动端按钮行布局 */
+  .button-row {
+    gap: 10px;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  /* 浅色按钮行,3个按钮 */
+  .light-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+  
+  /* 深色按钮行,4个按钮 */
+  .dark-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  /* 移动端按钮大小,调整为适合手机屏幕 */
+  button {
+    width: 70px;
+    height: 70px;
+    font-size: 24px;
+    padding: 10px;
+  }
+  
+  .falling-text {
+    font-size: 24px;
+  }
+}
+
+/* 非常小的屏幕 */
+@media (max-width: 360px) {
+  button {
+    width: 60px;
+    height: 60px;
+    font-size: 20px;
+  }
+  
+  .light-row {
+    max-width: 240px;
+    gap: 8px;
+  }
+  
+  .dark-row {
+    max-width: 320px;
+    gap: 8px;
+  }
+}

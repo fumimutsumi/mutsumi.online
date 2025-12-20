@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>birthday blessing</title>
+  <link rel="stylesheet" href="assets/birthday.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <!-- 切换按钮,右上角 -->
+  <div id="toggle-container">
+    <button id="toggle-btn" class="toggle-button" title="切换祝福内容">
+      <i id="toggle-icon" class="fas fa-arrow-right"></i>
+    </button>
+  </div>
+
+  <!-- 主要祝福内容容器 -->
+  <div id="birthday-container">
+    <!-- 祝福标题 -->
+    <h1 id="birthday-title">WSH的生日祝福</h1>
+    
+    <!-- 祝福文本 -->
+    <div id="blessing-text">
+      <p>今天是你的农历生日！</p>
+      <p>愿你的每一天都充满欢笑与阳光。</p>
+      <p>愿你的梦想像星星一样闪亮，像月亮一样圆满。</p>
+      <p>生日快乐，愿你永远保持童心与快乐！</p>
+    </div>
+
+    <!-- 按钮容器 -->
+    <div class="buttons-wrapper">
+      <!-- 浅色按钮行,3个按钮 -->
+      <div class="button-row light-row">
+        <button>W</button>
+        <button>S</button>
+        <button>H</button>
+      </div>
+      
+      <!-- 深色按钮行,4个按钮 -->
+      <div class="button-row dark-row">
+        <button class="dark-btn">S</button>
+        <button class="dark-btn">R</button>
+        <button class="dark-btn">K</button>
+        <button class="dark-btn">L</button>
+      </div>
+    </div>
+
+    <!-- 说明文本 -->
+    <p id="instruction">点击任意按钮，会有特殊效果</p>
+  </div>
+
+  <!-- 掉落文字容器 -->
+  <div id="falling-container"></div>
+
+  <!-- 外部JavaScript文件 -->
+  <script src="assets/birthday.js"></script>
+</body>
+</html>
+<!-- 代码参考:https://x.com/motomiya333/status/2001730072026452172 -->

@@ -435,7 +435,7 @@ div>span.css-00-1 {
 
 /* 文本 */
 [title="文本"] {
-    font: italic normal 600 50px "kleeone-600", serif;
+    font: italic normal 600 50px "翩翩体-简", sans-serif;
     background-color: rgb(199, 83, 141);/* 背景颜色 */
     color: #fff0f5;/* 文字颜色 */
     letter-spacing: normal;/* 字母(汉字)间距 */
