@@ -1,0 +1,540 @@
+/* 重置和基础样式 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: 'Helvetica', 'Arial', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #ffcfe0 0%, #ffb6d9 50%, #e6c6ff 100%);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  overflow-x: hidden;
+  padding-bottom: 40px;
+}
+
+/* 胡萝卜背景 */
+#carrot-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.carrot-row {
+  position: absolute;
+  display: flex;
+  gap: 80px;
+  opacity: 0.15;
+}
+
+.carrot {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(to bottom, #ff9966, #ff5e62);
+  clip-path: polygon(50% 0%, 80% 30%, 70% 100%, 30% 100%, 20% 30%);
+  position: relative;
+}
+
+.carrot::after {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 15px;
+  background-color: #7cfc00;
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+
+/* 顶部轮播banner */
+.banner-container {
+  width: 100%;
+  max-width: 1200px;
+  height: 300px;
+  margin: 20px auto 30px;
+  position: relative;
+  border-radius: 0 0 20px 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(255, 105, 180, 0.3);
+}
+
+.banner-slides {
+  display: flex;
+  width: 200%;
+  height: 100%;
+  transition: transform 0.5s ease;
+}
+
+.banner-slide {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.banner-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.banner-controls {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-50%);
+  padding: 0 15px;
+  pointer-events: none;
+}
+
+.banner-btn {
+  pointer-events: auto;
+  background-color: rgba(255, 255, 255, 0.7);
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #ff69b4;
+  font-size: 18px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s;
+}
+
+.banner-btn:hover {
+  background-color: white;
+  transform: scale(1.1);
+}
+
+.banner-dots {
+  position: absolute;
+  bottom: 15px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.dot.active {
+  background-color: white;
+  transform: scale(1.2);
+}
+
+/* 主要内容 */
+#main-content {
+  width: 100%;
+  max-width: 1000px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 20px;
+}
+
+#birthday-title {
+  color: #ff4081;
+  font-size: 2.8rem;
+  margin-bottom: 30px;
+  text-align: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+#birthday-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px;
+  height: 4px;
+  background: linear-gradient(to right, #ff4081, #ff79b0);
+  border-radius: 2px;
+}
+
+/* 卡片样式 */
+.card {
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.85);
+  border-radius: 20px;
+  padding: 30px;
+  margin-bottom: 40px;
+  box-shadow: 0 10px 30px rgba(255, 105, 180, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+.blessing-card {
+  border-top: 8px solid #ff79b0;
+}
+
+.gallery-card {
+  border-top: 8px solid #9c27b0;
+}
+
+.card-title {
+  color: #ff4081;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.card-content {
+  color: #555;
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+
+.card-content p {
+  margin-bottom: 15px;
+  text-align: justify;
+}
+
+.signature {
+  text-align: right;
+  font-style: italic;
+  color: #ff79b0;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+/* 生日贺图轮播 */
+.gallery-container {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.gallery-slides {
+  display: flex;
+  width: 500%;
+  height: 100%;
+  transition: transform 0.5s ease;
+}
+
+.gallery-slide {
+  width: 20%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.gallery-slide img {
+  width: 100%;
+  height: 85%;
+  object-fit: contain;
+  border-radius: 10px;
+}
+
+.image-caption {
+  margin-top: 10px;
+  color: #777;
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+.gallery-controls {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-50%);
+  padding: 0 15px;
+  pointer-events: none;
+}
+
+.gallery-btn {
+  pointer-events: auto;
+  background-color: rgba(156, 39, 176, 0.8);
+  border: none;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: white;
+  font-size: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s;
+}
+
+.gallery-btn:hover {
+  background-color: rgba(156, 39, 176, 1);
+  transform: scale(1.1);
+}
+
+.gallery-dots {
+  position: absolute;
+  bottom: 15px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* 按钮容器 */
+.buttons-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.button-row {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+
+/* 基础按钮样式 */
+button {
+  position: relative;
+  padding: 14px;
+  border-radius: 10px;
+  width: 150px;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 60px;
+  font-weight: bold;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.15s ease-out;
+  font-family: 'Arial', sans-serif;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* 粉色按钮样式 */
+.pink-btn {
+  background-color: #ff79b0;
+  box-shadow: 
+    inset 2px 2px 4px rgba(255, 255, 255, 0.7),
+    inset -2px -2px 4px rgba(0, 0, 0, 0.2),
+    0 8px 16px rgba(255, 105, 180, 0.4),
+    0 16px 32px rgba(255, 105, 180, 0.3),
+    8px 8px 0 rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* 紫色按钮样式 */
+.purple-btn {
+  background-color: #9c27b0;
+  box-shadow: 
+    inset 2px 2px 4px rgba(255, 255, 255, 0.6),
+    inset -2px -2px 4px rgba(0, 0, 0, 0.3),
+    0 8px 16px rgba(156, 39, 176, 0.4),
+    0 16px 32px rgba(156, 39, 176, 0.3),
+    8px 8px 0 rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* 按钮按下状态 */
+.pink-btn:active,
+.purple-btn:active {
+  box-shadow: 
+    inset 2px 2px 4px rgba(255, 255, 255, 0.5),
+    inset -2px -2px 4px rgba(0, 0, 0, 0.2),
+    0 2px 4px rgba(0, 0, 0, 0.1),
+    2px 2px 0 rgba(0, 0, 0, 0.05);
+  transform: translate(4px, 4px);
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+button::after {
+  display: none;
+}
+
+/* 说明文本 */
+.instruction {
+  color: #ff4081;
+  font-size: 1.2rem;
+  font-style: italic;
+  margin-top: 10px;
+  opacity: 0.9;
+  text-align: center;
+}
+
+/* 掉落文字容器 */
+#falling-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 100;
+  overflow: hidden;
+}
+
+/* 掉落文字样式 */
+.falling-text {
+  position: absolute;
+  font-size: 36px;
+  font-weight: bold;
+  z-index: 10;
+  pointer-events: none;
+  user-select: none;
+  top: -60px;
+  left: 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  animation-duration: 4s;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+/* 掉落动画 */
+@keyframes fall {
+  0% {
+    top: -60px;
+    opacity: 1;
+    transform: rotate(0deg);
+  }
+  100% {
+    top: 100vh;
+    opacity: 0;
+    transform: rotate(360deg);
+  }
+}
+
+/* 底部信息 */
+footer {
+  margin-top: 50px;
+  text-align: center;
+  color: #ff4081;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+footer p {
+  margin-bottom: 5px;
+}
+
+/* 响应式设计,平板设备 */
+@media (max-width: 768px) {
+  .button-row {
+    gap: 15px;
+  }
+  
+  button {
+    width: 120px;
+    height: 120px;
+    font-size: 50px;
+  }
+}
+
+/* 响应式设计,移动设备 */
+@media (max-width: 480px) {
+  .buttons-wrapper {
+    gap: 20px;
+  }
+  
+  /* 移动端按钮布局 */
+  .button-row {
+    gap: 10px;
+  }
+  
+  .pink-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+  
+  .purple-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  /* 移动端按钮大小 */
+  button {
+    width: 70px;
+    height: 70px;
+    font-size: 32px;
+    padding: 10px;
+  }
+  
+  /* 移动端按钮阴影调整 */
+  .pink-btn,
+  .purple-btn {
+    box-shadow: 
+      inset 1px 1px 3px rgba(255, 255, 255, 0.7),
+      inset -1px -1px 3px rgba(0, 0, 0, 0.2),
+      0 4px 8px rgba(0, 0, 0, 0.2),
+      4px 4px 0 rgba(0, 0, 0, 0.1);
+  }
+  
+  .pink-btn:active,
+  .purple-btn:active {
+    box-shadow: 
+      inset 1px 1px 3px rgba(255, 255, 255, 0.5),
+      inset -1px -1px 3px rgba(0, 0, 0, 0.2),
+      0 1px 2px rgba(0, 0, 0, 0.1),
+      2px 2px 0 rgba(0, 0, 0, 0.05);
+    transform: translate(2px, 2px);
+  }
+}
+
+/* 非常小的屏幕 */
+@media (max-width: 360px) {
+  .pink-row {
+    max-width: 240px;
+    gap: 8px;
+  }
+  
+  .purple-row {
+    max-width: 320px;
+    gap: 8px;
+  }
+  
+  button {
+    width: 60px;
+    height: 60px;
+    font-size: 28px;
+  }
+}

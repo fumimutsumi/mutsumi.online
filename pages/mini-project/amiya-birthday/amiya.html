@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>阿米娅の生日祝贺</title>
+    <link rel="icon" href="./assets/images/抠肉肚脐@Kuroduki-amiya.ico" type="image/x-icon">
+    <link rel="stylesheet" href="./assets/amiya.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- 胡萝卜背景 -->
+    <div id="carrot-bg"></div>
+    
+    <!-- 顶部轮播banner -->
+    <div class="banner-container">
+        <div class="banner-slides">
+            <div class="banner-slide active">
+                <img src="./assets/images/amiya1.jpg" alt="阿米娅贺图1">
+            </div>
+            <div class="banner-slide">
+                <img src="./assets/images/amiya2.jpg" alt="阿米娅贺图2">
+            </div>
+        </div>
+        <div class="banner-controls">
+            <button class="banner-btn prev-btn">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="banner-btn next-btn">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+        <div class="banner-dots">
+            <span class="dot active"></span>
+            <span class="dot"></span>
+        </div>
+    </div>
+    
+    <!-- 主要内容容器 -->
+    <main id="main-content">
+        <!-- 生日标题 -->
+        <h1 id="birthday-title">阿米娅の生日祝贺</h1>
+        
+        <!-- 祝福文本卡片 -->
+        <div class="card blessing-card">
+            <div class="card-content">
+                <h2 class="card-title">致最可爱的阿米娅：</h2>
+                <p>🚁🚁🚁今天是尊敬的罗得岛CEO阿米娅小姐的生日🚁🚁🚁</p>
+                <p>今天是你的生日，愿这份祝福能跨越次元，传递到罗德岛的每一个角落。</p>
+                <p>愿你的笑容永远如卡特兰般绽放。</p>
+                <p>生日快乐，阿米娅！愿你在新的一岁中，天天开心！</p>
+                <p class="signature">—— 来自博士的祝福</p>
+            </div>
+        </div>
+        
+        <!-- 生日贺图轮播 -->
+        <div class="card gallery-card">
+            <h2 class="card-title">生日贺图</h2>
+            <div class="gallery-container">
+                <div class="gallery-slides">
+                    <div class="gallery-slide active">
+                        <img src="./assets/images/Mag42-amiya.jpg" alt="阿米娅生日贺图-Mag42">
+                        <div class="image-caption">by Mag42</div>
+                    </div>
+                    <div class="gallery-slide">
+                        <img src="./assets/images/岡坂日川-amiya1.jpg" alt="阿米娅贺图1-岡坂日川">
+                        <div class="image-caption">by 岡坂日川</div>
+                    </div>
+                    <div class="gallery-slide">
+                        <img src="./assets/images/岡坂日川-amiya2.jpg" alt="阿米娅贺图2-岡坂日川">
+                        <div class="image-caption">by 岡坂日川</div>
+                    </div>
+                    <div class="gallery-slide">
+                        <img src="./assets/images/岡坂日川-amiya3.jpg" alt="阿米娅贺图3-岡坂日川">
+                        <div class="image-caption">by 岡坂日川</div>
+                    </div>
+                    <div class="gallery-slide">
+                        <img src="./assets/images/岡坂日川-amiya4.jpg" alt="阿米娅贺图4-岡坂日川">
+                        <div class="image-caption">by 岡坂日川</div>
+                    </div>
+                </div>
+                <div class="gallery-controls">
+                    <button class="gallery-btn prev-btn">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="gallery-btn next-btn">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+                <div class="gallery-dots">
+                    <span class="dot active"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 按钮容器 -->
+        <div class="buttons-wrapper">
+            <div class="button-row pink-row">
+                <button class="pink-btn">A</button>
+                <button class="pink-btn">M</button>
+                <button class="pink-btn">Y</button>
+            </div>
+            
+            <div class="button-row purple-row">
+                <button class="purple-btn">S</button>
+                <button class="purple-btn">R</button>
+                <button class="purple-btn">K</button>
+                <button class="purple-btn">L</button>
+            </div>
+            
+            <p class="instruction">点击按钮，为阿米娅送上祝福吧！</p>
+        </div>
+    </main>
+    
+    <!-- 掉落文字容器 -->
+    <div id="falling-container"></div>
+    
+    <!-- 底部信息 -->
+    <footer>
+        <p>谨以此页献给罗德岛最年轻的领袖——阿米娅</p>
+        <p>© 博士们的心意 | 生日快乐！</p>
+    </footer>
+    
+    <script src="./assets/amiya.js"></script>
+</body>
+</html>
