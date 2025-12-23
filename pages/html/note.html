@@ -37,7 +37,8 @@
 </head>
 <body>
 <!-- 网页的主体内容,会显示在网页中 -->
-<!-- 元素类型简介:
+<!--
+    元素类型简介:
     块级元素:标签呈现的元素独占一行
     行级元素:标签呈现的元素不独占一行
     行内块元素:特性几乎和行级元素相同,也不独占一行 
@@ -105,13 +106,15 @@
     <p>
         <code>fmt.Println("hello world")</code><br>
         输出结果:<samp>hello world</samp><br>
-        int <var>a</var> := 10
+        int <var>a</var> := 10<br>
+        qwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnm<wbr>qwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnm
     </p>
     <!-- 
         code表示代码；
         br单标签表示换行,重复使用可叠加效果;
         samp表示样本文本,通常用于显示计算机程序的输出结果;
-        var表示变量,通常用于表示计算机程序中的变量
+        var表示变量,通常用于表示计算机程序中的变量;
+        wbr单标签表示软换行,在超出容器宽度时换行,但是不会在wbr标签处截断单词
     -->
 
     <p><small>本网站仅为学习交流使用,如有侵权请联系删除。</small></p>
@@ -492,7 +495,7 @@
 </div>
 
 <div title="全局属性">
-    <p id="test-id-test" class="test-class-test-1 test-class-test-2" title="这是一个测试段落" lang="ja-JP" dir="ltr" style="font:60px '凸版文久見出し明朝', sans-serif;">6つのグローバル属性、俺が持ってやがる!</p>
+    <p id="test-id-test" class="test-class-test-1 test-class-test-2" title="这是一个测试段落" lang="ja" dir="ltr" style="font:60px '凸版文久見出し明朝', sans-serif;">6つのグローバル属性、俺が持ってやがる!</p>
     <!-- 
         id用来制定唯一元素的命名;class用来指定元素的类名,可以多个类名,用空格隔开;
         title用来指定元素的提示信息,鼠标悬停在元素上时显示,属于字符串;
@@ -589,7 +592,7 @@
 
             <a href="#Gladiia">看歌蕾蒂娅</a>
 
-            <p id="css-00-11">你好,<q lang="en-US">Hello</q></p>
+            <p id="css-00-11">你好,<q lang="en">Hello</q></p>
 
             <div id="css-00-12">
                 <p>子1</p>
@@ -660,35 +663,8 @@
     </p>
 </footer>
 
-<script>
-    function showCustomAlert(message) {
-        document.getElementById('alertMessage').innerHTML = message;
-        document.getElementById('customAlert').style.display = 'block';
-        document.getElementById('overlay').style.display = 'block';
-    }
-
-    function closeAlert() {
-        document.getElementById('customAlert').style.display = 'none';
-        document.getElementById('overlay').style.display = 'none';
-    }
-
-    function checkEnvironment() {
-        // 第一个弹窗：检测中提示
-        showCustomAlert('環境掃描中…Ciallo~(∠・ω< )⌒★<br><div style="margin-top:10px; text-align:center;">⏳ 正在扫描安全协议...</div>');
-        
-        // 等待1秒后弹出第二个弹窗
-        setTimeout(function() {
-            var messages = [
-                '安全認証完了です! 可以放心提交了喵~<br><span style="color:green;">✓ 环境安全评级: AAA</span>',
-                '「防火墻の超電磁屏障」展開!… 通過!無異常です!<br><span style="color:blue;">🛡️ 电磁护盾: 已激活</span>',
-                '>>> 威胁指数: 0.0 >>> 环境非常安全喵~<br><span style="color:purple;">🔒 加密通道: 已建立</span>'
-            ];
-            
-            var randomIndex = Math.floor(Math.random() * messages.length);
-            showCustomAlert(messages[randomIndex]);
-        }, 1000);
-    }
-</script>
+<script src="../../assets/styles/pages/note-style.js"></script>
+<!-- 引用外部js文件 -->
 </body>
 </html>
 <!-- 主要结构由<html><head></head><body></body></html>构成 -->

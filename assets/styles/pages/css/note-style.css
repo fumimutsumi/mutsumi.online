@@ -1,0 +1,469 @@
+/* 
+    p {
+        color: red;
+    }
+    p 是选择器, {}及其中的内容是声明块, 内容就是声明, 声明由属性和值组成;
+    字符串类型需要+"",其他类型只需要写值;
+
+    格式要求仅为方便阅读、维护。自动格式化工具会自动调整格式。所以很多地方空不空格完全没有影响; 
+
+    一般权重规律:!important > 行内CSS > 内部CSS = 外部CSS;
+    id选择器 > 类选择器 = 伪类选择器 = 属性选择器 = :root根元素选择器 > 元素选择器 = 伪元素选择器 = html元素选择器 > *通配选择器 > 从父元素继承的效果;
+    css权重计算:权重相同的情况下,后写的声明块会覆盖前写的声明块;将鼠标放到选择器上,可以查看其权重;
+    id选择器权重100,类选择器权重10,伪类选择器权重10,属性选择器权重10,根元素选择器权重1,元素选择器权重1,伪元素选择器权重1,通配选择器权重0;
+
+    三大特性:层叠性、继承性、优先级;
+    层叠性:多个选择器选中同一个元素,会根据权重和顺序,将多个样式合并到一起,形成最终的样式;
+    继承性:子元素可以继承父元素的某些样式,例如字体、颜色、行高等;
+    优先级:当多个选择器选中同一个元素,会根据权重和顺序,确定最终的样式;
+    
+    DOM:将HTML代码转化成树状图结构；
+    例如:
+    html
+    ├── head
+    │   └── title
+    └── body
+        └── p
+            ├── (文字"这是一个")
+            └── span
+                └── (文字"例子")
+    剩下的都是元素(标签)
+    伪元素正如其名,并不是元素,而是伪装成装饰挂在DOM树上；
+
+    文档内容是html文件的所有内容;html就是文档内容的根;
+    浏览器在渲染时,会额外增加默认的渲染样式,这些不是html元素;
+    * 通配选择器:权重很低,匹配所有DOM树上的真元素,正因如此伪元素不会被其默认作用;
+    如果想要用通配选择器,可以这样写:
+    *::after,*::after{color:red}
+    相同样式要求的可以用并集选择器;
+
+    html html元素选择器:权重就是元素选择器,只匹配html标签,剩下的样式靠继承;
+
+    :root 根元素选择器:权重和伪类选择器一样,只匹配html文档根元素,即html标签;
+    和html元素选择器继承的方式一样,不过其权重更高,而且是指定写css变量的地方;
+*/
+
+/* 字体 */
+@font-face {
+    font-family: 'zenkurenaido';/* 自定义字体名称 */
+    src:/* 字体文件路径 */ 
+        url('../../fonts/japanese/ZenKurenaido-Regular/ZenKurenaido-Regular.woff2') format('woff2'),
+        /* 优先使用woff2格式,因为woff2格式压缩率更高,加载速度更快 */
+        url('../../fonts/japanese/ZenKurenaido-Regular/ZenKurenaido-Regular.woff') format('woff');
+        /* 然后使用woff格式,因为woff格式兼容所有浏览器 */
+    font-weight: 400;/* 字体粗细,400表示正常粗细 */
+    font-style: normal;/* 字体样式,normal表示正常字体 */
+    font-display: swap;/* 字体加载方式,swap表示先显示默认字体,等自定义字体加载完成后再替换 */
+    unicode-range: 
+        /* 基本假名 */
+        U+3040-U+309F,/* 平假名 */ 
+        U+30A0-U+30FF,/* 片假名 */
+
+        /* 日文标点和符号 */
+        U+3000-U+303F,/* CJK标点和符号(句号、顿号、引号等) */
+
+        /* 全角字符和特殊符号 */
+        U+FF00-U+FFEF,/* 半角、全角形式 */
+
+        /* 注音符号 */
+        U+31F0-U+31FF,/* 假名扩展(小假名、注音等) */
+
+        /* 汉字范围 */
+        U+4E00-U+9FFF,/* CJK统一汉字(基本汉字) */
+        U+3400-U+4DBF;/* CJK扩展A(更多汉字) */
+}/* 日语字体ZenKurenaido-Regular,sans-serif字体 */
+@font-face {
+    font-family: 'kleeone-400';
+    src:
+        url('../../fonts/japanese/KleeOne/KleeOne-Regular/KleeOne-Regular.woff2') format('woff2'),
+        url('../../fonts/japanese/KleeOne/KleeOne-Regular/KleeOne-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+    unicode-range:U+3040-U+309F,U+30A0-U+30FF,U+3000-U+303F,U+FF00-U+FFEF,U+31F0-U+31FF,U+4E00-U+9FFF,U+3400-U+4DBF;
+}/* 日语字体KleeOne-Regular,serif字体 */
+@font-face {
+    font-family: 'kleeone-600';
+    src:
+        url('../../fonts/japanese/KleeOne/KleeOne-SemiBold/KleeOne-SemiBold.woff2') format('woff2'),
+        url('../../fonts/japanese/KleeOne/KleeOne-SemiBold/KleeOne-SemiBold.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+    unicode-range:U+3040-U+309F,U+30A0-U+30FF,U+3000-U+303F,U+FF00-U+FFEF,U+31F0-U+31FF,U+4E00-U+9FFF,U+3400-U+4DBF;
+}/* 日语字体KleeOne-SemiBold,serif字体 */
+/* 字体 */
+
+/* 页脚CSS */
+#webpage-footer {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: 0.9rem;
+    color: #666;
+    text-align: center;
+    padding: 1.5rem 1rem;
+    margin-top: 3rem;
+    border-top: 1px solid #eee;
+    line-height: 1.5;
+}
+#webpage-footer a {
+    color: #4a6fa5;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+#webpage-footer a:hover {
+    color: #2c4a7a;
+    text-decoration: underline;
+}
+#webpage-footer .footer-links {
+    margin-top: 0.5rem;
+}
+#webpage-footer .footer-links span {    
+    margin: 0 0.5rem;
+    color: #ddd;
+}
+/* 页脚CSS */
+
+/* 外部CSS示例 */
+[title="外部CSS样式展示"] {
+    color: red;/* 字体颜色 */
+    background-color: azure;/* 背景颜色 */
+    font: 40px sans-serif;/* 字体的特殊整合属性,此处表示:字体大小40像素、字体样式默认寻找非衬线字体 */
+    width: 30%;/* 宽度30% */
+}
+/* 外部CSS示例 */
+
+/* CSS代码风格 */
+[title="CSS代码风格"] {
+    font: 40px '娃娃体-简', sans-serif;/* ''或者""里面可以引入字体样式,详见后面 */
+}
+#css-0-1 {
+    color: #9b30ff;
+}
+#css-0-2{color:#ff4500}
+/* CSS代码风格 */
+
+/* 选择器 */
+[title="选择器"] {
+    background-color: #799;
+    color: #ff0;
+    font: 32.5px '娃娃体-简', sans-serif;
+}
+/* 
+    属性选择器:
+    [title]表示选择所有有title属性的元素,
+    [title="xxx"]表示选择所有title属性值为xxx的元素,
+    [title^="xxx"]表示选择所有title属性值以xxx开头的元素,
+    [title$="xxx"]表示选择所有title属性值以xxx结尾的元素,
+    [title*="xxx"]表示选择所有title属性值包含xxx的元素;
+    [title~="xxx"]表示选择所有title属性值包含完整xxx的元素,且不同单词之间用空格隔开,可以实现多个class值一样的效果;
+    属性里面是字符串,所以可以写中文等文本;
+    一个元素只能有一个属性值,毕竟是字符串的描述
+*/
+[title="选择器"]>span {
+    background-color: #7b68ee;
+    color: #fff;
+}
+/* span 就是元素选择器,选中指定的元素(标签) */
+div>span.css-00-1 {
+    background-color: #0a0a2a;
+    color: #ccf2ff;
+}
+/* 
+    .css-00-1 就是类选择器,在类的值前+".";
+    一个元素可以有多个类,用","+空格隔开;
+    类的命名只能用字母、数字、-、_,不能用数字或者下划线_、短杠-开头;
+    可以和属性选择器"~="一样使用
+*/
+#css-00-2 {
+    background-color: #ff6b6b;
+    color: #8b0000;
+}
+/* 
+    #css-00-4 就是id选择器,在id的值前+"#";
+    id的命名也只能用字母、数字、-、_,不能用数字或者下划线_、短杠-开头;
+    一个标签只能有一个id,所以id选择器的权重最高
+*/
+.css-00-3#css-00-4 {
+    background-color: #228b22;
+    color: #fffdd0;
+}
+/* 交集选择器,紧紧贴一起就行,选中同时符合两个选择器的元素 */
+#css-00-5,
+#css-00-6 {
+    background-color: #ff69b4;
+    color: #8b0058;
+}
+#css-00-6 {
+    color: #fff0f5;
+}
+/* 并集选择器,用","隔开就行,选中所有符合其中一个选择器的元素 */
+#css-00-7>q {
+    background-color: #ffd700;
+    color: #333;
+}
+/* 子代选择器,用">"隔开父元素和子元素,只选择直接子元素 */
+#css-00-8 q {
+    background-color: #4b0082;
+    color: #e6e6fa;
+}
+/* 后代选择器,用空格隔开父元素和子元素,选择所有后代元素 */
+#css-00-9>q:first-child+q {
+    font-size: 70px;
+    /* 
+        因为q往下数第一个兄弟不是q,所以效果不生效;
+        但是如果写成: #css-00-9>q:first-child+span+q 就可以生效
+    */
+}
+#css-00-9>q:first-child~q {
+    background-color: #00ff7f;
+    color: #006400;
+    /* 因为q往下数无数个,有兄弟是q,所以效果生效 */
+}
+/* 兄弟选择器,"+"表示往下数一个,"~"表示往下数无数个,都不往上照 */
+/* : 是伪类选择器, :: 是伪元素选择器 */
+[title^="超链接"]:link {
+    background-color: #0a0a2a;
+    color: #ccf2ff;
+    /* 超链接未点击时的样式 */
+}
+[title^="超链接"]:visited {
+    background-color: #ff6b6b;
+    color: #8b0000;
+    /* 超链接已点击时的样式 */
+}
+[title^="超链接"]:hover {
+    background-color: #228b22;
+    color: #fffdd0;
+    /* 超链接鼠标悬停时的样式 */
+}
+[title^="超链接"]:active {
+    background-color: #ff69b4;
+    color: #8b0058;
+    /* 超链接点击时的样式 */
+}
+/* 顺序乱了容易丢失效果,所以对于超链接a,建议按link、visited、hover、active的顺序写 */
+#css-00-10:focus {
+    background-color: #ffd700;
+    color: #333;
+    /* 输入框获得焦点时的样式 */
+}
+#label-00-15:checked,
+#label-00-16:checked {
+    width: 20px;/* 选中后宽度 */
+    height: 20px;/* 选中后高度 */
+}
+/* 
+    checked是持久状态,而focus是临时状态;
+    checked一般用在单选框和复选框和开关按钮上,focus通用 
+*/
+#label-00-17:enabled {
+    width: 20px;
+    height: 20px;
+}
+#label-00-18:disabled {
+    width: 20px;
+    height: 20px;
+}
+/* enabled表示启用状态的元素,disabled表示禁用状态的元素 */
+#Gladiia:target {
+    background-color: aqua;
+    /* 目标元素被选中时的样式 */
+}
+#css-00-11>q:lang(en-US) {
+    font-size: 40px;
+    color: red;
+    /* 语言伪类,选中语言为en-US的元素 */
+}
+#css-00-12 p:first-child {
+    font-size: 60px;
+    /* 在所有元素中,第一个后代元素p会产生效果 */
+    /* 
+        类似的还有:
+        :first-of-type 表示在所有元素中,第一个类型为p的元素会产生效果 
+        :nth-child(n) 表示在所有元素中,第n个后代元素p会产生效果
+        :nth-of-type(n) 表示在所有元素中,第n个类型为p的元素会产生效果
+    */
+}
+#css-00-12 p:last-child {
+    color: red;
+    /* 在所有元素中,最后一个后代元素p会产生效果 */
+    /* 
+        类似的还有:
+        :last-of-type 表示在所有元素中,最后一个类型为p的元素会产生效果
+        :nth-last-child(n) 表示在所有元素中,倒数第n个后代元素p会产生效果
+        :nth-last-of-type(n) 表示在所有元素中,倒数第n个类型为p的元素会产生效果
+    */
+}
+#css-00-12 p:only-child {
+    font-family: "宋体", serif;
+    /* 在所有元素中,只有一个后代元素p会产生效果 */
+    /* 
+        类似的还有:
+        :only-of-type 表示在所有元素中,只有一个类型为p的元素会产生效果
+    */
+}
+#css-00-13:empty {
+    width: 100px;
+    height: 100px;
+    background-color: #7b68ee;
+    /* 表示选中空元素,没有子元素或内容为空的元素 */
+}
+#css-00-14:not([title]) {
+    width: 200px;
+    height: 200px;
+    background-color: #ff6b6b;
+    /* 否定伪类选择器,表示选中没有title属性的元素,()里面可以写任意选择器 */
+}
+#css-00-15::first-letter {
+    font-size: 60px;
+    color: red;
+    /* 伪元素选择器,表示选中第一个字母 */
+}
+#css-00-15::first-line {
+    background-color: rgb(156, 205, 205);
+    /* 伪元素选择器,表示选中第一行 */
+}
+#css-00-15::selection {
+    background-color: #ff69b4;
+    color: #8b0058;
+    /* 伪元素选择器,表示选中被用户选中的元素 */
+}
+#css-00-16::placeholder {
+    background-color: #ffd700;
+    color: #333;
+    /* 伪元素选择器,表示选中输入框中的占位符 */
+}
+#css-00-17::before {
+    content: "dps:";
+    /* 伪元素选择器,表示选中元素之前的内容 */
+}
+#css-00-17::after {
+    content: "差不多是saki酱的十分之一";
+    content: "(呼呼呼の)" !important;
+    /* 伪元素选择器,表示选中元素之后的内容 */
+    /* !important,表示优先级最高,会覆盖其他声明,写在;之前 */
+}
+/* 选择器 */
+
+/* 像素和颜色 */
+[title="像素和颜色"] {
+    width: 5cm;
+    height: 50mm;
+    /* cm和mm可以表示长度,1cm=10mm,不准确;或者用px像素表示,更准确 */
+    background-color: aquamarine;
+    /* 颜色名表示颜色 */
+    background-color: rgba(255, 105, 180, 0.5) !important;
+    /* 
+        rgba()表示红色、绿色、蓝色、透明度;可以去掉透明度写成rgb()
+        每个值的范围是0-255,透明度的范围是0-1;
+        也可以用%表示;"0.5"可以简写成".5" 
+    */
+    background-color: hsla(200, 50%, 50%, 0.5);
+    /* 
+        hsla()表示色相、饱和度、亮度、透明度;可以写成hsl()
+        每个值的范围依次是0-360、0-100%、0-100%、0-1
+    */
+    background-color: #7b68ee11;
+    /* 
+        hexa()表示十六进制颜色值,透明度;可以写hex()
+        一般不写hexa(),直接写#7b68ee11;
+        每个值的范围是00-FF,表示0-255;
+        当两两重复时,比如#FFCCDDAA,可以简写为#FCDA
+    */
+}
+/* 像素和颜色 */
+
+/* 字体 */
+[title="字体"] {
+    background-color: #c7c3ae;
+    font-size: 60px;
+    /* 字体大小,一般用px像素表示,等比例变化字体大小 */
+}
+#css-00-18 {
+    font-family: "zenkurenaido", sans-serif;
+    /*
+        字体族(字体样式),值是字符串类型,需要用引号括起来;
+        多个字体样式之间用逗号隔开,先写覆盖后写,前一个实效才启用后面;
+        最后一个备胎推荐写serif或者sans-serif,届时会使用用户系统默认字体;
+        sans-serif是非衬线字体,serif是衬线字体;棱角分明是衬线字体,否则反之;
+        在此处设置的字体需要用户安装在系统中,否则会使用默认字体;
+        可以在css中引入字体文件,或者在html中引入字体文件
+    */
+}
+#css-00-19 {
+    font-family: "kleeone-400", serif;
+}
+#css-00-20 {
+    font-family: "kleeone-600", serif;
+}
+#css-00-21>q:nth-of-type(1) {
+    background-color: #c7c3ae;
+    font-size: 60px;
+    font-family: "zenkurenaido", sans-serif;
+    font-style: italic;
+    /* 
+        字体样式:normal是正常字体,italic是斜体,oblique是倾斜体; 
+        italic是先找字体设计好的倾斜样式,如果没有,才会使用oblique强制倾斜
+    */
+    font-weight: 400;
+    /*
+        字体粗细:可以用单词表示,也可以用数字表示(100~900);
+        thin(极细)100, extra-light(特细)200, light(细)300, 
+        normal、regular(常规)400, medium(中等)500,
+        semi-bold、demibold(半粗)600,bold(粗)700,
+        extra-bold、ultra-bold(特粗)800,
+        black、heavy(极粗)900
+    */
+}
+#css-00-21>q:nth-of-type(2) {
+    background-color: #c7c3ae;
+    font-size: 60px;
+    font-family: "kleeone-400", serif;
+    font-style: oblique;
+    font-weight: 400;
+}
+#css-00-21>q:nth-of-type(3) {
+    background-color: #c7c3ae;
+    font: normal normal normal 60px "kleeone-600", serif;
+    /* 
+        字体复合属性:
+        font: [font-style] [font-variant] [font-weight] [font-size] [font-family];
+        font-variant是字体变体,可以用small-caps表示小型大写字母,不写就是normal正常字体
+    */
+}
+/* 字体 */
+
+/* 文本 */
+[title="文本"] {
+    font: italic normal 600 50px "翩翩体-简", sans-serif;
+    background-color: rgb(199, 83, 141);/* 背景颜色 */
+    color: #fff0f5;/* 文字颜色 */
+    letter-spacing: normal;/* 字母(汉字)间距 */
+    word-spacing: 10px;/* 单词间距 */
+    text-indent: 50px;/* 段落首行缩进 */
+    height: 100%;/* 高度 */
+    width: 100%;/* 宽度 */
+    text-align: justify;
+    /* 
+        文本对齐:left左对齐, center居中对齐, right右对齐, justify两端对齐
+    */
+}
+[title="文本"]>p:nth-child(1) {
+    text-decoration: underline dashed rgb(69, 193, 12);
+    /* 
+        文本装饰:underline下划线, overline上划线, line-through删除线, 
+        dashed断横虚线, dotted虚线, wavy波浪线, none无装饰; 
+        还可以加颜色 
+    */
+    line-height: 75px;
+    /* 
+        行高:行高是指文本行与文本行之间的垂直间距,可以用px表示,也可以用数值表示;
+        例如数值:2,表示行高是字体大小的2倍;
+        最好用数值表示,因为当行高大于字体大小时,会导致文字超出容器,造成遮挡等;
+    */
+}
+[title="文本"]>p:nth-child(2) {
+    text-decoration: overline dotted rgb(69, 193, 12);
+    line-height: 1.5;/* 用的最多 */
+}
+/* 文本 */
