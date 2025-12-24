@@ -1,2 +1,2 @@
-assets/**/*.{jpg,jpeg,png,ico} filter=lfs diff=lfs merge=lfs -text
+assets/**/*.{jpg,jpeg,png,ico,woff2,woff,mp3,mp4} filter=lfs diff=lfs merge=lfs -text
 docs/**/*.{jpg,jpeg,png,ico} filter=lfs diff=lfs merge=lfs -text
