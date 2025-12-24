@@ -24,7 +24,7 @@
     <!-- 网页的版权信息(瞎写的,战锤40k乱入) -->
     <link rel="icon" type="image/x-icon" href="../../assets/images/ico/hoshina.ico">
     <!-- <link>标签用于引入外部资源,这里引入了一个图标文件 -->
-    <link rel="stylesheet" href="../../assets/styles/pages/note-style.css">
+    <link rel="stylesheet" href="../../assets/styles/pages/css/note-style.css">
     <!-- 引入外部CSS文件 -->
     <link rel="preload" href="../../assets/fonts/japanese/ZenKurenaido-Regular/ZenKurenaido-Regular.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="../../assets/fonts/japanese/KleeOne/KleeOne-Regular/KleeOne-Regular.woff2" as="font" type="font/woff2" crossorigin>
@@ -73,6 +73,110 @@
                 Love
     </pre>
     <!-- 预格式化文本pre,可以保留文本中的空格和换行符,不可嵌套其他块级元素 -->
+
+    <figure>
+        <figcaption>曼波音频</figcaption>
+        <audio src="../../assets/audios/mp3/曼波.mp3" controls autoplay muted="true"></audio>
+        <audio controls preload="metadata" loop><!-- 里面如果写src,会致使source的src属性不生效,如果无法播放就不会出现source来解救 -->
+            <source src="../../assets/audios/mp3/曼波.mp3" type="audio/mpeg">
+            <source src="../../assets/audios/ogg/曼波.ogg" type="audio/ogg"><!-- 架空,举例使用 -->
+            <!-- 如果浏览器都不支持，显示后备内容 -->
+            <p>如果你的浏览器不支持HTML5音频,请点击<a href="../../assets/audios/mp3/曼波.mp3" download="曼波.mp3">这里</a>下载音频文件</p>
+        </audio>
+    </figure>
+    <!--
+        figure块级独立元素容器,用于包裹图片、音频、视频等媒体元素,以及它们的标题figcaption;
+        audio原声音频播放器(播放器外壳)行级元素,controls属性为浏览器默认显示的控制面板,没有加就需要自己用javascript写;
+        src表示指定音频文件的路径,这是第一种写法,只能指定一个文件,如果浏览器不支持就不能播放;
+        loop属性表示循环播放音频;autoplay属性表示页面加载后自动播放音频,受浏览器对用户的保护不会自动播放,需要用户手动点击播放按钮;
+        muted属性表示静音播放音频,默认是false,设置为true后,音频会静音播放,可以配合autoplay属性使用,实现自动播放静音音频;
+        第二种写法,浏览器会根据source的顺序依次加载音频文件,如果第一个文件不支持,就加载第二个文件,以此类推;
+        如果最后一个文件也不支持,就显示后备内容;
+
+        preload属性表示预加载音频文件,可以提高音频播放的速度;
+            metadata:仅预加载音频文件的元数据,如时长、音量等;
+            auto:预加载整个音频文件,可能会占用较多的带宽;
+            none:不预加载音频文件,需要用户手动点击播放按钮;
+
+        type属性表示音频文件的类型:
+            audio/mpeg:MP3格式
+            audio/ogg或者audio/ogg; codecs=vorbis表示OGG Vorbis格式
+            audio/wav:WAV格式,无损格式,文件较大
+            audio/flac:FLAC格式,无损格式,文件较大
+            audio/webm或者audio/webm; codecs=vorbis表示WebM格式,通常与VP9视频搭配,但也可单独用于音频
+            audio/acc或者audio/acc; codecs=mp4表示Opus格式
+    -->
+    <figure>
+        <figcaption>早期此网页的结构</figcaption>
+        <video 
+            controls preload="auto" autoplay muted="true" 
+            poster="../../assets/images/ico/hoshina.ico"
+            playsinline webkit-playsinline width="300">
+            <source src="../../assets/videos/mp4/早期网页代码展示.mp4" type="video/mp4">
+            <p>如果你的浏览器不支持HTML5视频,请点击<a href="../../assets/videos/mp4/早期网页代码展示.mp4" download="早期网页代码展示.mp4">这里</a>下载视频文件</p>
+        </video>
+        <!--
+            video视频播放器(播放器外壳)行级元素,controls属性为浏览器默认显示的控制面板,没有加就需要自己用javascript写;
+            src表示指定视频文件的路径,这是第一种写法,只能指定一个文件,如果浏览器不支持就不能播放;
+            poster属性表示视频封面,加载视频时显示的图片,可以是jpg、png等格式;
+            playsinline属性表示在移动设备上内联播放视频,而不是全屏播放;
+            webkit-playsinline属性表示在webkit内核的移动设备上内联播放视频,而不是全屏播放;
+            width(height也是)属性表示视频播放器的宽度,单位为像素;autoplay、loop、muted、preload和audio的相同;
+
+            type属性表示视频文件的类型:
+                video/mp4:MP4(H.264)格式
+                video/mp4 codecs="hev1"表示MP4(H.265)格式
+                video/webm:WebM格式
+                video/ogg:OGG格式
+                video/mp4 codecs="av01.0.05M.08"表示MP4(AV1)格式
+        -->
+    </figure>
+
+    <details open>
+        <summary>点击这里查看详情</summary>
+        <p>这是隐藏的内容,点击上面的摘要才会显示。</p>
+        <p>可以包含任何HTML元素:图片、列表、表格等。</p>
+    </details>
+    <!-- 
+        details块级元素表示可折叠的详细信息,open属性表示默认展开;
+        可以多层嵌套,在一个details元素中再嵌套一个details元素,实现二级折叠;
+        summary元素表示摘要、标题,点击它可以展开或折叠details元素的内容;
+        summary元素必须是details元素的第一个子元素,且只能嵌套行级元素,不能嵌套块级元素;
+        summary避免嵌套交互元素,如表单、超链接、按钮等
+    -->
+
+    <!-- 语义化容器,基本和div相同,只是为了更语义化 -->
+    <article>
+    <h1>文章内容元素,独立内容容器</h1>
+    <header>
+        <article>
+            <h1>西雅图天气预报</h1>
+            <section>
+                <h2>2018年3月3日</h2>
+                <p>雨</p>
+            </section>
+            <section>
+                <h2>2018年3月4日</h2>
+                <p>降雨时段</p>
+            </section>
+            <section>
+                <h2>2018年3月5日</h2>
+                <p>大雨</p>
+            </section>
+        </article>
+        <footer>歪比巴卜</footer>
+    </header>
+    <footer>
+        <p>以上为2018年3月3日至2018年3月5日的西雅图天气预报</p>
+    </footer>
+    </article>
+    <!--
+        article块级独立内容容器,section块级主题内容容器,都可以相互嵌套;
+        header块级元素,表示文章的头部,通常包含标题、作者、发布时间等;
+        footer块级元素,表示文章的尾部,通常包含版权信息、联系信息等;
+        header和footer不可相互嵌套;
+        article和section里的第一个元素应该是标题h元素,footer应该是容器里最后一个元素,header同理(标题元素下面)  
+    -->
 </div>
 
 <div title="行级元素">
@@ -462,7 +566,7 @@
 
 <div title="iframe内联框架">
     <iframe src="https://www.bilibili.com/" frameborder="1" height="600px" width="1200px"></iframe><br>
-    <iframe src="../../assets/styles/pages/note-style.css" frameborder="1" height="600px" width="1200px"></iframe><br>
+    <iframe src="../../assets/styles/pages/css/note-style.css" frameborder="1" height="600px" width="1200px"></iframe><br>
     <!--
         iframe内联框架,行内元素,用于在当前页面嵌入其他页面;
         href偏向于跳转,src偏向于加载;
